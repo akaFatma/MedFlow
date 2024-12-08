@@ -1,0 +1,21 @@
+<div class="card-container">
+    <div class="logo">
+        <img src="" alt="">
+        <h3>test</h3>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+       
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text"  id="username" formControlName="username" placeholder="Veuillez entrer votre nom d'utilisateur">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password"  id="password" formControlName="password" placeholder="Veuillez entrer votre mot de passe">
+        </div>
+
+        <button type="submit" [disabled]="!loginForm.valid">Se connecter</button> <!-- Angular property , button is disabled when the form is invalid -->
+
+    </form>
+</div>
