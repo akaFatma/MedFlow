@@ -1,28 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder , FormGroup , Validators } from '@angular/forms'
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators ,ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+//import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-auth-card',
+  selector: 'app-login',
   templateUrl: './auth-card.component.html',
-  styleUrl: './auth-card.component.scss'
+  styleUrls: ['./auth-card.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule] ,
 })
-export class AuthCardComponent implements OnInit {
+export class LoginComponent {
+  loginForm!: FormGroup;
 
-  loginForm !: FormGroup;    
-
-  constructor(private fb : FormBuilder){}
-
-  ngOnInit(): void {
-      this.loginForm=this.fb.group({
-        username : ['',[Validators.required]], // Username is required
-        password : ['',[Validators.required,Validators.minLength(8)]],  // Password is required with min length of 8
-      });
+ /* constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.createForm();
+  }*/
+  constructor(private fb: FormBuilder) {
+    this.createForm();
   }
-  onSubmit():void{
-    if (this.loginForm.valid){
-      console.log(this.loginForm.value);
+
+  createForm() {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],  // Initialize with form controls
+      password: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      console.log("fffffff");
+
+      /*this.authService.login(username, password).subscribe(
+        response => {
+          console.log('Login successful', response);
+          // Handle successful login, e.g., redirect to another page
+        },
+        error => {
+          console.error('Login failed', error);
+          // Handle login failure, show an error message
+        }
+      );*/
     }
   }
-
-
 }
