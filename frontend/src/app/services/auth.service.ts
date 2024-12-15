@@ -13,7 +13,7 @@ import DOMPurify from 'dompurify';
 })
 export class AuthService {
 
-  private loginUrl = '/users/login/'; 
+  private loginUrl = 'http://127.0.0.1:8000/users/login/'; 
   private tokenKey = 'AuthToken' // to store in local storage
 
   constructor(private http: HttpClient , private router : Router) {}

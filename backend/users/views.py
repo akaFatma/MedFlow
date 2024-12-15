@@ -24,6 +24,7 @@ def signup(request):
 
 @api_view(['POST'])
 def login(request):
+    print("hna")
     user = get_object_or_404(CustomUser, username=request.data['username'])
     if not user.check_password(request.data['password']):
         return Response("missing user", status=status.HTTP_404_NOT_FOUND)
