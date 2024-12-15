@@ -13,7 +13,7 @@ import DOMPurify from 'dompurify';
 })
 export class AuthService {
 
-  private loginUrl = 'https.ff/api/auth/login/'; 
+  private loginUrl = '/users/login/'; 
   private tokenKey = 'AuthToken' // to store in local storage
 
   constructor(private http: HttpClient , private router : Router) {}
