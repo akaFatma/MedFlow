@@ -1,0 +1,93 @@
+@import '../../../styles.scss';
+
+.card-container {
+    width: 400px;
+    height: 350px;
+    padding: 1rem 4rem 1rem 4rem;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(231, 228, 232, 0.8);
+    border-radius: 12px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.logo {
+    img {
+        width: 200px;
+        margin-bottom: 1rem;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        border-radius: 12px;
+        color: #232323;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        font-size: 1rem;
+        box-sizing: border-box;
+
+        &:focus {
+            border-color: #027CC0;
+            outline: none;
+        }
+    }
+}
+
+button[type="submit"] {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #027CC0;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #068ed7;
+    }
+
+    &:disabled {
+        background-color: #8cb8fe;
+        cursor: not-allowed;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        padding: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    button {
+        padding: 0.6rem;
+    }
+}
