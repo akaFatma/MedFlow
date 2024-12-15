@@ -12,9 +12,10 @@ import DOMPurify from 'dompurify';
   providedIn: 'root'
 })
 export class AuthService {
+  
 
-  private loginUrl = '/users/login/'; 
-  private tokenKey = 'AuthToken' // to store in local storage
+  private loginUrl = 'http://127.0.0.1:8000/users/login'; 
+  private tokenKey = '' // to store in local storage
 
   constructor(private http: HttpClient , private router : Router) {}
 
@@ -30,6 +31,7 @@ export class AuthService {
 
       }).pipe(
       tap(response =>{
+        
         if (response && response.token){
           this.saveToken(response.token);
           this.router.navigate(['/test']);
