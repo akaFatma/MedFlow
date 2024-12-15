@@ -13,14 +13,8 @@
 
 .logo {
     img {
-        width: 100px;
+        width: 200px;
         margin-bottom: 1rem;
-    }
-
-    h3 {
-        margin: 0;
-        font-size: 1.5rem;
-        color: #007bff; // Logo color
     }
 }
 
@@ -72,7 +66,7 @@ button[type="submit"] {
     }
 
     &:disabled {
-        background-color: #a6c8ff;
+        background-color: #8cb8fe;
         cursor: not-allowed;
     }
 }
