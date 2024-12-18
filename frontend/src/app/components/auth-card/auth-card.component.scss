@@ -1,26 +1,31 @@
 @import '../../../styles.scss';
-
 .card-container {
     width: 400px;
     height: 350px;
-    padding: 1rem 4rem 1rem 4rem;
+    padding: 1rem 2rem 1rem 2rem;
     background-color: white;
     box-shadow: 0 2px 10px rgba(231, 228, 232, 0.8);
     border-radius: 12px;
     text-align: center;
     font-family: 'Inter', sans-serif;
-}
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
 
+}
 .logo {
     img {
-        width: 200px;
+        width: 150px;
         margin-bottom: 1rem;
     }
+    margin-bottom: 1rem;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .form-group {
@@ -31,7 +36,8 @@ form {
         display: block;
         margin-bottom: 0.5rem;
         border-radius: 12px;
-        color: #232323;
+         color: #666666;
+         font-size: 14px;
     }
 
     input {
@@ -66,11 +72,10 @@ button[type="submit"] {
     }
 
     &:disabled {
-        background-color: #8cb8fe;
+        background-color: #11a2f0;;
         cursor: not-allowed;
     }
 }
-
 @media (max-width: 768px) {
     .card-container {
         padding: 1.5rem;
