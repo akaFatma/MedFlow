@@ -1,0 +1,49 @@
+.sidebar {
+  background-color: #f8f9fa;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.logo {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.logo-image {
+  max-width: 300px; /* Increase the size */
+  height: auto;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #e0f7fa;
+}
+
+.menu-item.primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}

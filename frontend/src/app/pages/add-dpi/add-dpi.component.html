@@ -1,0 +1,110 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <div class="right-side">
+      <div class="topbox">
+        <div class="left-side">
+          <img src="/profil.png" alt="Key Icon" class="icon" />
+          <span>Bienvenu administratif</span>
+        </div>
+        <div class="right-side">
+          <img src="/notif.png" alt="Bell Icon" class="icon" />
+          <img src="/param.png" alt="Settings Icon" class="icon" />
+        </div>
+      </div>
+
+      <div class="box">
+        <p class="text">Nouveau dossier patient</p>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+          <!-- First Circle -->
+          <div
+            class="circle"
+            [class.bg-green-500]="currentStep > 1"
+            [class.text-white]="currentStep > 1"
+            [class.opacity-100]="currentStep > 1"
+          >
+            {{ currentStep > 1 ? "✔" : "1" }}
+          </div>
+
+          <!-- First Line -->
+          <div class="line" [class.opacity-100]="currentStep > 1"></div>
+
+          <!-- Second Circle -->
+          <div
+            class="circle"
+            [class.bg-green-500]="currentStep > 2"
+            [class.text-white]="currentStep > 2"
+            [class.opacity-100]="currentStep > 1"
+          >
+            {{ currentStep > 2 ? "✔" : "2" }}
+          </div>
+
+          <!-- Second Line -->
+          <div class="line" [class.opacity-100]="currentStep > 2"></div>
+
+          <!-- Third Circle -->
+          <div class="circle">{{ currentStep > 2 ? "✔" : "3" }}</div>
+        </div>
+
+        <!-- Conditional Rendering for Input Boxes -->
+        <div class="data-entry-container" *ngIf="currentStep === 1">
+          <div class="input-box">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" />
+          </div>
+          <div class="input-box">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" />
+          </div>
+          <div class="input-box">
+            <label for="dob">Date de naissance</label>
+            <input type="date" id="dob" name="dob" />
+          </div>
+          <div class="input-box">
+            <label for="phone">Numéro de téléphone</label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+        </div>
+
+        <div class="data-entry-container" *ngIf="currentStep === 2">
+          <div class="input-box">
+            <label for="address">Numéro de sécurité sociale</label>
+            <input type="text" id="address" name="address" />
+          </div>
+          <div class="input-box">
+            <label for="city">Mutuelle</label>
+            <input type="text" id="city" name="city" />
+          </div>
+          <div class="input-box">
+            <label for="zipcode">Médecin</label>
+            <input type="text" id="zipcode" name="zipcode" />
+          </div>
+          <div class="input-box">
+            <label for="email">Personne à contacter</label>
+            <input type="email" id="email" name="email" />
+          </div>
+          <div class="input-box">
+            <label for="profession">Profession</label>
+            <input type="text" id="profession" name="profession" />
+          </div>
+          <div class="input-box">
+            <label for="insurance">Assurance</label>
+            <input type="text" id="insurance" name="insurance" />
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-container">
+          <button class="button retour" (click)="goToPreviousStep()">
+            Retour
+          </button>
+          <button class="button suivant" (click)="goToNextStep()">
+            Suivant
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
