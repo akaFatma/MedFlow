@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'users',
+    'dpi',
 ]
 
 REST_FRAMEWORK = {
@@ -65,7 +66,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:55588",  # Angular frontend URL
+    "http://localhost:4200",  # Angular frontend URL
 ]
 
 CORS_ALLOW_HEADERS = [

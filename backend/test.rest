@@ -1,17 +1,45 @@
-POST http://127.0.0.1:8000/users/signup/
+POST http://127.0.0.1:8000/users/signup
 Content-Type: application/json
 
-{ "username": "tbib", "password": "pass123", "role": "Médecin" }
+{ "username": "mar", "password": "pass123", "role": "Médecin" }
 
 ###
 
-POST http://127.0.0.1:8000/users/login/
+POST http://127.0.0.1:8000/users/login
 Content-Type: application/json
 
-{ "username": "tbib", "password": "pass123" }
+{ "username": "mar", "password": "pass123" }
 
 ###
 
 GET http://127.0.0.1:8000/users/test_token 
 Content-Type: application/json
 Authorization: token xxx
+
+###
+
+POST http://127.0.0.1:8000/dpi/create
+Content-Type: application/json
+
+{
+    "patient": {
+        "nss": "123456549",
+        "nom": "hendi"
+    },
+    "dpi": {
+        "antecedents_medicaux": "allergie a moi."
+    }
+}
+
+###
+
+GET http://127.0.0.1:8000/dpi/test
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="qr_code"; filename="123456789.png"
+Content-Type: image/png
+
+< ./dpi/qr_codes/123456789.png
+--boundary--
+
