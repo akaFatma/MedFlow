@@ -7,6 +7,13 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-add-dpi',
@@ -14,10 +21,20 @@ import {
   styleUrls: ['./add-dpi.component.scss'],
   standalone: true,
   imports: [CommonModule, SidebarComponent, ReactiveFormsModule],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [animate('300ms ease-out', style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class AddDPIComponent {
   currentStep: number = 1;
   patientForm: FormGroup;
+  isSuccessPopupVisible: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.patientForm = this.fb.group({
@@ -38,48 +55,48 @@ export class AddDPIComponent {
     });
   }
 
-  // Check if current step is complete
   isStepComplete(): boolean {
     if (this.currentStep === 1) {
       return this.patientForm.get('step1')?.valid || false;
     } else if (this.currentStep === 2) {
       return this.patientForm.get('step2')?.valid || false;
-    } else if (this.currentStep === 3) {
-      // Always enable the button in step 3
-      return true;
     }
-    return false;
+    return true;
   }
 
-  // Method to move to the next step
   goToNextStep(): void {
     if (this.currentStep < 3 && this.isStepComplete()) {
       this.currentStep++;
     }
   }
 
-  // Method to move to the previous step
   goToPreviousStep(): void {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
   }
 
-  // Get button text based on current step
   getButtonText(): string {
-    if (this.currentStep === 2 && this.isStepComplete()) {
-      return 'Suivant';
-    } else if (this.currentStep === 3) {
-      return 'Valider';
-    }
-    return 'Suivant';
+    return this.currentStep === 3 ? 'Valider' : 'Suivant';
   }
 
-  // Get form data for summary
   getFormData() {
     return {
       ...this.patientForm.get('step1')?.value,
       ...this.patientForm.get('step2')?.value,
     };
+  }
+
+  onValidate(): void {
+    if (this.currentStep === 3) {
+      this.isSuccessPopupVisible = true;
+      setTimeout(() => {
+        this.isSuccessPopupVisible = false;
+      }, 3000);
+    }
+  }
+
+  closeSuccessPopup(): void {
+    this.isSuccessPopupVisible = false;
   }
 }

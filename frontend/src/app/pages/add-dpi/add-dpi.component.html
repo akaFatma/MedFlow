@@ -13,7 +13,12 @@
           <img src="/param.png" alt="Settings Icon" class="icon" />
         </div>
       </div>
-
+      <div class="success-popup" *ngIf="isSuccessPopupVisible" [@fadeInOut]>
+        <div class="popup-content" (click)="$event.stopPropagation()">
+          <span class="popup-close" (click)="closeSuccessPopup()">×</span>
+          <h2 class="popup-message">DPI CREE AVEC SUCCES !</h2>
+        </div>
+      </div>
       <div class="box">
         <p class="text">Nouveau dossier patient</p>
 
@@ -152,7 +157,7 @@
             </button>
             <button
               class="button suivant"
-              (click)="goToNextStep()"
+              (click)="currentStep === 3 ? onValidate() : goToNextStep()"
               [disabled]="!isStepComplete()"
             >
               {{ getButtonText() }}
