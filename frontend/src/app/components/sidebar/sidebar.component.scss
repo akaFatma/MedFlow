@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
+  position: fixed;
 }
 
 .logo {
@@ -13,9 +14,10 @@
 }
 
 .logo-image {
-  max-width: 300px; /* Increase the size */
+  max-width: 400px; /* Increased size */
   height: auto;
 }
+
 .menu {
   display: flex;
   flex-direction: column;

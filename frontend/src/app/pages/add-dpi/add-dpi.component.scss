@@ -1,8 +1,28 @@
-/* Layout container with sidebar and content */
-.container {
-  display: flex;
-  background-color: #f6f8fd;
-  height: 100vh; /* Ensure the container fills the full viewport height */
+/* Update button container for first step */
+.button-container.single-button {
+  justify-content: flex-end;
+  padding-right: 0;
+}
+
+/* Step indicator circle when it is complete */
+.bg-green-500 {
+  background-color: #28a745 !important; /* Bootstrap green */
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+  .box {
+    max-width: 90%; /* Reduce width for smaller screens */
+    padding: 15px;
+  }
+
+  .text {
+    font-size: 18px; /* Adjust font size for smaller screens */
+  }
+}
+
+.opacity-100 {
+  opacity: 1 !important; /* Fully opaque */
 }
 
 /* Sidebar styles */
@@ -10,61 +30,6 @@ app-sidebar {
   width: 250px; /* Sidebar width */
   height: 100vh; /* Full height */
   position: sticky;
-}
-
-.main-content {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  padding: 20px; /* Optional padding */
-  position: relative;
-}
-
-/* The main box that needs to be centered */
-
-// .box {
-//   position: relative;
-//   background-color: #ffffff; /* Example background */
-//   border: 1px solid #ddd;
-//   border-radius: 8px;
-//   padding: 20px;
-//   width: 100%;
-//   min-height: 400px; /* Ensure the box height accommodates both steps */
-//   max-width: 700px; /* Restrict maximum width */
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center; /* Ensures content starts at the top */
-//   transition: height 0.3s ease; /* Smooth transition if height changes */
-//   align-items: center; /* Center content horizontally */
-//   margin: 0 auto; /* Automatically center the box horizontally */
-
-//   border-radius: 20px; /* Rounded corners */
-//   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Optional shadow for depth */
-// }
-
-/* Box container */
-.box {
-  position: relative;
-  background-color: #ffffff; /* Example background */
-  border: 1px solid #ddd;
-  border-radius: 20px; /* Rounded corners */
-  padding: 20px;
-  width: 100%;
-  min-height: 400px; /* Ensure the box height accommodates both steps */
-  max-width: 700px; /* Restrict maximum width */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Ensures content starts at the top */
-  align-items: center; /* Center content horizontally */
-  margin: 0 auto; /* Automatically center the box horizontally */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Optional shadow for depth */
-  overflow: hidden; /* Prevents content from visually breaking out */
-  align-self: flex-start; /* Ensures box grows downward */
-  transform-origin: top; /* Anchor the transformation to the top border */
-  transition: transform 0.3s ease, height 0.3s ease; /* Smooth transition */
-  padding-bottom: 100px; /* Ensure space between content and button container */
-  margin-top: 80px; /* Fixed space between topbox and box */
 }
 
 /* Header styles (no changes here) */
@@ -82,6 +47,43 @@ button {
   margin-top: 10px;
 }
 
+/* Rest of your existing styles remain the same */
+.button-container {
+  position: absolute;
+  bottom: 6%;
+  width: 86%; /* Match the width of data-entry-container */
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0 auto;
+  right: 2%;
+}
+
+.button {
+  height: 35px;
+  width: 120px;
+  padding: 8px 24px;
+  font-size: 12px;
+  border-radius: 15px;
+  border: 2px solid #027cc0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button.retour {
+  background-color: transparent;
+  color: #027cc0;
+}
+
+/* Layout container with sidebar and content */
+.container {
+  display: flex;
+  background-color: #f6f8fd;
+  height: 100vh; /* Ensure the container fills the full viewport height */
+  position: relative;
+  // margin-top: 80px; /* Ensure space between .topbox and .box */
+}
+
 .right-side {
   display: flex;
   justify-content: center; /* Center horizontally */
@@ -89,17 +91,48 @@ button {
   flex-grow: 1; /* Take up remaining space */
 }
 
-/* Topbox container */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 20px; /* Optional padding */
+  position: relative;
+}
+
+.box {
+  position: relative;
+  top: 30px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px;
+  width: 100%;
+  min-height: 400px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 100px auto; /* Keep space from the top */
+  margin-bottom: 20px; /* Add space below the box */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  align-self: flex-start;
+  transform-origin: bottom;
+  transition: transform 0.3s ease, height 0.3s ease;
+  padding-bottom: 100px;
+}
+
 .topbox {
   background-color: white;
-  margin-bottom: 40px; /* Space below topbox */
   padding: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional shadow */
   max-width: 800px;
   width: 100%;
-  height: 60px; /* Increased height to accommodate the content */
+  height: 50px; /* Adjusted height */
   position: absolute;
-  top: 2%;
+  top: 2%; /* Anchor to the top */
   left: 50%; /* Center the topbox horizontally */
   transform: translateX(-50%); /* Adjust the left position to center */
   z-index: 1000;
@@ -107,9 +140,8 @@ button {
   display: flex;
   justify-content: space-between; /* Spread the content across */
   align-items: center; /* Vertically center the items */
-  padding: 0 20px; /* Add some padding for left and right sides */
+  padding: 0 20px;
 }
-
 .left-side {
   display: flex;
   align-items: center;
@@ -129,26 +161,23 @@ button {
   margin-right: 10px; /* Space between the icon and text */
 }
 
-/* The main box that needs to be centered */
-
-/* The text inside the box */
 .text {
   position: absolute;
   top: 10%; /* Position text in the top part of the box */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Adjust for text width */
   margin: 0; /* Remove default margin */
+  margin-top: -10px;
   text-align: center; /* Center text */
   font-size: 20px; /* Adjust font size as needed */
   font-weight: bold; /* Optional: Make the text bold */
 }
-/* Step indicator styles */
 .step-indicator {
+  margin-top: 100px; /* Adjust this value to match the spacing you want */
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
-  margin-bottom: 30px;
 }
 
 .circle {
@@ -194,11 +223,12 @@ button {
   margin: 0;
 }
 .data-entry-container {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; /* Space between input boxes */
-  justify-content: space-between; /* Align inputs properly */
+  gap: 16px;
+  justify-content: center; /* Center child items horizontally */
 }
 
 .input-box {
@@ -232,29 +262,6 @@ button {
   box-shadow: 0 0 5px rgba(2, 124, 192, 0.5); /* Add subtle glow */
 }
 
-// .button-container {
-//   position: absolute; /* Ensure precise positioning */
-//   left: 1.5%; /* Slight offset from the left border */
-//   right: 1.5%; /* Slight offset from the right border */
-//   display: flex; /* Arrange buttons in a row */
-//   justify-content: space-between; /* Distribute buttons with even spacing */
-//   padding: 0 10px; /* Optional: Add padding for better appearance */
-//   margin: 0; /* Remove any default margins */
-//   margin-top: 30;
-//   bottom: 6%;
-// }
-.button-container {
-  position: absolute; /* Ensure precise positioning */
-  left: 1.5%; /* Slight offset from the left border */
-  right: 1.5%; /* Slight offset from the right border */
-  display: flex; /* Arrange buttons in a row */
-  justify-content: space-between; /* Distribute buttons with even spacing */
-  padding: 0 10px; /* Optional: Add padding for better appearance */
-  margin: 0; /* Remove any default margins */
-  margin-top: 30px; /* Keep distance from the element above */
-  bottom: 6%; /* Ensures buttons are above the bottom of the box */
-}
-
 .button {
   height: 35px; /* Adjust height */
   width: 120px; /* Adjust width */
@@ -286,23 +293,85 @@ button {
   background-color: #004080; /* Darker blue on hover */
 }
 
-/* Step indicator circle when it is complete */
-.bg-green-500 {
-  background-color: #28a745 !important; /* Bootstrap green */
+.summary-container {
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
-/* Ensure responsiveness */
-@media (max-width: 768px) {
-  .box {
-    max-width: 90%; /* Reduce width for smaller screens */
-    padding: 15px;
-  }
-
-  .text {
-    font-size: 18px; /* Adjust font size for smaller screens */
-  }
+.summary-item {
+  margin-bottom: 15px;
+  font-size: 16px;
+  text-align: left;
 }
 
-.opacity-100 {
-  opacity: 1 !important; /* Fully opaque */
+.summary-item .label {
+  font-weight: bold;
+}
+
+.summary-item .value {
+  margin-left: 5px;
+}
+
+/* Update existing styles */
+.button.suivant:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.data-entry-container,
+.summary-container {
+  width: 90%;
+  margin-top: 0;
+}
+.button-container {
+  width: 82%; /* Match data-entry-container width */
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%); /* Center the container */
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Ensure proper single button alignment */
+.button-container.single-button {
+  justify-content: flex-end;
+}
+/* Update circle styles for step 3 */
+.step-indicator .circle:last-child {
+  background-color: #027cc0;
+  color: white;
+}
+
+.step-indicator .circle:last-child.opacity-100 {
+  opacity: 1;
+}
+
+.summary-container {
+  width: 90%;
+  padding: 20px 0; /* Remove horizontal padding */
+}
+
+.summary-item {
+  margin-bottom: 12px;
+  font-size: 13px;
+  text-align: left;
+  width: 100%;
+}
+
+.summary-item .label {
+  font-weight: bold;
+  color: #17692a; /* Keep labels green */
+}
+
+.summary-item .value {
+  margin-left: 5px;
+  color: #000000; /* Make values black */
+}
+
+.vide {
+  height: 100px; /* Ensures it takes up space */
+  background-color: #f6f8fd; /* Keep it the same as the container background to blend in */
 }
