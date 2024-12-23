@@ -1,0 +1,91 @@
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Space between left and right sections */
+    align-items: center; /* Vertically center elements */
+    background-color: #ffffff;
+    border: 1px solid #eaebf0; /* Stroke color */
+    border-radius: 20px;
+    width: 90%;
+    padding: 0 30px;
+    margin-left: 2%;
+    height: 70px;
+    margin-bottom: 3%;
+  
+    .left-section {
+      display: flex; /* Make user icon and text inline */
+      align-items: center; /* Vertically align the user icon and text */
+      gap: 10px; /* Space between user icon and text */
+  
+      .user-icon {
+        display: flex; /* Make the container for the icon flexible */
+        justify-content: center; /* Center the icon horizontally */
+        align-items: center; /* Center the icon vertically */
+        background-color: #e8eaed; /* Background color of the icon container */
+        color: #ffffff; /* Set profile icon color to white */
+        font-size: 24px; /* Icon size */
+        width: 40px; /* Width of the circular container */
+        height: 40px; /* Height of the circular container */
+        border-radius: 50%; /* Make the container circular */
+        border: none; /* Remove unwanted borders */
+      }
+  
+      .welcome-message {
+        font-family: 'Inter', sans-serif; /* Font style */
+        font-size: 16px; /* Text size */
+        color: #666666; /* Text color */
+        white-space: nowrap; /* Prevent text from wrapping */
+      }
+    }
+  
+    .fa-bell {
+
+      color: #666666; /* Notification icon color */
+      font-size: 20px; /* Icon size */
+      cursor: pointer; /* Add a pointer cursor to make it interactive */
+      border: none; /* Remove any border around the notification icon */
+      background: none; /* Remove any background */
+      padding: 0; /* Ensure no padding creates extra space */
+      margin-right:1%; /* Ensure no margin creates extra space */
+    }
+  
+    /* Remove unwanted ::before or ::after pseudo-elements */
+    .fa-bell::before,
+    .fa-bell::after {
+      content: none; /* Clear any content */
+    }
+  
+    @media (max-width: 1024px) {
+      height: 70px;
+    }
+  
+    @media (max-width: 768px) {
+      flex-wrap: wrap; /* Allow wrapping for smaller screens */
+      height: auto;
+      gap: 10px;
+      .header-container {
+        flex-direction: column; /* Stack items vertically */
+        height: auto; /* Let the height adjust dynamically */
+        gap: 10px; /* Add spacing between sections */
+        padding: 10px; /* Adjust padding for smaller screens */
+      .left-section {
+        gap: 5px; /* Reduce spacing for mobile */
+      }
+    }
+}
+    @media (max-width: 480px) {
+      padding: 0 10px;
+      margin-top: 2%;
+      margin-bottom: 4%;
+      height: 10%;
+  
+      .welcome-message {
+        font-size: 14px; /* Adjust text size for smaller screens */
+      }
+  
+      .fa-bell {
+        font-size: 18px; /* Adjust notification icon size */
+      }
+    } 
+
+}
+  

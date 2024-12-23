@@ -1,0 +1,130 @@
+/* Medecin Landing Page */
+.medecin-landing-page {
+    display: flex;
+    flex-wrap: wrap; /* Ensure wrapping for smaller screens */
+  
+    .main-content {
+      flex: 1;
+      margin: 2%;
+  
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 2%;
+        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        margin-right: 2%;
+  
+        .qr-button{
+          display: flex; /* Ensures alignment for icon and text inside */
+          align-items: center;
+          background-color: #027cc0;
+          color: #e8eaed;
+          border: none;
+          border-radius: 13px;
+          padding: 0 20px; /* Adjust padding to match input */
+          height: 40px;
+          font-size: 16px;
+          cursor: pointer; /* Makes it clear the button is clickable */
+          box-sizing: border-box;
+          .menu-icon {
+            margin-right: 5px; /* Space between icon and text */
+            font-size: 20px;
+          }
+          &:hover {
+            background-color: #025e94;
+          }
+        }
+        .search-container {
+          display: flex;
+          flex: 1; /* Make buttons stretch in small screens */
+          max-width: 200px;
+          align-items: center;
+          border: 1px solid #CCCCCC;
+          border-radius: 13px;
+          padding: 0 10px;
+          background-color: #f8f9fa;
+          gap: 8px; /* Space between the icon and the input */
+          box-sizing: border-box; /* Ensures border and padding are included in height */
+          color: #E8EAED;
+          .search-icon {
+            font-size: 18px;
+          }
+          input {
+            border: none;
+            outline: none;
+            background: transparent;
+            height: 100%; /* Matches the container's height */
+            box-sizing: border-box;
+  
+            &::placeholder {
+              color: #666666;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* Modal Styles */
+  .page-qr-container {
+    position: fixed; /* Fixed position to overlay on any background */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 999; /* Ensure it stays above other components */
+  }
+  
+  .notification-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px 40px;
+    text-align: center;
+    width: 350px;
+    z-index: 1000;
+  }
+  
+  .success-title {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    color: #48c5a5; /* Green text for success */
+    margin-bottom: 10px;
+  }
+  
+  .success-message {
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #666666; /* Gray color for redirection text */
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 15%;
+    right: 5%;
+      border-radius: 6px;
+    background: #48C5A5;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #ffffff;
+  
+    &:hover {
+      color: #333333;
+    }
+  
+    i {
+      font-size: 16px;
+    }
+  }
+  
+
+  
+  
+  

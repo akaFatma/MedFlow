@@ -1,0 +1,101 @@
+/* Sidebar */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /* Sidebar background color */
+    width: 250px;
+    height: 100vh;
+    border: 2px solid #eaebf0; /* Add stroke/border with a light gray color */
+    border-radius: 30px; /* Corner radius for rounded edges */
+    padding: 20px; /* Padding inside the sidebar */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Smooth transition for hiding/showing */
+  
+    .logo-container {
+      display: flex;
+      margin-left: 10%;
+      gap: 15px; /* Add space between the logo-svg and logo-text */
+      margin-bottom: 23%;
+      margin-top: 10%;
+  
+      .logo-svg {
+        width: 33.06px;
+        height: 33px;
+      }
+  
+      .logo-text {
+        width: 141px;
+        height: 37px;
+      }
+    }
+  
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-left: auto;
+      margin-right: auto;
+  
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: #666666;
+        cursor: pointer;
+  
+        &:hover {
+          color: #027cc0; /* Highlight on hover */
+        }
+  
+        .menu-icon {
+          font-size: 20px;
+        }
+      }
+  
+      .menu-item.fixed {
+        background-color: #027cc0;
+        color: #ffffff;
+        padding: 10px 15px;
+        border-radius: 10px;
+  
+        .menu-icon {
+          color: #ffffff;
+        }
+      }
+    }
+  
+    @media (max-width: 768px) {
+      
+      /* Minimized sidebar */
+      overflow: hidden;
+      width: 200px; /* Reduce width for smaller screens */
+      padding: 10px;
+  
+      .logo-container {
+        
+           
+           margin-left: 5%;
+            margin-bottom: 10%;
+            margin-top: 5%;
+      }
+     
+      .menu {
+        .menu-item {
+          justify-content: center;
+        }
+  
+        .menu-item.fixed {
+          justify-content: center;
+          padding: 10px;
+        }
+      }
+    }
+  
+    @media (max-width: 480px) {
+      display: none; /* Hide sidebar for very small screens */
+    }
+  }
+
+  
