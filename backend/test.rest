@@ -23,23 +23,37 @@ Content-Type: application/json
 
 {
     "patient": {
-        "nss": "123456549",
-        "nom": "hendi"
+    "nom": "Dupont",
+    "prenom": "Jean",
+    "date_de_naissance": "1985-04-12",
+    "adresse": "123 Rue des Lilas, 75010 Paris, France",
+    "telephone": "0123456789",
+    "nss": "123456789"
     },
     "dpi": {
-        "antecedents_medicaux": "allergie a moi."
+        "antecedants_medicaux": "allergique a moi."
     }
 }
 
 ###
+#hna z3ma ma kmlch kteb ga3 l nss
+GET http://127.0.0.1:8000/dpi/patients
+Content-Type: application/json
 
+{"nss": "123456"}
+
+###
+GET http://127.0.0.1:8000/dpi/patients/nss/123456789
+Content-Type: application/json
+
+###
+#la creation t3 qr code (aho deja crée wa7d dakhel qr_codes)
 GET http://127.0.0.1:8000/dpi/test
-Content-Type: multipart/form-data
+Content-Type: application/json
 
---boundary
-Content-Disposition: form-data; name="qr_code"; filename="123456789.png"
-Content-Type: image/png
+###
 
-< ./dpi/qr_codes/123456789.png
---boundary--
+GET http://127.0.0.1:8000/dpi/patients/qrcode
+Content-Type: application/json
 
+{ "qrcode" : "iVBORw0KGgoAAAANSUhEUgAAASIAAAEiAQAAAAB1xeIbAAABeklEQVR4nO2aQW6EMAxFnwtSl8wNepTkZj1TbwA3CstKoN8FCTAjVe2GgQF7EUF4Ur4SJ3EcTPxt3ds/IHDKKaeccurolGWrsQhAX2rirrouQQVJUgK1jAZUkiTdU8/XdQmqLz7e3cAiYGb1/rrOTNUP7xbSiOi3a9GpX6nuVsniM1u8LFX8vhHQA+HLJr9fH7qOqv4UVGdmZjcAKllknMKcvXWdmpr8/i6xMFqeBtu06NRsUygZJBFSqWsBaPIHtUdV/9pU7nuagVKUUQgpB/ne99tQy5ojo68htGMtGGpgNO2l6woU2bObocyAcqRdFiP3+22oucfXq3wZj/npqOpfm0L3RtCAlICQ5llxVPVnoJY8JvQ1dB/DIXSdm1rFmFKq5pV/YNkD3O+3pUoe0yLVtOGWYl9dV6Jy/r43s880+t3JltRjDnllnbnfP4VqpBxj9u+y2Mxn3Z11XYCa85gWm+8pe6mWfIN1ePUvSpn/G+WUU045dQnqBxxu4ybJDkbOAAAAAElFTkSuQmCC"}

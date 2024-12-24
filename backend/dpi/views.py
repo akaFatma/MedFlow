@@ -2,63 +2,53 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from .models import Patient
-from .serializers import PatientSerializer
+from .serializers import PatientSerializer, PatientMinimalSerializer
 
 @api_view(['GET'])
 def list_patients(request):
-    search_nss = request.data.get('nss')  # Récupérer le paramètre "nss" si présent
+    search_nss = request.data.get('nss')
     patients = Patient.objects.all()
 
     if search_nss:
-        patients = patients.filter(nss__startswith=search_nss)  # Filtrer par NSS (partiel ou complet)
+        patients = patients.filter(nss__startswith=search_nss)  # Recuperer tous les dpi qui commence par le search_nss
 
-    # Pagination
+    # Pagination, apparemment c'est pour ne pas envoyer tous les patients s'ils sont nombreux
+    # z3ma kima insta myb3tolkch kamel l existing posts mais une page, dk if it's helpful
+    # ila khdma zayda 9ololi na7ih, n7bes f patients ndir return patients --malak
+
     paginator = PageNumberPagination()
     paginator.page_size = 10  # Nombre de résultats par page
     paginated_patients = paginator.paginate_queryset(patients, request)
 
-    serializer = PatientSerializer(paginated_patients, many=True)
+    serializer = PatientMinimalSerializer(paginated_patients, many=True)
     return paginator.get_paginated_response(serializer.data)
 
 from .models import DPI
-from .serializers import DPISerializer
+from .serializers import DPISerializer, DPISerializerGET
 
 @api_view(['GET'])
 def get_dpi(request, nss):
     try:
         dpi = DPI.objects.get(patient__nss=nss)  # Rechercher le DPI lié au patient par NSS
-        serializer = DPISerializer(dpi)
+        serializer = DPISerializerGET(dpi)
         return Response(serializer.data, status=200)
     except DPI.DoesNotExist:
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
+    
 
-'''
-@api_view(['GET'])
-def create_patient_with_dpi(request):
-    print("hi")
-    return Response({"hi" : "bitch"}, status=200)
-
-'''
-
-@api_view(['POST'])
-def create_patient_with_dpi(request):
-    # Récupérer les données du corps de la requête
+@api_view(['POST']) 
+def create_patient_with_dpi(request): #utilisée pour le test uniquement
     patient_data = request.data.get('patient')
     dpi_data = request.data.get('dpi')
 
-    # Vérifier si les données du patient sont fournies
     if not patient_data:
         return Response({"error": "Les données du patient sont manquantes."}, status=400)
 
-    # Sérialiser les données du patient
     patient_serializer = PatientSerializer(data=patient_data)
     if patient_serializer.is_valid():
-        # Sauvegarder le patient
         patient = patient_serializer.save()
 
-        # Vérifier si les données du DPI sont fournies
         if dpi_data:
-            # Ajouter une référence au patient dans les données du DPI
             dpi_data['patient'] = patient.id
             dpi_serializer = DPISerializer(data=dpi_data)
 
@@ -70,8 +60,7 @@ def create_patient_with_dpi(request):
                 )
             else:
                 return Response(dpi_serializer.errors, status=400)
-
-        # Si aucun DPI n'est fourni, retourner uniquement le patient
+            
         return Response(
             {"patient": patient_serializer.data, "dpi": None},
             status=201
@@ -82,7 +71,7 @@ def create_patient_with_dpi(request):
 from .utils import generate_qrcode
 
 @api_view(["GET"])
-def qr_code(request): 
+def qr_code(request): #pour generer le code qr, à revoir 
     pat = Patient.objects.get(nss="123456789")
     path = generate_qrcode(pat)
     print(path)
@@ -94,20 +83,19 @@ import base64
 from django.core.files.base import ContentFile
 
 @api_view(['GET'])
-def get_dpi_by_qr(request):
-    encoded_qr = request.data.get('qr_code')
+def get_dpi_by_qr(request): 
+    #lors des tests je n'ai pas pu envoyer un fichier par postman (l'image du qr code scanné), 
+    # je l'ai donc encodé, le fichier MedFlow\qrcode_encoder.py fait l'encodage du qr code
+    encoded_qr = request.data.get('qrcode')
     if not encoded_qr:
         return Response({"error": "No QR code provided."}, status=400)
-        
-        # Decode the Base64 string
+    # Decodage
     qr_data = base64.b64decode(encoded_qr)
-        
-        # Save the decoded file temporarily
     temp_file = ContentFile(qr_data, name="temp_qr_code.png")
+   
     # Ouvrir l'image et décoder le QR code
     img = Image.open(temp_file)
     decoded_data = decode(img)
-
     if not decoded_data:
         return Response({"error": "Aucun QR code valide trouvé dans l'image."}, status=400)
     
@@ -118,11 +106,10 @@ def get_dpi_by_qr(request):
         return Response({"error": "QR code invalide."}, status=400)
     
     nss = qr_content.split(":")[1]  # Récupérer le nss à partir du QR code
-    
     # Rechercher le DPI à partir du nss
     try:
-        dpi = DPI.objects.get(patient__nss=nss)  # Rechercher le DPI lié au patient par NSS
-        serializer = DPISerializer(dpi)
+        dpi = DPI.objects.get(patient__nss=nss) 
+        serializer = DPISerializerGET(dpi)
         return Response(serializer.data, status=200)
     except DPI.DoesNotExist:
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
@@ -130,6 +117,7 @@ def get_dpi_by_qr(request):
 '''
 @api_view(['GET'])
 def get_dpi_by_qr_code(request):
+    #Methode alternative de la recherche par code qr, à utilisé si possible d'envoyer le fichier entier
     try:
         # Récupérer le fichier QR code depuis la requête
         qr_code_file = request.FILES.get('qr_code')
@@ -148,12 +136,10 @@ def get_dpi_by_qr_code(request):
         nss = qr_content  # Assumer que le NSS est directement dans le contenu du QR code
 
         # Rechercher le DPI associé
-        from .models import DPI
         dpi = DPI.objects.get(patient__nss=nss)
 
         # Sérialiser et retourner les données
-        from .serializers import DPISerializer
-        serializer = DPISerializer(dpi)
+        serializer = DPISerializerGET(dpi)
         return Response(serializer.data, status=200)
 
     except DPI.DoesNotExist:
@@ -161,3 +147,5 @@ def get_dpi_by_qr_code(request):
     except Exception as e:
         return Response({"error": str(e)}, status=500)
 '''
+
+
