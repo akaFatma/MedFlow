@@ -8,9 +8,6 @@ interface Consultation {
   doctor: string;
   specialty: string;
 }
-@Injectable({
-  providedIn: 'root'  
-})
 
 @Component({
   selector: 'app-medical-history',

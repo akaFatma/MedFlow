@@ -1,0 +1,25 @@
+<div class="info-card-container">
+    <div class="personal-info">
+      <div class="info-section">
+        <strong>Nom :</strong> {{ user.nom }} <br />
+        <strong>Prénom :</strong> {{ user.prenom }} <br />
+        <strong>Numéro de sécurité sociale :</strong> {{ user.securityNumber }} <br />
+        <strong>Adresse :</strong> {{ user.address }} <br />
+        <strong>Numéro de téléphone :</strong> {{ user.phone}} <br />
+        <strong>Mutuelle :</strong> {{ user.insurance }} <br />
+        <strong>Personne à contacter :</strong>
+        Nom: {{ user.contactName }} Prénom: {{ user.contactPrenom }}
+        +{{ user.contactPhone }} <br />
+        <strong>Médecin traitant :</strong> {{ user.doctors }} <br />
+      </div>
+  
+      <div class="qr-code">
+        <img src="{{ user.qrCode }}" alt="QR Code" />
+      </div>
+    </div>
+    <div class="medical-history">
+      <h4>Antécédants médicaux :</h4>
+      <p>{{ user.medicalHistory }}</p>
+    </div>
+  </div>
+  
