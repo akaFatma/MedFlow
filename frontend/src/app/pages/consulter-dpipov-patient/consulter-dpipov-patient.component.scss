@@ -1,22 +1,24 @@
 .container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 2rem;
+    padding-bottom: 2rem;
     background: #f8fafc;
     min-height: 100vh;
+    font-family: 'Inter' , sans-serif;
 }
 
-.header{
+.header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 2rem;
+
 }
 
 .logo {
-    height: 40px;
-    display: flex;
-}
-.logo img{
-    width: ;
+    width: 300px;
 }
 
 h2 {
@@ -26,6 +28,24 @@ h2 {
     margin-bottom: 1rem;
     letter-spacing: 0.05em;
 }
+.personnalInfo{
+    margin-bottom: 3rem;
+    h2 {
+        margin-left: 8rem;
+        font-size: 18px;
+    }
+}
+.consultationHistory{
+    margin-bottom: 3rem;
+    h2 {
+        margin-left: 8rem;
+        font-size: 18px;
+    }
+}
+
+
+
+
 
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
