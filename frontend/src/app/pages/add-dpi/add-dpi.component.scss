@@ -9,7 +9,6 @@
   background-color: #28a745 !important; /* Bootstrap green */
 }
 
-/* Ensure responsiveness */
 @media (max-width: 768px) {
   .box {
     max-width: 90%; /* Reduce width for smaller screens */
@@ -21,6 +20,9 @@
   }
 }
 
+.textbienven {
+  color: #666666;
+}
 .opacity-100 {
   opacity: 1 !important; /* Fully opaque */
 }
@@ -60,14 +62,16 @@ button {
 }
 
 .button {
-  height: 35px;
-  width: 120px;
-  padding: 8px 24px;
-  font-size: 12px;
-  border-radius: 15px;
-  border: 2px solid #027cc0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px; /* Adjust as needed for size */
+  border: none;
+  border-radius: 8px; /* Optional for rounded corners */
+  background-color: #007bff; /* Button background color */
+  color: white; /* Text color */
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .button.retour {
@@ -81,7 +85,6 @@ button {
   background-color: #f6f8fd;
   height: 100vh; /* Ensure the container fills the full viewport height */
   position: relative;
-  // margin-top: 80px; /* Ensure space between .topbox and .box */
 }
 
 .right-side {
@@ -98,6 +101,8 @@ button {
   align-items: center; /* Center vertically */
   padding: 20px; /* Optional padding */
   position: relative;
+
+  margin-bottom: 10px;
 }
 
 .box {
@@ -229,6 +234,22 @@ button {
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center; /* Center child items horizontally */
+}
+
+.everything {
+  background-color: #f6f8fd;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 0px auto;
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible; /* Autorise l'extension */
+}
+.everything::after {
+  content: "";
+  display: block;
+  height: 30px; /* Ajoute toujours de l'espace supplémentaire en bas */
 }
 
 .input-box {
@@ -375,47 +396,6 @@ button {
   height: 100px; /* Ensures it takes up space */
   background-color: green; /* Keep it the same as the container background to blend in */
 }
-/* Success Modal Styles */
-// .success-popup {
-//   position: fixed;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%); /* Center the modal box on the screen */
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-//   z-index: 9999;
-//   border-radius: 10px;
-//   background-color: green; /* White background */
-// }
-
-// .popup-content {
-//   padding: 20px;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-//   text-align: center;
-//   position: relative;
-//   width: 300px;
-//   display: flex;
-//   justify-content: center; /* Horizontally center the content */
-//   align-items: center; /* Vertically center the content */
-// }
-
-// .popup-message {
-//   color: white; /* Green text */
-//   font-size: 18px;
-//   font-weight: bold;
-// }
-
-// .popup-close {
-//   position: absolute;
-//   top: 2px;
-//   right: 10px;
-//   font-size: 20px;
-//   color: white; /* Green color for the close button */
-//   cursor: pointer;
-// }
-
 .success-popup {
   position: fixed;
   top: 0;

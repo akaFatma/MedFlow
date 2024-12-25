@@ -12,16 +12,13 @@ interface MenuItem {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <!-- Sidebar with Inter font applied -->
     <aside
-      class="h-[98vh] w-[18vw] bg-white-800 text-[#2B2929] flex flex-col p-4 rounded-[30px] border-[#EAEBF0] border-2 ml-3 mt-3 shadow-[4px_4px_8px_0px_rgba(0,123,255,0.2)]"
+      class="h-[98vh] w-[18vw] bg-white-800 text-[#2B2929] flex flex-col p-4 rounded-[30px] border-[#EAEBF0] border-2 ml-3 mt-3 shadow-[4px_4px_8px_0px_rgba(169,169,169,0.2)]"
     >
-      <!-- Logo Section -->
       <div class="mb-6">
-        <img src="./logo.svg" alt="MedFlow" class="max-w-[100px] mx-auto" />
+        <img src="./logo.svg" alt="MedFlow" class="max-w-[150px] mx-auto" />
       </div>
 
-      <!-- Menu Section -->
       <nav class="flex-grow flex flex-col space-y-4">
         <button
           *ngFor="let item of menuItems"
@@ -29,7 +26,7 @@ interface MenuItem {
           (click)="handleMenuClick(item)"
         >
           <img
-            [src]="'icons/' + item.icon"
+            [src]="'./' + item.icon"
             [alt]="item.label"
             class="w-5 h-5 mr-3"
           />
@@ -42,12 +39,12 @@ interface MenuItem {
 export class SidebarComponent {
   menuItems: MenuItem[] = [
     {
-      icon: 'manage.svg', // Ensure these images are in 'assets/icons'
+      icon: 'add.svg',
       label: 'Gestion des comptes',
       isPrimary: false,
     },
     {
-      icon: 'add.svg',
+      icon: 'manage.svg',
       label: 'Ajouter dossier',
       isPrimary: true,
     },
