@@ -44,6 +44,12 @@ textarea {
     overflow-y: hidden; 
     line-height: 1.5; 
     font-family: inherit; 
+    border-radius: 16px;
+    
+}
+textarea:focus {
+   border: 1px solid #027CC0;
+    outline: none;
 }
 
 .buttons {
