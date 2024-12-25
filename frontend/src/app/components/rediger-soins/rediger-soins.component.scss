@@ -18,12 +18,12 @@ h2 {
 }
 
 .Etat, .medicaments, .autres {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   
 }
 
 .etat, .meds, .aut {
-    color: #666;
+    color: #666666;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     padding-bottom: 6Px;
@@ -33,7 +33,7 @@ h2 {
 
 textarea {
     width: 100%;
-    min-height: 45px; 
+    min-height: 50px; 
     max-height: 300px; 
     padding: 0.75rem;
     border: 1px solid #e0e0e0;
@@ -84,4 +84,19 @@ button {
 
 .retour:hover {
     background-color: #f5f5f5;
+}
+.invalid {
+    border-color: #dc3545;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
