@@ -11,6 +11,7 @@ interface user {
     phone: number;
     insurance: string;
     contactName: string;
+    mutuelle : string;
     contactPrenom: string;
     contactPhone: number;
     doctors : string;
@@ -25,6 +26,7 @@ interface user {
     private apiUrl = 'https://example.com/api/user';  //replace
   
     constructor(private http: HttpClient) {}
+    
     getUserInfo(): Observable<user> {
       return this.http.get<any>(this.apiUrl);
     }

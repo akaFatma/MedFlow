@@ -1,25 +1,32 @@
-<div class="info-card-container">
-    <div class="personal-info">
-      <div class="info-section">
-        <strong>Nom :</strong> {{ user.nom }} <br />
-        <strong>Prénom :</strong> {{ user.prenom }} <br />
-        <strong>Numéro de sécurité sociale :</strong> {{ user.securityNumber }} <br />
-        <strong>Adresse :</strong> {{ user.address }} <br />
-        <strong>Numéro de téléphone :</strong> {{ user.phone}} <br />
-        <strong>Mutuelle :</strong> {{ user.insurance }} <br />
-        <strong>Personne à contacter :</strong>
-        Nom: {{ user.contactName }} Prénom: {{ user.contactPrenom }}
-        +{{ user.contactPhone }} <br />
-        <strong>Médecin traitant :</strong> {{ user.doctors }} <br />
+<div class="card">
+  <div class="card-header">
+    <div class="header-left">
+      <div class="NomPrenom">
+        <div><strong>Nom :</strong> {{user.nom}}</div>
+        <div><strong>Prénom :</strong> {{user.prenom}}</div>
+      
       </div>
-  
-      <div class="qr-code">
-        <img src="{{ user.qrCode }}" alt="QR Code" />
-      </div>
+      
     </div>
-    <div class="medical-history">
-      <h4>Antécédants médicaux :</h4>
-      <p>{{ user.medicalHistory }}</p>
+    <div class="header-right">
+      <img src="path/to/your/qr-code.png" alt="QR Code"> 
     </div>
   </div>
-  
+  <div class="card-content">
+    <div class="A"><strong>Numéro de sécurité sociale :</strong> {{user.insurance}}</div>
+    <div class="A"><strong>Adresse :</strong> {{user.address}}</div>
+    <div class="A"><strong>Numéro de téléphone :</strong> {{user.phone}}</div>
+    <div class="A"><strong>Mutuelle :</strong> {{user.mutuelle}}</div>
+    <div class="contact-person">
+      <div><strong>Personne à contacter :</strong></div>
+      <div> <strong>Nom : </strong> {{user.contactName}}</div>
+      <div> <strong>Prénom : </strong> {{user.contactPrenom}}</div>
+      <div>{{user.contactPhone}}</div>
+    </div>
+    <div class="A"><strong>Médecin traitant : </strong> {{user.doctors}}</div>
+    <div class="A"><strong>Antécédants médicaux :</strong></div>
+    <div class="medical-history">
+      {{user.medicalHistory}}
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ export class PersonalInfoCardComponent implements OnInit {
     securityNumber: 123456789,
     address: '1234 Elm St',
     phone: 1234567890,
+    mutuelle : 'test ',
     insurance: 'Blue Cross',
     contactName: 'Jane',
     contactPrenom: 'Doe',
