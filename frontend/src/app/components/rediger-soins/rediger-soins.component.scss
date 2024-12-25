@@ -1,0 +1,81 @@
+.container {
+    max-width: 50%;
+    margin: 2rem auto;
+    padding: 3rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #F6F8FD;
+    font-family: 'Inter', sans-serif;
+    font-weight: medium;
+}
+
+h2 {
+    margin-bottom: 2rem;
+    font-weight: 500;
+    color: #666666;
+    font-size: 1.5rem;
+}
+
+.Etat, .medicaments, .autres {
+    margin-bottom: 1.5rem;
+  
+}
+
+.etat, .meds, .aut {
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    padding-bottom: 6Px;
+    border-bottom: 2px solid #E6EFF5
+}
+
+
+textarea {
+    width: 100%;
+    min-height: 45px; 
+    max-height: 300px; 
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    resize: none; 
+    overflow-y: hidden; 
+    line-height: 1.5; 
+    font-family: inherit; 
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+button {
+    padding:0.5rem 2.5rem;
+    border-radius: 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.confirmer {
+    background-color:#027CC0;
+    color: white;
+}
+
+.confirmer:hover {
+    background-color: #006699;
+}
+
+.retour {
+    background-color: white;
+    color: #0088cc;
+    border: 1px solid #027CC0
+}
+
+.retour:hover {
+    background-color: #f5f5f5;
+}
