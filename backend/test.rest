@@ -1,0 +1,17 @@
+POST http://127.0.0.1:8000/users/signup/
+Content-Type: application/json
+
+{ "username": "tbib", "password": "pass123", "role": "Médecin" }
+
+###
+
+POST http://127.0.0.1:8000/users/login/
+Content-Type: application/json
+
+{ "username": "tbib", "password": "pass123" }
+
+###
+
+GET http://127.0.0.1:8000/users/test_token 
+Content-Type: application/json
+Authorization: token xxx
