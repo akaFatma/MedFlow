@@ -33,7 +33,7 @@ export class LoginComponent {
             this.authService.login(username, password).subscribe({
               next: (response) => {
                 console.log('Connexion réussie', response);
-                this.router.navigate(['/test']);
+                this.router.navigate(['add-dpi']);
               },
               error: (error) => {
                 console.error('Échec de la connexion', error);

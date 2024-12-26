@@ -34,7 +34,7 @@ export class AuthService {
         
         if (response && response.token){
           this.saveToken(response.token);
-          this.router.navigate(['/test']);
+          this.router.navigate(['add-dpi']);
         }
       }),
       catchError((error) => {
