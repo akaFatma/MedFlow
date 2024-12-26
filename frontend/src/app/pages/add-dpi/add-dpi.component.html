@@ -59,11 +59,11 @@
                 <input type="text" id="nom" formControlName="nom" />
               </div>
               <div class="input-box">
-                <label for="dateNaissance">Date de naissance</label>
+                <label for="date_naissance">Date de naissance</label>
                 <input
                   type="date"
-                  id="dateNaissance"
-                  formControlName="dateNaissance"
+                  id="date_naissance"
+                  formControlName="date_naissance"
                 />
               </div>
               <div class="input-box">
@@ -78,11 +78,11 @@
               formGroupName="step2"
             >
               <div class="input-box">
-                <label for="securiteSociale">Numéro de sécurité sociale</label>
+                <label for="nss">Numéro de sécurité sociale</label>
                 <input
                   type="text"
-                  id="securiteSociale"
-                  formControlName="securiteSociale"
+                  id="nss"
+                  formControlName="nss"
                 />
               </div>
               <div class="input-box">
@@ -90,28 +90,28 @@
                 <input type="text" id="mutuelle" formControlName="mutuelle" />
               </div>
               <div class="input-box">
-                <label for="medecin">Adresse</label>
-                <input type="text" id="medecin" formControlName="medecin" />
+                <label for="adr">Adresse</label>
+                <input type="text" id="adr" formControlName="adr" />
               </div>
               <div class="input-box">
-                <label for="personneContact">Nom de la personne à contacter</label>
+                <label for="nom_personne">Nom de la personne à contacter</label>
                 <input
                   type="text"
-                  id="personneContact"
-                  formControlName="personneContact"
+                  id="nom_personne"
+                  formControlName="nom_personne"
                 />
               </div>
               <div class="input-box">
-                <label for="profession">Prenom de la personne à contacter</label>
+                <label for="prenom_personne">Prenom de la personne à contacter</label>
                 <input
                   type="text"
-                  id="profession"
-                  formControlName="profession"
+                  id="prenom_personne"
+                  formControlName="prenom_personne"
                 />
               </div>
               <div class="input-box">
-                <label for="assurance">Telephone de la personne à contacter</label>
-                <input type="text" id="assurance" formControlName="assurance" />
+                <label for="telephone_personne">Telephone de la personne à contacter</label>
+                <input type="text" id="telephone_personne" formControlName="telephone_personne" />
               </div>
             </div>
 
@@ -127,7 +127,7 @@
                 </div>
                 <div class="summary-item">
                   <span class="label">Date de naissance : </span>
-                  <span class="value">{{ getFormData().dateNaissance }}</span>
+                  <span class="value">{{ getFormData().date_naissance }}</span>
                 </div>
                 <div class="summary-item">
                   <span class="label">Numéro de téléphone : </span>
@@ -135,11 +135,11 @@
                 </div>
                 <div class="summary-item">
                   <span class="label">Numéro de sécurité sociale : </span>
-                  <span class="value">{{ getFormData().securiteSociale }}</span>
+                  <span class="value">{{ getFormData().nss }}</span>
                 </div>
                 <div class="summary-item">
                   <span class="label">Médecin : </span>
-                  <span class="value">{{ getFormData().medecin }}</span>
+                  <span class="value">{{ getFormData().adr }}</span>
                 </div>
                 <div class="summary-item">
                   <span class="label">Spécialité : </span>
@@ -162,7 +162,6 @@
               <button
                 class="button suivant"
                 (click)="currentStep === 3 ? onValidate() : goToNextStep()"
-                [disabled]="!isStepComplete()"
               >
                 {{ getButtonText() }}
               </button>

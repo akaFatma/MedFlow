@@ -32,16 +32,16 @@ export class AddDPIComponent {
       step1: this.fb.group({
         prenom: ['', Validators.required],
         nom: ['', Validators.required],
-        dateNaissance: ['', Validators.required],
+        date_naissance: ['', Validators.required],
         telephone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       }),
       step2: this.fb.group({
-        securiteSociale: ['', Validators.required],
+        nss: ['', Validators.required],
         mutuelle: ['', Validators.required],
-        medecin: ['', Validators.required],
-        personneContact: ['', Validators.required],
-        profession: ['', Validators.required],
-        assurance: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        adr: ['', Validators.required],
+        nom_personne: ['', Validators.required],
+        prenom_personne: ['', Validators.required],
+        telephone_personne: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       }),
     });
   }
@@ -51,14 +51,14 @@ export class AddDPIComponent {
     return {
       nom: this.patientForm.value.step1.nom,
       prenom: this.patientForm.value.step1.prenom,
-      dateNaissance: this.patientForm.value.step1.dateNaissance,
+      date_naissance: this.patientForm.value.step1.date_naissance,
       telephone: this.patientForm.value.step1.telephone,
-      securiteSociale: this.patientForm.value.step2.securiteSociale,
+      nss: this.patientForm.value.step2.nss,
       mutuelle: this.patientForm.value.step2.mutuelle,
-      medecin: this.patientForm.value.step2.medecin,
-      personneContact: this.patientForm.value.step2.personneContact,
-      profession: this.patientForm.value.step2.profession,
-      assurance: this.patientForm.value.step2.assurance,
+      adr: this.patientForm.value.step2.adr,
+      nom_personne: this.patientForm.value.step2.nom_personne,
+      prenom_personne: this.patientForm.value.step2.prenom_personne,
+      telephone_personne: this.patientForm.value.step2.telephone_personne,
     };
   }
 
