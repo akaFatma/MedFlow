@@ -1,0 +1,23 @@
+<div class="consultation-container">
+    <div class="header-grid">
+        <div>NOM</div>
+        <div>PRENOM</div>
+        <div>NSS</div>
+        <div></div>
+    
+    </div>
+    
+    <div *ngFor="let patient of patient" class="consultation-row">
+    <div>{{ patient.nom}}</div>
+    <div>{{ patient.prenom}}</div>
+    <div>{{ patient.nss }}</div>
+    <div class="button-container">
+    <button class="consult-button">
+     Rediger soins
+    </button>
+    </div>
+    </div>
+    
+    
+    </div>
+    

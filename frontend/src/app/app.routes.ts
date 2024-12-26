@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { ConsulterDPIPovPatientComponent } from './pages/consulter-dpipov-patient/consulter-dpipov-patient.component';
-import { SuccessNotifComponent } from './components/success-notif/success-notif.component';
+import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 
 export const routes: Routes = [
-  { path: 'test', component : SuccessNotifComponent },
+  { path: 'test', component : InfermierTableComponent },
 
 ];
