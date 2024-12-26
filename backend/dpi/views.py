@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
-from .models import Patient
+from .models import Patient 
 from .serializers import PatientSerializer, PatientMinimalSerializer
 
 @api_view(['GET'])
@@ -148,4 +148,73 @@ def get_dpi_by_qr_code(request):
         return Response({"error": str(e)}, status=500)
 '''
 
+from .models import Ordonnance, Traitement, Distribution
+from .serializers import DistributionSerializer, OrdonnanceSerializer
 
+@api_view(['GET'])
+def envoyer_ordonnance_sgph(request, id):
+    try:
+        ordonnance = Ordonnance.objects.get(id=id)
+        serializer = OrdonnanceSerializer(ordonnance)
+        return Response(serializer.data, status=200)
+    except Ordonnance.DoesNotExist:
+        return Response({"error": "Ordonnance introuvable"}, status=404)
+
+@api_view(['POST'])
+def valider_ordonnance(request):
+    ordonnance_id = request.data.get("ordonnance_id")
+    if not ordonnance_id:
+        return Response({"error": "L'ID de l'ordonnance est requis."}, status=400)
+
+    try:
+        ordonnance = Ordonnance.objects.get(id=ordonnance_id)
+    except Ordonnance.DoesNotExist:
+        return Response({"error": "Ordonnance introuvable."}, status=404)
+
+    ordonnance.validee = True
+    ordonnance.save()
+
+    return Response({
+        "message": "Ordonnance validée avec succès.",
+        "ordonnance_id": ordonnance.id,
+        "status": ordonnance.validee
+    }, status=200)
+
+@api_view(['POST'])
+def valider_ordonnance(request, id):
+    ordonnance = Ordonnance.objects.get(id=id)
+    if not ordonnance:
+        return Response({'error': 'Ordonnance introuvable'}, status=404)
+    
+    if ordonnance.validee:
+        return Response({'message': 'Ordonnance déjà validée'}, status=400)
+
+    sgph_response = request.data.get('validation') 
+    ordonnance.validee = sgph_response
+    ordonnance.save()
+
+    status_message = 'validée' if sgph_response else 'non validée'
+    return Response({'message': f"Ordonnance {status_message}"}, status=200)
+
+@api_view(['POST'])
+def distribuer_medicament(request):
+    ordonnance_id = request.data.get('ordonnance_id')
+    traitement_id = request.data.get('traitement_id')
+    quantite = request.data.get('quantite')
+
+    ordonnance = Ordonnance.objects.filter(id=ordonnance_id).first()
+    if not ordonnance or not ordonnance.validee:
+        return Response({'error': 'Ordonnance invalide ou non validée'}, status=400)
+
+    traitement = Traitement.objects.filter(id=traitement_id).first()
+    if not traitement:
+        return Response({'error': 'Traitement introuvable'}, status=404)
+
+    distribution = Distribution.objects.create(
+        ordonnance=ordonnance,
+        traitement=traitement,
+        quantite=quantite
+    )
+
+    serializer = DistributionSerializer(distribution)
+    return Response(serializer.data, status=201)
