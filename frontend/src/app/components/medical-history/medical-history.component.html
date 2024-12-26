@@ -1,0 +1,22 @@
+<div class="consultation-container">
+<div class="header-grid">
+    <div>DATE</div>
+    <div>MEDECIN</div>
+    <div>SPECIALITE</div>
+    <div></div>
+
+</div>
+
+<div *ngFor="let consultation of consultations" class="consultation-row">
+<div>{{ consultation.date }}</div>
+<div>{{ consultation.doctor}}</div>
+<div>{{ consultation.specialty }}</div>
+<div class="button-container">
+<button class="consult-button">
+ Consulter
+</button>
+</div>
+</div>
+
+
+</div>

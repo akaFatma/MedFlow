@@ -1,0 +1,44 @@
+
+.landing-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    background-color: #F6F8FD; 
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .main-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow-x: auto;
+    background-color: #F6F8FD;
+  
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+  }
+  
+  :host {
+    display: contents;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  app-bienvenu-component {
+    margin-bottom: 0;
+   }
+   app-search-bar{
+    margin : 0 100px ;
+    padding: 0;
+   }
+    

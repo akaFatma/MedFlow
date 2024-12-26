@@ -1,0 +1,41 @@
+.sidebar{
+    background-color: white;
+    max-width: 250px;
+    border-radius: 20px;
+    position: fixed;
+    padding: 20px;
+    box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
+    height: 98vh;
+}
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.70rem 0.9rem;
+    color: #64748b;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.1s;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+    color: #2B2929;
+}
+
+.nav-item:hover {
+    background: #027CC0;
+    color: white;
+    border-radius: 16px;
+}
+.logo {
+    width: 200px;
+    margin-bottom: 1rem;
+    color: red;
+
+}

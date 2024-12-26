@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { MedecinLandingPageComponent } from './pages/medecin-landing-page/medecin-landing-page.component';
 
 export const routes: Routes = [
-    { path: 'users/login', component: LoginPageComponent },
-    { path: 'test', component: LoginPageComponent }
+  { path: 'test', component : MedecinLandingPageComponent },
+
 ];
