@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-bienvenu-component',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './bienvenu-component.component.scss'
 })
 export class BienvenuComponentComponent {
+ 
+  @Input() userName: string = '';
 
 }
