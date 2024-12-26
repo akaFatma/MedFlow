@@ -226,7 +226,7 @@ def creerr_dpi(request):
         try:
             # Décodage des données envoyées en JSON dans le corps de la requête
             body = json.loads(request.body)
-            print(f"Données reçues : {body}")  # Affiche les données JSON dans la console pour débogage
+            print(f"Données reçues nomjour : {body}")  # Affiche les données JSON dans la console pour débogage
             data = body.get('data')
 
             if not data:
@@ -235,11 +235,11 @@ def creerr_dpi(request):
             # Récupération des valeurs des données
             nom = data.get('nom')
             prenom = data.get('prenom')
-            date_naissance = data.get('date')
+            date_naissance = data.get('date_naissance')
             telephone = data.get('telephone')
-            adr = data.get('adresse')
             nss = data.get('nss')
             mutuelle = data.get('mutuelle')
+            adr = data.get('adr')
             nom_personne = data.get('nom_personne')
             prenom_personne = data.get('prenom_personne')
             telephone_personne = data.get('telephone_personne')
