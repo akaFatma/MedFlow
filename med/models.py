@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
+
 class PersonneAContacter(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
@@ -32,17 +33,17 @@ class Etablissement(models.Model):
     def __str__(self):
         return f"{self.nom} - {self.adresse}"
 
-class Utilisateur(models.Model):
-    username = models.CharField(max_length=20)
-    password = models.CharField(max_length=30)
-    telephone = models.CharField(max_length=15)
-    etablissement = models.ForeignKey(
-        Etablissement,  # Relation un-à-plusieurs
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="utilisateurs"
-    )
+# class Utilisateur(models.Model):
+#     username = models.CharField(max_length=20)
+#     password = models.CharField(max_length=30)
+#     telephone = models.CharField(max_length=15)
+#     etablissement = models.ForeignKey(
+#         Etablissement,  # Relation un-à-plusieurs
+#         on_delete=models.SET_NULL,
+#         null=True,
+#         blank=True,
+#         related_name="utilisateurs"
+#     )
 
 
 
@@ -50,7 +51,7 @@ class Utilisateur(models.Model):
 class Patient(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
-    date_de_naissance = models.DateField("Date de naissance")
+    date_de_naissance = models.CharField(max_length=100)
     adresse = models.TextField()
     telephone = models.CharField(max_length=15)  
     nss = models.CharField(max_length=15, unique=True)  # Ajout de `unique` pour éviter les doublons
@@ -129,12 +130,12 @@ class DPI(models.Model):
         related_name='dossier_patient',  # Un nom inversé unique
         help_text="Le patient associé à ce DSI"
     )
-    utilisateur = models.OneToOneField(
-        'Utilisateur', 
-        on_delete=models.CASCADE, 
-        related_name='dossier_utilisateur',  # Un nom inversé unique
-        help_text="L'utilisateur associé à ce DSI"
-    )
+    # utilisateur = models.OneToOneField(
+    #     'Utilisateur', 
+    #     on_delete=models.CASCADE, 
+    #     related_name='dossier_utilisateur',  # Un nom inversé unique
+    #     help_text="L'utilisateur associé à ce DSI"
+    # )
 
     def __str__(self):
         return f"Dossier patient de {self.patient.nom} {self.patient.prenom}"
