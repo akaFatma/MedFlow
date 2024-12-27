@@ -6,13 +6,8 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
 import { MedecinTableComponent } from '../../components/medecin-table/medecin-table.component';
 import { SearchService } from '../../services/search.services';
 import { PatientService } from '../../services/patient.services';
+import { Patient } from '../../models/patient.models';
 
-interface Patient {
-  nom: string;
-  prenom: string;
-  nss: number;
-  etat: 'ouvert' | 'fermé';
-}
 @Component({
   selector: 'app-medecin-landing-page',
   imports: [

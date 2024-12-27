@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-
-interface Patient {
-  nom: string;
-  prenom: string;
-  nss: number;
-  etat: 'ouvert' | 'fermé';
-}
+import { Patient } from '../models/patient.models';
 
 @Injectable({
   providedIn: 'root'
