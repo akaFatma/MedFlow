@@ -1,13 +1,13 @@
 <!-- medecin-landing.component.html -->
 <div class="landing-container">
-    <app-side-bar></app-side-bar>
-    
-    <main class="main-content">
-      <app-bienvenu-component [userName]="currentUser"></app-bienvenu-component>
-      <app-search-bar 
-        (search)="handleSearch($event)"
-        (scanQR)="onScanQR()">
-      </app-search-bar>
-      <app-medecin-table [searchResults]="results" ></app-medecin-table> 
-    </main>
-  </div>
+  <app-side-bar></app-side-bar>
+  
+  <main class="main-content">
+    <app-bienvenu-component  [userName]="userName" ></app-bienvenu-component>
+    <app-search-bar 
+      (search)="onSearch($event)"
+      (scanQR)="onScanQR()">
+    </app-search-bar>
+    <app-medecin-table  [searchResults]="results" ></app-medecin-table> 
+  </main>
+</div>

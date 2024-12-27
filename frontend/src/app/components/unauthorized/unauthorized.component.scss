@@ -1,0 +1,25 @@
+.unauthorized-container {
+    text-align: center;
+    margin-top: 50px;
+  
+    h1 {
+      font-size: 2rem;
+      color: red;
+    }
+  
+    p {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+  
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color:#027CC0;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+    }
+  }
+  

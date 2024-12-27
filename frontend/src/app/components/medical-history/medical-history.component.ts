@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsultationHistoryService } from '../../services/consultation-history';
 import { Injectable } from '@angular/core';
-
-interface Consultation {
-  date: string;
-  doctor: string;
-  specialty: string;
-}
+import { Consultation } from '../../models/consultation.models';
 
 @Component({
   selector: 'app-medical-history',

@@ -2,14 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Patient } from '../models/patient.models';
 
-
-interface Patient {
-    nom: string;
-    prenom: string;
-    nss: number;
-    etat: 'ouvert' | 'fermé';
-  }
 
   @Injectable({
     providedIn: 'root'
