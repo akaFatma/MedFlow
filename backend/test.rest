@@ -23,24 +23,23 @@ Content-Type: application/json
 
 {
     "patient": {
-    "nom": "Dupont",
-    "prenom": "Jean",
+    "nom": "TOUAT",
+    "prenom": "Malak",
     "date_de_naissance": "1985-04-12",
     "adresse": "123 Rue des Lilas, 75010 Paris, France",
     "telephone": "0123456789",
-    "nss": "123456789"
+    "nss": "337528277"
     },
     "dpi": {
-        "antecedants_medicaux": "allergique a moi."
+        "antecedants_medicaux": "allergique a TOUAT Malak."
     }
 }
 
 ###
 #hna z3ma ma kmlch kteb ga3 l nss
-GET http://127.0.0.1:8000/dpi/patients
+GET http://127.0.0.1:8000/dpi/patients/123
 Content-Type: application/json
 
-{"nss": "123456"}
 
 ###
 GET http://127.0.0.1:8000/dpi/patients/nss/123456789

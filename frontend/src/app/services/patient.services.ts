@@ -16,7 +16,7 @@ interface Patient {
   })
 export class PatientService {
 
-     private readonly API_URL = 'http://localhost:3000/cff';
+     private readonly API_URL = 'http://localhost:8000/dpi/patients';
       
       constructor(private http: HttpClient) {}
     

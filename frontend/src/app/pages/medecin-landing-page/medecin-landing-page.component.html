@@ -5,9 +5,9 @@
     <main class="main-content">
       <app-bienvenu-component [userName]="currentUser"></app-bienvenu-component>
       <app-search-bar 
-        (search)="onSearch($event)"
+        (search)="handleSearch($event)"
         (scanQR)="onScanQR()">
       </app-search-bar>
-      <app-medecin-table ></app-medecin-table> 
+      <app-medecin-table [searchResults]="results" ></app-medecin-table> 
     </main>
   </div>

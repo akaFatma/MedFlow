@@ -6,22 +6,33 @@ from .serializers import PatientSerializer, PatientMinimalSerializer
 
 @api_view(['GET'])
 def list_patients(request):
-    search_nss = request.data.get('nss')
     patients = Patient.objects.all()
-
-    if search_nss:
-        patients = patients.filter(nss__startswith=search_nss)  # Recuperer tous les dpi qui commence par le search_nss
+    serializer = PatientMinimalSerializer(patients, many=True) 
+    return Response(serializer.data, status=200)
 
     # Pagination, apparemment c'est pour ne pas envoyer tous les patients s'ils sont nombreux
     # z3ma kima insta myb3tolkch kamel l existing posts mais une page, dk if it's helpful
     # ila khdma zayda 9ololi na7ih, n7bes f patients ndir return patients --malak
-
+'''
     paginator = PageNumberPagination()
     paginator.page_size = 10  # Nombre de résultats par page
     paginated_patients = paginator.paginate_queryset(patients, request)
 
     serializer = PatientMinimalSerializer(paginated_patients, many=True)
     return paginator.get_paginated_response(serializer.data)
+'''
+@api_view(['GET'])
+def list_patients_filtered(request):
+    print("cc")
+    nss = request.query_params.get('nss', None)
+    if nss:
+        patients = Patient.objects.filter(nss__startswith=nss) 
+    else:
+        patients = Patient.objects.all() 
+
+    serializer = PatientMinimalSerializer(patients, many=True)
+    
+    return Response(serializer.data, status=200)
 
 from .models import DPI
 from .serializers import DPISerializer, DPISerializerGET

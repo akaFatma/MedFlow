@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { PatientService } from '../../services/patient.services'
+import { Input } from '@angular/core';
+import { SimpleChanges } from '@angular/core';
 
 interface Patient {
   nom: string;
@@ -15,9 +17,13 @@ interface Patient {
   templateUrl: './medecin-table.component.html',
   styleUrls: ['./medecin-table.component.scss']  
 })
-export class MedecinTableComponent implements OnInit {
+export class MedecinTableComponent implements OnInit , OnChanges {
   patients: Patient[] = [];  
   errorMessage: string = '';
+ 
+  @Input() searchResults: Patient[] = [];
+  displayedPatients: Patient[] = [];
+ 
 
   constructor(private patientservice: PatientService) {}
 
@@ -25,7 +31,13 @@ export class MedecinTableComponent implements OnInit {
     this.loadPatients();
   }
 
-  loadPatients(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchResults'] && changes['searchResults'].currentValue) {
+      this.displayedPatients = changes['searchResults'].currentValue;
+    }
+  }
+
+ /* loadPatients(): void {
     this.patientservice.getConsultationHistory().subscribe({
       next: (data) => {
         this.patients = data;
@@ -35,14 +47,17 @@ export class MedecinTableComponent implements OnInit {
         console.error('Error fetching consultations:', error);
       }
     });
-  }
+  }*/
 
-  // Example patient data to display before fetching real data
-  patientss: Patient[] = [
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'ouvert' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'ouvert' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'fermé' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'fermé' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'fermé' }
-  ];
+  loadPatients(): void {
+    this.patientservice.getConsultationHistory().subscribe({
+      next: (data) => {
+        this.displayedPatients = data;
+      },
+      error: (error) => {
+        this.errorMessage = error.message;
+        console.error('Error fetching consultations:', error);
+      }
+    });
+  }
 }

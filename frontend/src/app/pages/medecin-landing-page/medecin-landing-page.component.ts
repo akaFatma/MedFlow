@@ -4,6 +4,7 @@ import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { BienvenuComponentComponent } from '../../components/bienvenu-component/bienvenu-component.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { MedecinTableComponent } from '../../components/medecin-table/medecin-table.component';
+import { SearchService } from '../../services/search.services';
 
 @Component({
   selector: 'app-medecin-landing-page',
@@ -18,12 +19,23 @@ import { MedecinTableComponent } from '../../components/medecin-table/medecin-ta
   styleUrl: './medecin-landing-page.component.scss'
 })
 export class MedecinLandingPageComponent {
-
+  
+  results: any[] = [];
+  constructor(private searchService: SearchService) {}
+   
   currentUser = 'Name'; //hna idk how to get the username
+ 
   searchTerm: number =0 ; 
  
-  onSearch(value: number) {
-    this.searchTerm = value;
+  handleSearch(nss: number): void {
+    this.searchService.searchByNSS(nss).subscribe(
+      (data) => {
+        this.results = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
  
   onScanQR() {

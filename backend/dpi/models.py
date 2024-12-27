@@ -33,6 +33,8 @@ class Patient(models.Model):
         return f"{self.nom} {self.prenom} (NSS : {self.nss})" 
 
 class DPI(models.Model):
+    ETATS= [('ouvert', 'ouvert'), ('fermé', 'fermé')]
+    etat = models.CharField(default='ouvert', max_length=10, choices = ETATS)
     antecedants_medicaux = models.TextField(default= 'Aucun antecedant',help_text="Antecedants medicaux du patient")
     patient = models.OneToOneField(
         'Patient', 
