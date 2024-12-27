@@ -7,6 +7,7 @@ import { MedecinTableComponent } from '../../components/medecin-table/medecin-ta
 import { SearchService } from '../../services/search.services';
 import { PatientService } from '../../services/patient.services';
 import { Patient } from '../../models/patient.models';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-medecin-landing-page',
@@ -23,16 +24,20 @@ import { Patient } from '../../models/patient.models';
 export class MedecinLandingPageComponent implements OnInit {
   
   results: Patient[] = [];
+  userName: string = '';
  
   constructor(
     private searchService: SearchService,
-    private patientService : PatientService
+    private patientService : PatientService,
+    private authService : AuthService
   
   ) {}
 
   ngOnInit(): void {
-    //load all patients when component initializes
+    // Load all patients when component initializes
     this.loadAllPatients();
+    // Get the username dynamically
+    this.userName = this.authService.getUserName();
   }
   loadAllPatients(): void {
     this.patientService.getConsultationHistory().subscribe({
@@ -45,9 +50,7 @@ export class MedecinLandingPageComponent implements OnInit {
       }
     });
   }
-
-
-  onSearch(nss: number): void {
+   onSearch(nss: number): void {
     if (!nss) {
       this.loadAllPatients(); //if search is cleared load patients again
       return;
@@ -66,5 +69,6 @@ export class MedecinLandingPageComponent implements OnInit {
 
 onScanQR(){
   //idk
+
 }
 }

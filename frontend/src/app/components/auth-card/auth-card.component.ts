@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
-//import { AuthService } from '../../services/auth.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './auth-card.component.html',
@@ -33,7 +31,8 @@ export class LoginComponent {
             this.authService.login(username, password).subscribe({
               next: (response) => {
                 console.log('Connexion réussie', response);
-                this.router.navigate(['/test']);
+                const redirectUrl = this.authService.getRedirectUrl(response.role);
+                this.router.navigate([redirectUrl]);
               },
               error: (error) => {
                 console.error('Échec de la connexion', error);
