@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { BienvenuComponentComponent } from '../../components/bienvenu-component/bienvenu-component.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { MedecinTableComponent } from '../../components/medecin-table/medecin-table.component';
+import { SearchService } from '../../services/search.services';
+import { PatientService } from '../../services/patient.services';
 
+interface Patient {
+  nom: string;
+  prenom: string;
+  nss: number;
+  etat: 'ouvert' | 'fermé';
+}
 @Component({
   selector: 'app-medecin-landing-page',
   imports: [
@@ -17,16 +25,51 @@ import { MedecinTableComponent } from '../../components/medecin-table/medecin-ta
   templateUrl: './medecin-landing-page.component.html',
   styleUrl: './medecin-landing-page.component.scss'
 })
-export class MedecinLandingPageComponent {
+export class MedecinLandingPageComponent implements OnInit {
+  
+  results: Patient[] = [];
+ 
+  constructor(
+    private searchService: SearchService,
+    private patientService : PatientService
+  
+  ) {}
 
-  currentUser = 'Name'; //hna idk how to get the username
-  searchTerm: number =0 ; 
- 
-  onSearch(value: number) {
-    this.searchTerm = value;
+  ngOnInit(): void {
+    //load all patients when component initializes
+    this.loadAllPatients();
   }
- 
-  onScanQR() {
-   //hna idk 
+  loadAllPatients(): void {
+    this.patientService.getConsultationHistory().subscribe({
+      next: (data) => {
+        this.results = data;
+      },
+      error: (error) => {
+        console.error('Error fetching patients:', error);
+        this.results = [];
+      }
+    });
   }
+
+
+  onSearch(nss: number): void {
+    if (!nss) {
+      this.loadAllPatients(); //if search is cleared load patients again
+      return;
+    }
+    this.searchService.searchByNSS(nss).subscribe({
+      next: (data: Patient) => {
+        this.results = Array.isArray(data) ? data : [data];
+      },
+      error: (error) => {
+        console.error('Error fetching data:', error);
+        this.results = []; 
+      }
+    });
+
+}
+
+onScanQR(){
+  //idk
+}
 }
