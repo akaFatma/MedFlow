@@ -3,6 +3,8 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { PatientService } from '../../services/patient.services'
 import { Input } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
+import { Route } from '@angular/router';
+import { Router } from '@angular/router';
 
 interface Patient {
   nom: string;
@@ -23,7 +25,7 @@ export class MedecinTableComponent implements OnInit , OnChanges {
   @Input() searchResults: Patient[] = [];
   displayedPatients: Patient[] = [];
 
-  constructor(private patientservice: PatientService) {}
+  constructor(private patientservice: PatientService , private router : Router) {}
 
   ngOnInit(): void {
     this.loadPatients();
@@ -52,4 +54,9 @@ export class MedecinTableComponent implements OnInit , OnChanges {
       }
     });
   }
+
+  goToPatientDossier(nss: number): void {
+    this.router.navigate(['/dossier', nss]); 
+  }
 }
+

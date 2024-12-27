@@ -10,9 +10,9 @@ import DOMPurify from 'dompurify';
 })
 export class AuthService {
   private loginUrl = 'http://127.0.0.1:8000/users/login';
-  private tokenKey = ''; // to store in local storage
-  private userNameKey = ''; //store the current username in local storage
-  private roleKey = ''; // Store the role in localStorage
+  private tokenKey = 'auth_token';// to store in local storage
+  private userNameKey =  'user_name';; //store the current username in local storage
+  private roleKey = 'user_role'; // Store the role in localStorage
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -71,7 +71,7 @@ export class AuthService {
    getRedirectUrl(role: string): string {
     if (role === 'medecin') {
       return '/medecin-landing'; // Redirect to medecin landing page
-    } else if (role === 'admin') {
+    } else if (role === 'administratif') {
       return '/admin-dashboard'; // Redirect to admin dashboard
     } else {
       return '/user-landing'; // Default landing page for other users
@@ -79,5 +79,11 @@ export class AuthService {
   }
   private sanitizeInput(input: string): string {
     return DOMPurify.sanitize(input.trim());
+  }
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userNameKey);
+    localStorage.removeItem(this.roleKey);
+    this.router.navigate(['/login']);
   }
 }
