@@ -8,7 +8,7 @@ Content-Type: application/json
 POST http://127.0.0.1:8000/users/login
 Content-Type: application/json
 
-{ "username": "mar", "password": "pass123" }
+{ "username": "tbib", "password": "pass123" }
 
 ###
 
@@ -28,7 +28,7 @@ Content-Type: application/json
     "date_de_naissance": "1985-04-12",
     "adresse": "123 Rue des Lilas, 75010 Paris, France",
     "telephone": "0123456789",
-    "nss": "337528277"
+    "nss": "189088277"
     },
     "dpi": {
         "antecedants_medicaux": "allergique a TOUAT Malak."

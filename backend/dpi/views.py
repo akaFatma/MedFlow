@@ -1,32 +1,27 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
-from rest_framework.pagination import PageNumberPagination
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from .models import Patient
 from .serializers import PatientSerializer, PatientMinimalSerializer
+from users.decorators import role_required
 
 @api_view(['GET'])
+@role_required(allowed_roles=["Médecin"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def list_patients(request):
-    patients = Patient.objects.all()
+    patients = Patient.objects.all()[:7]
     serializer = PatientMinimalSerializer(patients, many=True) 
     return Response(serializer.data, status=200)
 
-    # Pagination, apparemment c'est pour ne pas envoyer tous les patients s'ils sont nombreux
-    # z3ma kima insta myb3tolkch kamel l existing posts mais une page, dk if it's helpful
-    # ila khdma zayda 9ololi na7ih, n7bes f patients ndir return patients --malak
-'''
-    paginator = PageNumberPagination()
-    paginator.page_size = 10  # Nombre de résultats par page
-    paginated_patients = paginator.paginate_queryset(patients, request)
 
-    serializer = PatientMinimalSerializer(paginated_patients, many=True)
-    return paginator.get_paginated_response(serializer.data)
-'''
 @api_view(['GET'])
 def list_patients_filtered(request):
     print("cc")
     nss = request.query_params.get('nss', None)
     if nss:
-        patients = Patient.objects.filter(nss__startswith=nss) 
+        patients = Patient.objects.filter(nss=nss) 
     else:
         patients = Patient.objects.all() 
 

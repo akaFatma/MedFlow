@@ -17,9 +17,11 @@ interface Patient {
   templateUrl: './medecin-table.component.html',
   styleUrls: ['./medecin-table.component.scss']  
 })
-export class MedecinTableComponent implements OnInit {
-  patients: Patient[] = [];  
+export class MedecinTableComponent implements OnInit , OnChanges {
+ 
   errorMessage: string = '';
+  @Input() searchResults: Patient[] = [];
+  displayedPatients: Patient[] = [];
 
   constructor(private patientservice: PatientService) {}
 
@@ -39,7 +41,7 @@ export class MedecinTableComponent implements OnInit {
     }
   }
 
-  loadPatients(): void {
+   loadPatients(): void {
     this.patientservice.getConsultationHistory().subscribe({
       next: (data) => {
         this.displayedPatients = data;
@@ -50,13 +52,4 @@ export class MedecinTableComponent implements OnInit {
       }
     });
   }
-
-  // Example patient data to display before fetching real data
-  patientss: Patient[] = [
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'ouvert' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'ouvert' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'fermé' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'fermé' },
-    { nom: 'Salhi', prenom: 'Fatma', nss: 110720004, etat: 'fermé' }
-  ];
 }
