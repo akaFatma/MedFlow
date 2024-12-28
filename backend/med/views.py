@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Patient, PersonneAContacter, DPI   
 from .serializers import PatientSerializer, PatientMinimalSerializer
 from users.decorators import role_required
+from users.serializers import UserSerializer
 
 @api_view(['GET'])
 @role_required(allowed_roles=["Médecin"])
@@ -44,17 +45,9 @@ def get_dpi(request):
     except DPI.DoesNotExist:
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
     
-'''
+
 from .utils import generate_qrcode
-
-@api_view(["GET"])
-def qr_code(request): 
-    pat = Patient.objects.get(nss="123456789")
-    path = generate_qrcode(pat)
-    print(path)
-    return Response({"qrcode": "good"}, status=200)
-'''   
-
+'''
 from pyzbar.pyzbar import decode
 from PIL import Image
 import base64
@@ -91,7 +84,7 @@ def get_dpi_by_qr(request):
         return Response(serializer.data, status=200)
     except DPI.DoesNotExist:
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
-    
+'''    
 '''
 @api_view(['GET'])
 def get_dpi_by_qr_code(request):
@@ -125,7 +118,6 @@ def get_dpi_by_qr_code(request):
     except Exception as e:
         return Response({"error": str(e)}, status=500)
 '''
-
 @csrf_exempt
 def rediger_ordonnance(request):
     if request.method == 'POST':
@@ -187,7 +179,7 @@ def rediger_ordonnance(request):
 
 
 @csrf_exempt
-def creerr_dpi(request): 
+def creer_dpi(request): 
     if request.method == 'POST':
         try:
             # Décodage des données envoyées en JSON dans le corps de la requête
@@ -220,16 +212,29 @@ def creerr_dpi(request):
                 prenom=prenom_personne,
                 telephone=telephone_personne
             )
+            # Create the user (signup logic)
+            user_data = {
+                'username': nom+prenom,
+                'password': nom+nss,
+                'first_name': nom,
+                'last_name': prenom,
+                'role': 'Patient'
+            }
+            user_serializer = UserSerializer(data=user_data)
+            if user_serializer.is_valid():
+                user = user_serializer.save()    
+
 
             # Création du patient
-            patient = Patient.objects.create(
-                nom=nom, prenom=prenom, date_de_naissance=date_naissance,
-                adresse=adr, telephone=telephone, nss=nss, mutuelle=mutuelle,
-                personne_a_contacter=personne_a_contacter
-            )
-
+                patient = Patient.objects.create(
+                    user = user,
+                    nom=nom, prenom=prenom, date_de_naissance=date_naissance,
+                    adresse=adr, telephone=telephone, nss=nss, mutuelle=mutuelle,
+                    personne_a_contacter=personne_a_contacter
+                )
+                generate_qrcode(patient)
             # Création du DPI (Dossier Patient Informatisé)
-            dpi = DPI.objects.create(patient=patient)
+                dpi = DPI.objects.create(patient=patient)
 
             # Réponse réussie avec les données créées
             return JsonResponse({

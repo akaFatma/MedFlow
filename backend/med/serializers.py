@@ -13,10 +13,9 @@ class PersonneAContacterSerializer(serializers.ModelSerializer):
 
 class PatientSerializer(serializers.ModelSerializer):
     personne_a_contacter = PersonneAContacterSerializer()
-    medecins = MedecinSerializer(many=True)
     class Meta:
         model = Patient
-        fields = ['nom', 'prenom','nss', 'adresse', 'date_de_naissance', 'telephone', 'mutuelle', 'personne_a_contacter', 'medecins']   
+        fields = ['nom', 'prenom','nss', 'adresse', 'date_de_naissance', 'telephone', 'mutuelle', 'personne_a_contacter']   
 
 
 
@@ -35,4 +34,4 @@ class DPISerializerGET(serializers.ModelSerializer):
     patient = PatientSerializer()
     class Meta:
         model = DPI
-        fields = ['patient', 'antecedants_medicaux', 'etat']
+        fields = ['patient', 'antecedents_medicaux', 'etat']

@@ -32,8 +32,8 @@ export interface user {
 })
 
   export class UserInfoService {
-    private baseUrl = 'http://127.0.0.1:8000/med/patients';  
-    nss= 123456789;
+    private baseUrl = 'http://127.0.0.1:8000/patients';  
+    nss= 1111111111;
     constructor(private http: HttpClient) {}
     
     getUserInfo(): Observable<user> {

@@ -1,7 +1,14 @@
-POST http://127.0.0.1:8000/users/signup
+POST http://127.0.0.1:8000/auth/signup
 Content-Type: application/json
 
-{ "username": "mar", "password": "pass123", "role": "Médecin" }
+{
+    "username": "drbailyy",
+    "password": "pass123",
+    "first_name": "Elizabeth",
+    "last_name": "Brown",
+    "role": "Médecin"
+}
+
 
 ###
 
@@ -18,23 +25,23 @@ Authorization: token xxx
 
 ###
 
-POST http://127.0.0.1:8000/dpi/create
+POST http://127.0.0.1:8000/creerrdpi
 Content-Type: application/json
 
 {
-    "patient": {
-    "nom": "TOUAT",
-    "prenom": "Malak",
-    "date_de_naissance": "1985-04-12",
-    "adresse": "123 Rue des Lilas, 75010 Paris, France",
-    "telephone": "0123456789",
-    "nss": "189088277"
-    },
-    "dpi": {
-        "antecedants_medicaux": "allergique a TOUAT Malak."
-    }
+    "data": {
+    "nom": "Brown",
+    "prenom": "Tristan",
+    "date_naissance": "1998-12-12",
+    "telephone": "0607080910",
+    "adr": "12 rue de la paix",
+    "nss": "13435625",
+    "mutuelle": "jsp wsh m3ntha",
+    "nom_personne": "Bailly",
+    "prenom_personne": "Thomas",
+    "telephone_personne": "0607080910"
 }
-
+}
 ###
 #hna z3ma ma kmlch kteb ga3 l nss
 GET http://127.0.0.1:8000/dpi/patients/123

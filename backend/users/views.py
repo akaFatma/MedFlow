@@ -9,28 +9,24 @@ from django.shortcuts import get_object_or_404
 from .models import CustomUser
 from rest_framework.authtoken.models import Token
 
+
 @api_view(['POST'])
 def signup(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
-        print("i aù here")
-        serializer.save()
-        user = CustomUser.objects.get(username=request.data['username'])
-        user.set_password(request.data['password'])
-        user.save()
-        token = Token.objects.create(user=user)
-        return Response({'token': token.key, 'user': serializer.data})
-    return Response(serializer.errors, status=status.HTTP_200_OK)
+        user = serializer.save() 
+        return Response({'user': serializer.data}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 def login(request):
-    print('hi')
     user = get_object_or_404(CustomUser, username=request.data['username'])
     if not user.check_password(request.data['password']):
         return Response("missing user", status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(user)
-    print("success")
+    print("successeful login")
     return Response({'token': token.key, 'user': serializer.data}, status=200)
 
 @api_view(['GET'])

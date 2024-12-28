@@ -20,6 +20,7 @@ class Etablissement(models.Model):
 
 
 class Patient(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='patient_profile')
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
     date_de_naissance = models.DateField()

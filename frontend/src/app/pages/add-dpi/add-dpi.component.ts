@@ -124,7 +124,7 @@ export class AddDPIComponent {
     });
 
     // URL du backend
-    const backendUrl = 'http://127.0.0.1:8000/creerrdpi/';
+    const backendUrl = 'http://127.0.0.1:8000/creerdpi';
 
     this.http.post(backendUrl, transformedData, { headers }).subscribe(
       (response) => {
