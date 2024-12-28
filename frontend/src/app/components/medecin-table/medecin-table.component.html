@@ -17,7 +17,7 @@
     [ngClass]="{ 'etat-ferme': patients.etat === 'fermé', 'etat-ouvert': patients.etat === 'ouvert' }"
     >{{patients.etat}}</button>
     <div class="button-container">
-    <button class="consult-button">
+    <button class="consult-button" (click)="consulterPatient(patients.nss)">
      Consulter
     </button>
     </div>

@@ -8,6 +8,8 @@ import { SearchService } from '../../services/search.services';
 import { PatientService } from '../../services/patient.services';
 import { Patient } from '../../models/patient.models';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-medecin-landing-page',
@@ -29,7 +31,8 @@ export class MedecinLandingPageComponent implements OnInit {
   constructor(
     private searchService: SearchService,
     private patientService : PatientService,
-    private authService : AuthService
+    private authService : AuthService,
+    private router : Router
   
   ) {}
 
@@ -70,5 +73,9 @@ export class MedecinLandingPageComponent implements OnInit {
 onScanQR(){
   //idk
 
+}
+
+onConsulter(patient: Patient): void { 
+  this.router.navigate(['/dossier-patient', patient.nss]);
 }
 }

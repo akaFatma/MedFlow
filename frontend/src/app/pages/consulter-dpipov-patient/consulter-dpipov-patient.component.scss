@@ -42,6 +42,27 @@ h2 {
         font-size: 18px;
     }
 }
+.nouvelle-consultation{
+    background-color: #119ae4;
+    color : white;
+     padding: 4px 20px;
+     border-radius: 13px;
+     font-size: 12px;
+     border: none;
+     cursor: pointer;
+     transition: background-color 0.2s;
+     margin-right: 70px;
+     margin-bottom: 5px;
+}
+.nouvelle-consultation:hover{
+    background-color:  #027CC0;
+}
+.but{
+    padding: 0;
+    display:  flex;
+    justify-content: space-between;
+}
+
 
 
 
