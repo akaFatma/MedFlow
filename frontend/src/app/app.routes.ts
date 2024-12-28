@@ -6,6 +6,7 @@ import { MedecinLandingPageComponent } from './pages/medecin-landing-page/medeci
 import { ConsulterDPIPovPatientComponent } from './pages/consulter-dpipov-patient/consulter-dpipov-patient.component';
 import { OrdonnanceComponent } from './components/ordonnance/ordonnance.component';
 import { BilanComponent } from './components/bilan/bilan.component';
+import { ResumeComponent } from './components/resume/resume.component';
 
 
  
@@ -25,5 +26,5 @@ export const routes: Routes = [
   //    data: { roles: ['Médecin', 'Patient'] }
   //  },
   //  { path: '**', redirectTo: 'login', pathMatch: 'full' }
-  {path : 'test' , component : OrdonnanceComponent}
+  {path : 'test' , component : ResumeComponent}
  ];
