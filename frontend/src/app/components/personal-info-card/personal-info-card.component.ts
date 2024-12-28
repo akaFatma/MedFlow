@@ -12,20 +12,28 @@ import { CommonModule } from '@angular/common';
 })
 export class PersonalInfoCardComponent implements OnInit {
   user = {
-    nom: 'John',
-    prenom: 'Doe',
-    securityNumber: 123456789,
-    address: '1234 Elm St',
-    phone: 1234567890,
-    mutuelle : 'test ',
-    insurance: 'Blue Cross',
-    contactName: 'Jane',
-    contactPrenom: 'Doe',
-    contactPhone: 1234567890,
-    doctors: 'Dr. Smith, Dr. Johnson',
-    qrCode: '1234567890',
-    medicalHistory: 'ffffffffffffffjfkdjfkd this dude is dying type shit'
-  };
+    'patient': {
+      'nom': "Doe",
+      'prenom': "John",
+      'nss': "123456789", 
+      'adresse': "123 rue de la rue", 
+      'date_de_naissance':'1985-04-12', 
+      'telephone': "0123456789", 
+      'mutuelle': "MGEN", 
+      'personne_a_contacter': {
+        'nom': "Doe", 
+        'prenom': "Jane", 
+        'telephone': "0123456789"
+      }, 
+      'medecins': [{
+        'nom': "Amiri", 
+        'prenom': "Sara", 
+        'specialite': "Cardiologue", 
+      }]
+    }, 
+    'antecedants_medicaux': "Asthme",
+    'etat': 'ouvert'
+  }
 
   errorMessage = '';
 

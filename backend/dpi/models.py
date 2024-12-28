@@ -25,7 +25,7 @@ class Patient(models.Model):
     )  
     medecins = models.ManyToManyField(
         'Medecin', 
-        blank=True,  # `null=True` n'est pas nécessaire pour ManyToManyField
+        blank=True, 
         related_name="patients"
     )
 

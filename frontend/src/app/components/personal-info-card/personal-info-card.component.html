@@ -2,9 +2,8 @@
   <div class="card-header">
     <div class="header-left">
       <div class="NomPrenom">
-        <div><strong>Nom :</strong> {{user.nom}}</div>
-        <div><strong>Prénom :</strong> {{user.prenom}}</div>
-      
+        <div><strong>Nom :</strong> {{user.patient.nom}}</div>
+        <div><strong>Prénom :</strong> {{user.patient.prenom}}</div>
       </div>
       
     </div>
@@ -13,20 +12,20 @@
     </div>
   </div>
   <div class="card-content">
-    <div class="A"><strong>Numéro de sécurité sociale :</strong> {{user.insurance}}</div>
-    <div class="A"><strong>Adresse :</strong> {{user.address}}</div>
-    <div class="A"><strong>Numéro de téléphone :</strong> {{user.phone}}</div>
-    <div class="A"><strong>Mutuelle :</strong> {{user.mutuelle}}</div>
+    <div class="A"><strong>Numéro de sécurité sociale :</strong> {{user.patient.nss}}</div>
+    <div class="A"><strong>Adresse :</strong> {{user.patient.adresse}}</div>
+    <div class="A"><strong>Numéro de téléphone :</strong> {{user.patient.telephone}}</div>
+    <div class="A"><strong>Mutuelle :</strong> {{user.patient.mutuelle}}</div>
     <div class="contact-person">
       <div><strong>Personne à contacter :</strong></div>
-      <div> <strong>Nom : </strong> {{user.contactName}}</div>
-      <div> <strong>Prénom : </strong> {{user.contactPrenom}}</div>
-      <div>{{user.contactPhone}}</div>
+      <div> <strong>Nom : </strong> {{user.patient.personne_a_contacter.nom}}</div>
+      <div> <strong>Prénom : </strong> {{user.patient.personne_a_contacter.prenom}}</div>
+      <div> <strong>Numéro de téléphone : </strong>{{user.patient.personne_a_contacter.telephone}}</div>
     </div>
-    <div class="A"><strong>Médecin traitant : </strong> {{user.doctors}}</div>
+    <div class="A"><strong>Médecin traitant : </strong> {{user.patient.medecins}}</div>
     <div class="A"><strong>Antécédants médicaux :</strong></div>
-    <div class="medical-history">
-      {{user.medicalHistory}}
+    <div class="medical-history"> 
+      {{user.antecedants_medicaux}}
     </div>
   </div>
 </div>

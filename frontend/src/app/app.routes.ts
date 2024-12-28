@@ -3,29 +3,14 @@ import { RoleGuard } from './services/role-guard';
 import { MedecinLandingPageComponent } from './pages/medecin-landing-page/medecin-landing-page.component';
 import { UnauthorizedPageComponent } from './pages/unauthorized-page/unauthorized-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import {ConsulterDPIPovPatientComponent} from './pages/consulter-dpipov-patient/consulter-dpipov-patient.component';
 
 export const routes: Routes = [
-  { 
-    path: 'medecin-landing', 
-    component: MedecinLandingPageComponent, 
-    canActivate: [RoleGuard], 
-    data: { role: 'Médecin' }
-  },
-  { 
-    path: 'unauthorized', 
-    component: UnauthorizedPageComponent 
-  },
-  { 
-    path: 'login', 
-    component: LoginPageComponent 
-  },
-  { 
-    path: '', 
-    redirectTo: 'login', 
-    pathMatch: 'full'
-  },
-  { 
-    path: '**', 
-    redirectTo: 'login'
-  }
+  //{ path: 'medecin-landing', component: MedecinLandingPageComponent, canActivate: [RoleGuard], data: { role: 'Médecin' }},
+  //{ path: 'unauthorized', component: UnauthorizedPageComponent },
+  //{ path: 'login', component: LoginPageComponent },
+  { path: 'test', component: ConsulterDPIPovPatientComponent },
+  //{ path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: '**', redirectTo: 'test'}
+
 ];

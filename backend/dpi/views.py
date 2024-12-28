@@ -18,7 +18,6 @@ def list_patients(request):
 
 @api_view(['GET'])
 def list_patients_filtered(request):
-    print("cc")
     nss = request.query_params.get('nss', None)
     if nss:
         patients = Patient.objects.filter(nss=nss) 
@@ -33,10 +32,12 @@ from .models import DPI
 from .serializers import DPISerializer, DPISerializerGET
 
 @api_view(['GET'])
-def get_dpi(request, nss):
+def get_dpi(request):
     try:
-        dpi = DPI.objects.get(patient__nss=nss)  # Rechercher le DPI lié au patient par NSS
+        nss = request.query_params.get('nss')
+        dpi = DPI.objects.get(patient__nss=nss)  
         serializer = DPISerializerGET(dpi)
+        print(serializer.data)
         return Response(serializer.data, status=200)
     except DPI.DoesNotExist:
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
