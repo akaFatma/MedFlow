@@ -31,8 +31,6 @@ export class LoginComponent {
             this.authService.login(username, password).subscribe({
               next: (response) => {
                 console.log('Connexion réussie', response);
-                const redirectUrl = this.authService.getRedirectUrl(response.role);
-                this.router.navigate([redirectUrl]);
               },
               error: (error) => {
                 console.error('Échec de la connexion', error);

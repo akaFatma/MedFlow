@@ -28,10 +28,13 @@ export class AuthService {
       .pipe(
         tap((response) => {
           if (response && response.token) {
+            console.log('Full response:', response);
+            console.log('User:', response.user);
+            console.log('Role:', response.user.role);
             this.saveToken(response.token);
-            this.saveUserName(response.username);
-            this.saveUserRole(response.role);
-            this.router.navigate([this.getRedirectUrl(response.role)]); //redirect based on the role
+            this.saveUserName(response.user.username);
+            this.saveUserRole(response.user.role);
+            this.router.navigate([this.getRedirectUrl(response.user.role)]); //redirect based on the role
           }
         }),
         catchError((error) => {
@@ -69,13 +72,14 @@ export class AuthService {
     return localStorage.getItem(this.roleKey) || ''; // Default to an empty string if no role is found
   }
    getRedirectUrl(role: string): string {
-    if (role === 'medecin') {
+    if (role === 'Médecin') {
       return '/medecin-landing'; // Redirect to medecin landing page
     } else if (role === 'administratif') {
       return '/admin-dashboard'; // Redirect to admin dashboard
-    } else {
-      return '/user-landing'; // Default landing page for other users
+    } else if (role === 'Patient') {
+      return '/dossier-patient'; // Default landing page for other users
     }
+    return '/'; // Default return value if no role matches
   }
   private sanitizeInput(input: string): string {
     return DOMPurify.sanitize(input.trim());

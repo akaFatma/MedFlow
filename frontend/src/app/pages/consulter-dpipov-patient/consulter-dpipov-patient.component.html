@@ -11,7 +11,11 @@
         <app-personal-info-card></app-personal-info-card>
     </div>
     <div class="consultationHistory">
-        <h2>HISTORIQUE CONSULTATIONS</h2>
+        <div class="but">
+            <h2>HISTORIQUE CONSULTATIONS</h2>
+            <button  *ngIf="isDoctor"  class="nouvelle-consultation" >Nouvelle consultation</button>
+        </div>
+       
         <app-medical-history></app-medical-history>
     </div>
 </div>

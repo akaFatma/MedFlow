@@ -26,6 +26,12 @@ export class PatientService {
         );
       }
 
+
+
+      getPatientByNSS(nss: number): Observable<any> {
+        return this.http.get(`${this.API_URL}/patients/${nss}`);
+      }
+
       private handleError(error: HttpErrorResponse) {
         let errorMessage = 'An error occurred';
     
@@ -39,9 +45,7 @@ export class PatientService {
         return throwError(() => new Error(errorMessage));
       }
 
-      getPatientByNSS(nss: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/patients/${nss}`);
-      }
+    
      
 
 

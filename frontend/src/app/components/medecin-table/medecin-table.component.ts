@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { PatientService } from '../../services/patient.services'
-import { Input } from '@angular/core';
+import { Input,Output } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
-import { Route } from '@angular/router';
+
 import { Router } from '@angular/router';
 
 interface Patient {
@@ -24,6 +24,7 @@ export class MedecinTableComponent implements OnInit , OnChanges {
   errorMessage: string = '';
   @Input() searchResults: Patient[] = [];
   displayedPatients: Patient[] = [];
+  
 
   constructor(private patientservice: PatientService , private router : Router) {}
 
@@ -55,8 +56,10 @@ export class MedecinTableComponent implements OnInit , OnChanges {
     });
   }
 
-  goToPatientDossier(nss: number): void {
-    this.router.navigate(['/dossier', nss]); 
+  consulterPatient(nss: number): void {
+    this.router.navigate(['/dossier-patient', nss]); 
   }
+  
+  
 }
 

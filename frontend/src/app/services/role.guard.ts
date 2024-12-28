@@ -13,19 +13,23 @@ import { Observable } from 'rxjs';
     canActivate(
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot
+      
     ): Observable<boolean> | Promise<boolean> | boolean {
       if (!this.authService.isAuthentificated()) {
         this.router.navigate(['/login']);
         return false;
       }
-      const expectedRole = route.data['role'];
+      
       const userRole = this.authService.getUserRole();
+      const expectedRoles = route.data['roles'] || [route.data['role']];
   
-      if (userRole === expectedRole) {
+
+      if (expectedRoles.includes(userRole)) {
         return true;
       } else {
         this.router.navigate(['/unauthorized']);
         return false;
       }
+
     }
   }

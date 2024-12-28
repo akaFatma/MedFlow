@@ -1,0 +1,56 @@
+<div class="ordonnanceContainer">
+    <div class="Ordonnance">
+        <div class="header">
+            <div class="hospitalInfo">
+                <p class="centre-hospitalier">CENTRE HOSPITALIER UNIVERSITAIRE</p>
+                <p>Service de cardiologie</p>
+                <p>Dr. AISSAT Rabah</p>
+                <p>Médecin spécialiste en cardiologie</p>
+            </div>
+            <div class="patientInfo">
+                <p>
+                    Alger, le : <input type="date" />
+                </p>
+                <p>
+                    Nom : <input type="text" placeholder="..........................." />
+                </p>
+                <p>
+                    Prénom(s) : <input type="text" placeholder="..........................." />
+                </p>
+                <p>
+                    Age : <input type="number" placeholder="..........................." /> ans
+                </p>
+            </div>
+        </div>
+        <div class="contenu">
+            <div class="title">
+                <h2>ORDONNANCE</h2>
+            </div>
+            <!-- Medication entries container -->
+            <div class="prescriptions-container">
+                <div *ngFor="let entry of medicationEntries; let i = index" class="prescription-line">
+                    <input [(ngModel)]="entry.medication" 
+                           placeholder="Médicament" 
+                           (keydown.enter)="addNewLine()"
+                           [disabled]="isConfirmed"/>
+                    <input [(ngModel)]="entry.dose" 
+                           placeholder="Dose" 
+                           (keydown.enter)="addNewLine()"
+                           [disabled]="isConfirmed"/>
+                    <input [(ngModel)]="entry.instructions" 
+                           placeholder="Instructions" 
+                           (keydown.enter)="addNewLine()"
+                           [disabled]="isConfirmed"/>
+                </div>
+            </div>
+            <div class="button-container">
+            <button class="confirm-button" 
+                    (click)="confirmPrescription()" 
+                    *ngIf="!isConfirmed"
+                    [disabled]="isConfirmed">
+                Confirmer
+            </button>
+        </div>
+        </div>
+    </div>
+</div>
