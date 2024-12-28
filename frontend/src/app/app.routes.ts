@@ -25,5 +25,5 @@ export const routes: Routes = [
   //    data: { roles: ['Médecin', 'Patient'] }
   //  },
   //  { path: '**', redirectTo: 'login', pathMatch: 'full' }
-  {path : 'test' , component : BilanComponent}
+  {path : 'test' , component : OrdonnanceComponent}
  ];

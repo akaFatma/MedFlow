@@ -1,36 +1,67 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-interface MedicationEntry {
-  medication: string;
-  dose: string;
-  instructions: string;
-}
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ordonnance',
-  imports : [FormsModule , CommonModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './ordonnance.component.html',
-  styleUrls: ['./ordonnance.component.scss']
+  styleUrls: ['./ordonnance.component.scss'],
 })
 export class OrdonnanceComponent {
-  medicationEntries: MedicationEntry[] = [
-    { medication: '', dose: '', instructions: '' }
-  ];
-  isConfirmed: boolean = false;
+  ordonnanceForm: FormGroup;
+  isConfirmed: boolean = false; // Flag to control button visibility and form behavior
 
-  addNewLine() {
+  constructor(private fb: FormBuilder) {
+    this.ordonnanceForm = this.fb.group({
+      date: ['', Validators.required],
+      lastName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      age: ['', [Validators.required, Validators.min(0)]],
+      medications: this.fb.array([
+        this.createMedicationEntry()
+      ])
+    });
+  }
+
+  // Get the medications FormArray
+  get medications(): FormArray {
+    return this.ordonnanceForm.get('medications') as FormArray;
+  }
+
+  // Create a single medication FormGroup
+  createMedicationEntry(): FormGroup {
+    return this.fb.group({
+      medication: ['', Validators.required],
+      dose: ['', Validators.required],
+      instructions: ['', Validators.required],
+    });
+  }
+
+  get medicationControls() {
+    return this.ordonnanceForm.get('medications') as FormArray;
+  }
+
+  // Add a new medication line
+  addNewLine(): void {
     if (!this.isConfirmed) {
-      this.medicationEntries.push({
-        medication: '',
-        dose: '',
-        instructions: ''
-      });
+      this.medications.push(this.createMedicationEntry());
     }
   }
-  confirmPrescription() {
-    this.isConfirmed = true; // This will hide the button by updating the *ngIf directive
+
+  // Confirm the prescription
+  confirmPrescription(): void {
+    this.isConfirmed = true; // Disable inputs and hide buttons
+    this.ordonnanceForm.disable(); // Optionally disable the form
   }
 
+  // Submit the form
+  onSubmit(): void {
+    if (this.ordonnanceForm.valid) {
+      console.log('Form submitted:', this.ordonnanceForm.value);
+    } else {
+      console.error('Form is invalid.');
+    }
+  }
 }

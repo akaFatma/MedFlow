@@ -1,56 +1,54 @@
 <div class="ordonnanceContainer">
-    <div class="Ordonnance">
+    <form [formGroup]="ordonnanceForm" (ngSubmit)="onSubmit()">
+      <div class="Ordonnance">
         <div class="header">
-            <div class="hospitalInfo">
-                <p class="centre-hospitalier">CENTRE HOSPITALIER UNIVERSITAIRE</p>
-                <p>Service de cardiologie</p>
-                <p>Dr. AISSAT Rabah</p>
-                <p>Médecin spécialiste en cardiologie</p>
-            </div>
-            <div class="patientInfo">
-                <p>
-                    Alger, le : <input type="date" />
-                </p>
-                <p>
-                    Nom : <input type="text" placeholder="..........................." />
-                </p>
-                <p>
-                    Prénom(s) : <input type="text" placeholder="..........................." />
-                </p>
-                <p>
-                    Age : <input type="number" placeholder="..........................." /> ans
-                </p>
-            </div>
+          <div class="hospitalInfo">
+            <p class="centre-hospitalier">CENTRE HOSPITALIER UNIVERSITAIRE</p>
+            <p>Service de cardiologie</p>
+            <p>Dr. AISSAT Rabah</p>
+            <p>Médecin spécialiste en cardiologie</p>
+          </div>
+          <div class="patientInfo">
+            <p>
+              Alger, le: 
+              <input type="date" formControlName="date" />
+            </p>
+            <p>
+              Nom: 
+              <input type="text" formControlName="lastName" placeholder="..........................." />
+            </p>
+            <p>
+              Prénom(s): 
+              <input type="text" formControlName="firstName" placeholder="..........................." />
+            </p>
+            <p>
+              Age: 
+              <input type="number" formControlName="age" placeholder="..........................." /> ans
+            </p>
+          </div>
         </div>
         <div class="contenu">
-            <div class="title">
-                <h2>ORDONNANCE</h2>
+          <div class="title">
+            <h2>ORDONNANCE</h2>
+          </div>
+          <div formArrayName="medications" class="prescriptions-container">
+            <div *ngFor="let entry of medicationControls.controls; let i = index" [formGroupName]="i" class="prescription-line">
+              <input formControlName="medication" placeholder="Médicament" [disabled]="isConfirmed" />
+              <input formControlName="dose" placeholder="Dose" [disabled]="isConfirmed" />
+              <input formControlName="instructions" placeholder="Instructions" [disabled]="isConfirmed" />
             </div>
-            <!-- Medication entries container -->
-            <div class="prescriptions-container">
-                <div *ngFor="let entry of medicationEntries; let i = index" class="prescription-line">
-                    <input [(ngModel)]="entry.medication" 
-                           placeholder="Médicament" 
-                           (keydown.enter)="addNewLine()"
-                           [disabled]="isConfirmed"/>
-                    <input [(ngModel)]="entry.dose" 
-                           placeholder="Dose" 
-                           (keydown.enter)="addNewLine()"
-                           [disabled]="isConfirmed"/>
-                    <input [(ngModel)]="entry.instructions" 
-                           placeholder="Instructions" 
-                           (keydown.enter)="addNewLine()"
-                           [disabled]="isConfirmed"/>
-                </div>
-            </div>
-            <div class="button-container">
-            <button class="confirm-button" 
-                    (click)="confirmPrescription()" 
-                    *ngIf="!isConfirmed"
-                    [disabled]="isConfirmed">
-                Confirmer
+          </div>
+          <div class="button-container">
+            <!-- Conditionally render buttons -->
+            <button *ngIf="!isConfirmed" type="button" class="add-button" (click)="addNewLine()">
+              Ajouter une ligne
             </button>
+            <button *ngIf="!isConfirmed" type="button" class="confirm-button" (click)="confirmPrescription()">
+              Confirmer
+            </button>
+          </div>
         </div>
-        </div>
-    </div>
-</div>
+      </div>
+    </form>
+  </div>
+  
