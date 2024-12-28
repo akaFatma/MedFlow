@@ -54,11 +54,4 @@ export class PersonalInfoCardComponent implements OnInit {
       }
     });
   }
-
-
-
-
-
-
-
 }

@@ -9,36 +9,51 @@ import DOMPurify from 'dompurify';
   providedIn: 'root',
 })
 export class AuthService {
-  private loginUrl = 'http://127.0.0.1:8000/users/login';
-  private tokenKey = 'auth_token';// to store in local storage
-  private userNameKey = 'user_name';; //store the current username in local storage
-  private roleKey = 'user_role'; // Store the role in localStorage
+  private loginUrl = 'http://127.0.0.1:8000/auth/login';
+  private tokenKey = 'auth_token';
+  private userNameKey = 'user_name';
+  private roleKey = 'user_role';
 
   constructor(private http: HttpClient, private router: Router) {}
+
   login(username: string, password: string): Observable<any> {
-    const satnitizedUsername = this.sanitizeInput(username);
+    const sanitizedUsername = this.sanitizeInput(username);
     const sanitizedPassword = this.sanitizeInput(password);
 
     return this.http
       .post<any>(this.loginUrl, {
-        username: satnitizedUsername, //sanitize inputs to prevent injection attacks
+        username: sanitizedUsername,
         password: sanitizedPassword,
       })
       .pipe(
         tap((response) => {
           if (response && response.token) {
+            // Store the authentication data
             this.saveToken(response.token);
             this.saveUserName(response.user.username);
             this.saveUserRole(response.user.role);
+
+            // Get the redirect URL
             const redirectUrl = this.getRedirectUrl(response.user.role);
-            console.log('Redirecting to:', redirectUrl);
-            this.router.navigate([redirectUrl]).then((success) => {
-              if (success) {
-                console.log('Navigation successful.');
-              } else {
-                console.error('Navigation failed.');
-              }
-            });
+            console.log('Role:', response.user.role);
+            console.log('Redirect URL:', redirectUrl);
+
+            // Use setTimeout to ensure the storage is complete before navigation
+            setTimeout(() => {
+              this.router.navigate([redirectUrl]).then(
+                (success) => {
+                  if (success) {
+                    console.log('Navigation successful');
+                  } else {
+                    console.error('Navigation failed');
+                    console.log('Current route:', this.router.url);
+                  }
+                },
+                (error) => {
+                  console.error('Navigation error:', error);
+                }
+              );
+            }, 10000);
           }
         }),
         catchError((error) => {
@@ -50,45 +65,56 @@ export class AuthService {
 
   isAuthentificated(): boolean {
     const token = this.getToken();
-    return !!token; //true if token exists , false otherwise
+    return !!token;
   }
-  // Save token in localStorage
+
   private saveToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
-  //get token from local storage
-  private getToken(): string | null {
+
+  getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
+
   private saveUserName(username: string): void {
     localStorage.setItem(this.userNameKey, username);
   }
 
-  // Get username from localStorage
   getUserName(): string {
-    return localStorage.getItem(this.userNameKey) || 'Guest' ; //return 'Guest' if no username is found
+    return localStorage.getItem(this.userNameKey) || 'Guest';
   }
-  // Save role in localStorage
+
   private saveUserRole(role: string): void {
-    localStorage.setItem(this.roleKey, role);
+    // Normalize the role before saving
+    const normalizedRole = this.normalizeRole(role);
+    localStorage.setItem(this.roleKey, normalizedRole);
   }
-  // Get the role from localStorage
+
   getUserRole(): string {
-    return localStorage.getItem(this.roleKey) || ''; // Default to an empty string if no role is found
+    const role = localStorage.getItem(this.roleKey) || '';
+    return this.normalizeRole(role);
   }
-   getRedirectUrl(role: string): string {
-    if (role === 'Médecin') {
-      console.log('Medecin');
-      return '/medecin-landing'; // Redirect to medecin landing page
-    } else if (role === 'Administratif') {
-      return '/admin-dashboard'; // Redirect to admin dashboard
+
+  private normalizeRole(role: string): string {
+    // Normalize the role to handle different encodings of 'é'
+    return role.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  getRedirectUrl(role: string): string {
+    const normalizedRole = this.normalizeRole(role);
+    if (normalizedRole === this.normalizeRole('Médecin')) {
+      return '/medecin-landing';
+    } else if (normalizedRole === 'Administratif') {
+      return '/admin-dashboard';
     } else {
-      return '/user-landing'; // Default landing page for other users
+      return '/user-landing';
     }
   }
+
   private sanitizeInput(input: string): string {
     return DOMPurify.sanitize(input.trim());
   }
+
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.userNameKey);

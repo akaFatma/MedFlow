@@ -9,7 +9,7 @@ import { Patient } from '../models/patient.models';
 })
 export class SearchService {
 
-  private baseUrl = 'http://127.0.0.1:8000/dpi/patients'; 
+  private baseUrl = 'http://127.0.0.1:8000/med/patients'; 
 
   constructor(private http: HttpClient) { }
 

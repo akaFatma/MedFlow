@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DpiConfig(AppConfig):
+class MedConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'dpi'
+    name = 'med'
