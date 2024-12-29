@@ -1,6 +1,13 @@
 <div class="resume-container">
-    <form action="">
-       <textarea name="" id="" placeholder="Entrez votre résumé ici ...."></textarea>
-       <div class=" but"><button type="submit">Confirmer </button></div>
+    <form (ngSubmit)="confirmResume()">
+      <textarea 
+        [(ngModel)]="resumeText" 
+        name="resume"
+        placeholder="Entrez votre résumé ici ...."
+        [disabled]="isConfirmed"
+      ></textarea>
+      <div class="but">
+        <button *ngIf="!isConfirmed" type="submit">Confirmer</button>
+      </div>
     </form>
-</div>
+  </div>

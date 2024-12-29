@@ -1,0 +1,63 @@
+
+.container{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    background-color: #F6F8FD;
+}
+.ordonnance app-ordonnance,
+.bilan app-bilan,
+.resume app-resume {
+  display: block;
+  width: 100%;
+  background-color: white;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.contenu {
+    display: flex;
+   flex-flow: column;
+   justify-content: center;
+   align-items: center;
+   gap: 5rem;
+  
+    
+}
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+button{
+    background-color: #119ae4;
+    color : white;
+     padding: 6px 30px;
+     border-radius: 9999px;
+     font-size: 16px;
+     border: none;
+     cursor: pointer;
+     transition: background-color 0.2s;
+     margin-bottom: 10rem;
+}
+button:hover {
+    background-color:  #027CC0;
+  }
+.retour {
+    border: 2px solid  #027CC0;
+    background-color: white;
+    color:  #027CC0;
+}
+h2{
+    color: #707B81;
+    font-family: 'Inter',sans-serif;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    margin: 1rem;
+    border-bottom: 2px solid #E6EFF5;
+}
