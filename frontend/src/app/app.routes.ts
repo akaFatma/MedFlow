@@ -1,4 +1,3 @@
-import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
 import { Routes } from '@angular/router';
 import { RoleGuard } from './services/role.guard';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -8,12 +7,29 @@ import { ConsulterDPIPovPatientComponent } from './pages/consulter-dpipov-patien
 import { OrdonnanceComponent } from './components/ordonnance/ordonnance.component';
 import { BilanComponent } from './components/bilan/bilan.component';
 import { ResumeComponent } from './components/resume/resume.component';
-
-
+import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
  
 export const routes: Routes = [
-  { path: 'LandingPage', component : MedecinLandingPageComponent },
-  { path: 'medecin-landing', component: MedecinLandingPageComponent, canActivate: [RoleGuard], data: { role: 'medecin' }},
-  { path: 'unauthorized', component: UnauthorizedPageComponent },
-  { path: '**', redirectTo: '/login' } 
-];
+   { path: 'login', component: LoginPageComponent },
+   { path: 'unauthorized', component: UnauthorizedPageComponent },
+   { 
+     path: 'medecin-landing', 
+     component: MedecinLandingPageComponent, 
+     canActivate: [RoleGuard], 
+     data: { role: 'Médecin' }
+   },
+   { 
+     path: 'dossier-patient/:nss', 
+     component: ConsulterDPIPovPatientComponent,
+     canActivate: [RoleGuard],
+     data: { roles: ['Médecin', 'Patient'] }
+   },
+   { 
+    path: 'add-dpi', 
+    component: AddDPIComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['Médecin', 'Administratif'] }
+  },
+   { path: '**', redirectTo: 'login', pathMatch: 'full' }
+  
+ ];

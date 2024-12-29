@@ -74,10 +74,12 @@ export class AuthService {
    getRedirectUrl(role: string): string {
     if (role === 'Médecin') {
       return '/medecin-landing'; // Redirect to medecin landing page
-    } else if (role === 'administratif') {
-      return '/admin-dashboard'; // Redirect to admin dashboard
+    } else if (role === 'Administratif') {
+      return '/add-dpi'; // Redirect to admin dashboard
     } else if (role === 'Patient') {
       return '/dossier-patient'; // Default landing page for other users
+    } else if (role === 'Infirmier') {
+      return '/soins'; // Default landing page for other users
     }
     return '/'; // Default return value if no role matches
   }

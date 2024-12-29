@@ -2,27 +2,26 @@ POST http://127.0.0.1:8000/auth/signup
 Content-Type: application/json
 
 {
-    "username": "drbailyy",
+    "username": "sousou",
     "password": "pass123",
-    "first_name": "Elizabeth",
-    "last_name": "Brown",
-    "role": "Médecin"
+    "first_name": "saliha",
+    "last_name": "bailly",
+    "role": "Infirmier"
 }
 
 
 ###
 
-POST http://127.0.0.1:8000/users/login
+POST http://127.0.0.1:8000/auth/login
 Content-Type: application/json
 
-{ "username": "tbib", "password": "pass123" }
+{ "username": "drbailyy", "password": "pass123" }
 
 ###
 
-GET http://127.0.0.1:8000/users/test_token 
+GET http://127.0.0.1:8000/auth/test 
 Content-Type: application/json
-Authorization: token xxx
-
+Authorization: Bearer 5c2d53de19e64ea7c4e940fb8c4d04eb120e66d2
 ###
 
 POST http://127.0.0.1:8000/creerrdpi
@@ -42,6 +41,11 @@ Content-Type: application/json
     "telephone_personne": "0607080910"
 }
 }
+###
+
+GET http://127.0.0.1:8000/patients
+Content-Type: application/json
+
 ###
 #hna z3ma ma kmlch kteb ga3 l nss
 GET http://127.0.0.1:8000/dpi/patients/123

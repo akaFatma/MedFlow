@@ -13,9 +13,7 @@ from users.decorators import role_required
 from users.serializers import UserSerializer
 
 @api_view(['GET'])
-@role_required(allowed_roles=["Médecin"])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
-@permission_classes([IsAuthenticated])
 def list_patients(request):
     patients = Patient.objects.all()
     serializer = PatientMinimalSerializer(patients, many=True) 
