@@ -12,7 +12,7 @@
         justify-content: flex-end;
         gap: 2%;
         flex-wrap: wrap; /* Allows wrapping on smaller screens */
-        margin-right: 2%;
+        margin-right: 4%;
   
         .qr-button{
           display: flex; /* Ensures alignment for icon and text inside */
@@ -63,6 +63,15 @@
         }
       }
     }
+    @media (max-width: 768px) {
+        .main-content {
+          margin-left: 200px; /* Matches the sidebar width */
+          padding: 10px; /* Add spacing inside the content */
+          transition: margin-left 0.3s ease; /* Smooth transition for sidebar width changes */
+          box-sizing: border-box; /* Ensure padding is included in total width */
+        }
+      }
+      
   }
   
   /* Modal Styles */
@@ -122,6 +131,14 @@
     i {
       font-size: 16px;
     }
+    @media (max-width: 768px) {
+        .table-container {
+          margin-left: 200px; /* Matches the sidebar width */
+          transition: margin-left 0.3s ease; /* Smooth adjustment for sidebar */
+          padding: 10px;
+        }
+      }
+      
   }
   
 

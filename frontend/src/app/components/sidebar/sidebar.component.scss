@@ -67,35 +67,20 @@
     }
   
     @media (max-width: 768px) {
+        .sidebar {
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 200px; /* Sidebar width */
+          height: 100vh;
+          z-index: 10;
+          background-color: #fff; /* Ensure the sidebar remains distinct */
+          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+      }
       
-      /* Minimized sidebar */
-      overflow: hidden;
-      width: 200px; /* Reduce width for smaller screens */
-      padding: 10px;
-  
-      .logo-container {
-        
-           
-           margin-left: 5%;
-            margin-bottom: 10%;
-            margin-top: 5%;
-      }
-     
-      .menu {
-        .menu-item {
-          justify-content: center;
-        }
-  
-        .menu-item.fixed {
-          justify-content: center;
-          padding: 10px;
-        }
-      }
-    }
-  
-    @media (max-width: 480px) {
-      display: none; /* Hide sidebar for very small screens */
-    }
+      
+    
   }
 
   
