@@ -77,7 +77,7 @@ export class AuthService {
     } else if (role === 'Administratif') {
       return '/add-dpi'; // Redirect to admin dashboard
     } else if (role === 'Patient') {
-      return '/dossier-patient'; // Default landing page for other users
+      return '/dossier-patient/:nss'; // Default landing page for other users
     } else if (role === 'Infirmier') {
       return '/soins'; // Default landing page for other users
     }

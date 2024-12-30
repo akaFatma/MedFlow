@@ -7,6 +7,11 @@ import { ConsulterDPIPovPatientComponent } from './pages/consulter-dpipov-patien
 import { OrdonnanceComponent } from './components/ordonnance/ordonnance.component';
 import { BilanComponent } from './components/bilan/bilan.component';
 import { ResumeComponent } from './components/resume/resume.component';
+import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nouvelle-consultation.component';
+import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
+import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
+
+
 import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
  
 export const routes: Routes = [
@@ -29,6 +34,12 @@ export const routes: Routes = [
     component: AddDPIComponent,
     canActivate: [RoleGuard],
     data: { roles: ['Médecin', 'Administratif'] }
+  },
+  { 
+    path: 'soins', 
+    component: InfermierLandingPageComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ["Infirmier"] }
   },
    { path: '**', redirectTo: 'login', pathMatch: 'full' }
   

@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Patient } from '../models/patient.models';
 
-
   @Injectable({
     providedIn: 'root'
   })

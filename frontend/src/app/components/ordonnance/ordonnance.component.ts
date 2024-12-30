@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Output , EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-ordonnance',
@@ -10,6 +11,7 @@ import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } fr
   styleUrls: ['./ordonnance.component.scss'],
 })
 export class OrdonnanceComponent {
+  @Output() formSubmit = new EventEmitter<any>(); 
   ordonnanceForm: FormGroup;
   isConfirmed: boolean = false; // Flag to control button visibility and form behavior
 
@@ -52,16 +54,13 @@ export class OrdonnanceComponent {
 
   // Confirm the prescription
   confirmPrescription(): void {
-    this.isConfirmed = true; // Disable inputs and hide buttons
-    this.ordonnanceForm.disable(); // Optionally disable the form
+    this.isConfirmed = true; //disable inputs and hide buttons
+    this.ordonnanceForm.disable();
   }
-
-  // Submit the form
   onSubmit(): void {
     if (this.ordonnanceForm.valid) {
-      console.log('Form submitted:', this.ordonnanceForm.value);
-    } else {
-      console.error('Form is invalid.');
+      this.formSubmit.emit(this.ordonnanceForm.value);
     }
   }
+
 }

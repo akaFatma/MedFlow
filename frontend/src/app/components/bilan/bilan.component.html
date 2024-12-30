@@ -5,6 +5,10 @@
       [(ngModel)]="bilans[i]"
       (keyup.enter)="addBilan(i)"
       placeholder="Bilan test {{i + 1}}"
+      [disabled]="isConfirmed"
     />
+  </div>
+  <div class="but" *ngIf="!isConfirmed">
+    <button type="button" (click)="confirmBilans()">Confirmer</button>
   </div>
 </div>

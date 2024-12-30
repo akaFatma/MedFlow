@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>REDIGER SOINS</h2>
+    <form [formGroup]="soinsForm" (ngSubmit)="onSubmit()">
+    <div class="Etat">
+        <div class="etat">Etat du patient</div>
+
+        <textarea formControlName="etatPatient"
+        [ngClass]="{'invalid': isFieldInvalid('etatPatient')}"> 
+
+    </textarea>
+    <div class="error-message" *ngIf="isFieldInvalid('medicaments')">
+        Ce champ est requis
+    </div>
+    </div>
+    <div class="medicaments">
+        <div class="meds">Médicaments prodigués au patient</div>
+        <textarea formControlName="medicaments"
+        [ngClass]="{'invalid': isFieldInvalid('medicaments')}">
+    </textarea>
+
+    <div class="error-message" *ngIf="isFieldInvalid('medicaments')">
+        *ce champ est requis
+    </div>
+
+    </div>
+    <div class="autres">
+        <div class="aut">Autres</div>
+        <textarea formControlName="autres"></textarea>
+    </div>
+    <div class="buttons">
+        <button  type="button" class="retour" (click)="onRetour() ">retour</button>
+        <button 
+        type="submit" 
+        class="confirmer"
+        [disabled]="soinsForm.invalid || isSubmitting" >confirmer</button>
+
+    </div>
+</form>
+</div>

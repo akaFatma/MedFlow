@@ -36,7 +36,7 @@ from .serializers import DPISerializer, DPISerializerGET
 def get_dpi(request):
     try:
         nss = request.query_params.get('nss')
-        dpi = DPI.objects.get(patient__nss=nss)  
+        dpi = DPI.objects.get(patient__nss=nss) 
         serializer = DPISerializerGET(dpi)
         print(serializer.data)
         return Response(serializer.data, status=200)
@@ -45,7 +45,6 @@ def get_dpi(request):
     
 
 from .utils import generate_qrcode
-'''
 from pyzbar.pyzbar import decode
 from PIL import Image
 import base64
@@ -82,7 +81,7 @@ def get_dpi_by_qr(request):
         return Response(serializer.data, status=200)
     except DPI.DoesNotExist:
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
-'''    
+
 '''
 @api_view(['GET'])
 def get_dpi_by_qr_code(request):

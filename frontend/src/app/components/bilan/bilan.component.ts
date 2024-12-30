@@ -1,29 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Output , EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-bilan',
-  imports: [FormsModule, CommonModule],
+  imports : [CommonModule,ReactiveFormsModule,FormsModule],
   templateUrl: './bilan.component.html',
   styleUrls: ['./bilan.component.scss']
 })
-export class BilanComponent implements OnInit {
+export class BilanComponent {
+  @Output() formSubmit = new EventEmitter<any>();
+  bilans: string[] = [''];  // Start with one empty input
+  isConfirmed: boolean = false;
 
-  bilans: string[] = [''];
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  addBilan(index: number): void {
-    if (index === this.bilans.length - 1 && this.bilans[index] !== '') {
-      this.bilans.push('');
-    }
-  }
-
-  trackByIndex(index: number, item: any): number {
+  trackByIndex(index: number): number {
     return index;
   }
 
+  addBilan(index: number): void {
+    if (index === this.bilans.length - 1) {  // Only add new line if we're at the last input
+      this.bilans.push('');  // Add new empty input
+    }
+  }
+
+  confirmBilans(): void {
+    this.isConfirmed = true;
+  }
+  
+  submitBilan(): void {
+    this.formSubmit.emit({ bilans: this.bilans });
+  }
 }

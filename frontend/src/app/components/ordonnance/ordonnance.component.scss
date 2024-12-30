@@ -1,5 +1,5 @@
 .ordonnanceContainer {
-    width: 55%;
+    width: 1050px;
     padding: 1rem;
     font-family: 'Times New Roman', Times, serif;
     border-radius: 16px;
@@ -12,17 +12,23 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
+    align-items: center;
     padding: 1rem;
 
 }
 
 .header {
+    width: 100%;
     display: flex;
-    justify-items: space-between;
+   
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 1rem;
 
 
     .patientInfo {
+        font-size: 20px;
         input {
             outline: none;
         }
@@ -38,6 +44,7 @@
 
         p {
             font-weight: 600;
+            font-size: 22px;
         }
 
         .centre-hospitalier {
@@ -50,6 +57,7 @@
 
 .contenu {
     width: 100%;
+   text-align: center;
    
     .title h2 {
         text-align: center;
@@ -62,13 +70,15 @@
             margin-bottom: 1rem;
             outline: none;
              text-align: center;
+             font-size: 20px;
         }
     }
     button{
     background-color: #119ae4;
    color : white;
-    padding: 6px 24px;
-    border-radius: 9999px;
+    padding: 6px 30px;
+    margin: 2rem;
+    border-radius: 16px;
     font-size: 14px;
     border: none;
     cursor: pointer;

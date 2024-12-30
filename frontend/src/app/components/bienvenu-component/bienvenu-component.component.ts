@@ -9,6 +9,7 @@ import { Input } from '@angular/core';
 })
 export class BienvenuComponentComponent {
  
-  @Input() userName: string = '';
+  @Input() first_name: string = '';
+  @Input() last_name: string = '';
 
 }

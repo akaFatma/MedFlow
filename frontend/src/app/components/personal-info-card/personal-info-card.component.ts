@@ -54,4 +54,7 @@ export class PersonalInfoCardComponent implements OnInit {
       }
     });
   }
+  // getQRCodeSrc(): string {
+  //   return this.user.qr ? `data:image/png;base64,${this.user.qr}` : '';
+  // }
 }

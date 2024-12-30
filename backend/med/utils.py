@@ -6,9 +6,9 @@ def generate_qrcode(patient):
     qr_data = f"nss:{patient.nss}"
     qr_code = qrcode.make(qr_data)
     
-    # Sauvegarder le QR code en tant qu'image
-    qr_code_path = f"med/qr_codes/{patient.nss}.png"
-    qr_code.save(qr_code_path)
+    # Sauvegarder le QR code en tant qu'image 
+    qr_code_image = ContentFile(qr_code.tobytes(), f"{patient.nss}.png") 
+    patient.qr_code_image.save(f"{patient.nss}.png", qr_code_image)
     
     return qr_code_path
 
