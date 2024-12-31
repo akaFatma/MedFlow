@@ -15,7 +15,7 @@ import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component
 
  
 export const routes: Routes = [
-  //  { path: 'login', component: LoginPageComponent },
+    { path: 'login', component: NouvelleConsultationComponent},
   //  { path: 'unauthorized', component: UnauthorizedPageComponent },
   //  { 
   //    path: 'medecin-landing', 
@@ -29,7 +29,9 @@ export const routes: Routes = [
   //    canActivate: [RoleGuard],
   //    data: { roles: ['Médecin', 'Patient'] }
   //  },
-  //  { path: '**', redirectTo: 'login', pathMatch: 'full' }
-  {path : 'test' , component : InfermierLandingPageComponent}
+  //  
+  
+  
+  // {path : 'test' , component : InfermierLandingPageComponent}
   
  ];

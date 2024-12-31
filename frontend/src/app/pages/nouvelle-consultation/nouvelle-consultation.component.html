@@ -1,30 +1,33 @@
 <div class="container">
-   
     <div class="header">
-        <img src="../../../assets/Logo.svg" alt="">
-        <app-bienvenu-component></app-bienvenu-component>
-
+      <img src="../../../assets/Logo.svg" alt="">
+      <app-bienvenu-component></app-bienvenu-component>
     </div>
-     <div class="contenu">
-    <div class="ordonnance">
-        <h2>ORDONANCE</h2>
-    <app-ordonnance (formSubmit)="onOrdonnanceSubmit($event)"></app-ordonnance>
-   </div>
-
-    <div class="bilan">
-        <h2>BILAN</h2>
-        <app-bilan (formSubmit)="onBilanSubmit($event)"></app-bilan>
-   </div>
-   
-   <div class="resume">
-    <h2>RESUME</h2>
-    <app-resume (formSubmit)="onResumeSubmit($event)"></app-resume>
-   </div>
-   <div class="buttons">
-    <button class="retour">Retour</button>
-    <button type="submit" (click)="submitAllForms()">Confimer</button>
-   </div>
-   </div>
-   
     
-</div>
+    <form [formGroup]="consultationForm">
+      <div class="contenu">
+        <div class="ordonnance">
+          <h2>ORDONANCE</h2>
+          <app-ordonnance (formSubmit)="onOrdonnanceSubmit($event)"></app-ordonnance>
+        </div>
+  
+        <div class="bilan">
+          <h2>BILAN</h2>
+          <app-bilan (formSubmit)="onBilanSubmit($event)"></app-bilan>
+        </div>
+     
+        <div class="resume">
+          <h2>RESUME</h2>
+          <app-resume (formSubmit)="onResumeSubmit($event)"></app-resume>
+        </div>
+  
+        <div class="buttons">
+          <button type="button" class="retour">Retour</button>
+          <button type="submit" 
+                  [disabled]="!consultationForm.valid">
+            Confimer
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>

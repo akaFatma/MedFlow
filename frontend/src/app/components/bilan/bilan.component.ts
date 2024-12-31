@@ -25,10 +25,17 @@ export class BilanComponent {
   }
 
   confirmBilans(): void {
-    this.isConfirmed = true;
+    if (!this.isConfirmed) {
+      this.isConfirmed = true;
+      this.formSubmit.emit(this.bilans); 
+    }
   }
+
+  // confirmBilans(): void {
+  //   this.isConfirmed = true;
+  // }
   
-  submitBilan(): void {
-    this.formSubmit.emit({ bilans: this.bilans });
-  }
+  // submitBilan(): void {
+  //   this.formSubmit.emit({ bilans: this.bilans });
+  // }
 }

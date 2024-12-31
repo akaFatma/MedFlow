@@ -1,49 +1,79 @@
-import { Component, OnInit } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { BarcodeFormat } from '@zxing/library';
+// qr-scanner.component.ts
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  NgxScannerQrcodeModule,
+  NgxScannerQrcodeService,
+  ScannerQRCodeResult,
+  ScannerQRCodeConfig,
+  NgxScannerQrcodeComponent
+} from 'ngx-scanner-qrcode';
 
 @Component({
-  imports: [BrowserModule, ZXingScannerModule],
+  selector: 'app-qr-scanner',
+  standalone: true,
+  imports: [
+    CommonModule,
+    NgxScannerQrcodeModule
+  ],
   templateUrl: './qr-scanner.component.html',
-  styleUrls: ['./qr-scanner.component.scss']
+  styleUrls: ['./qr-scanner.component.scss'],
+  providers: [NgxScannerQrcodeService]
 })
-export class QrScannerComponent implements OnInit {
-  formats: BarcodeFormat[] = [BarcodeFormat.QR_CODE]; // Already in use for formats
-  BarcodeFormat = BarcodeFormat; // Expose BarcodeFormat to the template
-  scanResult: string | null = null;
-  availableDevices: MediaDeviceInfo[] = [];
-  selectedDevice: MediaDeviceInfo | null = null;
-  hasTorch = false;
+export class QrScannerComponent implements OnInit, OnDestroy {
+  @ViewChild('action') action!: NgxScannerQrcodeComponent;
+  
+  public isFrontCamera = false;
+  
+  public config: ScannerQRCodeConfig = {
+    constraints: {
+      video: {
+        width: 640,
+        height: 480,
+        facingMode: "environment"  // Start with back camera
+      }
+    },
+    canvasStyles: {
+      width: '100%'
+    } as any
+  };
 
-  constructor() {}
+  public qrResult: string = '';
+
+  constructor(private qrService: NgxScannerQrcodeService) {}
 
   ngOnInit(): void {}
 
-  onScanSuccess(result: string): void {
-    this.scanResult = result;
-    console.log('Scanned QR code:', result);
+  ngOnDestroy(): void {
+    this.action.stop();
   }
 
-  onCamerasFound(devices: MediaDeviceInfo[]): void {
-    this.availableDevices = devices;
-    if (devices.length > 0) {
-      this.selectedDevice = devices[0]; // Select the first camera by default
-      this.hasTorch = this.selectedDevice && 'torch' in this.selectedDevice;
+  onEvent(e: ScannerQRCodeResult[]): void {
+    if (e && e.length > 0) {
+      this.qrResult = e[0].value;
     }
   }
 
-  onCamerasNotFound(): void {
-    console.error('No cameras found.');
-  }
-
-  handleError(error: any): void {
-    console.error('Error during scan:', error);
-  }
-
-  onDeviceSelect(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const deviceId = target.value;
-    this.selectedDevice = this.availableDevices.find(device => device.deviceId === deviceId) || null;
+  async switchCamera(): Promise<void> {
+    // Stop the current stream
+    await this.action.stop();
+    
+    // Toggle camera mode
+    this.isFrontCamera = !this.isFrontCamera;
+    
+    // Update config with new facing mode
+    this.config = {
+      ...this.config,
+      constraints: {
+        video: {
+          width: 640,
+          height: 480,
+          facingMode: this.isFrontCamera ? "user" : "environment"
+        }
+      }
+    };
+    
+    // Restart the scanner with new config
+    await this.action.start();
   }
 }
