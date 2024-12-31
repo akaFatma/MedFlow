@@ -10,6 +10,7 @@ import { ResumeComponent } from './components/resume/resume.component';
 import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nouvelle-consultation.component';
 import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
+import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 
 
  
@@ -30,4 +31,5 @@ export const routes: Routes = [
   //  },
   //  { path: '**', redirectTo: 'login', pathMatch: 'full' }
   {path : 'test' , component : InfermierLandingPageComponent}
+  
  ];

@@ -9,7 +9,7 @@
       
     </div>
     <div class="header-right">
-      <img src="path/to/your/qr-code.png" alt="QR Code"> 
+      <img *ngIf="user.qrCode" [src]="getQRCodeSrc()" alt="QR Code">
     </div>
   </div>
   <div class="card-content">

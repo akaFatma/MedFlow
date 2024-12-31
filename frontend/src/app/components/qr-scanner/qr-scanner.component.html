@@ -1,0 +1,28 @@
+<div class="scanner-container">
+    <zxing-scanner
+      [formats]="[BarcodeFormat.QR_CODE]"
+      (scanSuccess)="onScanSuccess($event.toString())"
+      [tryHarder]="true"
+      [device]="selectedDevice || undefined"
+      [torch]="hasTorch"
+      (camerasFound)="onCamerasFound($event)"
+      (camerasNotFound)="onCamerasNotFound()"
+      (scanError)="handleError($event)"
+      [autostart]="true"
+      [enable]="true"
+    ></zxing-scanner>
+  
+    <div *ngIf="scanResult" class="result">
+      <strong>Scanned Result:</strong> {{ scanResult }}
+    </div>
+  
+    <div class="camera-selection">
+      <label for="camera-selection">Select Camera:</label>
+      <select id="camera-selection" (change)="onDeviceSelect($event)">
+        <option *ngFor="let device of availableDevices" [value]="device.deviceId">
+          {{ device.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+  

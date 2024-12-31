@@ -17,7 +17,4 @@ export class SearchService {
     const params = new HttpParams().set('nss', nss.toString());
     return this.http.get<Patient>(`${this.baseUrl}/search`, { params })
   }
-  scanQR(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/scanQR`);
-  }
 }
