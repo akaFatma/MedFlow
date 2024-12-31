@@ -15,7 +15,8 @@ import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component
 
  
 export const routes: Routes = [
-    { path: 'login', component: NouvelleConsultationComponent},
+    { path: 'login', component: OrdonnanceComponent},
+    { path: '**', redirectTo: 'login', pathMatch: 'full' }
   //  { path: 'unauthorized', component: UnauthorizedPageComponent },
   //  { 
   //    path: 'medecin-landing', 
