@@ -75,12 +75,5 @@
     }
   }
 
-  /* Media query for responsiveness */
-  @media (max-width: 768px) {
-    .table-container {
-      margin-left: 200px; /* Matches the sidebar width */
-      padding: 10px;
-      box-sizing: border-box;
-    }
-  }
+
 }

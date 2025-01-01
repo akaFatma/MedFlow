@@ -1,80 +1,88 @@
-
-/* Medecin Landing Page */
 .medecin-landing-page {
-    display: flex;
-    flex-wrap: wrap; /* Ensure wrapping for smaller screens */
-  
-    .main-content {
-      flex: 1;
-      margin: 2%;
-  
-      .actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 2%;
-        flex-wrap: wrap; /* Allows wrapping on smaller screens */
-        margin-right: 4%;
-  
-        .qr-button{
-          display: flex; /* Ensures alignment for icon and text inside */
-          align-items: center;
-          background-color: #027cc0;
-          color: #e8eaed;
-          border: none;
-          border-radius: 13px;
-          padding: 0 20px; /* Adjust padding to match input */
-          height: 40px;
-          font-size: 16px;
-          cursor: pointer; /* Makes it clear the button is clickable */
-          box-sizing: border-box;
-          .menu-icon {
-            margin-right: 5px; /* Space between icon and text */
-            font-size: 20px;
-          }
-          &:hover {
-            background-color: #025e94;
-          }
+  display: flex;
+  flex-wrap: nowrap;
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+
+    // Add spacing under the header
+    .actions {
+      margin-top: 2%;
+      
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+      margin-bottom: 20px;
+      margin-right: 5%;
+      margin: top 2%;
+
+      .qr-button {
+        display: flex; /* Ensures alignment for icon and text inside */
+        align-items: center;
+        background-color: #027cc0;
+        color: #e8eaed;
+        border: none;
+        border-radius: 13px;
+        padding: 0 20px; /* Adjust padding to match input */
+        height: 40px;
+        font-size: 16px;
+        cursor: pointer; /* Makes it clear the button is clickable */
+        box-sizing: border-box;
+        .menu-icon {
+          margin-right: 5px; /* Space between icon and text */
+          font-size: 20px;
         }
-        .search-container {
-          display: flex;
-          flex: 1; /* Make buttons stretch in small screens */
-          max-width: 210px;
-          align-items: center;
-          border: 1px solid #CCCCCC;
-          border-radius: 13px;
-          padding: 0 10px;
-          background-color: #f8f9fa;
-          gap: 8px; /* Space between the icon and the input */
-          box-sizing: border-box; /* Ensures border and padding are included in height */
-          color: #E8EAED;
-          .search-icon {
-            font-size: 18px;
-          }
-          input {
-            border: none;
-            outline: none;
-            background: transparent;
-            height: 100%; /* Matches the container's height */
-            box-sizing: border-box;
-  
-            &::placeholder {
-              color: #666666;
-            }
+        &:hover {
+          background-color: #025e94;
+        }
+      }
+
+      .search-container {
+        background-color: chartreuse;
+        display: flex;
+        align-items: center;
+        background-color: #f8f9fa;
+        border: 1px solid #cccccc;
+        border-radius: 10px;
+        padding: 0 12px;
+        gap: 10px;
+        width: 300px;
+
+        input {
+          flex: 1;
+          border: none;
+          outline: none;
+          background: transparent;
+
+          &::placeholder {
+            color: #666666;
           }
         }
       }
     }
-    @media (max-width: 768px) {
-        .main-content {
-          margin-left: 200px; /* Matches the sidebar width */
-          padding: 10px; /* Add spacing inside the content */
-          transition: margin-left 0.3s ease; /* Smooth transition for sidebar width changes */
-          box-sizing: border-box; /* Ensure padding is included in total width */
-        }
-      }
-      
   }
-  
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+
+    .main-content {
+      margin-left: 0;
+      padding: 10px;
+    }
+
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-container {
+      width: 100%;
+    }
+  }
+
   /* Modal Styles */
   .page-qr-container {
     position: fixed; /* Fixed position to overlay on any background */
@@ -88,7 +96,7 @@
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     z-index: 999; /* Ensure it stays above other components */
   }
-  
+
   .notification-card {
     position: relative;
     background: #ffffff;
@@ -99,7 +107,7 @@
     width: 350px;
     z-index: 1000;
   }
-  
+
   .success-title {
     font-size: 18px;
     font-weight: bold;
@@ -107,44 +115,38 @@
     color: #48c5a5; /* Green text for success */
     margin-bottom: 10px;
   }
-  
+
   .success-message {
     font-size: 14px;
     font-family: 'Inter', sans-serif;
     color: #666666; /* Gray color for redirection text */
   }
-  
+
   .close-button {
     position: absolute;
     top: 15%;
     right: 5%;
-      border-radius: 6px;
+    border-radius: 6px;
     background: #48C5A5;
     border: none;
     font-size: 18px;
     cursor: pointer;
     color: #ffffff;
-  
+
     &:hover {
       color: #333333;
     }
-  
+
     i {
       font-size: 16px;
     }
-    @media (max-width: 768px) {
-        .table-container {
-          margin-left: 200px; /* Matches the sidebar width */
-          transition: margin-left 0.3s ease; /* Smooth adjustment for sidebar */
-          padding: 10px;
-        }
-      }
-      
   }
-  
 
-  
-  
-  
-
-
+  @media (max-width: 768px) {
+    .table-container {
+      margin-left: 200px; /* Matches the sidebar width */
+      transition: margin-left 0.3s ease; /* Smooth adjustment for sidebar */
+      padding: 10px;
+    }
+  }
+}
