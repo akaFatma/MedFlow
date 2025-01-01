@@ -1,17 +1,69 @@
-POST http://127.0.0.1:8000/users/signup/
+POST http://127.0.0.1:8000/auth/signup
 Content-Type: application/json
 
-{ "username": "tbib", "password": "pass123", "role": "Médecin" }
+{
+    "username": "sousou",
+    "password": "pass123",
+    "first_name": "saliha",
+    "last_name": "bailly",
+    "role": "Infirmier"
+}
+
 
 ###
 
-POST http://127.0.0.1:8000/users/login/
+POST http://127.0.0.1:8000/auth/login
 Content-Type: application/json
 
-{ "username": "tbib", "password": "pass123" }
+{ "username": "drbailyy", "password": "pass123" }
 
 ###
 
-GET http://127.0.0.1:8000/users/test_token 
+GET http://127.0.0.1:8000/auth/test 
 Content-Type: application/json
-Authorization: token xxx
+Authorization: Bearer 5c2d53de19e64ea7c4e940fb8c4d04eb120e66d2
+###
+
+POST http://127.0.0.1:8000/creerrdpi
+Content-Type: application/json
+
+{
+    "data": {
+    "nom": "Brown",
+    "prenom": "Tristan",
+    "date_naissance": "1998-12-12",
+    "telephone": "0607080910",
+    "adr": "12 rue de la paix",
+    "nss": "13435625",
+    "mutuelle": "jsp wsh m3ntha",
+    "nom_personne": "Bailly",
+    "prenom_personne": "Thomas",
+    "telephone_personne": "0607080910"
+}
+}
+###
+
+GET http://127.0.0.1:8000/patients
+Content-Type: application/json
+
+###
+#hna z3ma ma kmlch kteb ga3 l nss
+GET http://127.0.0.1:8000/dpi/patients/123
+Content-Type: application/json
+
+
+###
+GET http://127.0.0.1:8000/dpi/patients/nss/123456789
+Content-Type: application/json
+
+###
+#la creation t3 qr code (aho deja crée wa7d dakhel qr_codes)
+GET http://127.0.0.1:8000/dpi/test
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:8000/dpi/patients/qrcode
+Content-Type: application/json
+
+{ "qrcode" : "iVBORw0KGgoAAAANSUhEUgAAASIAAAEiAQAAAAB1xeIbAAABeklEQVR4nO2aQW6EMAxFnwtSl8wNepTkZj1TbwA3CstKoN8FCTAjVe2GgQF7EUF4Ur4SJ3EcTPxt3ds/IHDKKaeccurolGWrsQhAX2rirrouQQVJUgK1jAZUkiTdU8/XdQmqLz7e3cAiYGb1/rrOTNUP7xbSiOi3a9GpX6nuVsniM1u8LFX8vhHQA+HLJr9fH7qOqv4UVGdmZjcAKllknMKcvXWdmpr8/i6xMFqeBtu06NRsUygZJBFSqWsBaPIHtUdV/9pU7nuagVKUUQgpB/ne99tQy5ojo68htGMtGGpgNO2l6woU2bObocyAcqRdFiP3+22oucfXq3wZj/npqOpfm0L3RtCAlICQ5llxVPVnoJY8JvQ1dB/DIXSdm1rFmFKq5pV/YNkD3O+3pUoe0yLVtOGWYl9dV6Jy/r43s880+t3JltRjDnllnbnfP4VqpBxj9u+y2Mxn3Z11XYCa85gWm+8pe6mWfIN1ePUvSpn/G+WUU045dQnqBxxu4ybJDkbOAAAAAElFTkSuQmCC"}

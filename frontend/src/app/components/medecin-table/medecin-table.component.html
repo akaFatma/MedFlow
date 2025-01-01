@@ -1,0 +1,26 @@
+<div class="consultation-container">
+    <div class="header-grid">
+        <div>NOM</div>
+        <div>PRENOM</div>
+        <div>NSS</div>
+        <div>ETAT</div>
+        <div></div>
+    
+    </div>
+    
+    <div *ngFor="let patients of displayedPatients" class="consultation-row">
+    <div>{{ patients.nom}}</div>
+    <div>{{ patients.prenom}}</div>
+    <div>{{ patients.nss }}</div>
+    <button 
+    class="etat"
+    [ngClass]="{ 'etat-ferme': patients.etat === 'fermé', 'etat-ouvert': patients.etat === 'ouvert' }"
+    >{{patients.etat}}</button>
+    <div class="button-container">
+    <button class="consult-button" (click)="consulterPatient(patients.nss)">
+     Consulter
+    </button>
+    </div>
+    </div>
+    </div>
+    

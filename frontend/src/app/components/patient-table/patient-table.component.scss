@@ -1,91 +1,86 @@
 .patient-table {
-    margin-top: 5%; /* Space between table and sidebar */
-    width: 90%;
-    overflow-x: auto;
-    margin-left:3%; ; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-bottom: 2%;
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-       /* Rounded corners for the table container */
-      opacity: 1; /* 100% opacity */
-      font-family:'Inter';
-      thead {
-        background-color: white; /* White background for the header */
-        border-bottom-width: 40px;
-        th {
-       
-          padding: 20px; /* Space inside header cells */
-          font-weight: 500; /* Medium weight for font */
-          font-size: 15px; /* Text size */
-          font-family: 'Inter', sans-serif; /* Inter font family */
-          color: #666666; /* Text color */
-          text-transform: none; /* No text transformation */
-          border-bottom: 2px solid #e6eff5; 
-         /* Stroke (line) under the header */
-        }
+  margin-top: 5%; /* Space between table and sidebar */
+  width: 90%;
+  overflow-x: auto;
+  margin-left: 3%; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2%;
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: 'Inter';
+    opacity: 1; /* 100% opacity */
+    thead {
+      background-color: white; /* White background for the header */
+      
+      th {
+        padding: 10px; /* Space inside header cells */
+        font-weight: 500; /* Medium weight for font */
+        font-size: 15px; /* Text size */
+        font-family: 'Inter', sans-serif; /* Inter font family */
+        color: #666666; /* Text color */
+        text-transform: none; /* No text transformation */
+        /* Thinner border below header */
+        border-bottom: 1px solid #e6eff5;  /* Adjusted the thickness here */
       }
-  
-      tbody {
-        tr {
-          /* Light gray divider for rows */
-  
-          td {
-            padding: 10px;
-  
-            .etat-button {
-              height: 32px;
-              border-radius: 200px;
-              font-size: 14px;
-              font-weight: bold;
-              padding: 0 15px;
-              border: 1px solid;
-              cursor: pointer;
-  
-              &.ouvert {
-                background-color: #f4fcf7;
-                color: #48c5a5;
-                border-color: #48c5a5;
-              }
-  
-              &.ferme {
-                background-color: #ffeaea;
-                color: #cf3030;
-                border-color: #cf3030;
-              }
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: 10px;
+
+          .etat-button {
+            height: 32px;
+            border-radius: 200px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 0 15px;
+            border: 1px solid;
+            cursor: pointer;
+
+            &.ouvert {
+              background-color: #f4fcf7;
+              color: #48c5a5;
+              border-color: #48c5a5;
             }
-  
-            .consulter-button {
-              height: 32px;
-              border-radius: 200px;
-              background-color: #027CC0;
-              color: white;
-              border: none;
-              padding: 0 20px;
-              cursor: pointer;
-  
-              &:hover {
-                background-color: #025e94;
-              }
+
+            &.ferme {
+              background-color: #ffeaea;
+              color: #cf3030;
+              border-color: #cf3030;
+            }
+          }
+
+          .consulter-button {
+            height: 32px;
+            border-radius: 200px;
+            background-color: #027CC0;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #025e94;
             }
           }
         }
       }
-      @media (max-width: 768px) {
-        .table-container {
-          margin-left: 200px; /* Matches the sidebar width */
-          padding: 10px;
-          box-sizing: border-box;
-        }
-      }
-      
-      
     }
   }
-  
+
+  /* Media query for responsiveness */
+  @media (max-width: 768px) {
+    .table-container {
+      margin-left: 200px; /* Matches the sidebar width */
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  }
+}

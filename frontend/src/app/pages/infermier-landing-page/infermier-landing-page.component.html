@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="header">
+    <img src="../../../assets/Logo.svg" alt="Logo" />
+    <app-bienvenu-component
+      [firstName]="userName"
+    ></app-bienvenu-component>
+  </div>
+
+  <div class="searchBar">
+    <h2>REDIGER SOINS</h2>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+  </div>
+
+  <app-infermier-table
+    [searchResults]="results"
+    (openSoins)="openPopup($event)"
+  ></app-infermier-table>
+
+  <div *ngIf="showPopup" class="popup-overlay">
+    <div class="popup">
+      <app-rediger-soins (closePopup)="closePopup()"></app-rediger-soins>
+    </div>
+  </div>
+</div>

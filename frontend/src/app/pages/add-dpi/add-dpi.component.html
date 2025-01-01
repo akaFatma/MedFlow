@@ -1,0 +1,174 @@
+<div class="everything">
+  <div class="container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content">
+      <div class="right-side">
+        <div class="topbox">
+          <div class="left-side">
+            <img src="/profil.png" alt="Key Icon" class="icon" />
+            <p class="textbienven">Bienvenu administratif</p>
+          </div>
+          <div class="right-side">
+            <img src="/notif.png" alt="Bell Icon" class="icon" />
+            <img src="/param.png" alt="Settings Icon" class="icon" />
+          </div>
+        </div>
+        <div class="success-popup" *ngIf="isSuccessPopupVisible" [@fadeInOut]>
+          <div class="popup-content" (click)="$event.stopPropagation()">
+            <span class="popup-close" (click)="closeSuccessPopup()">×</span>
+            <h2 class="popup-message">DPI CREE AVEC SUCCES !</h2>
+          </div>
+        </div>
+        <div class="box">
+          <p class="text">Nouveau dossier patient</p>
+
+          <div class="step-indicator">
+            <div
+              class="circle"
+              [class.bg-green-500]="currentStep > 1"
+              [class.text-white]="currentStep > 1"
+              [class.opacity-100]="currentStep > 1"
+            >
+              {{ currentStep > 1 ? "✔" : "1" }}
+            </div>
+            <div class="line" [class.opacity-100]="currentStep > 1"></div>
+            <div
+              class="circle"
+              [class.bg-green-500]="currentStep > 2"
+              [class.text-white]="currentStep > 2"
+              [class.opacity-100]="currentStep > 1"
+            >
+              {{ currentStep > 2 ? "✔" : "2" }}
+            </div>
+            <div class="line" [class.opacity-100]="currentStep > 2"></div>
+            <div class="circle" [class.opacity-100]="currentStep === 3">3</div>
+          </div>
+
+          <form [formGroup]="patientForm">
+            <div
+              class="data-entry-container"
+              *ngIf="currentStep === 1"
+              formGroupName="step1"
+            >
+              <div class="input-box">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" formControlName="prenom" />
+              </div>
+              <div class="input-box">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" formControlName="nom" />
+              </div>
+              <div class="input-box">
+                <label for="date_naissance">Date de naissance</label>
+                <input
+                  type="date"
+                  id="date_naissance"
+                  formControlName="date_naissance"
+                />
+              </div>
+              <div class="input-box">
+                <label for="telephone">Numéro de téléphone</label>
+                <input type="tel" id="telephone" formControlName="telephone" />
+              </div>
+            </div>
+
+            <div
+              class="data-entry-container"
+              *ngIf="currentStep === 2"
+              formGroupName="step2"
+            >
+              <div class="input-box">
+                <label for="nss">Numéro de sécurité sociale</label>
+                <input
+                  type="text"
+                  id="nss"
+                  formControlName="nss"
+                />
+              </div>
+              <div class="input-box">
+                <label for="mutuelle">Mutuelle</label>
+                <input type="text" id="mutuelle" formControlName="mutuelle" />
+              </div>
+              <div class="input-box">
+                <label for="adr">Adresse</label>
+                <input type="text" id="adr" formControlName="adr" />
+              </div>
+              <div class="input-box">
+                <label for="nom_personne">Nom de la personne à contacter</label>
+                <input
+                  type="text"
+                  id="nom_personne"
+                  formControlName="nom_personne"
+                />
+              </div>
+              <div class="input-box">
+                <label for="prenom_personne">Prenom de la personne à contacter</label>
+                <input
+                  type="text"
+                  id="prenom_personne"
+                  formControlName="prenom_personne"
+                />
+              </div>
+              <div class="input-box">
+                <label for="telephone_personne">Telephone de la personne à contacter</label>
+                <input type="text" id="telephone_personne" formControlName="telephone_personne" />
+              </div>
+            </div>
+
+            <div class="data-entry-container" *ngIf="currentStep === 3">
+              <div class="summary-container">
+                <div class="summary-item">
+                  <span class="label">Nom : </span>
+                  <span class="value">{{ getFormData().nom }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Prénom : </span>
+                  <span class="value">{{ getFormData().prenom }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Date de naissance : </span>
+                  <span class="value">{{ getFormData().date_naissance }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Numéro de téléphone : </span>
+                  <span class="value">{{ getFormData().telephone }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Numéro de sécurité sociale : </span>
+                  <span class="value">{{ getFormData().nss }}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="label">Adresse : </span>
+                  <span class="value">{{ getFormData().adr }}</span>
+                </div>
+                <div class="summary-item">
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="button-container"
+              [ngClass]="{ 'single-button': currentStep === 1 }"
+            >
+              <button
+                class="button retour"
+                (click)="goToPreviousStep()"
+                *ngIf="currentStep > 1"
+              >
+                Retour
+              </button>
+              <button
+                class="button suivant"
+                (click)="currentStep === 3 ? onValidate() : goToNextStep()"
+              >
+                {{ getButtonText() }}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="vide"></div>
+      </div>
+      <div class="vide"></div>
+    </div>
+  </div>
+</div>

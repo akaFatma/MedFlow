@@ -1,0 +1,14 @@
+<div class="bilan-container">
+  <div *ngFor="let bilan of bilans; let i = index; trackBy: trackByIndex">
+    <input
+      type="text"
+      [(ngModel)]="bilans[i]"
+      (keyup.enter)="addBilan(i)"
+      placeholder="Bilan test {{i + 1}}"
+      [disabled]="isConfirmed"
+    />
+  </div>
+  <div class="but" *ngIf="!isConfirmed">
+    <button type="button" (click)="confirmBilans()">Confirmer</button>
+  </div>
+</div>

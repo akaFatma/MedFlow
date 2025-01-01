@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">
+    <div class="header-left">
+      
+    </div>
+    <div class="header-right">
+
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="NomPrenom">
+      <div><strong>Nom :</strong> {{user.patient.nom}}</div>
+      <div><strong>Prénom :</strong> {{user.patient.prenom}}</div>
+    </div>
+    <div class="A"><strong>Numéro de sécurité sociale :</strong> {{user.patient.nss}}</div>
+    <div class="A"><strong>Adresse :</strong> {{user.patient.adresse}}</div>
+    <div class="A"><strong>Numéro de téléphone :</strong> {{user.patient.telephone}}</div>
+    <div class="A"><strong>Mutuelle :</strong> {{user.patient.mutuelle}}</div>
+    <div class="contact-person">
+      <div><strong>Personne à contacter :</strong></div>
+      <div> <strong>Nom : </strong> {{user.patient.personne_a_contacter.nom}}</div>
+      <div> <strong>Prénom : </strong> {{user.patient.personne_a_contacter.prenom}}</div>
+      <div> <strong>Numéro de téléphone : </strong>{{user.patient.personne_a_contacter.telephone}}</div>
+    </div>
+    <div class="A"><strong>Antécédants médicaux :</strong></div>
+    <div class="medical-history"> 
+      {{user.antecedants_medicaux}}
+    </div>
+  </div>
+</div>

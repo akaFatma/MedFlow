@@ -1,0 +1,70 @@
+.consultation-container {
+    padding: 24px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
+    width: 100%;
+    margin: auto;
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Changed from 4 to 5 columns to match rows */
+    gap: 18px; /* Match the gap with consultation-row */
+    padding: 8px 16px; /* Match the padding with consultation-row */
+    margin-bottom: 16px;
+    color: #666666;
+    border-bottom: 1.5px solid #E6EFF5;
+    font-size: 13px;
+}
+
+.consultation-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    padding: 8px 16px;
+    align-items: center;
+    color: #232323;
+    font-size: 15px;
+}
+
+  .button-container {
+    text-align: right;
+  }
+
+  .consult-button {
+    background-color: #119ae4;
+   color : white;
+    padding: 6px 24px;
+    border-radius: 9999px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .consult-button:hover {
+    background-color:  #027CC0;
+  }
+  .etat {
+    padding: 6px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  
+    &.etat-ferme {
+      background-color: #FFEAEA; 
+      border: 1px solid #CF3030; 
+      color: #CF3030;
+    }
+    
+  
+    &.etat-ouvert {
+      background-color: #F4FCF7; 
+      border: 1px solid #48C5A5; 
+      
+    }
+    
+  }

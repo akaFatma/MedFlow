@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'; // Import Router for navigation
+
 interface Patient {
   nom: string;
   prenom: string;
@@ -15,6 +17,8 @@ interface Patient {
   styleUrls: ['./patient-table.component.scss'],
 })
 export class PatientTableComponent {
+  constructor(private router: Router) {}
+
   patients: Patient[] = [
     { nom: 'Salhi', prenom: 'Fatma', nss: '110720004', etat: 'ouvert' },
     { nom: 'Salhi', prenom: 'Fatma', nss: '110720004', etat: 'ferme' },
@@ -35,6 +39,7 @@ export class PatientTableComponent {
 
   consulter(patient: Patient) {
     console.log(`Consulting patient: ${patient.nom} ${patient.prenom}`);
-    // TODO: Implement logic for consultation
+    // Directly navigate to the patient dossier page with NSS as parameter
+    this.router.navigate(['/dossier-patient', patient.nss]);
   }
 }

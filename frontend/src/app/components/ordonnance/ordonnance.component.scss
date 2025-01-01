@@ -1,0 +1,94 @@
+.ordonnanceContainer {
+    width: 1050px;
+    padding: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 16px;
+    box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
+}
+
+.Ordonnance {
+    width: 100%;
+    border: 2px solid #000000;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
+}
+
+.header {
+    width: 100%;
+    display: flex;
+   
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+
+    .patientInfo {
+        font-size: 20px;
+        input {
+            outline: none;
+        }
+    }
+
+
+    .hospitalInfo {
+
+        text-align: center;
+        margin-right: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid black;
+
+        p {
+            font-weight: 600;
+            font-size: 22px;
+        }
+
+        .centre-hospitalier {
+            font-weight: bold;
+        }
+
+    }
+
+}
+
+.contenu {
+    width: 100%;
+   text-align: center;
+   
+    .title h2 {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+    .prescriptions-container{
+        input{
+            margin-bottom: 1rem;
+            outline: none;
+             text-align: center;
+             font-size: 20px;
+        }
+    }
+    button{
+    background-color: #119ae4;
+   color : white;
+    padding: 6px 30px;
+    margin: 2rem;
+    border-radius: 16px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    }
+    .button-container{
+        text-align: right;
+        margin-top: 10rem;
+    }
+    
+}
+
