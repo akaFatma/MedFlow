@@ -17,6 +17,7 @@ export const routes: Routes = [
       { path: 'login', component: LoginPageComponent },
       {path : 'test' , component : ConsulterDPIPovPatientComponent},
       {path : 'consult' , component : NouvelleConsultationComponent},
+      {path : 'soin' , component : InfermierLandingPageComponent},
   //  { path: 'unauthorized', component: UnauthorizedPageComponent },
   //   { 
   //    path: 'medecin-landing', 
@@ -30,7 +31,7 @@ export const routes: Routes = [
   //    canActivate: [RoleGuard],
   //    data: { roles: ['Médecin', 'Patient'] }
   //  },
-{ path: '**', redirectTo: 'consult', pathMatch: 'full' }
+{ path: '**', redirectTo: 'soin', pathMatch: 'full' }
   //{path : 'test' , component : InfermierLandingPageComponent}
  ];
 

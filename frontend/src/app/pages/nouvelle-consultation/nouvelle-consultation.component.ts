@@ -86,6 +86,7 @@ constructor(private fb: FormBuilder, private consultationService: ConsultationSe
       lastName: [{ value: '', disabled: false }, Validators.required],
       firstName: [{ value: '', disabled: false }, Validators.required],
       age: [{ value: '', disabled: false }, [Validators.required, Validators.min(0)]],
+      nss: [{ value: '', disabled: false }, [Validators.required, Validators.min(0)]],
       medications: this.fb.array([]),
     }),
     bilan: this.fb.array([]),
@@ -107,8 +108,8 @@ constructor(private fb: FormBuilder, private consultationService: ConsultationSe
       console.log('Form Data:', formData);
       const formattedData = {
         ordonnance: formData.ordonnance,
-        bilan: formData.bilan,
-        nss: 123456789012345,  // Le NSS du patient
+        bilan: formData.ordonnance.nss,
+        nss: formData.ordonnance.nss,  // Le NSS du patient (retester)
         resume: formData.resume,  // Le résumé de la consultation
         traitements: formData.ordonnance.medications.map((medication: any) => ({
           nom: medication.medication,  // Correspond au champ 'nom' dans le backend
