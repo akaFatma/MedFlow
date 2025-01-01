@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ConsultationService {
-  private apiUrl = '';  //enter your url here rayane
+  private apiUrl = 'http://127.0.0.1:8000/users/login';  //enter your url here rayane
 
   constructor(private http: HttpClient) {}
 

@@ -1,54 +1,52 @@
 <div class="ordonnanceContainer">
-    <form [formGroup]="ordonnanceForm" (ngSubmit)="onSubmit()">
-      <div class="Ordonnance">
-        <div class="header">
-          <div class="hospitalInfo">
-            <p class="centre-hospitalier">CENTRE HOSPITALIER UNIVERSITAIRE</p>
-            <p>Service de cardiologie</p>
-            <p>Dr. AISSAT Rabah</p>
-            <p>Médecin spécialiste en cardiologie</p>
-          </div>
-          <div class="patientInfo">
-            <p>
-              Alger, le: 
-              <input type="date" formControlName="date" />
-            </p>
-            <p>
-              Nom: 
-              <input type="text" formControlName="lastName" placeholder="..........................." />
-            </p>
-            <p>
-              Prénom(s): 
-              <input type="text" formControlName="firstName" placeholder="..........................." />
-            </p>
-            <p>
-              Age: 
-              <input type="number" formControlName="age" placeholder="..........................." /> ans
-            </p>
-          </div>
+  <form [formGroup]="ordonnanceForm" (ngSubmit)="onSubmit()">
+    <div class="Ordonnance">
+      <div class="header">
+        <div class="hospitalInfo">
+          <p class="centre-hospitalier">CENTRE HOSPITALIER UNIVERSITAIRE</p>
+          <p>Service de cardiologie</p>
+          <p>Dr. AISSAT Rabah</p>
+          <p>Médecin spécialiste en cardiologie</p>
         </div>
-        <div class="contenu">
-          <div class="title">
-            <h2>ORDONNANCE</h2>
-          </div>
-          <div formArrayName="medications" class="prescriptions-container">
-            <div *ngFor="let entry of medicationControls.controls; let i = index" [formGroupName]="i" class="prescription-line">
-              <input formControlName="medication" placeholder="Médicament" [disabled]="isConfirmed" />
-              <input formControlName="dose" placeholder="Dose" [disabled]="isConfirmed" />
-              <input formControlName="instructions" placeholder="Instructions" [disabled]="isConfirmed" />
-            </div>
-          </div>
-          <div class="button-container">
-            <!-- Conditionally render buttons -->
-            <button *ngIf="!isConfirmed" type="button" class="add-button" (click)="addNewLine()">
-              Ajouter une ligne
-            </button>
-            <button *ngIf="!isConfirmed" type="submit" class="confirm-button" (click)="confirmPrescription()">
-              Confirmer
-            </button>
-          </div>
+        <div class="patientInfo">
+          <p>
+            Alger, le:
+            <input type="date" formControlName="date" />
+          </p>
+          <p>
+            Nom:
+            <input type="text" formControlName="lastName" placeholder="..........................." />
+          </p>
+          <p>
+            Prénom(s):
+            <input type="text" formControlName="firstName" placeholder="..........................." />
+          </p>
+          <p>
+            Age:
+            <input type="number" formControlName="age" placeholder="..........................." /> ans
+          </p>
         </div>
       </div>
-    </form>
-  </div>
-  
+      <div class="contenu">
+        <div class="title">
+          <h2>ORDONNANCE</h2>
+        </div>
+        <div formArrayName="medications" class="prescriptions-container">
+          <div
+            *ngFor="let entry of medicationControls.controls; let i = index"
+            [formGroupName]="i"
+            class="prescription-line"
+          >
+            <input formControlName="medication" placeholder="Médicament" />
+            <input formControlName="dose" placeholder="Dose" />
+            <input formControlName="instructions" placeholder="Instructions" />
+          </div>
+        </div>
+        <div class="button-container">
+          <button *ngIf="!isConfirmed" type="button" class="add-button" (click)="addNewLine()">Ajouter une ligne</button>
+          <button *ngIf="!isConfirmed" type="button" class="confirm-button" (click)="confirmPrescription()">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

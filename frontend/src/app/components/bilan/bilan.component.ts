@@ -1,41 +1,51 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Output , EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-bilan',
-  imports : [CommonModule,ReactiveFormsModule,FormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './bilan.component.html',
   styleUrls: ['./bilan.component.scss']
 })
-export class BilanComponent {
+export class BilanComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<any>();
-  bilans: string[] = [''];  // Start with one empty input
+  bilansForm!: FormGroup;  // Reactive form to hold bilans
   isConfirmed: boolean = false;
 
-  trackByIndex(index: number): number {
-    return index;
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    // Initialize the form with one empty "bilan"
+    this.bilansForm = this.fb.group({
+      bilans: this.fb.array([this.fb.group({
+        bilan: ['', Validators.required]
+      })]) // Start with one empty input
+    });
   }
 
+  // Getter to access the FormArray controls
+  get bilansControls() : FormArray {
+    return this.bilansForm.get('bilans') as FormArray;
+  }
+
+  // Method to add a new "bilan" input field
   addBilan(index: number): void {
-    if (index === this.bilans.length - 1) {  // Only add new line if we're at the last input
-      this.bilans.push('');  // Add new empty input
+    if (index === this.bilansControls.length - 1) {
+      const bilansArray = this.bilansForm.get('bilans') as FormArray;
+      bilansArray.push(this.fb.group({
+        bilan: ['', Validators.required]
+      }));  // Add a new empty control
     }
   }
 
+  // Submit the form when the "Confirmer" button is clicked
   confirmBilans(): void {
-    if (!this.isConfirmed) {
+    if (this.bilansForm.valid && !this.isConfirmed) {
       this.isConfirmed = true;
-      this.formSubmit.emit(this.bilans); 
+      this.formSubmit.emit(this.bilansForm.value.bilans);  // Emit the bilans array
     }
   }
-
-  // confirmBilans(): void {
-  //   this.isConfirmed = true;
-  // }
-  
-  // submitBilan(): void {
-  //   this.formSubmit.emit({ bilans: this.bilans });
-  // }
 }

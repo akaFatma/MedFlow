@@ -1,16 +1,17 @@
 <div class="bilan-container">
-  <form (ngSubmit)="confirmBilans()"> 
-  <div *ngFor="let bilan of bilans; let i = index; trackBy: trackByIndex">
-    <input
-      type="text"
-      [(ngModel)]="bilans[i]"
-      (keyup.enter)="addBilan(i)"
-      placeholder="Bilan test {{i + 1}}"
-      [disabled]="isConfirmed"
-    />
-  </div>
-  <div class="but" *ngIf="!isConfirmed">
-    <button type="submit">Confirmer</button>
-  </div>
-</form>
+  <form [formGroup]="bilansForm" (ngSubmit)="confirmBilans()"> 
+    <div formArrayName="bilans">
+      <div *ngFor="let bilan of bilansControls.controls; let i = index" [formGroupName]="i">
+        <input
+          type="text"
+          formControlName="bilan"
+          (keyup.enter)="addBilan(i)"
+          placeholder="Bilan test {{i + 1}}"
+        />
+      </div>
+    </div>
+    <div class="but" *ngIf="!isConfirmed">
+      <button type="submit">Confirmer</button>
+    </div>
+  </form>
 </div>
