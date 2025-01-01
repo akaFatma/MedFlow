@@ -8,6 +8,11 @@
       (search)="onSearch($event)"
       (scanQR)="onScanQR()">
     </app-search-bar>
+    <app-qr-scanner 
+    *ngIf="isQrScannerVisible" 
+    [isVisible]="isQrScannerVisible"
+    (closePopup)="onCloseScanner()">
+    </app-qr-scanner>
     <app-medecin-table [searchResults]="results"></app-medecin-table>
   </main>
 </div>

@@ -13,9 +13,11 @@ import { InfermierLandingPageComponent } from './pages/infermier-landing-page/in
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 
 
+
  
 export const routes: Routes = [
-    { path: 'login', component: NouvelleConsultationComponent},
+  { path: 'test', component: MedecinLandingPageComponent},
+    
   //  { path: 'unauthorized', component: UnauthorizedPageComponent },
   //  { 
   //    path: 'medecin-landing', 
