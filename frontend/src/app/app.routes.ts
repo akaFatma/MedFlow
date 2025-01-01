@@ -14,9 +14,11 @@ import { InfermierLandingPageComponent } from './pages/infermier-landing-page/in
 
  
 export const routes: Routes = [
-  //  { path: 'login', component: LoginPageComponent },
+      { path: 'login', component: LoginPageComponent },
+      {path : 'test' , component : ConsulterDPIPovPatientComponent},
+      {path : 'consult' , component : NouvelleConsultationComponent},
   //  { path: 'unauthorized', component: UnauthorizedPageComponent },
-  //  { 
+  //   { 
   //    path: 'medecin-landing', 
   //    component: MedecinLandingPageComponent, 
   //    canActivate: [RoleGuard], 
@@ -28,6 +30,7 @@ export const routes: Routes = [
   //    canActivate: [RoleGuard],
   //    data: { roles: ['Médecin', 'Patient'] }
   //  },
-  //  { path: '**', redirectTo: 'login', pathMatch: 'full' }
-  {path : 'test' , component : InfermierLandingPageComponent}
+{ path: '**', redirectTo: 'consult', pathMatch: 'full' }
+  //{path : 'test' , component : InfermierLandingPageComponent}
  ];
+

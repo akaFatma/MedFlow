@@ -1,34 +1,72 @@
+// // 
+// import { Component, Input } from '@angular/core';
+// import { CommonModule } from '@angular/common';
+// import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+
+// @Component({
+//   selector: 'app-bilan',
+//   standalone: true,
+//   imports: [CommonModule, ReactiveFormsModule],
+//   templateUrl: './bilan.component.html',
+//   styleUrls: ['./bilan.component.scss']
+// })
+// export class BilanComponent {
+//   @Input() parentForm!: FormGroup;
+//   isConfirmed = false;
+
+//   constructor(private fb: FormBuilder) {}
+
+//   get bilanArray(): FormArray {
+//     return this.parentForm.get('bilan') as FormArray;
+//   }
+
+//   addBilan(): void {
+//     if (!this.isConfirmed) {
+//       this.bilanArray.push(this.fb.control('', Validators.required));
+//     }
+//   }
+
+//   confirmBilans(): void {
+//     this.isConfirmed = true;
+//     this.bilanArray.disable(); // Disabling the array so users can't edit after confirmation
+//   }
+
+//   trackByIndex(index: number): number {
+//     return index;
+//   }
+// }
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Output , EventEmitter } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bilan',
-  imports : [CommonModule,ReactiveFormsModule,FormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './bilan.component.html',
   styleUrls: ['./bilan.component.scss']
 })
 export class BilanComponent {
-  @Output() formSubmit = new EventEmitter<any>();
-  bilans: string[] = [''];  // Start with one empty input
-  isConfirmed: boolean = false;
+  @Input() parentForm!: FormGroup;
+  isConfirmed = false;
 
-  trackByIndex(index: number): number {
-    return index;
+  constructor(private fb: FormBuilder) {}
+
+  get bilanArray(): FormArray {
+    return this.parentForm.get('bilan') as FormArray;
   }
 
-  addBilan(index: number): void {
-    if (index === this.bilans.length - 1) {  // Only add new line if we're at the last input
-      this.bilans.push('');  // Add new empty input
+  addBilan(): void {
+    if (!this.isConfirmed) {
+      this.bilanArray.push(this.fb.control('', Validators.required));
     }
   }
 
   confirmBilans(): void {
     this.isConfirmed = true;
   }
-  
-  submitBilan(): void {
-    this.formSubmit.emit({ bilans: this.bilans });
+
+  trackByIndex(index: number): number {
+    return index;
   }
 }

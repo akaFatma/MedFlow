@@ -8,7 +8,7 @@ import { Patient } from '../models/patient.models';
   providedIn: 'root'
 })
 export class InfermierService {
-  private readonly API_URL = 'http://hna';
+  private readonly API_URL = 'http://127.0.0.1:8000/';
   
   constructor(private http: HttpClient) {}
 
