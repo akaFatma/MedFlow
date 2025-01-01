@@ -22,13 +22,19 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+
+
 urlpatterns = [
-    #path('demander_certificat/<str:patient_nss>/', views.demander_certificat_medical, name='demander_certificat'),
+   # path('uploader_bilan_radiologique/<int:consultation_id>/', views.uploader_bilan_radiologique, name='uploader_bilan_radiologique'),
+  #  path('demander_certificat/<str:patient_nss>/', views.demander_certificat_medical, name='demander_certificat'),
    # path('ajouter_patient/', views.ajouter_patient, name='ajouter_patient'),
-   # path('consulter_dpi/<int:dpi_id>/', views.consulter_dpi, name='consulter_dpi'),
-    path('remplir_bilan/<int:consultation_id>/<str:type_bilan>/', views.remplir_bilan, name='remplir_bilan'),
-    path('generer_graphique_bilan_biologique/<int:consultation_id>/', views.generer_graphique_bilan_biologique, name='generer_graphique_bilan_biologique'), 
-    path('ajouter_consultation/', views.ajouter_consultation, name='ajouter_consultation'),
+  #  path('consulter_dpi/<int:dpi_id>/', views.consulter_dpi, name='consulter_dpi'),
+  #  path('remplir_bilan/<int:consultation_id>/<str:type_bilan>/', views.remplir_bilan, name='remplir_bilan'),
+    path('generer_graphique_bilan_biologique/<int:consultation_id>/', views.generer_graphique_bilan_biologique, name='generer_graphique_bilan_biologique'),
+  #  path('ajouter_consultation/', views.ajouter_consultation, name='ajouter_consultation'),
     path('admin/', admin.site.urls),  # Utilise admin.site.urls pour l'admin
-    # autres chemins d'URL à ajouter ici
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -276,7 +276,7 @@ def generer_graphique_bilan_biologique(request, consultation_id):
 
     except Exception as e:
         return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
-"""
+
 
 
 from django.views.decorators.csrf import csrf_exempt
@@ -324,7 +324,7 @@ def ajouter_consultation(request):
             return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
     return JsonResponse({"error": "Méthode non autorisée."}, status=405)
 
-
+"""
 
 
 from django.views.decorators.csrf import csrf_exempt
@@ -376,32 +376,60 @@ def remplir_bilan(request, consultation_id, type_bilan):
 import matplotlib.pyplot as plt
 import io
 import os
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.conf import settings
-from .models import BilanBiologique, Consultation
+from .models import BilanBiologique, Bilan, Consultation
 
 def generer_graphique_bilan_biologique(request, consultation_id):
     try:
         # Récupérer les bilans actuels pour la consultation
-        bilans_actuels = BilanBiologique.objects.filter(consultation_id=consultation_id).order_by('date_emission')
+        bilans_actuels = Bilan.objects.filter(consultation_id=consultation_id).order_by('date_emission')
         
-        # Récupérer les bilans précédents
-        consultation_precedente = Consultation.objects.filter(id__lt=consultation_id).order_by('-id').first()
-        if consultation_precedente:
-            bilans_precedents = BilanBiologique.objects.filter(consultation_id=consultation_precedente.id).order_by('date_emission')
-        else:
-            bilans_precedents = []
+        # Récupérer les bilans biologiques associés
+        bilan_biologique_dict = {bilan.bilan_ptr_id: bilan.resultat for bilan in BilanBiologique.objects.all()}
 
         labels = [bilan.prescription for bilan in bilans_actuels]
-        resultats_actuels = [float(bilan.resultat) for bilan in bilans_actuels]
-        resultats_precedents = [float(bilan.resultat) for bilan in bilans_precedents] if bilans_precedents else [0] * len(resultats_actuels)
+        resultats_actuels = []
+        resultats_precedents = []
+        
+        for bilan in bilans_actuels:
+            resultat = bilan_biologique_dict.get(bilan.id, "0")
+            if "/" in resultat:
+                ancien, nouveau = resultat.split("/")
+                try:
+                    resultats_precedents.append(float(ancien))
+                    resultats_actuels.append(float(nouveau))
+                except ValueError:
+                    resultats_precedents.append(0)
+                    resultats_actuels.append(0)
+            elif " " in resultat:
+                ancien, nouveau = resultat.split(" ")
+                try:
+                    resultats_precedents.append(float(ancien))
+                    resultats_actuels.append(float(nouveau))
+                except ValueError:
+                    resultats_precedents.append(0)
+                    resultats_actuels.append(0)
+            else:
+                try:
+                    resultats_actuels.append(float(resultat))
+                    resultats_precedents.append(0)
+                except ValueError:
+                    resultats_actuels.append(0)
+                    resultats_precedents.append(0)
+
+        # Vérifier et ajuster les listes pour qu'elles aient la même longueur
+        max_length = max(len(resultats_actuels), len(resultats_precedents))
+        if len(resultats_actuels) < max_length:
+            resultats_actuels.extend([0] * (max_length - len(resultats_actuels)))
+        if len(resultats_precedents) < max_length:
+            resultats_precedents.extend([0] * (max_length - len(resultats_precedents)))
         
         width = 0.35
 
         fig, ax = plt.subplots()
-        ax.bar(labels, resultats_actuels, width, label='Actuel', color='b')
-        if bilans_precedents:
-            ax.bar(labels, resultats_precedents, width, bottom=resultats_actuels, label='Précédent', color='r')
+        ax.bar(labels, resultats_precedents, width, label='Précédent', color='r')
+        ax.bar(labels, resultats_actuels, width, bottom=resultats_precedents, label='Actuel', color='b')
 
         ax.set_xlabel('Tests')
         ax.set_ylabel('Valeurs')
@@ -428,3 +456,36 @@ def generer_graphique_bilan_biologique(request, consultation_id):
 
     except Exception as e:
         return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
+
+
+"""
+
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from .models import Consultation, BilanRadiologique
+
+@csrf_exempt
+def uploader_bilan_radiologique(request, consultation_id):
+    if request.method == 'POST':
+        try:
+            # Extraire les données du formulaire
+            compte_rendu = request.POST.get('compte_rendu', '')
+            image = request.FILES.get('image')
+
+            # Récupérer la consultation
+            consultation = get_object_or_404(Consultation, id=consultation_id)
+
+            # Créer et associer le bilan radiologique à la consultation
+            bilan_radiologique = BilanRadiologique.objects.create(
+                consultation=consultation,
+                compte_rendu=compte_rendu,
+                image_url=image
+            )
+
+            return JsonResponse({"message": "Bilan radiologique ajouté et associé à la consultation avec succès.", "bilan_id": bilan_radiologique.id}, status=201)
+
+        except Exception as e:
+            return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
+    return JsonResponse({"error": "Méthode non autorisée."}, status=405)
+"""
