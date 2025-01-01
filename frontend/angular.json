@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/",
             "outputPath": "dist/gestion-dpi",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -25,18 +26,16 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               {
-               "glob": "**/*",
+                "glob": "**/*",
                 "input": "src/assets",
-                 "output": "/assets/"
+                "output": "/assets/"
               }
             ],
-            "styles": ["src/styles.scss"],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "styles": [
+              "src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-svg-core/styles.css"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -83,7 +82,6 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-
             "styles": ["src/styles.scss"],
             "scripts": []
           }

@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-bienvenu-component',
-  imports: [],
   templateUrl: './bienvenu-component.component.html',
-  styleUrl: './bienvenu-component.component.scss'
+  styleUrls: ['./bienvenu-component.component.scss'], // Corrected typo here
 })
 export class BienvenuComponentComponent {
+  // Inputs to accept data from the parent component
  
-  @Input() first_name: string = '';
-  @Input() last_name: string = '';
 
+  @Input() userName: string = '';
+  @Input() firstName: string = '';
+  // Corrected property name
+  @Input() lastName: string = '';  // Corrected property name
 }
+
+// @Input() userName: string = '';

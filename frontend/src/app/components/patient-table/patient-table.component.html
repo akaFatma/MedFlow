@@ -1,0 +1,37 @@
+<div class="patient-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>NSS</th>
+        <th>État</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of patients">
+        <td>{{ patient.nom }}</td>
+        <td>{{ patient.prenom }}</td>
+        <td>{{ patient.nss }}</td>
+        <td>
+          <button
+            class="etat-button"
+            [ngClass]="{
+              'ouvert': patient.etat === 'ouvert',
+              'ferme': patient.etat === 'ferme'
+            }"
+            (click)="handleEtatClick(patient)"
+          >
+            {{ patient.etat }}
+          </button>
+        </td>
+        <td>
+          <button class="consulter-button" (click)="consulter(patient)">
+            Consulter
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

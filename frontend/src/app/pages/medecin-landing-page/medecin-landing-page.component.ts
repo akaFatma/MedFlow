@@ -1,81 +1,40 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { SideBarComponent } from '../../components/side-bar/side-bar.component';
-import { BienvenuComponentComponent } from '../../components/bienvenu-component/bienvenu-component.component';
-import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
-import { MedecinTableComponent } from '../../components/medecin-table/medecin-table.component';
-import { SearchService } from '../../services/search.services';
-import { PatientService } from '../../services/patient.services';
-import { Patient } from '../../models/patient.models';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
+import { Component } from '@angular/core';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { PatientTableComponent } from '../../components/patient-table/patient-table.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faQrcode, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule } from '@angular/common'; // Import CommonModule
 
 @Component({
   selector: 'app-medecin-landing-page',
+  standalone: true,
   imports: [
-    CommonModule,
-    SideBarComponent,
-    BienvenuComponentComponent,
-    SearchBarComponent,
-    MedecinTableComponent
+    SidebarComponent,
+    HeaderComponent,
+    PatientTableComponent,
+    FontAwesomeModule,
+    CommonModule, // Add CommonModule here to enable *ngIf
   ],
   templateUrl: './medecin-landing-page.component.html',
-  styleUrl: './medecin-landing-page.component.scss'
+  styleUrls: ['./medecin-landing-page.component.scss'],
 })
-export class MedecinLandingPageComponent implements OnInit {
-  
-  results: Patient[] = [];
-  userName: string = '';
- 
-  constructor(
-    private searchService: SearchService,
-    private patientService : PatientService,
-    private authService : AuthService,
-    private router : Router
-  
-  ) {}
+export class MedecinLandingPageComponent {
+  faQrcode = faQrcode;
+  faMagnifyingGlass = faMagnifyingGlass;
 
-  ngOnInit(): void {
-    // Load all patients when component initializes
-    this.loadAllPatients();
-    // Get the username dynamically
-    this.userName = this.authService.getUserName();
+  // Flag to control the visibility of the QR notification modal
+  showNotification = false;
+
+  // Show the notification modal when the QR button is clicked
+  openQrNotification(): void {
+    this.showNotification = true;
   }
-  loadAllPatients(): void {
-    this.patientService.getConsultationHistory().subscribe({
-      next: (data) => {
-        this.results = data;
-      },
-      error: (error) => {
-        console.error('Error fetching patients:', error);
-        this.results = [];
-      }
-    });
+
+  // Close the notification modal
+  closeQrNotification(): void {
+    this.showNotification = false;
   }
-   onSearch(nss: number): void {
-    if (!nss) {
-      this.loadAllPatients(); //if search is cleared load patients again
-      return;
-    }
-    this.searchService.searchByNSS(nss).subscribe({
-      next: (data: Patient) => {
-        this.results = Array.isArray(data) ? data : [data];
-      },
-      error: (error) => {
-        console.error('Error fetching data:', error);
-        this.results = []; 
-      }
-    });
-
 }
 
-onScanQR(){
-  //idk
-
-}
-
-onConsulter(patient: Patient): void { 
-  this.router.navigate(['/dossier-patient', patient.nss]);
-}
-}

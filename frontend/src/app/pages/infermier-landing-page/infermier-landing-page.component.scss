@@ -1,10 +1,10 @@
 .container {
-  background-color: #F6F8FD;
+  background-color: #f6f8fd;
   width: 100%;
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   margin: 0 auto;
   gap: 1rem;
 }
@@ -50,11 +50,8 @@
   border-radius: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   min-width: 55%;
-  max-width: 600px;  /* Set a max-width to avoid stretching */
-  min-height: fit-content;
-  max-height: 80vh;  /* Set a max-height so it doesn’t fill the entire screen */
-  overflow-y: auto;  /* Enable scrolling if the content is too large */
- 
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
 }
-
 

@@ -10,37 +10,24 @@ import { ResumeComponent } from './components/resume/resume.component';
 import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nouvelle-consultation.component';
 import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
+import { AddDPIComponent } from './pages/add-dpi/add-dpi.component';
 
-
-import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
- 
 export const routes: Routes = [
-   { path: 'login', component: LoginPageComponent },
-   { path: 'unauthorized', component: UnauthorizedPageComponent },
-   { 
-     path: 'medecin-landing', 
-     component: MedecinLandingPageComponent, 
-     canActivate: [RoleGuard], 
-     data: { role: 'Médecin' }
-   },
-   { 
-     path: 'dossier-patient/:nss', 
-     component: ConsulterDPIPovPatientComponent,
-     canActivate: [RoleGuard],
-     data: { roles: ['Médecin', 'Patient'] }
-   },
-   { 
-    path: 'add-dpi', 
-    component: AddDPIComponent,
-    canActivate: [RoleGuard],
-    data: { roles: ['Médecin', 'Administratif'] }
+  { path: '', redirectTo: 'medecin-landing', pathMatch: 'full' },
+  { path: 'login', component: LoginPageComponent },
+  { path: 'unauthorized', component: UnauthorizedPageComponent },
+  {
+    path: 'medecin-landing',
+    component: MedecinLandingPageComponent,
+    data: { role: 'Médecin' },
   },
-  { 
-    path: 'soins', 
-    component: InfermierLandingPageComponent,
-    canActivate: [RoleGuard],
-    data: { roles: ["Infirmier"] }
+  {
+    path: 'dossier-patient/:nss',
+    component: ConsulterDPIPovPatientComponent,
+   // canActivate: [RoleGuard],
+    data: { roles: ['Médecin', 'Patient'] },
   },
-   { path: '**', redirectTo: 'login', pathMatch: 'full' }
-  
- ];
+  { path: 'add-dpi', component: AddDPIComponent, canActivate: [RoleGuard], data: { roles: ['Médecin', 'Administratif'] } },
+  { path: 'soins', component: InfermierLandingPageComponent, canActivate: [RoleGuard], data: { roles: ['Infirmier'] } },
+  { path: '**', redirectTo: 'medecin-landing', pathMatch: 'full' },
+];

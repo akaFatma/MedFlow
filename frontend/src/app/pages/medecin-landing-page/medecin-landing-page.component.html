@@ -1,13 +1,35 @@
-<!-- medecin-landing.component.html -->
-<div class="landing-container">
-  <app-side-bar></app-side-bar>
+
+<div class="medecin-landing-page">
+    <app-sidebar></app-sidebar>
   
-  <main class="main-content">
-    <app-bienvenu-component  [userName]="userName" ></app-bienvenu-component>
-    <app-search-bar 
-      (search)="onSearch($event)"
-      (scanQR)="onScanQR()">
-    </app-search-bar>
-    <app-medecin-table [searchResults]="results"></app-medecin-table>
-  </main>
-</div>
+    <div class="main-content">
+      <app-header></app-header>
+  
+      <div class="actions">
+        <!-- Clicking this button will show the QR notification modal -->
+        <button class="qr-button" (click)="openQrNotification()">
+          <fa-icon [icon]="faQrcode" class="menu-icon"></fa-icon>
+          Scanner QR
+        </button>
+  
+        <div class="search-container">
+          <fa-icon [icon]="faMagnifyingGlass" class="search-icon"></fa-icon>
+          <input type="text" placeholder="Rechercher par NSS..." />
+        </div>
+      </div>
+  
+      <app-patient-table></app-patient-table>
+    </div>
+  
+    <!-- Modal for QR Notification, shown when showNotification is true -->
+    <div *ngIf="showNotification" class="page-qr-container">
+      <div class="notification-card">
+        <button class="close-button" (click)="closeQrNotification()">
+          <i class="fa-solid fa-x"></i>
+        </button>
+        <h3 class="success-title">QR scanné avec succès !</h3>
+        <p class="success-message">Redirection vers DPI...</p>
+      </div>
+    </div>
+  </div>
+  
