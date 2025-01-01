@@ -63,11 +63,7 @@ class Patient(models.Model):
         blank=True,
         related_name="patients"
     )  
-    medecins = models.ManyToManyField(
-        'Medecin', 
-        blank=True,  # `null=True` n'est pas nécessaire pour ManyToManyField
-        related_name="patients"
-    )
+
 
     def __str__(self):
         return f"{self.nom} {self.prenom} (NSS : {self.nss})"
@@ -78,10 +74,6 @@ class Traitement(models.Model):
     consommation = models.CharField(
         max_length=100, 
         help_text="Par exemple : '3 comprimés'"
-    )
-    frequence = models.IntegerField(
-        verbose_name="Fréquence (en jours)", 
-        help_text="Par exemple : tous les 3 jours"
     )
 
     def __str__(self):
@@ -96,13 +88,13 @@ class Ordonnance(models.Model):
         ('en_attente', 'En attente'),
         ('validee', 'Validée'),
     ]
-
-    patient = models.ForeignKey(
-        'Patient', 
-        on_delete=models.CASCADE,  # Supprime l'ordonnance si le patient est supprimé
-        related_name='ordonnances', 
-        help_text="Patient associé à cette ordonnance"
+    consultation = models.ForeignKey(
+        'Consultation', 
+        on_delete=models.CASCADE,  
+        related_name='ordonnances',  
+        help_text="Consultation associée à cette ordonnance"
     )
+    
     date_emission = models.DateField("Date d'émission", auto_now_add=True)
     status = models.CharField(
         max_length=100, 
@@ -117,7 +109,9 @@ class Ordonnance(models.Model):
     )
 
     def __str__(self):
-        return f"Ordonnance du {self.date_emission} - {self.patient.nom} {self.patient.prenom}"
+        return f"Ordonnance du {self.date_emission} pour consultation {self.consultation.id}"
+
+
 
 
 
@@ -141,11 +135,16 @@ class DPI(models.Model):
         return f"Dossier patient de {self.patient.nom} {self.patient.prenom}"
 
 
+class Examen(models.Model):
+    idc = models.IntegerField()  # L'id de la consultation
+    consigne = models.TextField()  # La consigne de l'examen
 
-
+    def __str__(self):
+        return f"Examen pour la consultation {self.idd}"
 
 
 class Consultation(models.Model):
+    id = models.AutoField(primary_key=True)
     date = models.DateField(
         "Date de consultation",
         auto_now_add=True,
@@ -164,7 +163,7 @@ class Consultation(models.Model):
         help_text="Ordonnance liée à cette consultation (optionnelle)"
     )
     dpi = models.ForeignKey(
-        DPI,
+        'DPI',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -172,38 +171,72 @@ class Consultation(models.Model):
         related_name='consultations',
         help_text="DPI associé à cette consultation"
     )
+    examens = models.ManyToManyField(
+        Examen,
+        blank=True,
+        related_name='consultations',
+        help_text="Examens associés à cette consultation"
+    )
 
     def __str__(self):
         return f"Consultation du {self.date}"
 
 
 
-class Bilan(models.Model):
+
+from django.db import models
+
+class BilanBiologique(models.Model):
+    idc = models.IntegerField()  # l'id de la consultation
     prescription = models.CharField(
         max_length=255,
         help_text="Description de la prescription pour cet examen"
     )
     date_emission = models.DateField(
         "Date d'émission",
-        auto_now_add=True
+        auto_now_add=False
     )
     consultation = models.ForeignKey(
         'Consultation',
         on_delete=models.CASCADE,
-        related_name='bilans',
-        help_text="Consultation à laquelle ce bilan est associé"
+        related_name='bilans_biologiques',
+        help_text="Consultation à laquelle ce bilan biologique est associé"
     )
-
-    def __str__(self):
-        return f"Bilan : {self.prescription} pour la consultation du {self.consultation.date}"
-
-
-class BilanBiologique(Bilan):
     resultat = models.TextField(
         help_text="Résultat du bilan biologique"
     )
 
+    def __str__(self):
+        return f"Bilan Biologique : {self.prescription} pour la consultation du {self.consultation.date}"
 
+class BilanRadiologique(models.Model):
+    idc = models.IntegerField()  # l'id de la consultation
+    prescription = models.CharField(
+        max_length=255,
+        help_text="Description de la prescription pour cet examen"
+    )
+    date_emission = models.DateField(
+        "Date d'émission",
+        auto_now_add=False
+    )
+    consultation = models.ForeignKey(
+        'Consultation',
+        on_delete=models.CASCADE,
+        related_name='bilans_radiologiques',
+        help_text="Consultation à laquelle ce bilan radiologique est associé"
+    )
+    compte_rendu = models.TextField(
+        help_text="Compte-rendu du bilan radiologique"
+    )
+    image_url = models.URLField(
+        max_length=200,
+        null=True,
+        blank=True,
+        help_text="Lien vers l'image radiologique (optionnel)"
+    )
+
+    def __str__(self):
+        return f"Bilan Radiologique : {self.prescription} pour la consultation du {self.consultation.date}"
 
 
 class Medecin(models.Model):
@@ -220,13 +253,21 @@ class test(models.Model):
 
 
 
-class BilanRadiologique(Bilan):
-    compte_rendu = models.TextField(
-        help_text="Compte-rendu du bilan radiologique"
+
+
+class Soin(models.Model):
+    etat = models.CharField(max_length=100, help_text="État associé")
+    medicament = models.CharField(max_length=255, help_text="Nom du médicament")
+    autre = models.TextField(help_text="Autre information supplémentaire", null=True, blank=True)
+    date = models.DateField(auto_now_add=False, help_text="Date de création du soin")
+    dpi = models.ForeignKey(
+        DPI,
+        on_delete=models.CASCADE,
+        related_name='soins',
+        help_text="DPI auquel ce soin est associé"
     )
-    image_url = models.URLField(
-        max_length=200,
-        null=True,
-        blank=True,
-        help_text="Lien vers l'image radiologique (optionnel)"
-    )
+
+    def __str__(self):
+        return f"Soin : {self.medicament} ({self.etat}) - {self.date}"
+
+     

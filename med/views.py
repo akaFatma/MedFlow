@@ -2,220 +2,48 @@ import json
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
+import pickle
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
 
 from .models import ( 
     Patient, 
     PersonneAContacter, 
     DPI,
+    Consultation,
+    BilanBiologique,  
+    BilanRadiologique, 
+    Ordonnance,
+    Soin,
+    Examen,
     Traitement
 )
 
-# Page d'accueil
+@csrf_exempt
 def home(request):
+    if request.method == 'POST':
+        try:
+            # Vous pouvez accéder aux données envoyées avec request.POST
+            data = request.POST  # Récupérer les données POST envoyées par le frontend
+            
+            # Vous pouvez imprimer les données pour les examiner dans la console
+            print("Données reçues:", data)
+            
+            # Exemple de réponse JSON
+            response_data = {"message": "Success", "received_data": data}
+            return JsonResponse(response_data)
+        
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    
+    # Si ce n'est pas une requête POST, retourner un message simple
     return HttpResponse("Bienvenue sur la page d'accueil!")
 
-# Définir un décorateur de gestion des rôles
-def check_roles(allowed_roles):
-    def decorator(view_func):
-        def _wrapped_view(request, *args, **kwargs):
-            if not request.user.is_authenticated:
-                return JsonResponse({'error': 'Utilisateur non authentifié'}, status=403)
-            if request.user.role not in allowed_roles:
-                return JsonResponse({'error': f'Accès refusé pour ce rôle: {request.user.role}'}, status=403)
-            return view_func(request, *args, **kwargs)
-        return _wrapped_view
-    return decorator
-
-# Création du DPI - Gestion de la création des patients et de la personne à contacter
-@csrf_exempt
-# @check_roles(['admin', 'medecin'])
-
-def creer_dpi(request): 
-    if request.method == 'POST':
-        try:
-            # Décodage des données envoyées en JSON dans le corps de la requête
-            body = json.loads(request.body)
-            print(f"Données reçues : {body}")  # Affiche les données JSON dans la console pour débogage
-
-            step = body.get('step')
-            data = body.get('data')
-
-            if not data and (step == 2 or step == 1):
-                return JsonResponse({'error': 'Aucune donnée fournie'}, status=400)
-
-            # Variables par défaut pour les étapes 2 et 3
-            nom_personne = prenom_personne = telephone_personne = None
-            nom = prenom = date_naissance = telephone = adr = nss = mutuelle = None
-
-            if step == 1:
-                # Étape 1 : Collecte des données personnelles
-                nom = data.get('nom')
-                prenom = data.get('prenom')
-                date_naissance = data.get('date')
-                telephone = data.get('telephone')
-
-                # Enregistrer les données de l'étape 1 dans la session
-                request.session['nom'] = nom
-                request.session['prenom'] = prenom
-                request.session['date_naissance'] = date_naissance
-                request.session['telephone'] = telephone
-                print(request.session.items())
-
-                if not all([nom, prenom, date_naissance, telephone]):
-                    return JsonResponse({'error': 'Certains champs sont manquants dans l\'étape 1'}, status=400)
-
-                return JsonResponse({'message': 'Étape 1 complétée', 'data': {
-                    'nom': nom,
-                    'prenom': prenom,
-                    'date_naissance': date_naissance,
-                    'telephone': telephone,
-                }})
-
-            elif step == 2:
-                # Étape 2 : Collecte des données supplémentaires
-                nss = data.get('nss')
-                mutuelle = data.get('mutuelle')
-                nom_personne = data.get('personne_nom')
-                prenom_personne = data.get('personne_prenom')
-                telephone_personne = data.get('personne_telephone')
-                adr = data.get('adresse')
-
-                # Enregistrer les données de l'étape 2 dans la session
-                request.session['nss'] = nss
-                request.session['mutuelle'] = mutuelle
-                request.session['nom_personne'] = nom_personne
-                request.session['prenom_personne'] = prenom_personne
-                request.session['telephone_personne'] = telephone_personne
-                request.session['adresse'] = adr
-                print(request.session.items())
-
-                if not all([nss, mutuelle, nom_personne, prenom_personne, telephone_personne]):
-                    return JsonResponse({'error': 'Certains champs sont manquants dans l\'étape 2'}, status=400)
-
-                return JsonResponse({'message': 'Étape 2 complétée', 'data': {
-                    'nss': nss,
-                    'mutuelle': mutuelle,
-                    'nom_personne': nom_personne,
-                    'prenom_personne': prenom_personne,
-                    'telephone_personne': telephone_personne
-                }})
-
-            elif step == 3:
-                # Étape 3 : Création des objets et validation
-                print(f"Session data: {dict(request.session)}")
-                nom = request.session.get('nom')
-                prenom = request.session.get('prenom')
-                date_naissance = request.session.get('date_naissance')
-                telephone = request.session.get('telephone')
-                adr = request.session.get('adresse')
-                nss = request.session.get('nss')
-                mutuelle = request.session.get('mutuelle')
-                nom_personne = request.session.get('nom_personne')
-                prenom_personne = request.session.get('prenom_personne')
-                telephone_personne = request.session.get('telephone_personne')
-
-                if nom_personne and prenom_personne and telephone_personne:
-                    personne_a_contacter, created = PersonneAContacter.objects.get_or_create(
-                        nom=nom_personne,
-                        prenom=prenom_personne,
-                        telephone=telephone_personne
-                    )
-
-                    patient = Patient.objects.create(
-                        nom=nom, prenom=prenom, date_de_naissance=date_naissance,
-                        adresse=adr, telephone=telephone, nss=nss, mutuelle=mutuelle,
-                        personne_a_contacter=personne_a_contacter
-                    )
-
-                    dpi = DPI.objects.create(patient=patient)
-
-                    return JsonResponse({'message': 'DPI créé avec succès', 'data': {
-                        'nom': nom,
-                        'prenom': prenom,
-                        'date_naissance': date_naissance,
-                        'telephone': telephone,
-                        'adresse': adr,
-                        'nss': nss,
-                        'mutuelle': mutuelle,
-                        'personne_nom': nom_personne,
-                        'personne_prenom': prenom_personne,
-                        'telephone_personne': telephone_personne
-                    }})
-
-                return JsonResponse({'error': 'Données incomplètes pour l\'étape 3'}, status=400)
-
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Données JSON invalides'}, status=400)
-
-        except Exception as e:
-            print(f"Erreur : {e}")
-            return JsonResponse({'error': f'Erreur lors du traitement des données: {str(e)}'}, status=400)
-
-    return JsonResponse({'error': 'Requête invalide'}, status=400)
 
 
 
-# Rédaction d'ordonnance - Traitements
-@csrf_exempt
-# @check_roles(['medecin'])
-def rediger_ordonnance(request):
-    if request.method == 'POST':
-        try:
-            print(request.body)  # Ajoutez cette ligne pour voir le contenu brut de la requête
-            body = json.loads(request.body)
-            data = body.get('data')
-
-            if not data:
-                return JsonResponse({'error': 'Aucune donnée fournie'}, status=400)
-
-            traitements = data.get('traitements')
-            if not traitements or not isinstance(traitements, list):
-                return JsonResponse({'error': 'Aucun traitement fourni ou format invalide'}, status=400)
-
-            traitements_list = []
-            for traitement_data in traitements:
-                nom_traitement = traitement_data.get('nom')
-                dose = traitement_data.get('dose')
-                consommation = traitement_data.get('consommation')
-                frequence = traitement_data.get('frequence')
-
-                if not all([nom_traitement, dose, consommation, frequence]):
-                    return JsonResponse({'error': 'Certains champs sont manquants pour un traitement'}, status=400)
-
-                traitement = Traitement.objects.create(
-                    nom=nom_traitement, dose=dose, consommation=consommation, frequence=frequence
-                )
-                traitements_list.append(traitement)
-
-            return JsonResponse({'message': 'Traitements enregistrés avec succès', 'traitements': [str(t) for t in traitements_list]})
-        except Exception as e:
-            print(f"Erreur : {e}")
-            return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
-
-    return JsonResponse({'error': 'Requête invalide'}, status=400)
-
-# @csrf_exempt
-# # @check_roles(['medecin'])
-# def rediger_bilan_biologique(request):
-#     if request.method == 'POST':
-#         try:
-#             print(request.body)  # Ajoutez cette ligne pour voir le contenu brut de la requête
-#             body = json.loads(request.body)
-#             data = body.get('data')
-         
-#             prescription = data.get('prescription')
-            
-
-#             if not prescription:
-#                 return JsonResponse({'error': 'Aucune prescription fournie'}, status=400)
-
-#             return JsonResponse({'message': 'Prescription enregistrée avec succès', 'prescription': prescription})
-#         except Exception as e:
-#             print(f"Erreur : {e}")
-#             return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
-
-#     return JsonResponse({'error': 'Requête invalide'}, status=400)
 
 
 ###########################################Nouvelle version de creer_dpi#############################################
@@ -297,35 +125,417 @@ def creerr_dpi(request):
 def rediger_ordonnance(request):
     if request.method == 'POST':
         try:
-            print(request.body)  # Ajoutez cette ligne pour voir le contenu brut de la requête
+            print(request.body)  # Affiche le contenu brut de la requête pour déboguer
             body = json.loads(request.body)
             data = body.get('data')
 
             if not data:
                 return JsonResponse({'error': 'Aucune donnée fournie'}, status=400)
 
+            nss = data.get('nss')
+            if not nss:
+                return JsonResponse({'error': 'Numéro de sécurité sociale (NSS) requis'}, status=400)
+
+            # Recherche le DPI correspondant au NSS
+            try:
+                dpi = DPI.objects.get(patient__nss=nss)
+            except DPI.DoesNotExist:
+                return JsonResponse({'error': 'Aucun DPI trouvé pour ce NSS'}, status=404)
+
+            # Recherche la dernière consultation d'aujourd'hui pour ce DPI
+            date = now()
+            consultation = Consultation.objects.filter(dpi=dpi, date__date=date.date()).order_by('-date').first()
+
+            if not consultation:
+                return JsonResponse({'error': 'Aucune consultation trouvée pour ce DPI aujourd\'hui'}, status=404)
+
+            # Récupère les traitements de la requête
             traitements = data.get('traitements')
             if not traitements or not isinstance(traitements, list):
                 return JsonResponse({'error': 'Aucun traitement fourni ou format invalide'}, status=400)
 
+            # Crée les objets Traitement
             traitements_list = []
             for traitement_data in traitements:
                 nom_traitement = traitement_data.get('nom')
                 dose = traitement_data.get('dose')
                 consommation = traitement_data.get('consommation')
-                frequence = traitement_data.get('frequence')
 
-                if not all([nom_traitement, dose, consommation, frequence]):
+                if not all([nom_traitement, dose, consommation]):
                     return JsonResponse({'error': 'Certains champs sont manquants pour un traitement'}, status=400)
 
                 traitement = Traitement.objects.create(
-                    nom=nom_traitement, dose=dose, consommation=consommation, frequence=frequence
+                    nom=nom_traitement,
+                    dose=dose,
+                    consommation=consommation,
                 )
                 traitements_list.append(traitement)
 
-            return JsonResponse({'message': 'Traitements enregistrés avec succès', 'traitements': [str(t) for t in traitements_list]})
+            # Crée une ordonnance et l'affecte à la consultation
+            ordonnance = Ordonnance.objects.create(
+                patient=dpi.patient,  # Associe la bonne relation patient
+                status='en_attente'
+            )
+            ordonnance.traitements.set(traitements_list)  # Ajoute les traitements à l'ordonnance
+            ordonnance.save()
+
+            # Associe l'ordonnance à la consultation
+            consultation.ordonnance = ordonnance
+            consultation.save()
+
+            return JsonResponse({
+                'message': 'Ordonnance créée et associée avec succès',
+                'ordonnance': {
+                    'id': ordonnance.id,
+                    'date_emission': ordonnance.date_emission,
+                    'status': ordonnance.status,
+                    'traitements': [str(t) for t in traitements_list]
+                }
+            })
         except Exception as e:
             print(f"Erreur : {e}")
             return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
 
     return JsonResponse({'error': 'Requête invalide'}, status=400)
+
+
+
+# @csrf_exempt
+# # @check_roles(['medecin'])
+@csrf_exempt
+def rediger_bilan_radiologique(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            data = body.get('data')
+            nss = data.get('nss')
+            if not nss:
+                return JsonResponse({'error': 'NSS requis'}, status=400)
+            try:
+                dpi = DPI.objects.get(patient__nss=nss)
+            except DPI.DoesNotExist:
+                return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
+            date = now()
+            consultation = Consultation.objects.filter(dpi=dpi, date__date=date.date()).order_by('-date').first()
+            if not consultation:
+                return JsonResponse({'error': 'Aucune consultation trouvée aujourd\'hui'}, status=404)
+            prescription = data.get('prescription')
+            if not prescription  :
+                return JsonResponse({'error': 'Prescription ou compte-rendu manquant'}, status=400)
+            bilan = BilanRadiologique.objects.create(
+                consultation=consultation,
+                prescription=prescription,
+                date_emission=date,
+                compte_rendu=None,
+                image_url=None
+            )
+            return JsonResponse({
+                'message': 'Bilan radiologique enregistré avec succès',
+                'bilan_id': bilan.id,
+                'consultation_id': consultation.id
+            })
+        except Exception as e:
+            return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
+    return JsonResponse({'error': 'Requête invalide'}, status=400)
+
+
+###########################################Bilan radiologique#######################################################
+
+# @csrf_exempt
+# # @check_roles(['medecin'])
+@csrf_exempt
+def rediger_bilan_biologique(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            data = body.get('data')
+            nss = data.get('nss')
+            if not nss:
+                return JsonResponse({'error': 'NSS requis'}, status=400)
+            try:
+                dpi = DPI.objects.get(patient__nss=nss)
+            except DPI.DoesNotExist:
+                return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
+            date = now()
+            consultation = Consultation.objects.filter(dpi=dpi, date__date=date.date()).order_by('-date').first()
+            if not consultation:
+                return JsonResponse({'error': 'Aucune consultation trouvée aujourd\'hui'}, status=404)
+            prescription = data.get('prescription')
+            resultat = None
+            if not prescription :
+                return JsonResponse({'error': 'Prescription ou compte-rendu manquant'}, status=400)
+            bilan = BilanRadiologique.objects.create(
+                consultation=consultation,
+                prescription=prescription,
+                date_emission=date,
+                resultat=resultat,
+            )
+            return JsonResponse({
+                'message': 'Bilan radiologique enregistré avec succès',
+                'bilan_id': bilan.id,
+                'consultation_id': consultation.id
+            })
+        except Exception as e:
+            return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
+    return JsonResponse({'error': 'Requête invalide'}, status=400)
+
+
+# @csrf_exempt
+# # @check_roles(['infermier'])
+@csrf_exempt
+def rediger_soin(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            nss = body.get('nss')
+            if not nss:
+                return JsonResponse({'error': 'NSS requis'}, status=400)
+            try:
+                dpi = DPI.objects.get(patient__nss=nss)
+            except DPI.DoesNotExist:
+                return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
+            etat = body.get('etat')
+            medicament = body.get('medicament')
+            autre = body.get('autre')
+            if not etat or not medicament or not autre:
+                return JsonResponse({'error': 'Etat, médicament ou autre information manquants'}, status=400)
+            soin = Soin.objects.create(
+                etat=etat,
+                medicament=medicament,
+                autre=autre,
+                dpi=dpi,
+                date=now()
+            )
+            dpi.soins.add(soin)  # Associer le soin au DPI
+            return JsonResponse({
+                'message': 'Soin enregistré avec succès',
+                'soin_id': soin.id,
+                'dpi_id': dpi.id
+            })
+        except Exception as e:
+            return JsonResponse({'error': f'Erreur lors du traitement des données: {str(e)}'}, status=400)
+    return JsonResponse({'error': 'Requête invalide'}, status=400)
+
+#@csrf_exempt
+# # @check_roles(['medecin'])
+
+
+
+
+
+
+@csrf_exempt
+def commencer_consultation(request):
+    if request.method == 'POST':
+        try:
+            # Afficher le corps de la requête
+            print("Request Body:", request.body)
+            
+            body = json.loads(request.body)
+
+            # Log des données reçues
+            print("body received:", body)
+
+            # Validation du NSS
+            nss = body.get('nss')
+            if not nss:
+                return JsonResponse({'error': 'NSS requis'}, status=400)
+            
+            print(f"NSS reçu: {nss}")
+
+            try:
+                dpi = DPI.objects.get(patient__nss=nss)
+                print(f"DPI trouvé: {dpi}")
+            except DPI.DoesNotExist:
+                return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
+
+            # Création de la consultation
+            consultation = Consultation.objects.create(
+                dpi=dpi,
+                resume="",  # Le résumé peut être défini plus tard
+                ordonnance=None,
+                date=now()  # La date de la consultation est définie à maintenant
+            )
+            print(f"Consultation créée avec ID: {consultation.id}")
+            
+            ordonnance = Ordonnance.objects.create(
+                consultation=consultation,  # Associe l'ordonnance à la consultation
+                status='en_attente'
+            )
+            print(f"Ordonnance créée avec ID: {ordonnance.id}")
+
+            # Traitements - Ajout direct
+            traitements = body.get('traitements')
+            if not traitements or not isinstance(traitements, list):
+                return JsonResponse({'error': 'Aucun traitement fourni ou format invalide'}, status=400)
+            
+            print(f"Traitements reçus: {traitements}")
+
+            for traitement_data in traitements:
+                nom_traitement = traitement_data.get('nom')
+                dose = traitement_data.get('dose')
+                consommation = traitement_data.get('consommation')
+
+                if not all([nom_traitement, dose, consommation]):
+                    return JsonResponse({'error': 'Certains champs sont manquants pour un traitement'}, status=400)
+                
+                print(f"Ajout du traitement: nom={nom_traitement}, dose={dose}, consommation={consommation}")
+
+                traitement = Traitement.objects.create(
+                    nom=nom_traitement,
+                    dose=dose,
+                    consommation=consommation,
+                )
+                ordonnance.traitements.add(traitement)  # Ajoute directement le traitement à l'ordonnance
+                print(f"Traitement ajouté à l'ordonnance: {traitement.id}")
+
+            ordonnance.save()
+            consultation.ordonnance = ordonnance
+
+            # Examens - Ajout avec set()
+            examens = body.get('examens')
+            if examens and isinstance(examens, list):
+                created_exams = []
+                for exam_data in examens:
+                    consigne = exam_data
+                    if consigne:
+                        # Création de l'examen associé à la consultation
+                        exam = Examen.objects.create(
+                            consigne=consigne,
+                            idc=consultation.id  # On associe l'examen à la consultation via 'idd'
+                        )
+                        is_biologique = bilan_type_detector(consigne)
+                        if is_biologique:
+                            bilan_bio = BilanBiologique.objects.create(
+                                date_emission=now(),
+                                consultation=consultation,
+                                prescription=consigne,
+                                resultat='',
+                                idc=consultation.id                                 
+                            )
+                        else:
+                            bilan_radio = BilanRadiologique.objects.create(
+                                date_emission=now(),
+                                consultation=consultation,
+                                prescription=consigne,
+                                compte_rendu='',
+                                image_url='',
+                                idc=consultation.id                                 
+                            )
+                        created_exams.append(exam)
+                        print(f"Examen créé: {exam.id} avec consigne: {consigne}")
+
+                # Ajout de tous les examens à la consultation
+                consultation.examens.set(created_exams)
+
+            # Mise à jour du résumé de la consultation
+            resume = body.get('resume')
+            if resume:
+                consultation.resume = resume
+                print(f"Résumé mis à jour: {resume}")
+
+            consultation.save()  # Sauvegarde de la consultation avec les modifications
+            print(f"Consultation sauvegardée avec l'ordonnance et les examens")
+
+            # Retour de la réponse réussie
+            return JsonResponse({'message': 'Consultation commencée avec succès'}, status=201)
+
+        except Exception as e:
+            print(f"Erreur dans le traitement: {str(e)}")  # Log l'erreur
+            return JsonResponse({'error': f'Erreur lors du traitement des données: {str(e)}'}, status=400)
+
+    return JsonResponse({'error': 'Requête invalide'}, status=400)
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pickle
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+def bilan_type_detector(consigne, model=None, vectorizer=None):
+    """
+    Retourne True si le bilan est biologique, False s'il est radiologique.
+    
+    Args:
+        consigne (str): La consigne décrivant le bilan.
+        model (trained model): Modèle entraîné (si déjà chargé)
+        vectorizer (trained vectorizer): Vectorizer entraîné (si déjà chargé)
+    
+    Returns:
+        bool: True pour biologique, False pour radiologique.
+    """
+    # Si le modèle et le vectorizer ne sont pas fournis, on les charge depuis un fichier pickle
+    if model is None or vectorizer is None:
+        with open('model_bilan.pkl', 'rb') as model_file:
+            model, vectorizer = pickle.load(model_file)
+    
+    # Prédire le type de bilan à partir de la consigne
+    X_test = vectorizer.transform([consigne])
+    prediction = model.predict(X_test)
+    
+    # Retourner le résultat
+    return bool(prediction[0])
+
+def entrainer_et_sauvegarder_model():
+    """
+    Entraîne le modèle et le sauvegarde dans un fichier pickle.
+    """
+    # Données d'entraînement étendues
+    consignes = [
+        # Biologiques (35)
+        "Analyse de sang pour le cholestérol", "Test de glycémie à jeun", "Dosage des hormones thyroïdiennes",
+        "Bilan urinaire pour une infection", "Hémogramme pour vérifier les globules rouges", 
+        "Recherche de marqueurs tumoraux dans le sang", "Dosage du calcium sanguin", "Analyse de liquide céphalorachidien", 
+        "Test d'hémoglobine glyquée", "Culture d'urine pour identifier une bactérie", "Dosage des électrolytes dans le plasma", 
+        "Analyse du liquide pleural", "Test de dépistage du VIH", "Test d'antigène pour la grippe", "Recherche d'anticorps dans le sang",
+        "Dosage des enzymes hépatiques", "Analyse de sang pour le fer sérique", "Test de dépistage de la syphilis", 
+        "Analyse d'urine pour détecter des protéines", "Recherche de pathogènes dans les selles", "Test sanguin pour mesurer le taux d'albumine",
+        "Test de dépistage du paludisme", "Analyse du liquide synovial", "Bilan rénal pour évaluer la fonction des reins",
+        "Dosage de la troponine cardiaque", "Analyse de la ferritine dans le sang", "Culture de plaie pour identifier une infection",
+        "Dosage de la vitamine D", "Analyse de sang pour le taux de CRP", "Recherche de parasites dans le sang", 
+        "Test sanguin pour mesurer le taux d'acide urique", "Analyse de sang pour le groupe sanguin", 
+        "Test de dépistage des hépatites virales", "Analyse de gaz du sang artériel", "Test de coagulation pour le temps de prothrombine",
+        
+        # Radiologiques (35)
+        "IRM cérébrale pour détecter une tumeur", "Scanner thoracique pour une embolie pulmonaire", "Radiographie des poumons pour une pneumonie",
+        "Échographie abdominale pour une douleur", "IRM lombaire pour une hernie discale", "Radiographie dentaire pour une carie", 
+        "Tomodensitométrie du genou pour une fracture", "Radiographie de la colonne pour une scoliose", "Mammographie pour dépister un cancer du sein", 
+        "Échographie cardiaque pour une anomalie", "IRM du genou pour une lésion ligamentaire", "Scanner abdominopelvien pour une appendicite", 
+        "Arthro-IRM pour une lésion articulaire", "Radiographie de la main pour une fracture", "Échographie pelvienne pour une masse ovarienne",
+        "Radiographie du bassin pour une fracture", "IRM du poignet pour une douleur chronique", "Scanner cérébral pour un AVC", 
+        "Radiographie de l'épaule pour une luxation", "Échographie hépatique pour détecter une stéatose", "Radiographie thoracique pour une douleur",
+        "IRM thoracique pour des anomalies cardiaques", "Scanner des sinus pour une sinusite", "Radiographie des dents pour un implant", 
+        "Échographie transvaginale pour une grossesse", "IRM de la hanche pour une nécrose", "Scanner abdominal pour un kyste rénal", 
+        "Radiographie des vertèbres cervicales pour un traumatisme", "Mammographie de dépistage annuel", "Échographie rénale pour des calculs",
+        "Radiographie pulmonaire pour un cancer suspecté", "IRM orbitale pour une tumeur de l'œil", "Scanner du cœur pour évaluer les coronaires", 
+        "IRM du pied pour détecter une fracture", "Échographie doppler des artères carotides"
+    ]
+    
+    # Labels associés : 1 = biologique, 0 = radiologique
+    labels = [1] * 35 + [0] * 35  # 1 pour biologique, 0 pour radiologique
+    
+    # Vectorisation des données
+    vectorizer = CountVectorizer()
+    X = vectorizer.fit_transform(consignes)
+    
+    # Entraîner le modèle Naive Bayes
+    model = MultinomialNB()
+    model.fit(X, labels)
+    
+    # Sauvegarder le modèle et le vectorizer
+    with open('model_bilan.pkl', 'wb') as model_file:
+        pickle.dump((model, vectorizer), model_file)
+
+# Entraîner le modèle et sauvegarder
+entrainer_et_sauvegarder_model()
+

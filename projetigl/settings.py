@@ -5,13 +5,13 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Secret Key
-SECRET_KEY = '280919'  # Replace this with your actual secret key
+SECRET_KEY = '280919'  # Remplacez ceci par votre clé secrète réelle
 
 # Debug Settings
 DEBUG = True
 
 # Allowed Hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # Changez '*' par un domaine spécifique si nécessaire, ou laissez '*' pour tout accepter
 
 # Installed Apps
 INSTALLED_APPS = [
@@ -22,13 +22,12 @@ INSTALLED_APPS = [
     'corsheaders',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'med',  # Ajouter cette ligne pour ton application 'med'
+    'med',  # Application personnalisée
 ]
-
 
 # Middleware
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # Placez ceci en premier
+    'corsheaders.middleware.CorsMiddleware',  # Cela doit être mis en premier
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -38,18 +37,26 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# CORS Settings
+CORS_ALLOW_ALL_ORIGINS = False  # Mettez False pour restreindre les origines
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:4200',  # URL de votre frontend Angular
+]
+CORS_ALLOW_CREDENTIALS = True  # Permet d'envoyer des cookies avec les requêtes
+
+# CSRF Settings
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:4200',  # Ajoutez l'URL de votre frontend ici
+]
 
 # URL Configuration
-ROOT_URLCONF = 'projetigl.urls'  # Replace 'med' with your project name
+ROOT_URLCONF = 'projetigl.urls'  # Remplacez 'projetigl' par le nom de votre projet
 
 # Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Define your templates directory
+        'DIRS': [BASE_DIR / 'templates'],  # Votre répertoire de templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,25 +70,28 @@ TEMPLATES = [
 ]
 
 # WSGI Application
-  # Replace 'med' with your project name
-WSGI_APPLICATION = 'projetigl.wsgi.application'
+WSGI_APPLICATION = 'projetigl.wsgi.application'  # Remplacez 'projetigl' par le nom de votre projet
 
 # Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bdd',  # Replace with your MySQL database name
-        'USER': 'root',                # Your username
-        'PASSWORD': '280919',          # Your password
-        'HOST': 'localhost',           # Database host
-        'PORT': '3306',                # Default MySQL port
+        'NAME': 'bdd',  # Votre base de données MySQL
+        'USER': 'root',  # Votre nom d'utilisateur
+        'PASSWORD': '280919',  # Votre mot de passe
+        'HOST': 'localhost',  # Hôte de la base de données
+        'PORT': '3306',  # Port MySQL par défaut
     }
 }
 
-
+# Custom User Model
 AUTH_USER_MODEL = 'med.CustomUser'
+
+# Session and Cookie Settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False  # Mettez True lorsque vous utilisez HTTPS en production
+
 # Password Validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -98,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -108,11 +117,12 @@ USE_TZ = True
 
 # Static Files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Define your static files directory
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Votre répertoire de fichiers statiques
 
 # Default Auto Field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Media Files (optional)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'  # Répertoire de fichiers médias
+
