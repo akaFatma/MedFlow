@@ -19,7 +19,7 @@ interface patient {
 }
 @Component({
   selector: 'app-infermier-landing-page',
-  imports: [CommonModule, BienvenuComponentComponent,FormsModule],
+  imports: [CommonModule, BienvenuComponentComponent,FormsModule,ReactiveFormsModule],
   templateUrl: './infermier-landing-page.component.html',
   styleUrl: './infermier-landing-page.component.scss'
 })

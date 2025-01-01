@@ -1,4 +1,4 @@
-<form id="patientCareForm" onsubmit="event.preventDefault(); alert('Form submitted!');">
+<form [formGroup]="patientCareForm" (ngSubmit)="onSubmit()">
     <div class="container">
         <div class="header">
             <img src="../../../assets/Logo.svg" alt="Logo">
@@ -7,26 +7,27 @@
         
         <div class="nss">
             <h2>REDACTION DES SOINS</h2>
-            <input type="text" placeholder="NSS correspondant..." required>
+            <input type="text" formControlName="nss" placeholder="NSS correspondant...">
         </div>
         
         <div class="soins">
             <div class="Etat">
                 <h2>Etat du patient</h2>
-                <textarea required></textarea>
+                <textarea formControlName="etatPatient"></textarea>
             </div>
             
             <div class="Medicaments">
                 <h2>Médicaments prodigués au patient</h2>
-                <textarea required></textarea>
+                <textarea formControlName="medicaments"></textarea>
             </div>
             
             <div class="autres">
                 <h2>Autres</h2>
-                <textarea required></textarea>
+                <textarea formControlName="autres"></textarea>
             </div>
         </div>
-        <div class="but"> <button type="submit">Soumettre</button></div>
-       
+        <div class="but">
+            <button type="submit" [disabled]="!patientCareForm.valid">Soumettre</button>
+        </div>
     </div>
 </form>
