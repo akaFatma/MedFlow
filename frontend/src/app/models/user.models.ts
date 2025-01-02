@@ -17,7 +17,6 @@ export interface user {
       'prenom': string, 
       'specialite': string, 
     }]
-  }, 
-  'antecedants_medicaux': string,
-  'etat': 'ouvert'
+  },
+  'etat': string
 }

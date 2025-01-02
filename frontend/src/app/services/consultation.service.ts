@@ -23,7 +23,7 @@ interface ConsultationData {
   providedIn: 'root'
 })
 export class ConsultationService {
-  private apiUrl = 'http://127.0.0.1:8000/consultation/'; // Change to the actual URL
+  private apiUrl = 'http://127.0.0.1:8000/consultation'; // Change to the actual URL
 
   constructor(private http: HttpClient) {}
 

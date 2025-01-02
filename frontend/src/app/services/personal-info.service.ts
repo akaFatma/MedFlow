@@ -12,7 +12,6 @@ import  { user }  from '../models/user.models';
     constructor(private http: HttpClient) {}
     user: user | undefined;
     getUserInfo(nss : number): Observable<user> {
-      console.log('fouffouuuuu ', nss);
       const params = new HttpParams().set('nss', nss.toString());
       return this.http.get<any>(`${this.baseUrl}`, { params })
     }

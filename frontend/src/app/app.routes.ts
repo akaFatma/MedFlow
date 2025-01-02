@@ -34,10 +34,9 @@ export const routes: Routes = [
     data: { roles: ['Médecin', 'Administratif'] }
   },
   {
-    path : 'consult' ,
+    path : 'new-consultation' ,
     component : NouvelleConsultationComponent,
-    canActivate: [RoleGuard],
-    data: { roles: ['Médecin'] }
+
     },
   { 
     path: 'soins', 
@@ -45,7 +44,7 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ["Infirmier"] }
   },
-   { path: '**', redirectTo: 'login', pathMatch: 'full' }
+   { path: '**', redirectTo: 'new-consultation', pathMatch: 'full' }
   
  ];
 

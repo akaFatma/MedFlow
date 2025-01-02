@@ -2,11 +2,11 @@ POST http://127.0.0.1:8000/auth/signup
 Content-Type: application/json
 
 {
-    "username": "sousou",
+    "username": "adminis",
     "password": "pass123",
     "first_name": "saliha",
     "last_name": "bailly",
-    "role": "Infirmier"
+    "role": "Administratif"
 }
 
 
@@ -29,12 +29,12 @@ Content-Type: application/json
 
 {
     "data": {
-    "nom": "9adiri",
-    "prenom": "za7louj",
+    "nom": "mohammed",
+    "prenom": "khoya",
     "date_naissance": "1998-12-12",
     "telephone": "0607080910",
     "adr": "12 rue de la paix",
-    "nss": "665535535",
+    "nss": "999999999",
     "mutuelle": "jsp wsh m3ntha",
     "nom_personne": "Bailly",
     "prenom_personne": "Thomas",

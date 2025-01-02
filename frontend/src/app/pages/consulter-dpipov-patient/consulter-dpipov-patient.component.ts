@@ -21,7 +21,8 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private patientService: PatientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router : Router
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +53,10 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
     } else {
       console.error('Patient NSS is null');
     }
+  }
+
+  handleNewConsultation(): void {
+    this.router.navigate(['/new-consultation']);
   }
 }
 

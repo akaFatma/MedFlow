@@ -13,7 +13,7 @@
     <div class="consultationHistory">
         <div class="but">
             <h2>HISTORIQUE CONSULTATIONS</h2>
-            <button  *ngIf="isDoctor"  class="nouvelle-consultation" >Nouvelle consultation</button>
+            <button  *ngIf="isDoctor"  class="nouvelle-consultation" (click)="handleNewConsultation()">Nouvelle consultation</button>
         </div>
        
         <app-medical-history></app-medical-history>

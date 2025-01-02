@@ -33,4 +33,4 @@ class DPISerializerGET(serializers.ModelSerializer):
     patient = PatientSerializer()
     class Meta:
         model = DPI
-        fields = ['patient', 'antecedents_medicaux', 'etat']
+        fields = ['patient','etat']

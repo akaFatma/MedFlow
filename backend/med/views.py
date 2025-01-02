@@ -446,3 +446,104 @@ def commencer_consultation(request):
             return JsonResponse({'error': f'Erreur lors du traitement des données: {str(e)}'}, status=400)
 
     return JsonResponse({'error': 'Requête invalide'}, status=400)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pickle
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+def bilan_type_detector(consigne, model=None, vectorizer=None):
+    """
+    Retourne True si le bilan est biologique, False s'il est radiologique.
+    
+    Args:
+        consigne (str): La consigne décrivant le bilan.
+        model (trained model): Modèle entraîné (si déjà chargé)
+        vectorizer (trained vectorizer): Vectorizer entraîné (si déjà chargé)
+    
+    Returns:
+        bool: True pour biologique, False pour radiologique.
+    """
+    # Si le modèle et le vectorizer ne sont pas fournis, on les charge depuis un fichier pickle
+    if model is None or vectorizer is None:
+        with open('model_bilan.pkl', 'rb') as model_file:
+            model, vectorizer = pickle.load(model_file)
+    
+    # Prédire le type de bilan à partir de la consigne
+    X_test = vectorizer.transform([consigne])
+    prediction = model.predict(X_test)
+    
+    # Retourner le résultat
+    return bool(prediction[0])
+
+def entrainer_et_sauvegarder_model():
+    """
+    Entraîne le modèle et le sauvegarde dans un fichier pickle.
+    """
+    # Données d'entraînement étendues
+    consignes = [
+        # Biologiques (35)
+        "Analyse de sang pour le cholestérol", "Test de glycémie à jeun", "Dosage des hormones thyroïdiennes",
+        "Bilan urinaire pour une infection", "Hémogramme pour vérifier les globules rouges", 
+        "Recherche de marqueurs tumoraux dans le sang", "Dosage du calcium sanguin", "Analyse de liquide céphalorachidien", 
+        "Test d'hémoglobine glyquée", "Culture d'urine pour identifier une bactérie", "Dosage des électrolytes dans le plasma", 
+        "Analyse du liquide pleural", "Test de dépistage du VIH", "Test d'antigène pour la grippe", "Recherche d'anticorps dans le sang",
+        "Dosage des enzymes hépatiques", "Analyse de sang pour le fer sérique", "Test de dépistage de la syphilis", 
+        "Analyse d'urine pour détecter des protéines", "Recherche de pathogènes dans les selles", "Test sanguin pour mesurer le taux d'albumine",
+        "Test de dépistage du paludisme", "Analyse du liquide synovial", "Bilan rénal pour évaluer la fonction des reins",
+        "Dosage de la troponine cardiaque", "Analyse de la ferritine dans le sang", "Culture de plaie pour identifier une infection",
+        "Dosage de la vitamine D", "Analyse de sang pour le taux de CRP", "Recherche de parasites dans le sang", 
+        "Test sanguin pour mesurer le taux d'acide urique", "Analyse de sang pour le groupe sanguin", 
+        "Test de dépistage des hépatites virales", "Analyse de gaz du sang artériel", "Test de coagulation pour le temps de prothrombine",
+        
+        # Radiologiques (35)
+        "IRM cérébrale pour détecter une tumeur", "Scanner thoracique pour une embolie pulmonaire", "Radiographie des poumons pour une pneumonie",
+        "Échographie abdominale pour une douleur", "IRM lombaire pour une hernie discale", "Radiographie dentaire pour une carie", 
+        "Tomodensitométrie du genou pour une fracture", "Radiographie de la colonne pour une scoliose", "Mammographie pour dépister un cancer du sein", 
+        "Échographie cardiaque pour une anomalie", "IRM du genou pour une lésion ligamentaire", "Scanner abdominopelvien pour une appendicite", 
+        "Arthro-IRM pour une lésion articulaire", "Radiographie de la main pour une fracture", "Échographie pelvienne pour une masse ovarienne",
+        "Radiographie du bassin pour une fracture", "IRM du poignet pour une douleur chronique", "Scanner cérébral pour un AVC", 
+        "Radiographie de l'épaule pour une luxation", "Échographie hépatique pour détecter une stéatose", "Radiographie thoracique pour une douleur",
+        "IRM thoracique pour des anomalies cardiaques", "Scanner des sinus pour une sinusite", "Radiographie des dents pour un implant", 
+        "Échographie transvaginale pour une grossesse", "IRM de la hanche pour une nécrose", "Scanner abdominal pour un kyste rénal", 
+        "Radiographie des vertèbres cervicales pour un traumatisme", "Mammographie de dépistage annuel", "Échographie rénale pour des calculs",
+        "Radiographie pulmonaire pour un cancer suspecté", "IRM orbitale pour une tumeur de l'œil", "Scanner du cœur pour évaluer les coronaires", 
+        "IRM du pied pour détecter une fracture", "Échographie doppler des artères carotides"
+    ]
+    
+    # Labels associés : 1 = biologique, 0 = radiologique
+    labels = [1] * 35 + [0] * 35  # 1 pour biologique, 0 pour radiologique
+    
+    # Vectorisation des données
+    vectorizer = CountVectorizer()
+    X = vectorizer.fit_transform(consignes)
+    
+    # Entraîner le modèle Naive Bayes
+    model = MultinomialNB()
+    model.fit(X, labels)
+    
+    # Sauvegarder le modèle et le vectorizer
+    with open('model_bilan.pkl', 'wb') as model_file:
+        pickle.dump((model, vectorizer), model_file)
+
+# Entraîner le modèle et sauvegarder
+entrainer_et_sauvegarder_model()
