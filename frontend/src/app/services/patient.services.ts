@@ -21,9 +21,6 @@ export class PatientService {
         );
       }
 
-     
-
-     
     
       getPatientById(id: string): Observable<Patient> {
         return this.http.get<Patient>(`${this.API_URL}/${id}`).pipe(

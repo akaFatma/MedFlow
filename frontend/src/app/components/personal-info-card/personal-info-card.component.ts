@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfoService } from '../../services/personal-info.service';
 import { CommonModule } from '@angular/common';
-
+import { ActivatedRoute } from '@angular/router';
+import {user} from '../../models/user.models'
 
 
 @Component({
@@ -11,36 +12,25 @@ import { CommonModule } from '@angular/common';
   styleUrl: './personal-info-card.component.scss'
 })
 export class PersonalInfoCardComponent implements OnInit {
-  user = {
-    'patient': {
-      'nom': "Doe",
-      'prenom': "John",
-      'nss': "123456789", 
-      'adresse': "123 rue de la rue", 
-      'date_de_naissance':'1985-04-12', 
-      'telephone': "0123456789", 
-      'mutuelle': "MGEN", 
-      'personne_a_contacter': {
-        'nom': "Doe", 
-        'prenom': "Jane", 
-        'telephone': "0123456789"
-      }
-    }, 
-    'antecedants_medicaux': "Asthme",
-    'etat': 'ouvert'
-  }
-
   errorMessage = '';
   decodedQRCode: string = '';
-
-  constructor(private userInfoService: UserInfoService) {}
+  user : any;
+  constructor(
+    private userInfoService: UserInfoService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadUserInfo();
+    this.route.params.subscribe(params => {
+      const nss = params['nss'];
+      if (nss) {
+        this.loadUserInfo(nss);
+      }
+    });
   }
 
-  loadUserInfo(): void {
-    this.userInfoService.getUserInfo().subscribe({
+  loadUserInfo(nss : number): void {
+    this.userInfoService.getUserInfo(nss).subscribe({
       next: (data) => {
         this.user = data;
       },
@@ -50,32 +40,6 @@ export class PersonalInfoCardComponent implements OnInit {
       }
     });
   }
-
-
-  // decodeQRCode(base64String: string): void {
-  //   try {
-  //     const base64Data = base64String.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, '');
-  //     this.decodedQRCode = atob(base64Data);
-  //     this.user.qrCode = `data:image/png;base64,${base64Data}`;
-  //   } catch (error) {
-  //     console.error('Error decoding QR code:', error);
-  //     this.errorMessage = 'Error decoding QR code';
-  //     this.decodedQRCode = '';
-  //     this.user.qrCode = '';
-  //   }
-  // }
-
-  // getQRCodeSrc(): string {
-  //   return this.user.qrCode ? `data:image/png;base64,${this.user.qrCode}` : '';
-  // }
-  
-  // getQRCodeSrc(): string {
-  //   return this.user.qrCode ? `data:image/png;base64,${this.user.qrCode}` : '';
-  // }
-
-
-
-
 
 
 

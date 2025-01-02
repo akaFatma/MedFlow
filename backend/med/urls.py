@@ -6,5 +6,4 @@ urlpatterns = [
     path('patients', views.list_patients, name='list des patients'),
     path('patients/search', views.list_patients_filtered, name='list des patients recherchée'),
     path('patients/nss', views.get_dpi, name='dpi'),
-    #path('patients/qrcode', views.get_dpi_by_qr, name='qr'),
 ]

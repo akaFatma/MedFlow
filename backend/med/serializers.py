@@ -18,7 +18,6 @@ class PatientSerializer(serializers.ModelSerializer):
         fields = ['nom', 'prenom','nss', 'adresse', 'date_de_naissance', 'telephone', 'mutuelle', 'personne_a_contacter']   
 
 
-
 class DPISerializer(serializers.ModelSerializer):
     class Meta:
         model = DPI

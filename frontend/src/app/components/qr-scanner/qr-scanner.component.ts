@@ -51,7 +51,6 @@ export class QrScannerComponent {
       // Handling invalid QR code error
       return this.throwError({ error: 'QR code invalide.', status: 400 });
     }
-
     const nss = qrContent.split(":")[1];  // Extract the NSS from QR code
     console.log('NSS:', nss);
     return this.searchService.searchByNSS(parseInt(nss))
@@ -62,13 +61,9 @@ export class QrScannerComponent {
       const qrCodeData = results[0]?.value;
       console.log('QR code:', qrCodeData);
       if (this.validateQRCode(qrCodeData)) {
-        const nss= parseInt(qrCodeData);     
+        const nss= parseInt(qrCodeData.split(":")[1]); 
         this.action.stop();
-
         this.searchService.searchByNSS(nss).subscribe(
-          
-          
-          
           patient => {
             this.router.navigate(['/dossier-patient',nss]);
           },
