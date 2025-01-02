@@ -43,7 +43,6 @@ class Patient(models.Model):
 class DPI(models.Model): 
     ETATS= [('ouvert', 'ouvert'), ('fermé', 'fermé')]
     etat = models.CharField(default='ouvert', max_length=10, choices = ETATS)
-    antecedents_medicaux = models.TextField(default= 'Aucun antecedent',help_text="Antecedents medicaux du patient")
     patient = models.OneToOneField(
         'Patient', 
         on_delete=models.CASCADE, 
@@ -62,11 +61,6 @@ class Traitement(models.Model):
         max_length=100, 
         help_text="Par exemple : '3 comprimés'"
     )
-    frequence = models.IntegerField(
-        verbose_name="Fréquence (en jours)", 
-        help_text="Par exemple : tous les 3 jours"
-    )
-
     def __str__(self):
         return f"{self.nom} ({self.dose})"
 
@@ -90,6 +84,26 @@ class Ordonnance(models.Model):
         return f"Ordonnance du {self.date_emission} - {self.patient.nom} {self.patient.prenom}"
 
 
+class Examen(models.Model):
+    prescription = models.CharField(
+        max_length=255,
+        help_text="Description de la prescription pour cet examen"
+    )
+    date_emission = models.DateField(
+        "Date d'émission",
+        auto_now_add=False
+    )
+    consultation = models.ForeignKey(
+        'Consultation',
+        on_delete=models.CASCADE,
+        related_name='examens_from_examen',
+        help_text="Consultation à laquelle cet examen est associé"
+    )
+
+    def __str__(self):
+        return f"Examen : {self.prescription} pour la consultation du {self.consultation.date}"
+
+
 class Consultation(models.Model):
     date = models.DateField(
         "Date de consultation",
@@ -108,8 +122,14 @@ class Consultation(models.Model):
         related_name='consultations',
         help_text="Ordonnance liée à cette consultation (optionnelle)"
     )
+    examens = models.ManyToManyField(
+        'Examen',  
+        blank=True,
+        related_name='consultations_from_examens',
+        help_text="Examens associés à cette consultation"
+    )
     dpi = models.ForeignKey(
-        DPI,
+        'DPI',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -122,32 +142,17 @@ class Consultation(models.Model):
         return f"Consultation du {self.date}"
 
 
-
-class Bilan(models.Model):
-    prescription = models.CharField(
-        max_length=255,
-        help_text="Description de la prescription pour cet examen"
-    )
-    date_emission = models.DateField(
-        "Date d'émission",
-        auto_now_add=True
-    )
-    consultation = models.ForeignKey(
-        'Consultation',
-        on_delete=models.CASCADE,
-        related_name='bilans',
-        help_text="Consultation à laquelle ce bilan est associé"
-    )
-
-    def __str__(self):
-        return f"Bilan : {self.prescription} pour la consultation du {self.consultation.date}"
-
-
-class BilanBiologique(Bilan):
+class BilanBiologique(Examen):
     resultat = models.TextField(
         help_text="Résultat du bilan biologique"
     )
 
+
+class BilanRadiologique(Examen):
+    compte_rendu = models.TextField(
+        help_text="Compte-rendu du bilan radiologique"
+    )
+    image_url = models.ImageField(upload_to='radio/', blank=True, null=True)
 
 class Medecin(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='doctor_profile')
@@ -160,17 +165,16 @@ class Medecin(models.Model):
         related_name='medecins'
     )
 
-class test(models.Model):
-    id = models.AutoField(primary_key=True)  # Définir un champ id explicite si nécessaire
-
-
-class BilanRadiologique(Bilan):
-    compte_rendu = models.TextField(
-        help_text="Compte-rendu du bilan radiologique"
+class Soin(models.Model):
+    etat = models.CharField(max_length=100, help_text="État associé")
+    medicament = models.CharField(max_length=255, help_text="Nom du médicament")
+    autre = models.TextField(help_text="Autre information supplémentaire", null=True, blank=True)
+    date = models.DateField(auto_now_add=False, help_text="Date de création du soin")
+    dpi = models.ForeignKey(
+        DPI,
+        on_delete=models.CASCADE,
+        related_name='soins',
+        help_text="DPI auquel ce soin est associé"
     )
-    image_url = models.URLField(
-        max_length=200,
-        null=True,
-        blank=True,
-        help_text="Lien vers l'image radiologique (optionnel)"
-    )
+    def __str__(self):
+        return f"Soin : {self.medicament} ({self.etat}) - {self.date}"
