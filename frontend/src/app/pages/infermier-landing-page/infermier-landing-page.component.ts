@@ -33,17 +33,34 @@ export class InfermierLandingPageComponent  implements OnInit{
   ) {}
 
   ngOnInit() {
+    console.log('Initialisation du composant');
     this.patientCareForm = this.fb.group({
       nss: ['', Validators.required],
       etatPatient: ['', Validators.required],
       medicaments: ['', Validators.required],
       autres: ['']
     });
+    console.log('Formulaire initialisé:', this.patientCareForm);
   }
 
+
+
   onSubmit() {
+    console.log('Soumission du formulaire déclenchée');
     if (this.patientCareForm.valid) {
-      this.infermierService.submitSoins(this.patientCareForm.value)
+      console.log('Soumission du formulaire déclenchée');
+      const formData = this.patientCareForm.getRawValue()
+      console.log('Données du formulaire récupérées:', formData);
+      const formattedData = {
+        nss: formData.nss,
+        etatPatient: formData.etatPatient,
+        medicaments: formData.medicaments,
+        etat: formData.etatPatient,
+        medicament: formData.medicaments,
+        autre: formData.autres,
+      }; 
+      console.log('Données formatées pour l\'API:', formattedData);
+      this.infermierService.submitSoins(formattedData)
         .subscribe({
           next: (response) => {
             console.log('Soins enregistrés', response);

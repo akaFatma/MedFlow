@@ -10,7 +10,7 @@ export type { Soins } from '../models/soins.models'
 })
 export class InfermierService {
 
-  private apiUrl = 'http://localhost:3000/api/soins';
+  private apiUrl = 'http://127.0.0.1:8000/soin/';
 
   constructor(private http: HttpClient) {}
 
