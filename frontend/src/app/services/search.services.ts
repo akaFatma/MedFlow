@@ -9,7 +9,7 @@ import { Patient } from '../models/patient.models';
 })
 export class SearchService {
 
-  private baseUrl = 'https/api'; 
+  private baseUrl = 'https//localhost:42000/test';
 
   constructor(private http: HttpClient) { }
 

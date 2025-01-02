@@ -13,11 +13,13 @@ import { InfermierLandingPageComponent } from './pages/infermier-landing-page/in
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 
 
+
  
 export const routes: Routes = [
     { path: 'login', component: OrdonnanceComponent},
-    { path: '**', redirectTo: 'login', pathMatch: 'full' }
-  //  { path: 'unauthorized', component: UnauthorizedPageComponent },
+    { path : 'test', component : MedecinLandingPageComponent},
+    { path: '**', redirectTo: 'test', pathMatch: 'full' }
+    //  { path: 'unauthorized', component: UnauthorizedPageComponent },
   //  { 
   //    path: 'medecin-landing', 
   //    component: MedecinLandingPageComponent, 
