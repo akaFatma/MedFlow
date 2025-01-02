@@ -1,0 +1,24 @@
+<div class="overlay" *ngIf="isVisible">
+<div class="qr-scanner-container">
+    <img
+      class="close-icon"
+      src="../../../assets/close_24dp_E8EAED.svg"
+      (click)="closePopup.emit()"
+    />
+    <h2 class="title">Scanner le QR code du patient</h2>
+    <div class="scanner-container">
+      <ngx-scanner-qrcode
+        #action="scanner"
+        (event)="onScanSuccess($event)"
+      ></ngx-scanner-qrcode>
+    </div>
+    <button
+      class="start-stop-btn"
+      (click)="action.isStart ? action.stop() : action.start()"
+    >
+      {{ action.isLoading ? 'Loading...' : action.isStart ? 'Stop scanning' : 'Start scanning' }}
+    </button>
+    <div class="button-group">
+    </div>
+  </div>
+</div>

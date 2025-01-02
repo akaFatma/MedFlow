@@ -11,6 +11,7 @@ from .models import Patient, PersonneAContacter, DPI
 from .serializers import PatientSerializer, PatientMinimalSerializer
 from users.decorators import role_required
 from users.serializers import UserSerializer
+from .utils import generate_qrcode
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
@@ -20,6 +21,7 @@ def list_patients(request):
     return Response(serializer.data, status=200)
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def list_patients_filtered(request):
     nss = request.query_params.get('nss', None)
     if nss:
@@ -33,6 +35,7 @@ from .models import DPI
 from .serializers import DPISerializer, DPISerializerGET
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def get_dpi(request):
     try:
         nss = request.query_params.get('nss')
@@ -44,77 +47,6 @@ def get_dpi(request):
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
     
 
-from .utils import generate_qrcode
-from pyzbar.pyzbar import decode
-from PIL import Image
-import base64
-from django.core.files.base import ContentFile
-
-@api_view(['GET'])
-def get_dpi_by_qr(request): 
-    #lors des tests je n'ai pas pu envoyer un fichier par postman (l'image du qr code scanné), 
-    # je l'ai donc encodé, le fichier MedFlow\qrcode_encoder.py fait l'encodage du qr code
-    encoded_qr = request.data.get('qrcode')
-    if not encoded_qr:
-        return Response({"error": "No QR code provided."}, status=400)
-    # Decodage
-    qr_data = base64.b64decode(encoded_qr)
-    temp_file = ContentFile(qr_data, name="temp_qr_code.png")
-   
-    # Ouvrir l'image et décoder le QR code
-    img = Image.open(temp_file)
-    decoded_data = decode(img)
-    if not decoded_data:
-        return Response({"error": "Aucun QR code valide trouvé dans l'image."}, status=400)
-    
-    # Extraire le NSS à partir des données du QR code
-    qr_content = decoded_data[0].data.decode('utf-8')
-    
-    if not qr_content.startswith("nss:"):
-        return Response({"error": "QR code invalide."}, status=400)
-    
-    nss = qr_content.split(":")[1]  # Récupérer le nss à partir du QR code
-    # Rechercher le DPI à partir du nss
-    try:
-        dpi = DPI.objects.get(patient__nss=nss) 
-        serializer = DPISerializerGET(dpi)
-        return Response(serializer.data, status=200)
-    except DPI.DoesNotExist:
-        return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
-
-'''
-@api_view(['GET'])
-def get_dpi_by_qr_code(request):
-    #Methode alternative de la recherche par code qr, à utilisé si possible d'envoyer le fichier entier
-    try:
-        # Récupérer le fichier QR code depuis la requête
-        qr_code_file = request.FILES.get('qr_code')
-        if not qr_code_file:
-            return Response({"error": "Aucun fichier QR code fourni."}, status=400)
-
-        # Ouvrir l'image QR code et décoder son contenu
-        qr_code_image = Image.open(qr_code_file)
-        decoded_data = decode(qr_code_image)
-
-        if not decoded_data:
-            return Response({"error": "Impossible de décoder le QR code."}, status=400)
-
-        # Extraire les données du QR code (par exemple le NSS)
-        qr_content = decoded_data[0].data.decode('utf-8')
-        nss = qr_content  # Assumer que le NSS est directement dans le contenu du QR code
-
-        # Rechercher le DPI associé
-        dpi = DPI.objects.get(patient__nss=nss)
-
-        # Sérialiser et retourner les données
-        serializer = DPISerializerGET(dpi)
-        return Response(serializer.data, status=200)
-
-    except DPI.DoesNotExist:
-        return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
-    except Exception as e:
-        return Response({"error": str(e)}, status=500)
-'''
 @csrf_exempt
 def rediger_ordonnance(request):
     if request.method == 'POST':

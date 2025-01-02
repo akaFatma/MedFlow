@@ -28,6 +28,7 @@ class Patient(models.Model):
     telephone = models.CharField(max_length=15)  
     nss = models.CharField(max_length=15, unique=True)  # Ajout de `unique` pour éviter les doublons
     mutuelle = models.CharField(max_length=100, blank=True, null=True)
+    qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
     personne_a_contacter = models.ForeignKey(
         'PersonneAContacter', 
         on_delete=models.SET_NULL, 

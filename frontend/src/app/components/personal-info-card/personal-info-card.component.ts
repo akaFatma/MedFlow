@@ -24,18 +24,14 @@ export class PersonalInfoCardComponent implements OnInit {
         'nom': "Doe", 
         'prenom': "Jane", 
         'telephone': "0123456789"
-      }, 
-      'medecins': [{
-        'nom': "Amiri", 
-        'prenom': "Sara", 
-        'specialite': "Cardiologue", 
-      }]
+      }
     }, 
     'antecedants_medicaux': "Asthme",
     'etat': 'ouvert'
   }
 
   errorMessage = '';
+  decodedQRCode: string = '';
 
   constructor(private userInfoService: UserInfoService) {}
 
@@ -54,7 +50,33 @@ export class PersonalInfoCardComponent implements OnInit {
       }
     });
   }
-  // getQRCodeSrc(): string {
-  //   return this.user.qr ? `data:image/png;base64,${this.user.qr}` : '';
+
+
+  // decodeQRCode(base64String: string): void {
+  //   try {
+  //     const base64Data = base64String.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, '');
+  //     this.decodedQRCode = atob(base64Data);
+  //     this.user.qrCode = `data:image/png;base64,${base64Data}`;
+  //   } catch (error) {
+  //     console.error('Error decoding QR code:', error);
+  //     this.errorMessage = 'Error decoding QR code';
+  //     this.decodedQRCode = '';
+  //     this.user.qrCode = '';
+  //   }
   // }
+
+  // getQRCodeSrc(): string {
+  //   return this.user.qrCode ? `data:image/png;base64,${this.user.qrCode}` : '';
+  // }
+  
+  // getQRCodeSrc(): string {
+  //   return this.user.qrCode ? `data:image/png;base64,${this.user.qrCode}` : '';
+  // }
+
+
+
+
+
+
+
 }

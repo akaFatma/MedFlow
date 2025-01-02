@@ -9,6 +9,7 @@ import { PatientService } from '../../services/patient.services';
 import { Patient } from '../../models/patient.models';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { QrScannerComponent } from '../../components/qr-scanner/qr-scanner.component';
 
 
 @Component({
@@ -18,7 +19,8 @@ import { Router } from '@angular/router';
     SideBarComponent,
     BienvenuComponentComponent,
     SearchBarComponent,
-    MedecinTableComponent
+    MedecinTableComponent,
+    QrScannerComponent
   ],
   templateUrl: './medecin-landing-page.component.html',
   styleUrl: './medecin-landing-page.component.scss'
@@ -27,6 +29,7 @@ export class MedecinLandingPageComponent implements OnInit {
   
   results: Patient[] = [];
   userName: string = '';
+  isQrScannerVisible: boolean = false; 
  
   constructor(
     private searchService: SearchService,
@@ -70,9 +73,11 @@ export class MedecinLandingPageComponent implements OnInit {
 
 }
 
-onScanQR(){
-  //idk
-
+onScanQR() {
+  this.isQrScannerVisible = true;
+}
+onCloseScanner() {
+  this.isQrScannerVisible = false;
 }
 
 onConsulter(patient: Patient): void { 
