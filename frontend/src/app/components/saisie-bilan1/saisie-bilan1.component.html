@@ -19,11 +19,14 @@
     <!-- Uploader Image Section -->
     <label class="section-label">Uploader Image</label>
     <div class="uploader-section">
-       
       <div class="upload-input">
-        <input type="file" id="fileUploader" />
-        <i class="fas fa-paperclip"></i>
-
+        <input
+          type="file"
+          id="fileUploader"
+          (change)="onFileSelected($event)"
+          style="display: none;"
+        />
+        <i class="fas fa-paperclip" (click)="triggerFileInput()"></i>
       </div>
     </div>
   
@@ -34,6 +37,6 @@
     </div>
   
     <!-- Confirm Button -->
-    <button type="button" class="confirm-button">Confirmer</button>
+    <button type="button" class="confirm-button" (click)="onConfirm()">Confirmer</button>
   </div>
   
