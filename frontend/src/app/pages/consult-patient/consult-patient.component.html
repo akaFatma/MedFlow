@@ -6,11 +6,21 @@
     </div>
     <div
       class="relative w-full max-w-[8000px] ml-5 px-5 flex items-center justify-between"
-      style="height: 50px; border: 1px solid #d3d3d3; border-radius: 12px; background-color: #fff;"
+      style="
+        height: 50px;
+        border: 1px solid #d3d3d3;
+        border-radius: 12px;
+        background-color: #fff;
+      "
     >
       <div class="flex items-center pl-4" style="gap: 20px">
-        <img src="/profil.png" alt="Key Icon" class="h-8 w-8" style="margin-left: 15px" />
-        <p class="text-sm" style="color: #666666">Bienvenu Mr. </p>
+        <img
+          src="/profil.png"
+          alt="Key Icon"
+          class="h-8 w-8"
+          style="margin-left: 15px"
+        />
+        <p class="text-sm" style="color: #666666">Bienvenue Mr.</p>
       </div>
     </div>
   </div>
@@ -50,15 +60,40 @@
     <!-- Résumé -->
     <div style="color: #707b81; flex: 1; max-width: 100%">
       <p class="text-lg font-semibold">Résumé</p>
-      <div style="height: 1px; background-color: #707b8144; margin-top: 5px; width: 100%;"></div>
-      <div class="bg-transparent" style="margin-top: 20px; height: 200px; border-radius: 12px; background-color: #fff; padding: 10px 20px; overflow: auto;">
-        <p style="color: #707b81; text-align: left; margin: 0">{{ CONSULTATION.data.resume }}</p>
+      <div
+        style="
+          height: 1px;
+          background-color: #707b8144;
+          margin-top: 5px;
+          width: 100%;
+        "
+      ></div>
+      <div
+        class="bg-transparent"
+        style="
+          margin-top: 20px;
+          height: 200px;
+          border-radius: 12px;
+          background-color: #fff;
+          padding: 10px 20px;
+          overflow: auto;
+        "
+      >
+        <p style="color: #707b81; text-align: left; margin: 0">
+          {{ CONSULTATION.data.resume }}
+        </p>
       </div>
     </div>
 
     <!-- Ordonnance -->
     <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
         <p class="text-lg font-semibold">Ordonnance</p>
         <a href="/radio.png" download>
           <img
@@ -75,32 +110,123 @@
           />
         </a>
       </div>
-      <div style="height: 1px; background-color: #707b8144; margin-top: 5px; width: 100%;"></div>
+      <div
+        style="
+          height: 1px;
+          background-color: #707b8144;
+          margin-top: 5px;
+          width: 100%;
+        "
+      ></div>
     </div>
 
     <!-- Bilan Radiologique -->
     <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
-      <p class="text-lg font-semibold">Bilan Radiologique</p>
-      <div style="height: 1px; background-color: #707b8144; margin-top: 5px; width: 100%;"></div>
-      <img src="/radio.png" alt="MedFlow Logo" class="w-1/2" />
-    </div>
+      <p class="text-lg font-semibold">Bilans Radiologique</p>
+      <div
+        style="
+          height: 1px;
+          background-color: #707b8144;
+          margin-top: 5px;
+          width: 100%;
+        "
+      ></div>
+      <div
+        class="consultation-container"
+        style="
+          margin: 20px;
+          padding: 20px;
+          background-color: #f9f9f9;
+          border-radius: 12px;
+        "
+      >
+        <div
+          class="header-grid"
+          style="
+            display: grid;
+            grid-template-columns: 2fr 2fr 2fr;
+            gap: 15px;
+            font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+          "
+        >
+          <div>PRESCRIPTION MEDECIN</div>
+          <div>COMPTE RENDU RADIOLOGUE</div>
+          <div>BILAN RADIOGRAPHIE</div>
+        </div>
 
-    <!-- Compte rendu -->
-    <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
-      <p class="text-lg font-semibold">Compte rendu</p>
-      <div style="height: 1px; background-color: #707b8144; margin-top: 5px; width: 100%;"></div>
-      <div class="bg-transparent" style="margin-top: 20px; height: 200px; border-radius: 12px; background-color: #fff; padding: 10px 20px; overflow: auto;">
-        <p style="color: #707b81; text-align: left; margin: 0">{{ CONSULTATION.data.bilans_biologiques_prescription }}</p>
+        <div
+          class="consultation-row"
+          *ngFor="
+            let bilan of CONSULTATION.data.bilans_radiologiques_prescription;
+            let i = index
+          "
+        >
+          <p>{{ CONSULTATION.data.bilans_radiologiques_prescription[i] }}</p>
+          <p>{{ CONSULTATION.data.bilans_radiologiques_compte_rendu[i] }}</p>
+          <p>{{ CONSULTATION.data.bilans_radiographiques[i] }}</p>
+          <div>
+            <button class="download-button">Radiographie</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Bilan Biologique -->
+
     <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
-      <p class="text-lg font-semibold">Bilan Biologique</p>
-      <div style="height: 1px; background-color: #707b8144; margin-top: 5px; width: 100%;"></div>
-      <div class="bg-transparent" style="margin-top: 20px; height: 200px; border-radius: 12px; background-color: #fff; padding: 10px 20px; overflow: auto;">
-        <div *ngFor="let bilan of CONSULTATION.data.bilans_biologiques_prescription">
-          <p style="color: #707b81; text-align: left; margin: 0">{{ bilan }}</p>
+      <p class="text-lg font-semibold">Bilans Biologique</p>
+      <div
+        style="
+          height: 1px;
+          background-color: #707b8144;
+          margin-top: 5px;
+          width: 100%;
+        "
+      ></div>
+      <div
+        class="consultation-container"
+        style="
+          margin: 20px;
+          padding: 20px;
+          background-color: #f9f9f9;
+          border-radius: 12px;
+        "
+      >
+        <div
+          class="header-grid"
+          style="
+            display: grid;
+            grid-template-columns: 2fr 2fr;
+            gap: 80px;
+            font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+          "
+        >
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            PRESCRIPTION MEDECIN
+          </div>
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            RESULTAS
+          </div>
+        </div>
+
+        <div
+          class="consultation-row"
+          *ngFor="
+            let bilan of CONSULTATION.data.bilans_biologiques_prescription;
+            let i = index
+          "
+        >
+          <p>{{ CONSULTATION.data.bilans_biologiques_prescription[i] }}</p>
+          <p>{{ CONSULTATION.data.bilans_biologiques_resultat[i] }}</p>
         </div>
       </div>
     </div>

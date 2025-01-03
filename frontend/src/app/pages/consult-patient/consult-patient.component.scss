@@ -9,3 +9,105 @@
   margin-right: 70px;
   margin-left: 70px;
 }
+
+/* Centering Table and Container */
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensures full-width spanning */
+  margin: auto; /* Centers the table horizontally */
+}
+
+.consultation-container {
+  padding: 24px; /* Already consistent */
+  margin: 0 auto; /* Centers container */
+  width: 90%;
+}
+
+.header-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr; /* Ensure consistent fractions */
+  gap: 15px;
+  font-weight: bold;
+  padding: 0 16px; /* Reduce side padding */
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.consultation-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr; /* Match header grid */
+  gap: 15px;
+  padding: 8px 16px; /* Match header padding */
+  align-items: center;
+}
+/* Text Content */
+.text-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 8px;
+  color: #707b81;
+}
+
+/* Small Column */
+.small-column {
+  text-align: center;
+}
+
+/* Button Container */
+.button-container {
+  text-align: right;
+}
+
+/* Consult Button */
+.consult-button {
+  background-color: #119ae4;
+  color: white;
+  padding: 6px 24px;
+  border-radius: 9999px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.consult-button:hover {
+  background-color: #027cc0;
+}
+
+/* Download Button */
+.download-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.download-button:hover {
+  background-color: #45a049;
+}
+
+/* Radio Section */
+.radio-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.header-grid.bio {
+  grid-template-columns: 2fr 2fr;
+}
+
+.header-grid,
+.consultation-row {
+  padding: 8px 16px; /* Uniform padding */
+  gap: 16px; /* Equal spacing between items */
+}
