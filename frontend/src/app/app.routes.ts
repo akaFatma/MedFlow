@@ -48,7 +48,7 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ["Infirmier"] }
   },
-   { path: '**', redirectTo: 'HomePage', pathMatch: 'full' }
+   { path: '**', redirectTo: 'login', pathMatch: 'full' }
   
  ];
 
