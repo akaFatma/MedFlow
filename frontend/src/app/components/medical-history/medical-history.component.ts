@@ -41,22 +41,6 @@ export class MedicalHistoryComponent implements OnInit {
     });
   }
   onConsult(id: number): void {
-    this.router.navigate(['/consultation']);
-    this.consultationPatientService.submitData(id).subscribe(
-      (response) => {
-        console.log('Data received:', response);
-        ;
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
+    this.router.navigate(['/consult-patient'], { queryParams: { id } });
   }
 }
-
-
-
-
-
-
-

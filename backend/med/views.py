@@ -51,7 +51,7 @@ def get_dpi(request):
         nss = request.query_params.get('nss')
         dpi = DPI.objects.get(patient__nss=nss) 
         serializer = DPISerializerGET(dpi)
-        print(serializer.data)
+      #  print(serializer.data)
         return Response(serializer.data, status=200)
     except DPI.DoesNotExist:
         return Response({"error": "Aucun DPI trouvé pour ce NSS."}, status=404)
@@ -489,7 +489,7 @@ def MedecinView(request):
 def get_patient_consultations(request):
     try:
         nss = request.query_params.get('nss')
-        print('nssssss : ',nss)
+    #    print('nssssss : ',nss)
         # Retrieve the DPI associated with the given NSS
         dpi = DPI.objects.get(patient__nss=nss)
 
@@ -499,7 +499,7 @@ def get_patient_consultations(request):
         # Serialize the consultations
         serializer = ConsultationMinimalSerializer(consultations, many=True)
 
-        print(serializer.data)
+   #     print(serializer.data)
         # Return the serialized consultations
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -534,7 +534,7 @@ def get_user_info(request):
         'date': consultation.date,
         'resume': consultation.resume,
         'medecin': consultation.medecin.user.last_name if consultation.medecin else None, 
-        'ordonnance': consultation.ordonnance if consultation.ordonnance else None,
+        #'ordonnance': consultation.ordonnance if consultation.ordonnance else None,
         'bilans_biologiques_prescription': [
             bilan.prescription for bilan in consultation.BilanBiologique.all()
         ] if hasattr(consultation, 'BilanBiologique') else [],
@@ -551,6 +551,7 @@ def get_user_info(request):
             bilan.url_image for bilan in consultation.BilanRadiologique.all()
         ] if hasattr(consultation, 'BilanRadiologique') else [],
     }
+    print(data)
 
     # Étape 4 : Retourner la réponse au client
     return Response({'data': data}, status=200)

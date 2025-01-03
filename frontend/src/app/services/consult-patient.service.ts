@@ -11,7 +11,8 @@ export class ConsultationPatientService {
 
   constructor(private http: HttpClient) {}
 
-  submitData(id: number): Observable<any> {
+  getConsultation(id: number): Observable<any> {
     return this.http.post(this.apiUrl, id);
   }
 }
+
