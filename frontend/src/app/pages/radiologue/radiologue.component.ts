@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { HeaderComponent } from '../../components/header/header.component';
-import { LaboTableComponent } from '../../components/labo-table/labo-table.component';
+import { LaboTable2Component } from '../../components/labo-table2/labo-table2.component'; // Updated to labo-table2
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-radiologue',
-  imports: [SidebarComponent, HeaderComponent, LaboTableComponent],  // Add components here
+  imports: [SidebarComponent, HeaderComponent, LaboTable2Component], // Updated to labo-table2
   templateUrl: './radiologue.component.html',
-  styleUrls: ['./radiologue.component.scss']  // Corrected from styleUrl to styleUrls
+  styleUrls: ['./radiologue.component.scss']
 })
 export class RadiologueComponent {
-  // Your component logic here
-}
 
+}
