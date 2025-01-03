@@ -28,7 +28,17 @@
     <div>
       <button
         class="text-white px-8 py-2"
-        style="background-color: #027cc0; border-radius: 12px; height: 35px; width: 280px;"
+        style="
+          background-color: #027cc0;
+          border-radius: 12px;
+          height: 35px;
+          width: 280px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+        "
+        onmouseover="this.style.backgroundColor='#0263a0'"
+        onmouseout="this.style.backgroundColor='#027cc0'"
+        onclick="alert('Certificate requested')"
       >
         Demander Certificat
       </button>
@@ -50,7 +60,20 @@
     <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <p class="text-lg font-semibold">Ordonnance</p>
-        <img src="/download.svg" alt="Icon" style="width: 30px; height: 30px" />
+        <a href="/radio.png" download>
+          <img
+            src="/download.svg"
+            alt="Icon"
+            style="
+              width: 30px;
+              height: 30px;
+              cursor: pointer;
+              transition: transform 0.2s;
+            "
+            onmouseover="this.style.transform='scale(1.1)'"
+            onmouseout="this.style.transform='scale(1)'"
+          />
+        </a>
       </div>
       <div style="height: 1px; background-color: #707b8144; margin-top: 5px; width: 100%;"></div>
     </div>
