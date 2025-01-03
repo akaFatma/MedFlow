@@ -9,10 +9,10 @@
 
 <div *ngFor="let consultation of consultations" class="consultation-row">
 <div>{{ consultation.date }}</div>
-<div>{{ consultation.doctor}}</div>
-<div>{{ consultation.specialty }}</div>
+<div>Dr. {{ consultation.medecin_last_name}}</div>
+<div>{{ consultation.medecin_specialite }}</div>
 <div class="button-container">
-<button class="consult-button">
+<button class="consult-button" (click)="onConsult(consultation.id)">
  Consulter
 </button>
 </div>

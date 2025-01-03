@@ -16,6 +16,6 @@
             <button  *ngIf="isDoctor"  class="nouvelle-consultation" (click)="handleNewConsultation()">Nouvelle consultation</button>
         </div>
        
-        <app-medical-history></app-medical-history>
+        <app-medical-history [nss]="patientNSS"></app-medical-history>
     </div>
 </div>

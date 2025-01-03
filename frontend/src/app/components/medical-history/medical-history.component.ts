@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ConsultationHistoryService } from '../../services/consultation-history';
 import { Injectable } from '@angular/core';
 import { Consultation } from '../../models/consultation.models';
+import { ConsultationPatientService} from '../../services/consult-patient.service';
 
 @Component({
   selector: 'app-medical-history',
@@ -12,20 +14,25 @@ import { Consultation } from '../../models/consultation.models';
   styleUrl: './medical-history.component.scss'
 })
 
-/*export class MedicalHistoryComponent implements OnInit {
+export class MedicalHistoryComponent implements OnInit {
   consultations: Consultation[] = [];
   errorMessage: string = '';
 
-  constructor(private consultationService: ConsultationHistoryService) {}
+  @Input() nss: any;
+  constructor(private consultationService: ConsultationHistoryService, private router: Router, 
+    private consultationPatientService: ConsultationPatientService
+  ) {}
 
   ngOnInit(): void {
     this.loadConsultations();
   }
 
   loadConsultations(): void {
-    this.consultationService.getConsultationHistory().subscribe({
+    this.consultationService.getConsultationHistory(this.nss).subscribe({
       next: (data) => {
         this.consultations = data;
+        console.log('Consultations:', this.consultations);
+        console.log('Data :', data);
       },
       error: (error) => {
         this.errorMessage = error.message;
@@ -33,14 +40,18 @@ import { Consultation } from '../../models/consultation.models';
       }
     });
   }
-}*/
-
-export class MedicalHistoryComponent {
-  consultations: Consultation[] = [
-    { date: '2024-12-20', doctor: 'Dr. TOUAT', specialty: 'Cardiologue' },
-    { date: '2024-12-10', doctor: 'Dr. SENNANE', specialty: 'Dermatologue' },
-    { date: '2024-12-05', doctor: 'Dr. FELKIR', specialty: 'Neurologue' }
-  ];
+  onConsult(id: number): void {
+    this.router.navigate(['/consultation']);
+    this.consultationPatientService.submitData(id).subscribe(
+      (response) => {
+        console.log('Data received:', response);
+        ;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
 }
 
 

@@ -10,15 +10,6 @@ class PersonneAContacter(models.Model):
         return f"{self.nom} {self.prenom}"
 
  
-class Etablissement(models.Model):
-    nom = models.CharField(max_length=100)
-    adresse = models.TextField()
-    telephone = models.CharField(max_length=15)
-
-    def __str__(self):
-        return f"{self.nom} - {self.adresse}"
-
-
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='patient_profile')
     nom = models.CharField(max_length=100)
@@ -137,7 +128,13 @@ class Consultation(models.Model):
         related_name='consultations',
         help_text="DPI associé à cette consultation"
     )
-
+    medecin = models.ForeignKey(
+        'Medecin',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='consultations'
+    )
     def __str__(self):
         return f"Consultation du {self.date}"
 
@@ -157,13 +154,7 @@ class BilanRadiologique(Examen):
 class Medecin(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='doctor_profile')
     specialite = models.CharField(max_length=100)
-    etablissement = models.ForeignKey(
-        'Etablissement',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='medecins'
-    )
+
 
 class Soin(models.Model):
     etat = models.CharField(max_length=100, help_text="État associé")

@@ -22,7 +22,7 @@ import { ResumeComponent } from '../../components/resume/resume.component';
 })
 export class NouvelleConsultationComponent {
   consultationForm: FormGroup;
- 
+
 
 constructor(private fb: FormBuilder, private consultationService: ConsultationService, private route: ActivatedRoute) {
   console.log('Constructeur exécuté');  // Affiche un message lorsque le constructeur est appelé
@@ -77,7 +77,9 @@ constructor(private fb: FormBuilder, private consultationService: ConsultationSe
           dose: medication.dose,  // Dose du médicament
           consommation: medication.instructions  // Instructions de consommation, que vous appelez 'consommation' dans le backend
         })),
-        examens: formData.bilan  // Le tableau des examens
+        examens: formData.bilan,  // Le tableau des examens
+        username : localStorage.getItem('user_name') || 'medecin'  // Le nom d'utilisateur du médecin,
+
       };
       console.log('donnees formatees:', formattedData);
       this.consultationService.submitData(formattedData).subscribe({

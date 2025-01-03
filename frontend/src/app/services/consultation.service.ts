@@ -17,6 +17,7 @@ interface ConsultationData {
   };
   bilan: string[];
   resume: string;
+  username: string;
 }
 
 @Injectable({

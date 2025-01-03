@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-consulter-dpipov-patient',
+  template: `
+  <app-medical-history [nss]="patientNSS"></app-medical-history>
+`,
   imports: [CommonModule, MedicalHistoryComponent, PersonalInfoCardComponent, BienvenuComponentComponent],
   templateUrl: './consulter-dpipov-patient.component.html',
   styleUrls: ['./consulter-dpipov-patient.component.scss']

@@ -11,6 +11,8 @@ import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nou
 import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
 import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
+import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
+
  
 export const routes: Routes = [
    { path: 'login', component: LoginPageComponent },
@@ -45,6 +47,12 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ["Infirmier"] }
   },
+   { path: 'consult-patient', 
+    component: ConsultPatientComponent, 
+    canActivate: [RoleGuard],
+    data: { roles: ['Médecin', 'Patient'] }
+    },
+  
    { path: '**', redirectTo: 'login', pathMatch: 'full' }
   
  ];

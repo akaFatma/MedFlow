@@ -16,11 +16,13 @@ from .models import (
     Soin,
     Examen,
     Traitement   )
-from .serializers import PatientSerializer, PatientMinimalSerializer, SoinSerializer
+from .serializers import PatientSerializer, PatientMinimalSerializer, SoinSerializer, ConsultationMinimalSerializer
 from users.decorators import role_required
 from users.serializers import UserSerializer
 from .utils import generate_qrcode
 from django.utils.timezone import now
+from rest_framework.exceptions import NotFound
+from rest_framework import status
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 def list_patients(request):
@@ -351,9 +353,19 @@ def commencer_consultation(request):
             except DPI.DoesNotExist:
                 return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
 
+            username = body.get('username')
+            try:
+                user = CustomUser.objects.get(username=username)
+                medecin = Medecin.objects.get(user=user)
+            except CustomUser.DoesNotExist:
+                raise NotFound("User with this username does not exist.")
+            except Medecin.DoesNotExist:
+                raise NotFound("No Medecin profile found for this user.")
+            print('medecinnnnn :  ',medecin)
             # Création de la consultation
             consultation = Consultation.objects.create(
                 dpi=dpi,
+                medecin=medecin,
                 resume="",  
                 ordonnance=None,
                 date=now()  
@@ -473,12 +485,75 @@ def MedecinView(request):
     })
 
 
+@api_view(['GET'])
+def get_patient_consultations(request):
+    try:
+        nss = request.query_params.get('nss')
+        print('nssssss : ',nss)
+        # Retrieve the DPI associated with the given NSS
+        dpi = DPI.objects.get(patient__nss=nss)
 
+        # Get all consultations for the retrieved DPI
+        consultations = Consultation.objects.filter(dpi=dpi)
 
+        # Serialize the consultations
+        serializer = ConsultationMinimalSerializer(consultations, many=True)
 
+        print(serializer.data)
+        # Return the serialized consultations
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
+    except DPI.DoesNotExist:
+        return Response({'error': 'No DPI found for the given NSS'}, status=status.HTTP_404_NOT_FOUND)
 
+    except Exception as e:
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@csrf_exempt
+@api_view(['POST'])  # Attends une requête POST avec l'ID de la consultation dans le corps  # Assure que seul un utilisateur authentifié peut appeler cette fonction
+def get_user_info(request):
+    # Étape 1 : Charger et valider le corps de la requête
+    try:
+
+        body = json.loads(request.body) 
+        consultation_id = body # Extraire l'ID
+        if not consultation_id:
+            return Response({'error': 'ID de consultation non fourni.'}, status=400)
+    except json.JSONDecodeError:
+        return Response({'error': 'Format JSON invalide.'}, status=400)
+
+    # Étape 2 : Récupérer la consultation correspondante
+    try:
+        consultation = Consultation.objects.get(id=consultation_id)
+    except Consultation.DoesNotExist:
+        return Response({'error': 'Aucune consultation trouvée pour cet ID.'}, status=404)
+    
+    # Étape 3 : Construire la réponse
+    data = {
+        'id': consultation.id,
+        'date': consultation.date,
+        'resume': consultation.resume,
+        'medecin': consultation.medecin.user.last_name if consultation.medecin else None, 
+        'ordonnance': consultation.ordonnance if consultation.ordonnance else None,
+        'bilans_biologiques_prescription': [
+            bilan.prescription for bilan in consultation.BilanBiologique.all()
+        ] if hasattr(consultation, 'BilanBiologique') else [],
+        'bilans_radiologiques_prescription': [
+            bilan.prescription for bilan in consultation.BilanRadiologique.all()
+        ] if hasattr(consultation, 'BilanRadiologique') else [],
+        'bilans_biologiques_resultat': [
+            bilan.resultat for bilan in consultation.BilanBiologique.all()
+        ] if hasattr(consultation, 'BilanBiologique') else [],
+        'bilans_radiologiques_compte_rendu': [
+            bilan.compte_rendu for bilan in consultation.BilanRadiologique.all()
+        ] if hasattr(consultation, 'BilanRadiologique') else [],
+        'bilans_radiologiques_url_image': [
+            bilan.url_image for bilan in consultation.BilanRadiologique.all()
+        ] if hasattr(consultation, 'BilanRadiologique') else [],
+    }
+
+    # Étape 4 : Retourner la réponse au client
+    return Response({'data': data}, status=200)
 
 
 

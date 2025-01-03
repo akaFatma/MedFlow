@@ -8,12 +8,12 @@ import { Consultation } from '../models/consultation.models';
   providedIn: 'root'
 })
 export class ConsultationHistoryService {
-  private readonly API_URL = 'http://localhost:3000/consultationHistory';
+  private readonly API_URL = 'http://localhost:8000/consultationHistory';
   
   constructor(private http: HttpClient) {}
 
-  getConsultationHistory(): Observable<Consultation[]> {
-    return this.http.get<Consultation[]>(this.API_URL).pipe(
+  getConsultationHistory(nss : number): Observable<Consultation[]> {
+    return this.http.get<Consultation[]>(`${this.API_URL}?nss=${nss}`).pipe(
       catchError(this.handleError)
     );
   }
