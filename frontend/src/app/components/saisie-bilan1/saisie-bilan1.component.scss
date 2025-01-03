@@ -1,0 +1,141 @@
+$primary-color: #027CC0;
+$secondary-color: #707B81;
+$light-gray: #F6F8FD;
+$border-radius: 18px;
+$line-color: #E6EFF5;
+$font-family: "Inter", sans-serif;
+
+.bilan-biologique-container {
+    background-color: #f6f8fd;
+    font-family: $font-family;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 5%;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #666666;
+    }
+  
+    .prescription-section {
+      background-color: #fff;
+      border-radius: $border-radius;
+      margin-bottom: 20px;
+      padding: 4%;
+  
+      h3 {
+        font-size: 1.2rem;
+        color: $secondary-color;
+        margin-bottom: 15px;
+      }
+  
+      .text-group {
+        margin-bottom: 15px;
+  
+        label {
+          font-weight: 500;
+          color: #000000;
+          margin-bottom: 5px;
+        }
+  
+        .description-text {
+          color: $secondary-color;
+          font-weight: 500;
+          line-height: 1.5;
+          border-bottom: 1px solid $line-color;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  
+    .section-label {
+      font-weight: 500;
+      color: $secondary-color;
+      margin-bottom: 10px;
+      display: block; // Ensures it’s treated as a block-level element
+    }
+  
+    .uploader-section {
+      margin-top: 5px; // Adjust spacing between label and uploader section
+      background-color: #fff;
+      border-radius: $border-radius;
+      padding: 2%; // Reduce padding for a smaller section
+      display: flex;
+      flex-direction: column;
+      min-height: 50px; // Ensure the uploader section has a consistent minimum height
+    margin-bottom: 10px;
+      .upload-input {
+        margin-bottom: 10px;
+        border-radius: $border-radius;
+        padding: 2%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 40px;
+  
+        input[type="file"] {
+          display: none; // Hide the file input
+        }
+  
+        i {
+          font-size: 1.2rem;
+          color: $secondary-color;
+          cursor: pointer;
+          margin-left: auto;
+          line-height: 40px;
+        }
+      }
+    }
+  
+    .form-group {
+      margin-bottom: 10px;
+  
+      label {
+        font-weight: 500;
+        color: $secondary-color;
+        display: block;
+        margin-bottom: 10px;
+        border-bottom: 1px solid $line-color;
+        padding-bottom: 5px;
+      }
+  
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: $border-radius;
+        border: 1px solid $line-color;
+        resize: none;
+        font-family: $font-family;
+        font-size: 1rem;
+        color: $secondary-color;
+  
+        &:focus {
+          outline: none;
+          border: 1px solid $primary-color;
+        }
+      }
+    }
+  
+    .confirm-button {
+      width: auto;
+      padding: 10px 20px;
+      background-color: $primary-color;
+      color: #fff;
+      border: none;
+      border-radius: $border-radius;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      float: right;
+      margin-top: 2px;
+  
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+  

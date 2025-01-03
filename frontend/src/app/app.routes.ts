@@ -11,10 +11,14 @@ import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nou
 import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
 import { AddDPIComponent } from './pages/add-dpi/add-dpi.component';
-import { LaborantinComponent } from './pages/laborantin/laborantin.component';  // Import Laborantin component
+import { LaborantinComponent } from './pages/laborantin/laborantin.component'; // Import Laborantin component
 import { SaisieBilanComponent } from './components/saisie-bilan/saisie-bilan.component';
+import { RadiologueComponent } from './pages/radiologue/radiologue.component';  // Import Radiologue component
+import { SaisieBilan1Component } from './components/saisie-bilan1/saisie-bilan1.component';
+
 export const routes: Routes = [
-  { path: '', redirectTo: 'laborantin', pathMatch: 'full' },  // Redirect root path to Laborantin
+
+  { path: 'saisie-bilan', component: SaisieBilan1Component },
   { path: 'login', component: LoginPageComponent },
   { path: 'unauthorized', component: UnauthorizedPageComponent },
   {
@@ -29,10 +33,12 @@ export const routes: Routes = [
   },
   { path: 'add-dpi', component: AddDPIComponent, canActivate: [RoleGuard], data: { roles: ['Médecin', 'Administratif'] } },
   { path: 'soins', component: InfermierLandingPageComponent, canActivate: [RoleGuard], data: { roles: ['Infirmier'] } },
-  
+
   // Laborantin route
   { path: 'laborantin', component: LaborantinComponent, data: { role: 'Laborantin' } },
   { path: 'saisie-bilan', component: SaisieBilanComponent }, // Add this route
+  { path: 'radiologue', component: RadiologueComponent },  // Add the route for RadiologueComponent
+  
   // Redirect all invalid paths to Laborantin
-  { path: '**', redirectTo: 'laborantin', pathMatch: 'full' },
+  { path: '**', redirectTo: 'radiologue', pathMatch: 'full' },
 ];
