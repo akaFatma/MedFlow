@@ -1,0 +1,104 @@
+/* Resetting basic styles */
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Container styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6F8FD;
+    margin: 0;
+    height: 100vh; /* Full height for the container */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Header styling */
+header {
+    color: white;
+    text-align: center;
+    padding: 40px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-image: url('../../../assets/encounters.avif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; /* Cover for full screen */
+    animation: moveUp 30s linear infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height for the header */
+}
+
+header img {
+    width: 200px;
+}
+
+@keyframes moveUp {
+    0% {
+        background-position: center bottom;
+    }
+    100% {
+        background-position: center top;
+    }
+}
+
+#logo {
+    max-width: 150px;
+}
+
+h1 {
+    font-size: 48px; /* Larger font size */
+    margin-bottom: 20px; /* Space between title and subtitle */
+}
+
+p {
+    font-size: 24px; /* Larger font size for subtitle */
+    margin-bottom: 30px; /* Space before the button */
+}
+
+/* Footer styling */
+footer {
+    margin-top: 20px;
+}
+
+#cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #027CC0;
+    cursor: pointer;
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#cta-button:hover {
+    background-color: #005f8f;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    #cta-button {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+}

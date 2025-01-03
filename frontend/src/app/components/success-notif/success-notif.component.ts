@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Input } from '@angular/core';
 
 interface Alert {
   title: string;
@@ -9,10 +10,14 @@ interface Alert {
 @Component({
   selector: 'app-success-notif',
   imports: [],
+  standalone : true,
   templateUrl: './success-notif.component.html',
   styleUrl: './success-notif.component.scss'
 })
 export class SuccessNotifComponent {
+  @Input() isVisible: boolean = false;
+   @Input() title: string = '';         // Bindable input for the title
+  @Input() description: string = ''; 
 
   alert: Alert | null = null;
 
@@ -27,6 +32,7 @@ export class SuccessNotifComponent {
       this.hideAlert();
     }, 5000);
   }
+ 
   hideAlert() {
     this.alert = null;
   }

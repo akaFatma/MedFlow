@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { BienvenuComponentComponent } from "../../components/bienvenu-component/bienvenu-component.component";
+import { AuthService } from '../../services/auth.service';
+import { OnInit } from '@angular/core';
+import { SuccessNotifComponent } from '../../components/success-notif/success-notif.component';
 
 @Component({
   selector: 'app-add-dpi',
   templateUrl: './add-dpi.component.html',
   styleUrls: ['./add-dpi.component.scss'],
   standalone: true,
-  imports: [CommonModule, SidebarComponent, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, BienvenuComponentComponent,SuccessNotifComponent],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -21,12 +24,16 @@ import { trigger, style, animate, transition } from '@angular/animations';
     ]),
   ],
 })
-export class AddDPIComponent {
+export class AddDPIComponent implements OnInit {
+  userName: string = '';
   patientForm: FormGroup;
   currentStep: number = 1;
   isSuccessPopupVisible: boolean = false;
+  successTitle: string = ''; // Title for success popup
+  successDescription: string = ''; // Description for success popup
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+ 
+  constructor(private fb: FormBuilder, private http: HttpClient , private authService : AuthService ) {
     // Initialisation du formulaire avec les champs requis
     this.patientForm = this.fb.group({
       step1: this.fb.group({
@@ -44,6 +51,9 @@ export class AddDPIComponent {
         telephone_personne: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       }),
     });
+  }
+  ngOnInit(): void {
+    this.userName = this.authService.getUserName();
   }
 
   // Récupère toutes les données du formulaire
@@ -98,7 +108,9 @@ export class AddDPIComponent {
   // Soumet le formulaire et envoie les données au backend
   onValidate(): void {
     if (this.patientForm.valid) {
-      this.sendDataToBackend(); // Envoi final des données au backend
+     this.sendDataToBackend(); // Envoi final des données au backend
+      this.successTitle = 'DPI créé avec succès';
+      this.successDescription = 'Le dossier patient a été enregistré';
       this.isSuccessPopupVisible = true;
       setTimeout(() => {
         this.isSuccessPopupVisible = false;
