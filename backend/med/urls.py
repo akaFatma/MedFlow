@@ -11,4 +11,5 @@ urlpatterns = [
     path('medecin', views.MedecinView, name='medecin'), 
     path('consultationHistory', views.get_patient_consultations, name='liste des consultations'),
     path('consultationContent', views.get_user_info, name='liste des consultations'),
+    path('getnss', views.get_nss_info, name='getnss'),
 ]

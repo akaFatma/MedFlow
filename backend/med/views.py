@@ -422,6 +422,7 @@ def commencer_consultation(request):
                         is_biologique = bilan_type_detector(consigne)
                         if is_biologique:
                             bilan_bio = BilanBiologique.objects.create(
+                                idc = consultation.id,
                                 prescription=consigne,
                                 consultation=consultation,
                                 date_emission=now() ,
@@ -429,6 +430,7 @@ def commencer_consultation(request):
                             )
                         else:
                             bilan_radio = BilanRadiologique.objects.create(
+                                idc = consultation.id,
                                 prescription=consigne,
                                 consultation=consultation,
                                 date_emission=now() ,
@@ -529,18 +531,24 @@ def get_user_info(request):
         return Response({'error': 'Aucune consultation trouvée pour cet ID.'}, status=404)
     
     # Étape 3 : Construire la réponse
+    # Récupérer plusieurs bilans biologiques liés à une consultation
+    bilansbiologiques = BilanBiologique.objects.filter(idc=consultation.id)
+
+    # Récupérer plusieurs bilans radiologiques liés à une consultation
+    bilansradiologiques = BilanRadiologique.objects.filter(idc=consultation.id) 
+
     data = {
         'id': consultation.id,
         'date': consultation.date,
         'resume': consultation.resume,
-        'medecin': consultation.medecin.user.last_name if consultation.medecin else None, 
+        'medecin': consultation.medecin.user.last_name if consultation.medecin else None,
         #'ordonnance': consultation.ordonnance if consultation.ordonnance else None,
         'bilans_biologiques_prescription': [
-            bilan.prescription for bilan in consultation.BilanBiologique.all()
-        ] if hasattr(consultation, 'BilanBiologique') else [],
+            bilan.prescription for bilan in bilansbiologiques
+        ] if bilansbiologiques else [],
         'bilans_radiologiques_prescription': [
-            bilan.prescription for bilan in consultation.BilanRadiologique.all()
-        ] if hasattr(consultation, 'BilanRadiologique') else [],
+            bilan.prescription for bilan in bilansradiologiques
+        ] if bilansradiologiques else [],
         'bilans_biologiques_resultat': [
             bilan.resultat for bilan in consultation.BilanBiologique.all()
         ] if hasattr(consultation, 'BilanBiologique') else [],
@@ -560,7 +568,24 @@ def get_user_info(request):
 
 
 
+###############################################token shit####################################################################
 
+@api_view(['GET'])
+@csrf_exempt  # Assure que l'utilisateur est authentifié
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+def get_nss_info(request):
+    print(request)
+
+    userr = request.GET.get('username') 
+    if not userr:
+        return Response({'error': 'Username is required'}, status=status.HTTP_400_BAD_REQUEST )#the token will be sent m l front, a travers lui on recupere l user 
+    print(userr)
+    user = CustomUser.objects.get(username = userr)
+    patient = Patient.objects.get(user=user) # njbdo l patient tae l user
+    print(patient)
+    nss=patient.nss
+    print(nss)
+    return Response({'nss': nss}) # hna nbeato el reponse 
 
 
 
@@ -646,3 +671,8 @@ def entrainer_et_sauvegarder_model():
 
 # Entraîner le modèle et sauvegarder
 entrainer_et_sauvegarder_model()
+
+
+
+
+
