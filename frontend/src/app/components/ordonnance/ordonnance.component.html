@@ -3,10 +3,8 @@
   <div class="Ordonnance" [formGroup]="ordonnanceForm">
     <div class="header">
       <div class="hospitalInfo">
-        <p class="centre-hospitalier">CENTRE HOSPITALIER UNIVERSITAIRE</p>
-        <p>Service de cardiologie</p>
-        <p>Dr. AISSAT Rabah</p>
-        <p>Médecin spécialiste en cardiologie</p>
+        <p>Dr. {{ medecin.first_name }} {{ medecin.last_name }}</p>
+        <p>Médecin {{ medecin.specialite }}</p>
       </div>
       <div class="patientInfo">
         <p>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ConsultationService } from '../../services/consultation.service';
 import { BilanComponent } from '../../components/bilan/bilan.component';
 import { OrdonnanceComponent } from '../../components/ordonnance/ordonnance.component';
@@ -23,7 +24,7 @@ export class NouvelleConsultationComponent {
   consultationForm: FormGroup;
  
 
-constructor(private fb: FormBuilder, private consultationService: ConsultationService) {
+constructor(private fb: FormBuilder, private consultationService: ConsultationService, private route: ActivatedRoute) {
   console.log('Constructeur exécuté');  // Affiche un message lorsque le constructeur est appelé
 
   // Crée le formulaire réactif
@@ -43,7 +44,20 @@ constructor(private fb: FormBuilder, private consultationService: ConsultationSe
   // Log l'état du formulaire après sa création
   console.log('Formulaire initialisé:', this.consultationForm);
 }
-
+  ngOnInit() {
+  console.log('zahri ana dayr hakda dayr hakda')
+  this.route.queryParams.subscribe(params => {
+    console.log(params); // Access the data
+    const ordonnanceData = {
+      date:  new Date().toISOString().split('T')[0],
+      lastName: params['nom'] || '',
+      firstName: params['prenom'] || '',
+      nss: params['nss'] || null,
+    };
+    
+    this.consultationForm.get('ordonnance')?.patchValue(ordonnanceData);
+  });
+}
   onSubmit(): void {
     console.log('Form submit event fired');
     if (this.consultationForm.valid) {

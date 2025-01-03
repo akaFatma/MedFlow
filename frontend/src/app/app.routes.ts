@@ -36,7 +36,8 @@ export const routes: Routes = [
   {
     path : 'new-consultation' ,
     component : NouvelleConsultationComponent,
-
+    canActivate: [RoleGuard],
+    data: { roles: ['Médecin'] }
     },
   { 
     path: 'soins', 
@@ -44,7 +45,7 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ["Infirmier"] }
   },
-   { path: '**', redirectTo: 'new-consultation', pathMatch: 'full' }
+   { path: '**', redirectTo: 'login', pathMatch: 'full' }
   
  ];
 

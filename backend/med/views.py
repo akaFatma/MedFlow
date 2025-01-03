@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import (
-    Patient, PersonneAContacter, DPI,
+    Patient, PersonneAContacter, DPI, Medecin,
     Consultation,
     BilanBiologique,  
     BilanRadiologique, 
@@ -16,11 +16,11 @@ from .models import (
     Soin,
     Examen,
     Traitement   )
-from .serializers import PatientSerializer, PatientMinimalSerializer
+from .serializers import PatientSerializer, PatientMinimalSerializer, SoinSerializer
 from users.decorators import role_required
 from users.serializers import UserSerializer
 from .utils import generate_qrcode
-
+from django.utils.timezone import now
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 def list_patients(request):
@@ -293,40 +293,39 @@ def rediger_bilan_biologique(request):
             return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
     return JsonResponse({'error': 'Requête invalide'}, status=400)
 
-@csrf_exempt
+@api_view(['POST'])
 def rediger_soin(request):
-    if request.method == 'POST':
+    try:
+        body = json.loads(request.body)
+        nss = body.get('nss')
+        if not nss:
+            return JsonResponse({'error': 'NSS requis'}, status=400)
         try:
-            body = json.loads(request.body)
-            nss = body.get('nss')
-            if not nss:
-                return JsonResponse({'error': 'NSS requis'}, status=400)
-            try:
-                dpi = DPI.objects.get(patient__nss=nss)
-            except DPI.DoesNotExist:
-                return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
-            etat = body.get('etat')
-            medicament = body.get('medicament')
-            autre = body.get('autre')
-            if not etat or not medicament or not autre:
-                return JsonResponse({'error': 'Etat, médicament ou autre information manquants'}, status=400)
-            soin = Soin.objects.create(
-                etat=etat,
-                medicament=medicament,
-                autre=autre,
-                dpi=dpi,
-                date=now()
-            )
-            dpi.soins.add(soin)  # Associer le soin au DPI
-            return JsonResponse({
-                'message': 'Soin enregistré avec succès',
-                'soin_id': soin.id,
-                'dpi_id': dpi.id
-            })
-        except Exception as e:
-            return JsonResponse({'error': f'Erreur lors du traitement des données: {str(e)}'}, status=400)
-    return JsonResponse({'error': 'Requête invalide'}, status=400)
+            dpi = DPI.objects.get(patient__nss=nss)
+        except DPI.DoesNotExist:
+            return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
+        etat = body.get('etat')
+        medicament = body.get('medicament')
+        autre = body.get('autre')
+        if not etat or not medicament or not autre:
+            return JsonResponse({'error': 'Etat, médicament ou autre information manquants'}, status=400)
 
+        soin = Soin.objects.create(
+            etat=etat,
+            medicament=medicament,
+            autre=autre,
+            dpi=dpi,
+            date=now()
+        )
+        dpi.soins.add(soin)  # Associer le soin au DPI
+        return JsonResponse({
+            'message': 'Soin enregistré avec succès',
+            'soin_id': soin.id,
+            'dpi_id': dpi.id
+            })
+    except Exception as e:
+        return JsonResponse({'error': f'Erreur lors du traitement des données: {str(e)}'}, status=400)
+    return JsonResponse({'error': 'Requête invalide'}, status=400)
 @csrf_exempt
 def commencer_consultation(request):
     if request.method == 'POST':
@@ -362,8 +361,8 @@ def commencer_consultation(request):
             print(f"Consultation créée avec ID: {consultation.id}")
             
             ordonnance = Ordonnance.objects.create(
-                consultation=consultation,  # Associe l'ordonnance à la consultation
-                status='en_attente'
+                dpi = dpi,
+                date_emission = now()
             )
             print(f"Ordonnance créée avec ID: {ordonnance.id}")
 
@@ -404,7 +403,8 @@ def commencer_consultation(request):
                     if consigne:
                         # Création de l'examen associé à la consultation
                         exam = Examen.objects.create(
-                            consigne=consigne,
+                            date_emission = now(),
+                            prescription=consigne,
                             consultation = consultation  # On associe l'examen à la consultation
                         )
                         is_biologique = bilan_type_detector(consigne)
@@ -447,7 +447,30 @@ def commencer_consultation(request):
 
     return JsonResponse({'error': 'Requête invalide'}, status=400)
 
+from users.models import CustomUser
 
+
+@api_view(['GET'])
+def MedecinView(request):
+    print('hna')
+    username = request.GET.get('username') 
+    print(username)
+    if not username:
+        return Response({"error": "Username is required."}, status=400)
+        
+    try:
+        user = CustomUser.objects.get(username=username)
+        medecin = Medecin.objects.get(user=user)
+    except CustomUser.DoesNotExist:
+        raise NotFound("User with this username does not exist.")
+    except Medecin.DoesNotExist:
+        raise NotFound("No Medecin profile found for this user.")
+        
+    return Response({
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "specialite": medecin.specialite
+    })
 
 
 

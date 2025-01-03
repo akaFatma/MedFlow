@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./consulter-dpipov-patient.component.scss']
 })
 export class ConsulterDPIPovPatientComponent implements OnInit {
-  patientData: any;
+
   isDoctor: boolean = false;
   patientNSS: number | null = null; // To store the patient's NSS from the route parameter
 
@@ -34,29 +34,11 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
     // Get the patient NSS from the route parameters
     this.patientNSS = +this.route.snapshot.paramMap.get('nss')!; // Get NSS from the route path
     console.log('Patient NSS:', this.patientNSS);
-
-    // Load the patient data based on NSS
-    this.loadPatientData();
   }
 
-  // Load patient data from the patient service using the NSS
-  private loadPatientData() {
-    if (this.patientNSS) {
-      this.patientService.getPatientByNSS(this.patientNSS).subscribe({
-        next: (data) => {
-          this.patientData = data; // Store the patient data
-        },
-        error: (error) => {
-          console.error('Error loading patient data:', error);
-        }
-      });
-    } else {
-      console.error('Patient NSS is null');
-    }
-  }
 
   handleNewConsultation(): void {
-    this.router.navigate(['/new-consultation']);
+    this.router.navigate(['/new-consultation'], { queryParams: {'nss' : this.patientNSS}});
   }
 }
 

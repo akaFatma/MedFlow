@@ -8,4 +8,5 @@ urlpatterns = [
     path('patients/nss', views.get_dpi, name='dpi'),
     path('consultation', views.commencer_consultation, name='consultation'),  # Route pour commencer la consultation
     path('soin', views.rediger_soin, name='soin'), # Route pour commencer le soin
+    path('medecin', views.MedecinView, name='medecin'), 
 ]

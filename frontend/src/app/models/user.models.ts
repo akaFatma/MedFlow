@@ -12,11 +12,6 @@ export interface user {
       'prenom': string, 
       'telephone': string
     }, 
-    'medecins': [{
-      'nom': string, 
-      'prenom': string, 
-      'specialite': string, 
-    }]
   },
   'etat': string
 }

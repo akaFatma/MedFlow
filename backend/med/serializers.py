@@ -1,4 +1,4 @@
-from .models import DPI, Patient, PersonneAContacter, Medecin
+from .models import DPI, Patient, PersonneAContacter, Medecin, Soin
 from rest_framework import serializers
 
 class MedecinSerializer(serializers.ModelSerializer):
@@ -34,3 +34,15 @@ class DPISerializerGET(serializers.ModelSerializer):
     class Meta:
         model = DPI
         fields = ['patient','etat']
+
+
+class MedecinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Medecin
+        fields = ['user', 'specialite']
+
+class SoinSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Soin
+        fields = [ 'etat', 'medicament', 'autre', 'date', 'dpi']
