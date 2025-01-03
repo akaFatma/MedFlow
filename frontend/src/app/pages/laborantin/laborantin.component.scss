@@ -1,0 +1,19 @@
+.laborantin-page {
+    display: flex;
+    flex-wrap: nowrap;
+  
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+  
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+  
+      .main-content {
+        margin-left: 0;
+        padding: 10px;
+      }
+    }
+  }
+  
