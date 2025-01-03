@@ -139,17 +139,57 @@ class Consultation(models.Model):
         return f"Consultation du {self.date}"
 
 
-class BilanBiologique(Examen):
+class BilanBiologique(models.Model):
+    idc = models.IntegerField()  # l'id de la consultation
+    prescription = models.CharField(
+        max_length=255,
+        help_text="Description de la prescription pour cet examen"
+    )
+    date_emission = models.DateField(
+        "Date d'émission",
+        auto_now_add=False
+    )
+    consultation = models.ForeignKey(
+        'Consultation',
+        on_delete=models.CASCADE,
+        related_name='bilans_biologiques',
+        help_text="Consultation à laquelle ce bilan biologique est associé"
+    )
     resultat = models.TextField(
         help_text="Résultat du bilan biologique"
     )
 
+    def __str__(self):
+        return f"Bilan Biologique : {self.prescription} pour la consultation du {self.consultation.date}"
 
-class BilanRadiologique(Examen):
+class BilanRadiologique(models.Model):
+    idc = models.IntegerField()  # l'id de la consultation
+    prescription = models.CharField(
+        max_length=255,
+        help_text="Description de la prescription pour cet examen"
+    )
+    date_emission = models.DateField(
+        "Date d'émission",
+        auto_now_add=False
+    )
+    consultation = models.ForeignKey(
+        'Consultation',
+        on_delete=models.CASCADE,
+        related_name='bilans_radiologiques',
+        help_text="Consultation à laquelle ce bilan radiologique est associé"
+    )
     compte_rendu = models.TextField(
         help_text="Compte-rendu du bilan radiologique"
     )
-    image_url = models.ImageField(upload_to='radio/', blank=True, null=True)
+    image_url = models.URLField(
+        max_length=200,
+        null=True,
+        blank=True,
+        help_text="Lien vers l'image radiologique (optionnel)"
+    )
+
+    def __str__(self):
+        return f"Bilan Radiologique : {self.prescription} pour la consultation du {self.consultation.date}"
 
 class Medecin(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='doctor_profile')
