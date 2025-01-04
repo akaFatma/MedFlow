@@ -1,19 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { BienvenuComponentComponent } from "../../components/bienvenu-component/bienvenu-component.component";
+import { BienvenuComponentComponent } from '../../components/bienvenu-component/bienvenu-component.component';
 import { AuthService } from '../../services/auth.service';
 import { OnInit } from '@angular/core';
 import { SuccessNotifComponent } from '../../components/success-notif/success-notif.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-dpi',
   templateUrl: './add-dpi.component.html',
   styleUrls: ['./add-dpi.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,SuccessNotifComponent],
+  imports: [CommonModule, ReactiveFormsModule, SuccessNotifComponent],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -32,8 +38,12 @@ export class AddDPIComponent implements OnInit {
   successTitle: string = ''; // Title for success popup
   successDescription: string = ''; // Description for success popup
 
- 
-  constructor(private fb: FormBuilder, private http: HttpClient , private authService : AuthService ) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {
     // Initialisation du formulaire avec les champs requis
     this.patientForm = this.fb.group({
       step1: this.fb.group({
@@ -48,7 +58,10 @@ export class AddDPIComponent implements OnInit {
         adr: ['', Validators.required],
         nom_personne: ['', Validators.required],
         prenom_personne: ['', Validators.required],
-        telephone_personne: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        telephone_personne: [
+          '',
+          [Validators.required, Validators.pattern('^[0-9]+$')],
+        ],
       }),
     });
   }
@@ -94,6 +107,9 @@ export class AddDPIComponent implements OnInit {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
+    if (this.currentStep === 1) {
+      this.router.navigate(['/HomePage']);
+    }
   }
 
   // Retourne le texte du bouton selon l'étape
@@ -108,7 +124,7 @@ export class AddDPIComponent implements OnInit {
   // Soumet le formulaire et envoie les données au backend
   onValidate(): void {
     if (this.patientForm.valid) {
-     this.sendDataToBackend(); // Envoi final des données au backend
+      this.sendDataToBackend(); // Envoi final des données au backend
       this.successTitle = 'DPI créé avec succès';
       this.successDescription = 'Le dossier patient a été enregistré';
       this.isSuccessPopupVisible = true;
@@ -143,7 +159,7 @@ export class AddDPIComponent implements OnInit {
         console.log('Données envoyées avec succès au backend', response);
       },
       (error) => {
-        console.error('Erreur lors de l\'envoi des données au backend', error);
+        console.error("Erreur lors de l'envoi des données au backend", error);
       }
     );
   }
