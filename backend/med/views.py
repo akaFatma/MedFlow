@@ -274,7 +274,7 @@ def commencer_consultation(request):
                                 prescription=consigne,
                                 consultation=consultation,
                                 date_emission=now() ,
-                                resultat=''                                
+                                resultat='test'                                
                             )
                         else:
                             bilan_radio = BilanRadiologique.objects.create(
@@ -282,7 +282,7 @@ def commencer_consultation(request):
                                 prescription=consigne,
                                 consultation=consultation,
                                 date_emission=now() ,
-                                compte_rendu='',
+                                compte_rendu='test',
                                 image_url=None                               
                             )
                         created_exams.append(exam)
@@ -383,6 +383,15 @@ def get_user_info(request):
 
     # Récupérer plusieurs bilans radiologiques liés à une consultation
     bilansradiologiques = BilanRadiologique.objects.filter(idc=consultation.id) 
+    compte_rendus = BilanRadiologique.objects.filter(idc=consultation.id).values_list('compte_rendu', flat=True)
+    resultats = BilanBiologique.objects.filter(idc=consultation.id).values_list('resultat', flat=True)
+    image_urls = BilanRadiologique.objects.filter(idc=consultation.id).values_list('image_url', flat=True)
+
+    print(bilansbiologiques)
+    print(bilansradiologiques)
+    print(compte_rendus)
+    print(resultats)
+    print(image_urls)
 
     data = {
         'id': consultation.id,
@@ -390,21 +399,26 @@ def get_user_info(request):
         'resume': consultation.resume,
         'medecin': consultation.medecin.user.last_name if consultation.medecin else None,
         'ordonnance': OrdonnanceSerializer(consultation.ordonnance).data if consultation.ordonnance else None,
+
         'bilans_biologiques_prescription': [
             bilan.prescription for bilan in bilansbiologiques
         ] if bilansbiologiques else [],
+
         'bilans_radiologiques_prescription': [
             bilan.prescription for bilan in bilansradiologiques
         ] if bilansradiologiques else [],
+
         'bilans_biologiques_resultat': [
-            bilan.resultat for bilan in consultation.BilanBiologique.all()
-        ] if hasattr(consultation, 'BilanBiologique') else [],
+            resultat for resultat in resultats
+        ] if resultats else [],
+
         'bilans_radiologiques_compte_rendu': [
-            bilan.compte_rendu for bilan in consultation.BilanRadiologique.all()
-        ] if hasattr(consultation, 'BilanRadiologique') else [],
+            compte_rendu for compte_rendu in compte_rendus
+        ] if compte_rendus else [],
+
         'bilans_radiologiques_url_image': [
-            bilan.url_image for bilan in consultation.BilanRadiologique.all()
-        ] if hasattr(consultation, 'BilanRadiologique') else [],
+           image_url for image_url in image_urls
+        ] if image_urls else [],
     }
     print(data)
 

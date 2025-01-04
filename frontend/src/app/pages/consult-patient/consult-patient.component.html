@@ -128,18 +128,6 @@
                 Alger, le:
                 <span>{{ CONSULTATION.data.ordonnance.date_emission | date}}</span>
               </p>
-              <p>
-                Nom:
-                <span>{{ CONSULTATION.data.patient.lastName }}</span>
-              </p>
-              <p>
-                Prénom(s):
-                <span>{{ CONSULTATION.data.patient.firstName }}</span>
-              </p>
-              <p>
-                Age:
-                <span>{{ CONSULTATION.data.patient.age }}</span> ans
-              </p>
             </div>
           </div>
 
@@ -152,20 +140,20 @@
               <div
                 *ngFor="
                   let traitement of traitements;
-                  let i = index
+                  let k = index
                 "
                 class="prescription-line"
               >
                 <p>
                   Médicament:
-                  <span>{{ traitements.nom[i] }}</span>
+                  <span>{{ traitements.nom[k] }}</span>
                 </p>
                 <p>
-                  Dose: <span>{{ traitements.dose[i] }}</span>
+                  Dose: <span>{{ traitements.dose[k] }}</span>
                 </p>
                 <p>
                   Instructions:
-                  <span>{{ traitements.consommation[i] }}</span>
+                  <span>{{ traitements.consommation[k] }}</span>
                 </p>
               </div>
             </div>
@@ -221,9 +209,8 @@
           let i = index
         "
       >
-        <p>{{ CONSULTATION.data.bilans_radiologiques_prescription[i] }}</p>
-        <p>{{ CONSULTATION.data.bilans_radiologiques_compte_rendu[i] }}</p>
-        <p>{{ CONSULTATION.data.bilans_radiographiques[i] }}</p>
+        <p>{{ CONSULTATION.data.bilans_radiologiques_prescription[i] || 'Aucun résultat disponible'}}</p>
+        <p>{{ CONSULTATION.data.bilans_radiologiques_compte_rendu[i] || 'Aucun résultat disponible' }}</p>
         <div>
           <button class="download-button">Radiographie</button>
         </div>
@@ -281,6 +268,7 @@
           class="consultation-row"
           *ngFor="
             let bilan of CONSULTATION.data.bilans_biologiques_prescription
+            let j = index
           "
           style="
             display: grid;
@@ -292,10 +280,10 @@
           "
         >
           <div style="text-align: center">
-            {{bilan}}
+            <p>{{ CONSULTATION.data.bilans_biologiques_prescription[j] || 'Aucun résultat disponible'}}</p>
           </div>
           <div style="text-align: center">
-            {{ CONSULTATION.data.bilans_biologiques_resultat}}
+            {{ CONSULTATION.data.bilans_biologiques_resultat[j] || 'Aucun résultat disponible'}}
           </div>
         </div>
       </div>
