@@ -1,4 +1,4 @@
-from .models import DPI, Patient, PersonneAContacter, Medecin, Soin, Consultation, Ordonnance, Traitement, Distribution
+from .models import DPI, Patient, PersonneAContacter, Medecin, Soin, Consultation, Ordonnance, Traitement, Distribution, BilanRadiologique
 from rest_framework import serializers
 
 class MedecinSerializer(serializers.ModelSerializer):
@@ -74,3 +74,10 @@ class DistributionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Distribution
         fields = ['id', 'ordonnance', 'traitement', 'quantite', 'date_distribution']
+
+
+class RadiologiqueSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = BilanRadiologique
+        fields = [ 'prescription', 'idc', 'compte_rendu', 'date_emission']
