@@ -613,7 +613,6 @@ def remplir_bilan_bio(request):
 def remplir_bilan_radio(request):
     if request.method == 'POST':
         try:
-            body = json.loads(request.body)
             idb = request.GET.get('id') 
             if not idb:
                 return JsonResponse({"error": "L'identifiant du bilan (idb) est requis."}, status=400)
@@ -624,25 +623,24 @@ def remplir_bilan_radio(request):
                 return JsonResponse({"error": "Bilan radiologique introuvable."}, status=404)
 
             # Handle the file upload
-            if 'image' in request.FILES:
-                image = request.FILES['image']
-            else:
-                image = None
+            image = request.FILES.get('image')  # Retrieve the image from the request
+            compte_rendu = request.POST.get('compteRendu')  # Retrieve the compte_rendu from the form data
             
-            bilan.image = image
-            bilan.compte_rendu = body.get('compte_rendu')
+            if image:
+                bilan.image = image  # Assign the uploaded image to the model
+            if compte_rendu:
+                bilan.compte_rendu = compte_rendu  # Assign the compte_rendu to the model
+
             bilan.save()
 
             # Réponse en cas de succès
             return JsonResponse({"message": "Bilan ajouté avec succès.", "bilan_id": bilan.id}, status=201)
 
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Le corps de la requête doit être au format JSON valide."}, status=400)
         except Exception as e:
             return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
 
-    # Réponse pour les méthodes non autorisées
     return JsonResponse({"error": "Méthode non autorisée. Utilisez POST."}, status=405)
+
 
 
 

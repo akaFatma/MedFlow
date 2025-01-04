@@ -31,7 +31,7 @@ export class SaisieBilanService {
     );
   }  
   postCompteRendu(id: number, formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.API_URL4}?id=${id}`, { formData }).pipe(
+    return this.http.post<any>(`${this.API_URL4}?id=${id}`, formData).pipe(
       catchError(this.handleError)
     );
   }
