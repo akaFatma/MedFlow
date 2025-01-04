@@ -12,4 +12,7 @@ urlpatterns = [
     path('consultationHistory', views.get_patient_consultations, name='liste des consultations'),
     path('consultationContent', views.get_user_info, name='liste des consultations'),
     path('getnss', views.get_nss_info, name='getnss'),
+    path('ordonnance/<int:id>/', views.get_ordonnance, name='get_ordonnance'),
+    path('ordonnances/<int:id>/valider', views.valider_ordonnance, name='valider_ordonnance'),
+    path('distributions', views.distribuer_medicament, name='distribuer_medicament'),
 ]

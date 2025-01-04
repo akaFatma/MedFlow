@@ -15,14 +15,15 @@ from .models import (
     Ordonnance,
     Soin,
     Examen,
-    Traitement   )
-from .serializers import PatientSerializer, PatientMinimalSerializer, SoinSerializer, ConsultationMinimalSerializer
+    Traitement, Distribution  )
+from .serializers import PatientSerializer, PatientMinimalSerializer, SoinSerializer, ConsultationMinimalSerializer, DistributionSerializer, OrdonnanceSerializer
 from users.decorators import role_required
 from users.serializers import UserSerializer
 from .utils import generate_qrcode
 from django.utils.timezone import now
 from rest_framework.exceptions import NotFound
 from rest_framework import status
+
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 def list_patients(request):
@@ -542,7 +543,7 @@ def get_user_info(request):
         'date': consultation.date,
         'resume': consultation.resume,
         'medecin': consultation.medecin.user.last_name if consultation.medecin else None,
-        #'ordonnance': consultation.ordonnance if consultation.ordonnance else None,
+        'ordonnance': OrdonnanceSerializer(consultation.ordonnance).data if consultation.ordonnance else None,
         'bilans_biologiques_prescription': [
             bilan.prescription for bilan in bilansbiologiques
         ] if bilansbiologiques else [],
@@ -564,12 +565,6 @@ def get_user_info(request):
     # Étape 4 : Retourner la réponse au client
     return Response({'data': data}, status=200)
 
-
-
-
-
-###############################################token shit####################################################################
-
 @api_view(['GET'])
 @csrf_exempt  # Assure que l'utilisateur est authentifié
 @authentication_classes([SessionAuthentication, TokenAuthentication])
@@ -587,8 +582,76 @@ def get_nss_info(request):
     print(nss)
     return Response({'nss': nss}) # hna nbeato el reponse 
 
+@api_view(['GET'])
+def get_ordonnance(request, id):
+    try:
+        # Retrieve the ordonnance by ID
+        ordonnance = Ordonnance.objects.get(id=id)
+        
+        # Serialize the ordonnance
+        serializer = OrdonnanceSerializer(ordonnance)
+        
+        # Return the serialized data
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    except Ordonnance.DoesNotExist:
+        return Response({'error': 'Ordonnance introuvable'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def valider_ordonnance(request, id):
+    ordonnance = Ordonnance.objects.get(id=id)
+    if not ordonnance:
+        return Response({'error': 'Ordonnance introuvable'}, status=404)
+    
+    if ordonnance.validee:
+        return Response({'message': 'Ordonnance déjà validée'}, status=400)
+
+    sgph_response = request.data.get('validation') 
+    ordonnance.validee = sgph_response
+    ordonnance.save()
+
+    status_message = 'validée' if sgph_response else 'non validée'
+    return Response({'message': f"Ordonnance {status_message}"}, status=200)
+
+@api_view(['POST'])
+def distribuer_medicament(request):
+    ordonnance_id = request.data.get('ordonnance_id')
+    traitement_id = request.data.get('traitement_id')
+    quantite = request.data.get('quantite')
+
+    ordonnance = Ordonnance.objects.filter(id=ordonnance_id).first()
+    if not ordonnance or not ordonnance.validee:
+        return Response({'error': 'Ordonnance invalide ou non validée'}, status=400)
+
+    traitement = Traitement.objects.filter(id=traitement_id).first()
+    if not traitement:
+        return Response({'error': 'Traitement introuvable'}, status=404)
+
+    distribution = Distribution.objects.create(
+        ordonnance=ordonnance,
+        traitement=traitement,
+        quantite=quantite
+    )
+
+    serializer = DistributionSerializer(distribution)
+    return Response(serializer.data, status=201)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###################################################################################################################
 
 
 import pickle

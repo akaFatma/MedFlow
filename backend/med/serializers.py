@@ -1,4 +1,4 @@
-from .models import DPI, Patient, PersonneAContacter, Medecin, Soin, Consultation, Ordonnance, Traitement
+from .models import DPI, Patient, PersonneAContacter, Medecin, Soin, Consultation, Ordonnance, Traitement, Distribution
 from rest_framework import serializers
 
 class MedecinSerializer(serializers.ModelSerializer):
@@ -59,11 +59,18 @@ class ConsultationMinimalSerializer(serializers.ModelSerializer):
 class TraitementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Traitement
-        fields = ['id', 'nom', 'dose', 'consultation']
-
+        fields = ['id', 'nom', 'dose', 'consommation']
 class OrdonnanceSerializer(serializers.ModelSerializer):
-    traitements = TraitementSerializer(many=True)  # Many-to-many relationship, so we use `many=True`
+    traitements = TraitementSerializer(many=True, read_only=True)
 
     class Meta:
         model = Ordonnance
         fields = ['id', 'validee', 'date_emission', 'traitements']
+
+class DistributionSerializer(serializers.ModelSerializer):
+    traitement = TraitementSerializer(read_only=True)
+    ordonnance = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Distribution
+        fields = ['id', 'ordonnance', 'traitement', 'quantite', 'date_distribution']

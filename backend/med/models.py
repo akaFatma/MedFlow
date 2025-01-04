@@ -209,3 +209,22 @@ class Soin(models.Model):
     )
     def __str__(self):
         return f"Soin : {self.medicament} ({self.etat}) - {self.date}"
+    
+class Distribution(models.Model):
+    ordonnance = models.ForeignKey(
+        'Ordonnance', 
+        on_delete=models.CASCADE, 
+        related_name='distributions', 
+        help_text="Ordonnance associée à cette distribution"
+    )
+    traitement = models.ForeignKey(
+        'Traitement', 
+        on_delete=models.CASCADE, 
+        related_name='distributions', 
+        help_text="Médicament délivré"
+    )
+    quantite = models.IntegerField(help_text="Quantité délivrée")
+    date_distribution = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.quantite}x {self.traitement.nom} - {self.date_distribution}"

@@ -2,11 +2,11 @@ POST http://127.0.0.1:8000/auth/signup
 Content-Type: application/json
 
 {
-    "username": "soussou",
+    "username": "tbib",
     "password": "pass123",
     "first_name": "saliha",
     "last_name": "bailly",
-    "role": "Infirmier"
+    "role": "Médecin"
 }
 
 
@@ -29,12 +29,12 @@ Content-Type: application/json
 
 {
     "data": {
-    "nom": "rayane",
+    "nom": "malak",
     "prenom": "hhhh",
     "date_naissance": "1998-12-12",
     "telephone": "0607080910",
     "adr": "12 rue de la paix",
-    "nss": "123456789012345",
+    "nss": "12345678800",
     "mutuelle": "jsp wsh m3ntha",
     "nom_personne": "Bailly",
     "prenom_personne": "Thomas",
@@ -52,3 +52,22 @@ GET http://127.0.0.1:8000/dpi/patients/nss/123456789
 Content-Type: application/json
 
 ###
+GET http://localhost:8000/ordonnance/1
+Content-Type: application/json
+###
+
+POST http://127.0.0.1:8000/ordonnances/1/valider
+Content-Type: application/json
+{
+  "validation": true
+}
+
+###
+POST http://127.0.0.1:8000/distributions
+Content-Type: application/json
+
+{
+  "ordonnance_id": 1,
+  "traitement_id": 1,
+  "quantite": 2
+}
