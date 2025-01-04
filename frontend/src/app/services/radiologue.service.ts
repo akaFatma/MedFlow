@@ -6,8 +6,8 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class LaborantinService {
-  private readonly API_URL = 'http://localhost:8000/bilansbiologiques';
+export class RadiologueService {
+  private readonly API_URL = 'http://localhost:8000/bilansradiologiques';
   
   constructor(private http: HttpClient) {}
 

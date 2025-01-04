@@ -95,3 +95,24 @@ class BiologiqueSerializer(serializers.ModelSerializer):
     def get_etat(self, obj):
         # Renvoie 'en attente' si resultat est vide, sinon 'fait'
         return 'en attente' if not obj.resultat else 'fait'
+
+class RadiologiqueSerializer(serializers.ModelSerializer):
+    nom = serializers.SerializerMethodField()
+    prenom = serializers.SerializerMethodField()
+    etat = serializers.SerializerMethodField()
+
+    class Meta:
+        model = BilanRadiologique
+        fields = ['prescription', 'id', 'compte_rendu', 'date_emission', 'nom', 'prenom', 'etat']
+
+    def get_nom(self, obj):
+        # Accéder à nom via les relations : consultation -> dpi -> patient -> nom
+        return obj.consultation.dpi.patient.nom if obj.consultation and obj.consultation.dpi and obj.consultation.dpi.patient else None
+
+    def get_prenom(self, obj):
+        # Accéder à prenom via les relations : consultation -> dpi -> patient -> prenom
+        return obj.consultation.dpi.patient.prenom if obj.consultation and obj.consultation.dpi and obj.consultation.dpi.patient else None
+
+    def get_etat(self, obj):
+        # Renvoie 'en attente' si resultat est vide, sinon 'fait'
+        return 'en attente' if not obj.compte_rendu else 'fait'

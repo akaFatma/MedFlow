@@ -2,15 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { Router } from '@angular/router';
 import { LaborantinService } from '../../services/laborantin.service';
-
-interface Bilan {
-  nom: string;
-  prenom: string;
-  date: Date;
-  id: string;
-  etat: 'fait' | 'en attente';
-}
-
 @Component({
   selector: 'app-labo-table',
   standalone: true,

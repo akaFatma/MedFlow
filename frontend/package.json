@@ -28,6 +28,7 @@
     "gestion-dpi": "file:",
     "glob": "^11.0.0",
     "inflight": "^1.0.6",
+    "ng2-charts": "^7.0.0",
     "ngx-scanner-qrcode": "^1.7.3",
     "rimraf": "^6.0.1",
     "rxjs": "~7.8.0",

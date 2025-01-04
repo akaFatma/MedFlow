@@ -15,6 +15,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
 import { LaborantinComponent } from './pages/laborantin/laborantin.component';  
 import { SaisieBilanComponent } from './components/saisie-bilan/saisie-bilan.component';
+import { SaisieBilanRadioComponent } from './components/saisie-bilan-radio/saisie-bilan-radio.component';
+import { RadiologueComponent } from './pages/radiologue/radiologue.component';
 
  
 export const routes: Routes = [
@@ -60,8 +62,12 @@ export const routes: Routes = [
       component: LaborantinComponent, 
       },
       { path: 'saisie-bilan', component: SaisieBilanComponent },
+      { path: 'saisie-bilan-radio', component: SaisieBilanRadioComponent },
     
-     { path: '**', redirectTo: 'HomePage', pathMatch: 'full' }
+      { path: 'radiologue', component: RadiologueComponent },  // Add the route for RadiologueComponent
+  
+      // Redirect all invalid paths to Laborantin
+      { path: '**', redirectTo: 'radiologue', pathMatch: 'full' },
   
  ];
 

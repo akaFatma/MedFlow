@@ -8,7 +8,9 @@ import { catchError } from 'rxjs/operators';
 })
 export class SaisieBilanService {
   private readonly API_URL = 'http://localhost:8000/bio-pres';
-  private readonly API_URL2 = 'http://localhost:8000/saisie-bilan';
+  private readonly API_URL2 = 'http://localhost:8000/saisie-bilan-bio';
+  private readonly API_URL3 = 'http://localhost:8000/radio-pres';
+  private readonly API_URL4 = 'http://localhost:8000/saisie-bilan-radio';
 
   
   constructor(private http: HttpClient) {}
@@ -20,6 +22,16 @@ export class SaisieBilanService {
   }  
   postResults(id: number, measures: string): Observable<any> {
     return this.http.post<any>(`${this.API_URL2}?id=${id}`, { measures }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  getPrescriptionRadio(id: number): Observable<any> {
+    return this.http.get<any>(`${this.API_URL3}?id=${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }  
+  postCompteRendu(id: number, compte_rendu: string): Observable<any> {
+    return this.http.post<any>(`${this.API_URL4}?id=${id}`, { compte_rendu }).pipe(
       catchError(this.handleError)
     );
   }
