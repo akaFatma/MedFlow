@@ -13,10 +13,13 @@ import { InfermierLandingPageComponent } from './pages/infermier-landing-page/in
 import { AddDPIComponent } from './pages/add-dpi/add-dpi.component';
 import { LaborantinComponent } from './pages/laborantin/laborantin.component';  // Import Laborantin component
 import { SaisieBilanComponent } from './components/saisie-bilan/saisie-bilan.component';
+import { GrapheComponent } from './components/graphe/graphe.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'laborantin', pathMatch: 'full' },  // Redirect root path to Laborantin
   { path: 'login', component: LoginPageComponent },
   { path: 'unauthorized', component: UnauthorizedPageComponent },
+  { path: 'graph', component: GrapheComponent },
   {
     path: 'medecin-landing',
     component: MedecinLandingPageComponent,

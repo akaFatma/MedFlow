@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
-
+import { Router } from '@angular/router';  // Import Router
 
 @Component({
   selector: 'app-saisie-bilan',
@@ -32,7 +32,7 @@ export class SaisieBilanComponent implements OnInit {
   };
   chartType: ChartType = 'line';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}  // Inject Router here
 
   ngOnInit(): void {
     // Retrieve 'id' from query params
@@ -70,45 +70,12 @@ export class SaisieBilanComponent implements OnInit {
     }
   }
 
-  // Generate a graph based on the collected measurements
-  /*
-  genererGraphique() {
-    if (this.mesures.length === 0) {
-      alert('No data available to generate a graph.');
-      return;
+  // Navigate to the graphe component
+  generateGraph() {
+    if (this.bilanId) {
+      this.router.navigate(['/graph'], { queryParams: { bilanId: this.bilanId } });
+    } else {
+      alert('Bilan ID is required to generate the graph.');
     }
-
-    const transformedData: { [key: string]: { dates: string[]; values: number[] } } = {};
-
-    // Transform the data into a format suitable for chart.js
-    this.mesures.forEach((mesure) => {
-      const { mesure: metric, valeur } = mesure;
-
-      if (!transformedData[metric]) {
-        transformedData[metric] = { dates: [], values: [] };
-      }
-
-      transformedData[metric].dates.push(new Date().toLocaleDateString());
-      transformedData[metric].values.push(parseFloat(valeur));
-    });
-
-    // Update chart data and labels
-    Object.keys(transformedData).forEach((metric) => {
-      this.chartData[metric] = [
-        {
-          data: transformedData[metric].values,
-          label: metric,
-          fill: false,
-          borderColor: 'blue',
-          tension: 0.1,
-        },
-      ];
-      this.chartLabels[metric] = transformedData[metric].dates;
-    });
-
-    // Show the graph after it's generated
-    this.showGraph = true;
   }
-  */
 }
-

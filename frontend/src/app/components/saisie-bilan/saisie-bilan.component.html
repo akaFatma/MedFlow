@@ -1,84 +1,63 @@
 <div class="bilan-biologique-container">
-    <h2>Bilan Biologique</h2>
-  
-    <div class="prescription-section">
-      <h3>Prescription</h3>
-      <div class="text-group">
-        <label>Type:</label>
-      </div>
-      <div class="text-group">
-        <label>Description:</label>
-        <div class="description-text">
-          This is a description loaded from the backend. It provides detailed
-          information about the biological analysis to be performed.
-        </div>
+  <h2>Bilan Biologique</h2>
+
+  <div class="prescription-section">
+    <h3>Prescription</h3>
+    <div class="text-group">
+      <label>Type:</label>
+    </div>
+    <div class="text-group">
+      <label>Description:</label>
+      <div class="description-text">
+        This is a description loaded from the backend. It provides detailed
+        information about the biological analysis to be performed.
       </div>
     </div>
-  
-    <div class="result-section">
-      <h3>Resultat</h3>
-      <div class="result-fields">
-        <div class="input-group">
-          <label>Mesure clinique</label>
-          <input
-            type="text"
-            [(ngModel)]="newMesure"
-            placeholder="Enter measure..."
-          />
-        </div>
-        <div class="input-group">
-          <label>Valeur</label>
-          <input
-            type="text"
-            [(ngModel)]="newValeur"
-            placeholder="Enter value..."
-          />
-        </div>
+  </div>
+
+  <div class="result-section">
+    <h3>Resultat</h3>
+    <div class="result-fields">
+      <div class="input-group">
+        <label>Mesure clinique</label>
+        <input
+          type="text"
+          [(ngModel)]="newMesure"
+          placeholder="Enter measure..."
+        />
       </div>
-      <div class="add-button">
-        <button class="btn" (click)="addMesure()">Ajouter</button>
+      <div class="input-group">
+        <label>Valeur</label>
+        <input
+          type="text"
+          [(ngModel)]="newValeur"
+          placeholder="Enter value..."
+        />
       </div>
     </div>
-  <!--
-    <div *ngIf="mesures.length" class="added-measures">
-      <h4>Added Measures:</h4>
-      <ul>
-        <li *ngFor="let mesure of mesures">
-          {{ mesure.mesure }}: {{ mesure.valeur }}
-        </li>
-      </ul>
+    <div class="add-button">
+      <button class="btn" (click)="addMesure()">Ajouter</button>
     </div>
-  -->
+  </div>
+
+  <div *ngIf="mesures.length" class="added-measures">
+    <h4>Added Measures:</h4>
+    <ul>
+      <li *ngFor="let mesure of mesures">
+        {{ mesure.mesure }}: {{ mesure.valeur }}
+      </li>
+    </ul>
+  </div>
+
   <div class="action-buttons">
     <div class="button-group">
-      <!-- Button disabled, not functional -->
-      <button class="btn btn-secondary" disabled>Générer graphique</button>
+      <!-- Now the 'Générer graphique' button is functional -->
+      <button class="btn btn-secondary" (click)="generateGraph()">Générer graphique</button>
+      
     </div>
     <div class="button-group">
-      <!-- Button disabled, not functional -->
-      <button class="btn btn-primary" disabled>Confirmer</button>
+      <!-- Button for confirming, you can implement the confirmation logic later -->
+      <button class="btn btn-primary" (click)="sendToBackend()">Confirmer</button>
     </div>
   </div>
-  
-  <!-- Commenting out the graph display section to make it non-functional -->
-  <!--
-  <div *ngFor="let metric of getKeys(chartData)" style="margin-bottom: 20px;">
-    <h4>{{ metric | titlecase }}</h4>
-    <canvas baseChart
-            [datasets]="chartData[metric]"
-            [labels]="chartLabels[metric]"
-            [options]="chartOptions"
-            [legend]="true"
-            [chartType]="chartType">
-    </canvas>
-  </div>
-  -->
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
+</div>
