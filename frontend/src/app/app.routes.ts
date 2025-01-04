@@ -10,51 +10,50 @@ import { ResumeComponent } from './components/resume/resume.component';
 import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nouvelle-consultation.component';
 import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
-import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
+import { AddDPIComponent } from './pages/add-dpi/add-dpi.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
- 
+
 export const routes: Routes = [
-   { path: 'HomePage', component: HomePageComponent},
-   { path: 'login', component: LoginPageComponent},
-   { path: 'unauthorized', component: UnauthorizedPageComponent },
-   { 
-     path: 'medecin-landing', 
-     component: MedecinLandingPageComponent, 
-     canActivate: [RoleGuard], 
-     data: { role: 'Médecin' }
-   },
-   { 
-     path: 'dossier-patient/:nss', 
-     component: ConsulterDPIPovPatientComponent,
-     canActivate: [RoleGuard],
-     data: { roles: ['Médecin', 'Patient'] }
-   },
-   { 
-    path: 'add-dpi', 
-    component: AddDPIComponent,
+  { path: 'HomePage', component: HomePageComponent },
+  { path: 'login', component: LoginPageComponent },
+  { path: 'unauthorized', component: UnauthorizedPageComponent },
+  {
+    path: 'medecin-landing',
+    component: MedecinLandingPageComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['Médecin', 'Administratif'] }
+    data: { role: 'Médecin' },
   },
   {
-    path : 'new-consultation' ,
-    component : NouvelleConsultationComponent,
+    path: 'dossier-patient/:nss',
+    component: ConsulterDPIPovPatientComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['Médecin'] }
-    },
-  { 
-    path: 'soins', 
+    data: { roles: ['Médecin', 'Patient'] },
+  },
+  {
+    path: 'add-dpi',
+    component: AddDPIComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['Médecin', 'Administratif'] },
+  },
+  {
+    path: 'new-consultation',
+    component: NouvelleConsultationComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['Médecin'] },
+  },
+  {
+    path: 'soins',
     component: InfermierLandingPageComponent,
     canActivate: [RoleGuard],
-    data: { roles: ["Infirmier"] }
+    data: { roles: ['Infirmier'] },
   },
-   { path: 'consult-patient', 
-    component: ConsultPatientComponent, 
+  {
+    path: 'consult-patient',
+    component: ConsultPatientComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['Médecin', 'Patient'] }
-    },
-  
-   { path: '**', redirectTo: 'HomePage', pathMatch: 'full' }
-  
- ];
+    data: { roles: ['Médecin', 'Patient'] },
+  },
 
+  { path: '**', redirectTo: 'HomePage', pathMatch: 'full' },
+];
