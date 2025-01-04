@@ -386,12 +386,13 @@ def get_user_info(request):
     compte_rendus = BilanRadiologique.objects.filter(idc=consultation.id).values_list('compte_rendu', flat=True)
     resultats = BilanBiologique.objects.filter(idc=consultation.id).values_list('resultat', flat=True)
     image_urls = BilanRadiologique.objects.filter(idc=consultation.id).values_list('image_url', flat=True)
-
-    print(bilansbiologiques)
-    print(bilansradiologiques)
-    print(compte_rendus)
-    print(resultats)
-    print(image_urls)
+    ordo=consultation.ordonnance
+    noms = ordo.traitements.all().values_list('nom', flat=True)
+    doses = ordo.traitements.all().values_list('dose', flat=True)
+    consommations = ordo.traitements.all().values_list('consommation', flat=True)
+    print('noms: ', noms)
+    print('doses: ', noms)
+    print('consommations: ', consommations)
 
     data = {
         'id': consultation.id,
@@ -399,6 +400,10 @@ def get_user_info(request):
         'resume': consultation.resume,
         'medecin': consultation.medecin.user.last_name if consultation.medecin else None,
         'ordonnance': OrdonnanceSerializer(consultation.ordonnance).data if consultation.ordonnance else None,
+        
+        'noms' : [nom for nom in noms] if noms else [],
+        'doses' : [dose for dose in doses] if doses else [],
+        'consommations' : [consommation for consommation in consommations] if consommations else [],
 
         'bilans_biologiques_prescription': [
             bilan.prescription for bilan in bilansbiologiques
@@ -424,6 +429,7 @@ def get_user_info(request):
 
     # Étape 4 : Retourner la réponse au client
     return Response({'data': data}, status=200)
+
 
 @api_view(['GET'])
 def get_patient_soins(request):

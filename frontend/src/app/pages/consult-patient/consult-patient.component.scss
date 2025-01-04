@@ -111,88 +111,110 @@
   padding: 8px 16px; /* Uniform padding */
   gap: 16px; /* Equal spacing between items */
 }
+/* Container for the ordonnance */
 .ordonnanceContainer {
-  width: 1050px;
-  padding: 1rem;
-  font-family: "Times New Roman", Times, serif;
-  border-radius: 16px;
-  box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
+  display: flex;
+  justify-content: center; /* Center the ordonnance */
+  align-items: flex-start; /* Align items at the top */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  min-height: 100vh; /* Full height */
 }
 
+/* Ordonnance box styling */
 .Ordonnance {
-  width: 100%;
-  border: 2px solid #000000;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
+  justify-content: center; /* Center the ordonnance */
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%; /* Adjust width */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Header styling */
 .header {
-  width: 100%;
   display: flex;
-
-  align-items: center;
-  justify-content: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-
-  .patientInfo {
-    font-size: 20px;
-    input {
-      outline: none;
-    }
-  }
-
-  .hospitalInfo {
-    text-align: center;
-    margin-right: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid black;
-
-    p {
-      font-weight: 600;
-      font-size: 22px;
-    }
-
-    .centre-hospitalier {
-      font-weight: bold;
-    }
-  }
+  justify-content: space-between; /* Separate hospitalInfo and patientInfo */
+  margin-bottom: 20px;
 }
 
-.contenu {
-  width: 100%;
-  text-align: center;
+.hospitalInfo p,
+.patientInfo p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
 
-  .title h2 {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 2rem;
+.patientInfo span {
+  font-weight: bold;
+}
+
+/* Title styling */
+.title h2 {
+  text-align: center;
+  color: #119ae4;
+  font-size: 22px;
+}
+
+/* Prescription container */
+.prescriptions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spacing between rows */
+  margin-top: 10px;
+}
+
+/* Each prescription row */
+.prescription-line {
+  display: flex;
+  justify-content: space-between; /* Align horizontally */
+  align-items: center; /* Center vertically */
+  border-bottom: 1px solid #ddd; /* Divider between rows */
+}
+
+.prescription-line:last-child {
+  border-bottom: none; /* Remove border for last row */
+}
+
+/* Individual text styling */
+.prescription-line p {
+  flex: 1; /* Allow equal space distribution */
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.prescription-line span {
+  font-weight: bold;
+  margin-left: 5px; /* Space between label and value */
+}
+
+/* Custom width adjustments for alignment */
+.prescription-line p:nth-child(1) {
+  flex-basis: 40%; /* Médicament takes more space */
+}
+
+.prescription-line p:nth-child(2),
+.prescription-line p:nth-child(3) {
+  flex-basis: 30%; /* Dose and Instructions take equal space */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Ordonnance {
+    width: 90%;
   }
-  .prescriptions-container {
-    input {
-      margin-bottom: 1rem;
-      outline: none;
-      text-align: center;
-      font-size: 20px;
-    }
+
+  .prescription-line {
+    flex-direction: column; /* Stack labels vertically */
+    align-items: flex-start; /* Align to the left */
   }
-  button {
-    background-color: #119ae4;
-    color: white;
-    padding: 6px 30px;
-    margin: 2rem;
-    border-radius: 16px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  .button-container {
-    text-align: right;
-    margin-top: 10rem;
+
+  .prescription-line p {
+    flex-basis: auto;
+    margin-bottom: 5px;
   }
 }

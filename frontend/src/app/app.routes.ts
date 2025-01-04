@@ -61,7 +61,7 @@ export const routes: Routes = [
       },
       { path: 'saisie-bilan', component: SaisieBilanComponent },
     
-     { path: '**', redirectTo: 'laborantin', pathMatch: 'full' }
+     { path: '**', redirectTo: 'HomePage', pathMatch: 'full' }
   
  ];
 
