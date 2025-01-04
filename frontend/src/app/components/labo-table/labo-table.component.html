@@ -14,7 +14,7 @@
         <tr *ngFor="let bilan of bilans">
           <td>{{ bilan.nom }}</td>
           <td>{{ bilan.prenom }}</td>
-          <td>{{ bilan.date }}</td>
+          <td>{{ bilan.date_emission }}</td>
           <td>{{ bilan.id }}</td>
           <td>
             <span [ngClass]="{
@@ -25,7 +25,6 @@
             </span>
           </td>
           <td>
-            <button *ngIf="bilan.etat === 'fait'" class="ouvrir-button">Ouvrir</button>
             <button *ngIf="bilan.etat === 'en attente'" class="completer-button" 
                     (click)="onCompleterBilan(bilan.id)">
               Compléter bilan

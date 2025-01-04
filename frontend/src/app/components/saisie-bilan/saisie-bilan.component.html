@@ -1,0 +1,58 @@
+<div class="bilan-biologique-container">
+  <h2>Bilan Biologique</h2>
+
+  <div class="prescription-section">
+    <h3>Prescription</h3>
+    <div class="text-group">
+      <div class="description-text">
+          {{prescription}}
+      </div>
+    </div>
+  </div>
+
+  <div class="result-section">
+    <h3>Resultat</h3>
+    <div class="result-fields">
+      <div class="input-group">
+        <label>Mesure clinique</label>
+        <input
+          type="text"
+          [(ngModel)]="newMesure"
+          placeholder="Enter measure..."
+        />
+      </div>
+      <div class="input-group">
+        <label>Valeur</label>
+        <input
+          type="text"
+          [(ngModel)]="newValeur"
+          placeholder="Enter value..."
+        />
+      </div>
+    </div>
+    <div class="add-button">
+      <button class="btn" (click)="addMesure()">Ajouter</button>
+    </div>
+  </div>
+
+  <div *ngIf="mesures.length" class="added-measures">
+    <h3>Added Measures:</h3>
+    <ul>
+      <li *ngFor="let mesure of mesures" >
+             {{ mesure.mesure }}: {{ mesure.valeur }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="action-buttons">
+    <div class="button-group">
+      <!-- Now the 'Générer graphique' button is functional -->
+      <button class="btn btn-secondary" (click)="generateGraph()">Générer graphique</button>
+      
+    </div>
+    <div class="button-group">
+      <!-- Button for confirming, you can implement the confirmation logic later -->
+      <button class="btn btn-primary" (click)="sendToBackend()">Confirmer</button>
+    </div>
+  </div>
+</div>

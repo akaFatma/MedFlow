@@ -16,7 +16,7 @@ from .models import (
     Soin,
     Examen,
     Traitement, Distribution  )
-from .serializers import PatientSerializer, PatientMinimalSerializer, SoinSerializer, ConsultationMinimalSerializer, DistributionSerializer, OrdonnanceSerializer
+from .serializers import PatientSerializer, PatientMinimalSerializer, SoinSerializer, ConsultationMinimalSerializer, DistributionSerializer, OrdonnanceSerializer, BiologiqueSerializer
 from users.decorators import role_required
 from users.serializers import UserSerializer
 from .utils import generate_qrcode
@@ -518,10 +518,65 @@ def distribuer_medicament(request):
     serializer = DistributionSerializer(distribution)
     return Response(serializer.data, status=201)
 
+@api_view(['GET'])
+def export_bilans(request):
+    biologiques = BilanBiologique.objects.all()
+    if not biologiques:
+        return Response({'error': 'Aucun bilan biologique trouvé'}, status=status.HTTP_404_NOT_FOUND)
+    serializer = BiologiqueSerializer(biologiques, many=True)
+    print(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def envoi_pres_bio(request):
+    id = request.GET.get('id') 
+    if not id:
+        return Response({"error": "L'identifiant (id) est requis."}, status=400)
 
+    try:
+        bilan = BilanBiologique.objects.get(id=id)
+    except BilanBiologique.DoesNotExist:
+        return Response({'error': 'Bilan introuvable.'}, status=404)
+    
 
+    return Response(bilan.prescription, status=200)
+
+@csrf_exempt
+def remplir_bilan_bio(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            idb = request.GET.get('id') 
+            measures = json.loads(body.get('measures'))
+            print(idb)
+            print(measures)
+            if not idb:
+                return JsonResponse({"error": "L'identifiant du bilan (idb) est requis."}, status=400)
+
+            try:
+                bilan = BilanBiologique.objects.get(id=idb)
+            except BilanBiologique.DoesNotExist:
+                return JsonResponse({"error": "Bilan radiologique introuvable."}, status=404)
+
+            # Récupération des champs facultatifs
+            resultat= "\n".join(
+               f"{item.get('mesure', '')} : {item.get('valeur', '')}" for item in measures
+            )
+
+            bilan.resultat = resultat
+            bilan.save()
+
+            # Réponse en cas de succès
+            return JsonResponse({"message": "Bilan ajouté avec succès.", "bilan_id": bilan.id}, status=201)
+
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Le corps de la requête doit être au format JSON valide."}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
+
+    # Réponse pour les méthodes non autorisées
+    return JsonResponse({"error": "Méthode non autorisée. Utilisez POST."}, status=405)
 
 
 

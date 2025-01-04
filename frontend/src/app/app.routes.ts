@@ -14,6 +14,7 @@ import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
 import { LaborantinComponent } from './pages/laborantin/laborantin.component';  
+import { SaisieBilanComponent } from './components/saisie-bilan/saisie-bilan.component';
 
  
 export const routes: Routes = [
@@ -58,8 +59,9 @@ export const routes: Routes = [
     { path: 'laborantin', 
       component: LaborantinComponent, 
       },
+      { path: 'saisie-bilan', component: SaisieBilanComponent },
     
-   { path: '**', redirectTo: 'laborantin', pathMatch: 'full' }
+     { path: '**', redirectTo: 'laborantin', pathMatch: 'full' }
   
  ];
 
