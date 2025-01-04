@@ -286,7 +286,7 @@ def commencer_consultation(request):
                                 consultation=consultation,
                                 date_emission=now() ,
                                 compte_rendu='',
-                                image_url=None                               
+                                image=None                          
                             )
                         created_exams.append(exam)
                         print(f"Examen créé: {exam.id} avec consigne: {consigne}")

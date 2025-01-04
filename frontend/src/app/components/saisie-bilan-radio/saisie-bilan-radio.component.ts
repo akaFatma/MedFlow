@@ -17,7 +17,8 @@ export class SaisieBilanRadioComponent implements OnInit {
   bilanId: any;
   prescription: any;
   compteRendu = '';
-  image: any;
+  selectedFile: File | null = null; // Fichier sélectionné
+  selectedFileName: string = "Aucun fichier n'a été sélectionné";
   showGraph = false;
 
   // Chart.js configuration
@@ -57,18 +58,34 @@ export class SaisieBilanRadioComponent implements OnInit {
         }
       });
     }
-
+    onFileSelected(event: Event): void {
+      const input = event.target as HTMLInputElement;
+      if (input.files && input.files.length > 0) {
+        this.selectedFile = input.files[0];
+        this.selectedFileName = this.selectedFile.name;
+        console.log('Fichier sélectionné :', this.selectedFileName);
+      } else {
+        this.selectedFile = null;
+        this.selectedFileName = "Aucun fichier n'a été sélectionné";
+      }
+    }
 
   // Helper function to extract keys from an object
   getKeys(obj: object): string[] {
     return Object.keys(obj);
   }
 
-
+  onImageUpload(): void {
+    if (!this.selectedFile) {
+      alert('Veuillez sélectionner un fichier avant de soumettre.');
+      return;
+    }
+  }
   // Send the measurements to the backend (or log it)
   sendToBackend() {
-    console.log(this.compteRendu);
-      this.saisieBilanService.postCompteRendu(this.bilanId, this.compteRendu).subscribe({
+    const formData = new FormData(); 
+    formData.append('image', this.selectedImage, this.selectedImage.name); 
+      this.saisieBilanService.postCompteRendu(this.bilanId, this.compteRendu,formData ).subscribe({
       next: (response) => {
         console.log('Compte rendu posted successfully:', response);
       },

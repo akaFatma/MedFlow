@@ -25,7 +25,6 @@
             </span>
           </td>
           <td>
-            <button *ngIf="bilan.etat === 'fait'" class="ouvrir-button">Ouvrir</button>
             <button *ngIf="bilan.etat === 'en attente'" class="completer-button" 
                     (click)="onCompleterBilan(bilan.id)">
               Compléter bilan

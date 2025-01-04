@@ -30,12 +30,11 @@ export class SaisieBilanService {
       catchError(this.handleError)
     );
   }  
-  postCompteRendu(id: number, compte_rendu: string): Observable<any> {
-    return this.http.post<any>(`${this.API_URL4}?id=${id}`, { compte_rendu }).pipe(
+  postCompteRendu(id: number, compte_rendu: string, formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.API_URL4}?id=${id}`, { compte_rendu, formData }).pipe(
       catchError(this.handleError)
     );
   }
-
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred';
 
