@@ -4,10 +4,12 @@
   padding-right: 0;
 }
 
+
 /* Step indicator circle when it is complete */
 .bg-green-500 {
   background-color: #28a745 !important; /* Bootstrap green */
 }
+
 
 @media (max-width: 768px) {
   .box {
@@ -114,14 +116,15 @@ button {
   padding: 10px;
   width: 100%;
   min-height: 400px;
-  max-width: 600px;
+  max-width: 750px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 100px auto; /* Keep space from the top */
-  margin-bottom: 20px; /* Add space below the box */
+  margin: 150px auto; /* Keep space from the top */
+  margin-bottom:2rem; /* Add space below the box */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
   overflow: hidden;
   align-self: flex-start;
   transform-origin: bottom;
@@ -130,9 +133,7 @@ button {
 }
 
 .topbox {
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional shadow */
+ 
   max-width: 800px;
   width: 100%;
   height: 50px; /* Adjusted height */
@@ -243,6 +244,7 @@ button {
   padding: 10px;
   margin: 0px auto;
   box-sizing: border-box;
+  min-height: fit-content;
   position: relative;
   overflow: visible; /* Autorise l'extension */
 }
@@ -443,3 +445,29 @@ button {
 .popup-close:hover {
   opacity: 1;
 }
+.welcome-container {
+  width: 950px;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white; 
+  border-radius: 20px;
+  box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
+  border: 1px solid #EAEBF0; 
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.iconn img {
+  width: 30px; 
+  height: 30px;
+}
+
+.textt{
+  font-size: 14px;
+  color: #666666; 
+}
+

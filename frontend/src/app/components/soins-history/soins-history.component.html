@@ -1,0 +1,19 @@
+<div class="soin-container">
+<div class="header-grid">
+    <div>DATE</div>
+    <div>ETAT DU PATIENT</div>
+    <div>MEDICAMENT</div>
+    <div>AUTRE</div>
+    <div></div>
+
+</div>
+
+<div *ngFor="let soin of Soins" class="soin-row">
+<div>{{soin.date }}</div>
+<div>{{soin.etat}}</div>
+<div>{{soin.medicament}}</div>
+<div>{{soin.autre}}</div>
+</div>
+
+
+</div>

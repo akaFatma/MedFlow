@@ -1,0 +1,32 @@
+.soin-container {
+    padding: 24px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
+    width: 90%;
+    margin: auto;
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 0 16px;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    color: #666666;
+    border-bottom: 1.5px solid #E6EFF5;
+    font-size: 15px;
+  }
+
+  .soin-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 8px 16px;
+    align-items: center;
+    color: #232323;
+    font-size: 15px;
+  }
+
+  

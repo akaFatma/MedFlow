@@ -143,159 +143,6 @@ def creer_dpi(request):
     return JsonResponse({'error': 'Requête invalide'}, status=400)
 
 
-# Rédaction d'ordonnance - Traitements
-@csrf_exempt
-# @check_roles(['medecin'])
-def rediger_ordonnance(request):
-    if request.method == 'POST':
-        try:
-            print(request.body)  # Affiche le contenu brut de la requête pour déboguer
-            body = json.loads(request.body)
-            data = body.get('data')
-
-            if not data:
-                return JsonResponse({'error': 'Aucune donnée fournie'}, status=400)
-
-            nss = data.get('nss')
-            if not nss:
-                return JsonResponse({'error': 'Numéro de sécurité sociale (NSS) requis'}, status=400)
-
-            # Recherche le DPI correspondant au NSS
-            try:
-                dpi = DPI.objects.get(patient__nss=nss)
-            except DPI.DoesNotExist:
-                return JsonResponse({'error': 'Aucun DPI trouvé pour ce NSS'}, status=404)
-
-            # Recherche la dernière consultation d'aujourd'hui pour ce DPI
-            date = now()
-            consultation = Consultation.objects.filter(dpi=dpi, date__date=date.date()).order_by('-date').first()
-
-            if not consultation:
-                return JsonResponse({'error': 'Aucune consultation trouvée pour ce DPI aujourd\'hui'}, status=404)
-
-            # Récupère les traitements de la requête
-            traitements = data.get('traitements')
-            if not traitements or not isinstance(traitements, list):
-                return JsonResponse({'error': 'Aucun traitement fourni ou format invalide'}, status=400)
-
-            # Crée les objets Traitement
-            traitements_list = []
-            for traitement_data in traitements:
-                nom_traitement = traitement_data.get('nom')
-                dose = traitement_data.get('dose')
-                consommation = traitement_data.get('consommation')
-
-                if not all([nom_traitement, dose, consommation]):
-                    return JsonResponse({'error': 'Certains champs sont manquants pour un traitement'}, status=400)
-
-                traitement = Traitement.objects.create(
-                    nom=nom_traitement,
-                    dose=dose,
-                    consommation=consommation,
-                )
-                traitements_list.append(traitement)
-
-            # Crée une ordonnance et l'affecte à la consultation
-            ordonnance = Ordonnance.objects.create(
-                patient=dpi.patient,  # Associe la bonne relation patient
-                status='en_attente'
-            )
-            ordonnance.traitements.set(traitements_list)  # Ajoute les traitements à l'ordonnance
-            ordonnance.save()
-
-            # Associe l'ordonnance à la consultation
-            consultation.ordonnance = ordonnance
-            consultation.save()
-
-            return JsonResponse({
-                'message': 'Ordonnance créée et associée avec succès',
-                'ordonnance': {
-                    'id': ordonnance.id,
-                    'date_emission': ordonnance.date_emission,
-                    'status': ordonnance.status,
-                    'traitements': [str(t) for t in traitements_list]
-                }
-            })
-        except Exception as e:
-            print(f"Erreur : {e}")
-            return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
-
-    return JsonResponse({'error': 'Requête invalide'}, status=400)
-
-# @csrf_exempt
-# # @check_roles(['medecin'])
-@csrf_exempt
-def rediger_bilan_radiologique(request):
-    if request.method == 'POST':
-        try:
-            body = json.loads(request.body)
-            data = body.get('data')
-            nss = data.get('nss')
-            if not nss:
-                return JsonResponse({'error': 'NSS requis'}, status=400)
-            try:
-                dpi = DPI.objects.get(patient__nss=nss)
-            except DPI.DoesNotExist:
-                return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
-            date = now()
-            consultation = Consultation.objects.filter(dpi=dpi, date__date=date.date()).order_by('-date').first()
-            if not consultation:
-                return JsonResponse({'error': 'Aucune consultation trouvée aujourd\'hui'}, status=404)
-            prescription = data.get('prescription')
-            if not prescription  :
-                return JsonResponse({'error': 'Prescription ou compte-rendu manquant'}, status=400)
-            bilan = BilanRadiologique.objects.create(
-                consultation=consultation,
-                prescription=prescription,
-                date_emission=date,
-                compte_rendu=None,
-                image_url=None
-            )
-            return JsonResponse({
-                'message': 'Bilan radiologique enregistré avec succès',
-                'bilan_id': bilan.id,
-                'consultation_id': consultation.id
-            })
-        except Exception as e:
-            return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
-    return JsonResponse({'error': 'Requête invalide'}, status=400)
-
-@csrf_exempt
-def rediger_bilan_biologique(request):
-    if request.method == 'POST':
-        try:
-            body = json.loads(request.body)
-            data = body.get('data')
-            nss = data.get('nss')
-            if not nss:
-                return JsonResponse({'error': 'NSS requis'}, status=400)
-            try:
-                dpi = DPI.objects.get(patient__nss=nss)
-            except DPI.DoesNotExist:
-                return JsonResponse({'error': 'Aucun DPI trouvé'}, status=404)
-            date = now()
-            consultation = Consultation.objects.filter(dpi=dpi, date__date=date.date()).order_by('-date').first()
-            if not consultation:
-                return JsonResponse({'error': 'Aucune consultation trouvée aujourd\'hui'}, status=404)
-            prescription = data.get('prescription')
-            resultat = None
-            if not prescription :
-                return JsonResponse({'error': 'Prescription ou compte-rendu manquant'}, status=400)
-            bilan = BilanRadiologique.objects.create(
-                consultation=consultation,
-                prescription=prescription,
-                date_emission=date,
-                resultat=resultat,
-            )
-            return JsonResponse({
-                'message': 'Bilan radiologique enregistré avec succès',
-                'bilan_id': bilan.id,
-                'consultation_id': consultation.id
-            })
-        except Exception as e:
-            return JsonResponse({'error': 'Erreur lors du traitement des données'}, status=400)
-    return JsonResponse({'error': 'Requête invalide'}, status=400)
-
 @api_view(['POST'])
 def rediger_soin(request):
     try:
@@ -467,7 +314,6 @@ from users.models import CustomUser
 
 @api_view(['GET'])
 def MedecinView(request):
-    print('hna')
     username = request.GET.get('username') 
     print(username)
     if not username:
@@ -566,6 +412,26 @@ def get_user_info(request):
     return Response({'data': data}, status=200)
 
 @api_view(['GET'])
+def get_patient_soins(request):
+    try:
+        nss = request.query_params.get('nss')
+
+        dpi = DPI.objects.get(patient__nss=nss)
+
+        # Get all consultations for the retrieved DPI
+        soins = Soin.objects.filter(dpi=dpi)
+
+        serializer =SoinSerializer(soins, many=True)
+        print(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    except DPI.DoesNotExist:
+        return Response({'error': 'No DPI found for the given NSS'}, status=status.HTTP_404_NOT_FOUND)
+
+    except Exception as e:
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['GET'])
 @csrf_exempt  # Assure que l'utilisateur est authentifié
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 def get_nss_info(request):
@@ -581,6 +447,8 @@ def get_nss_info(request):
     nss=patient.nss
     print(nss)
     return Response({'nss': nss}) # hna nbeato el reponse 
+
+
 
 @api_view(['GET'])
 def get_ordonnance(request, id):

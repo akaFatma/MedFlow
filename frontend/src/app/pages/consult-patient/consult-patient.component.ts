@@ -29,6 +29,8 @@ interface Consultation {
 export class ConsultPatientComponent implements OnInit {
   errorMessage: string = '';
   CONSULTATION: any ;
+  traitements: any ;
+
   showRadio: boolean = false;
   loading: boolean = false;
 
@@ -54,7 +56,8 @@ export class ConsultPatientComponent implements OnInit {
       next: (data) => {
         console.log('Received Data:', data);
         this.CONSULTATION = data;
-        
+        this.traitements = this.CONSULTATION.data.ordonnance.traitements;
+        console.log('Traitements:', this.traitements);
         this.loading = false;
       },
       error: (error) => {

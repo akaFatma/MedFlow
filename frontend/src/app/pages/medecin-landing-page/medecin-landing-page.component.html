@@ -1,8 +1,7 @@
 <!-- medecin-landing.component.html -->
 <div class="landing-container">
   <app-side-bar></app-side-bar>
-  
-  <main class="main-content">
+  <div class="content">
     <app-bienvenu-component [userName]="userName" ></app-bienvenu-component>
     <app-search-bar 
       (search)="onSearch($event)"
@@ -14,5 +13,5 @@
     (closePopup)="onCloseScanner()">
     </app-qr-scanner>
     <app-medecin-table [searchResults]="results"></app-medecin-table>
-  </main>
+  </div>
 </div>

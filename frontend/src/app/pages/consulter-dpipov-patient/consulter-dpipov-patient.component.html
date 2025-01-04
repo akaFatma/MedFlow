@@ -15,7 +15,12 @@
             <h2>HISTORIQUE CONSULTATIONS</h2>
             <button  *ngIf="isDoctor"  class="nouvelle-consultation" (click)="handleNewConsultation()">Nouvelle consultation</button>
         </div>
-       
         <app-medical-history [nss]="patientNSS"></app-medical-history>
+    </div>
+    <div class="consultationHistory">
+        <div class="but">
+            <h2>HISTORIQUE SOINS</h2>
+        </div>
+        <app-soins-history [nss]="patientNSS"></app-soins-history>
     </div>
 </div>

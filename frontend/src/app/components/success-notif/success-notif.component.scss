@@ -1,78 +1,86 @@
-/* Container styles */
 .alert-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* gap-2 */
-  width: 16rem; /* w-60 */
-  font-size: 0.625rem; /* text-[10px] */
-  z-index: 50;
-}
-
-/* Success alert styles */
-.success-alert {
-  cursor: default;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Makes sure the notification is above other elements */
   width: 100%;
-  height: 3.5rem; /* h-12 */
-  border-radius: 0.5rem; /* rounded-lg */
-  background-color: #232531;
-  padding-left: 0.625rem; /* px-[10px] */
-  padding-right: 0.625rem;
-  font-size: 12px;
+  max-width: 400px; /* Max width to limit how wide the alert can be */
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Left content wrapper */
+.success-alert {
+  background-color: #e0f7fa; /* Light teal background */
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1; /* Fully visible */
+}
+
 .content-wrapper {
   display: flex;
-  gap: 0.5rem; /* gap-2 */
+  align-items: center;
 }
 
-/* Icon container */
 .icon-container {
-  color: #2b9875; /* text-[#2b9875] */
-  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
-  backdrop-filter: blur(24px); /* backdrop-blur-xl */
-  padding: 0.25rem; /* p-1 */
-  border-radius: 0.5rem; /* rounded-lg */
+  background-color: #b2dfdb;
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin-right: 1rem;
 }
 
-/* SVG icon dimensions */
 .icon {
-  width: 1.5rem; /* w-6 */
-  height: 1.5rem; /* h-6 */
+  width: 24px;
+  height: 24px;
+  color: #00796b; /* Greenish color for icon */
 }
 
-/* Text content */
 .alert-text {
-  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #00796b;
+  margin: 0; /* Removes any unwanted margin */
 }
 
 .alert-description {
-  color: rgb(107, 114, 128); /* text-gray-500 */
+  color: #004d40;
+  font-size: 0.75rem;
+  margin: 0.5rem 0 0 0; /* Adjusts margin between text and description */
 }
 
-/* Close button */
 .close-button {
-  color: rgb(75, 85, 99); /* text-gray-600 */
-  padding: 0.25rem; /* p-1 */
-  border-radius: 0.375rem; /* rounded-md */
-  transition: background-color 0.15s linear; /* transition-colors ease-linear */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-.close-button:hover {
-  background-color: rgba(255, 255, 255, 0.05); /* hover:bg-white/5 */
+.close-button .icon {
+  width: 24px;
+  height: 24px;
+  color: #00796b;
 }
 
-/* Media query for small screens */
-@media (min-width: 640px) {
-  .alert-container {
-    width: 18rem; /* sm:w-72 */
-    font-size: 0.75rem; /* sm:text-xs */
-  }
-  
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
   .success-alert {
-    height: 3.5rem; /* sm:h-14 */
+    width: 90%; /* Makes the alert fit well on smaller screens */
   }
 }

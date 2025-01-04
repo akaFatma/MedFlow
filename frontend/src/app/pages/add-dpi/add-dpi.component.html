@@ -1,22 +1,21 @@
 <div class="everything">
+  <app-success-notif 
+  *ngIf=" isSuccessPopupVisible"
+   [isVisible]="isSuccessPopupVisible" 
+  [title]="successTitle"
+  [description]="successDescription"
+  ></app-success-notif>
   <div class="container">
-    <app-sidebar></app-sidebar>
     <div class="main-content">
       <div class="right-side">
         <div class="topbox">
-          <div class="left-side">
-            <img src="/profil.png" alt="Key Icon" class="icon" />
-            <p class="textbienven">Bienvenu administratif</p>
-          </div>
-          <div class="right-side">
-            <img src="/notif.png" alt="Bell Icon" class="icon" />
-            <img src="/param.png" alt="Settings Icon" class="icon" />
-          </div>
-        </div>
-        <div class="success-popup" *ngIf="isSuccessPopupVisible" [@fadeInOut]>
-          <div class="popup-content" (click)="$event.stopPropagation()">
-            <span class="popup-close" (click)="closeSuccessPopup()">×</span>
-            <h2 class="popup-message">DPI CREE AVEC SUCCES !</h2>
+          <div class="welcome-container">
+            <div class="iconn">
+              <img src="../../../assets/account_circle_24dp_E8EAED 1.svg" alt="User Icon">
+            </div>
+            <div class="textt">
+              Bienvenue Mr {{userName}}
+            </div>
           </div>
         </div>
         <div class="box">

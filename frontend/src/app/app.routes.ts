@@ -11,11 +11,12 @@ import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nou
 import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
 import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
-
  
 export const routes: Routes = [
-   { path: 'login', component: LoginPageComponent },
+   { path: 'HomePage', component: HomePageComponent},
+   { path: 'login', component: LoginPageComponent},
    { path: 'unauthorized', component: UnauthorizedPageComponent },
    { 
      path: 'medecin-landing', 
@@ -53,7 +54,7 @@ export const routes: Routes = [
     data: { roles: ['Médecin', 'Patient'] }
     },
   
-   { path: '**', redirectTo: 'login', pathMatch: 'full' }
+   { path: '**', redirectTo: 'HomePage', pathMatch: 'full' }
   
  ];
 

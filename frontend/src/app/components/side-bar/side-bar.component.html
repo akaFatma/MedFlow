@@ -1,16 +1,16 @@
 <div class="sidebar">
-    <div class="logo">
-      <img src="../../../assets/Logo.svg"  alt="MedFlow">
-    </div>
-    
-    <nav class="nav-menu">
-      <a  routerLinkActive="active" class="nav-item">
-        <i class="manage_accounts"></i>
-        Gestion des comptes
-      </a>
-      <a  routerLinkActive="active" class="nav-item active">
-       <img src="" alt="">
-        Gestion des patients
-      </a>
-    </nav>
+  <div class="logo">
+    <img src="../../../assets/Logo.svg" alt="MedFlow">
   </div>
+
+  <nav class="nav-menu">
+    <button 
+      (click)="navigateTo('/add-dpi')" 
+      routerLinkActive="active" 
+      [routerLinkActiveOptions]="{exact: true}" 
+      class="nav-item">
+      <i class="manage_accounts"></i>
+      Créer DPI
+    </button>
+  </nav>
+</div>

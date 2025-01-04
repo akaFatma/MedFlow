@@ -1,4 +1,4 @@
-<div style="min-height: 200vh; background-color: #f0f4fa">
+<div style="min-height: 200vh; background-color: #f0f4fa; padding-top: 30px">
   <!-- NAVBAR -->
   <div class="navbar w-11/12 mx-auto flex items-center py-5" style="gap: 20px">
     <div class="w-[30%] flex justify-end">
@@ -86,7 +86,15 @@
     </div>
 
     <!-- Ordonnance -->
-    <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
+    <div
+      style="
+        color: #707b81;
+        flex: 1;
+        font-weight: semi-bold;
+        max-width: 100%;
+        margin-top: 30px;
+      "
+    >
       <div
         style="
           display: flex;
@@ -95,20 +103,6 @@
         "
       >
         <p class="text-lg font-semibold">Ordonnance</p>
-        <a href="/radio.png" download>
-          <img
-            src="/download.svg"
-            alt="Icon"
-            style="
-              width: 30px;
-              height: 30px;
-              cursor: pointer;
-              transition: transform 0.2s;
-            "
-            onmouseover="this.style.transform='scale(1.1)'"
-            onmouseout="this.style.transform='scale(1)'"
-          />
-        </a>
       </div>
       <div
         style="
@@ -118,6 +112,66 @@
           width: 100%;
         "
       ></div>
+
+      <!-- ORDONNNANNANANANNANCE-->
+
+      <div class="ordonnanceContainer">
+        <div class="Ordonnance">
+          <div class="header">
+            <div class="hospitalInfo">
+              <p>
+                Dr. {{ CONSULTATION.data.medecin }}
+              </p>
+            </div>
+            <div class="patientInfo">
+              <p>
+                Alger, le:
+                <span>{{ CONSULTATION.data.ordonnance.date_emission | date}}</span>
+              </p>
+              <p>
+                Nom:
+                <span>{{ CONSULTATION.data.patient.lastName }}</span>
+              </p>
+              <p>
+                Prénom(s):
+                <span>{{ CONSULTATION.data.patient.firstName }}</span>
+              </p>
+              <p>
+                Age:
+                <span>{{ CONSULTATION.data.patient.age }}</span> ans
+              </p>
+            </div>
+          </div>
+
+          <div class="contenu">
+            <div class="title">
+              <h2 style="font-weight: bold; margin-top: 10px">ORDONNANCE</h2>
+            </div>
+
+            <div class="prescriptions-container">
+              <div
+                *ngFor="
+                  let traitement of traitements;
+                  let i = index
+                "
+                class="prescription-line"
+              >
+                <p>
+                  Médicament:
+                  <span>{{ traitements.nom[i] }}</span>
+                </p>
+                <p>
+                  Dose: <span>{{ traitements.dose[i] }}</span>
+                </p>
+                <p>
+                  Instructions:
+                  <span>{{ traitements.consommation[i] }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Bilan Radiologique -->
@@ -140,15 +194,18 @@
           border-radius: 12px;
         "
       >
+        <!-- Header -->
         <div
           class="header-grid"
           style="
             display: grid;
-            grid-template-columns: 2fr 2fr 2fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 15px;
             font-weight: bold;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
+            text-align: center;
+            justify-items: center;
           "
         >
           <div>PRESCRIPTION MEDECIN</div>
@@ -156,23 +213,23 @@
           <div>BILAN RADIOGRAPHIE</div>
         </div>
 
+        <!-- Data Rows (Dynamic Version) -->
         <div
-          class="consultation-row"
-          *ngFor="
-            let bilan of CONSULTATION.data.bilans_radiologiques_prescription;
-            let i = index
-          "
-        >
-          <p>{{ CONSULTATION.data.bilans_radiologiques_prescription[i] }}</p>
-          <p>{{ CONSULTATION.data.bilans_radiologiques_compte_rendu[i] }}</p>
-          <p>{{ CONSULTATION.data.bilans_radiographiques[i] }}</p>
-          <div>
-            <button class="download-button">Radiographie</button>
-          </div>
+        class="consultation-row"
+        *ngFor="
+          let bilan of CONSULTATION.data.bilans_radiologiques_prescription;
+          let i = index
+        "
+      >
+        <p>{{ CONSULTATION.data.bilans_radiologiques_prescription[i] }}</p>
+        <p>{{ CONSULTATION.data.bilans_radiologiques_compte_rendu[i] }}</p>
+        <p>{{ CONSULTATION.data.bilans_radiographiques[i] }}</p>
+        <div>
+          <button class="download-button">Radiographie</button>
         </div>
       </div>
     </div>
-
+    <!-- Bilan Biologique -->
     <!-- Bilan Biologique -->
 
     <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
@@ -194,6 +251,7 @@
           border-radius: 12px;
         "
       >
+        <!-- Header -->
         <div
           class="header-grid"
           style="
@@ -218,15 +276,27 @@
           </div>
         </div>
 
+        <!-- Data Rows -->
         <div
           class="consultation-row"
           *ngFor="
-            let bilan of CONSULTATION.data.bilans_biologiques_prescription;
-            let i = index
+            let bilan of CONSULTATION.data.bilans_biologiques_prescription
+          "
+          style="
+            display: grid;
+            grid-template-columns: 2fr 2fr;
+            gap: 80px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd; /* Optional for row separation */
           "
         >
-          <p>{{ CONSULTATION.data.bilans_biologiques_prescription[i] }}</p>
-          <p>{{ CONSULTATION.data.bilans_biologiques_resultat[i] }}</p>
+          <div style="text-align: center">
+            {{bilan}}
+          </div>
+          <div style="text-align: center">
+            {{ CONSULTATION.data.bilans_biologiques_resultat}}
+          </div>
         </div>
       </div>
     </div>

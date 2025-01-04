@@ -39,3 +39,11 @@
     color: red;
 
 }
+.nav-item.active {
+    background-color: #007bff; /* Blue active background */
+    color: white; /* Optional: change text color for better contrast */
+  }
+  
+  .nav-item.active i {
+    color: white; /* Change icon color when active */
+  }
