@@ -1,0 +1,65 @@
+.header-container { 
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #eaebf0;
+  border-radius: 20px;
+  width: 90%;
+  padding: 0 30px;
+  margin: 0 auto;
+  height: 70px;
+
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .user-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #E8EAED;
+      color: #ffffff;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .welcome-message {
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      color: #666666;
+    }
+  }
+
+  .fa-bell {
+    
+    font-size: 20px;
+    color: #666666;
+    
+  }
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    padding: 10px;
+
+    .left-section {
+      gap: 5px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .welcome-message {
+      font-size: 14px;
+    }
+
+    .fa-bell {
+      font-size: 18px;
+    }
+  }
+}
+
+  

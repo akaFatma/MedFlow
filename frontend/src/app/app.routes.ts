@@ -13,6 +13,8 @@ import { InfermierLandingPageComponent } from './pages/infermier-landing-page/in
 import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
+import { LaborantinComponent } from './pages/laborantin/laborantin.component';  
+
  
 export const routes: Routes = [
    { path: 'HomePage', component: HomePageComponent},
@@ -53,8 +55,11 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ['Médecin', 'Patient'] }
     },
-  
-   { path: '**', redirectTo: 'HomePage', pathMatch: 'full' }
+    { path: 'laborantin', 
+      component: LaborantinComponent, 
+      },
+    
+   { path: '**', redirectTo: 'laborantin', pathMatch: 'full' }
   
  ];
 
