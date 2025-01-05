@@ -116,6 +116,8 @@ export class AuthService {
       return '/soins'; // Default landing page for other users
     } else if (role === 'Laborantin') {
       return '/laborantin'; // Default landing page for other users
+    }else if (role === 'Radiologue') {
+      return '/radiologue'; // Default landing page for other users
     }
     return '/'; // Default return value if no role matches
   }

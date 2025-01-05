@@ -5,13 +5,13 @@
     <h3>Prescription</h3>
     <div class="text-group">
       <div class="description-text">
-          {{prescription}}
+          {{ prescription }}
       </div>
     </div>
   </div>
 
   <div class="result-section">
-    <h3>Resultat</h3>
+    <h3>Résultat</h3>
     <div class="result-fields">
       <div class="input-group">
         <label>Mesure clinique</label>
@@ -36,23 +36,25 @@
   </div>
 
   <div *ngIf="mesures.length" class="added-measures">
-    <h3>Added Measures:</h3>
+    <h3>Mesures ajoutées:</h3>
     <ul>
-      <li *ngFor="let mesure of mesures" >
-             {{ mesure.mesure }}: {{ mesure.valeur }}
+      <li *ngFor="let mesure of mesures">
+        {{ mesure.mesure }}: {{ mesure.valeur }}
       </li>
     </ul>
   </div>
 
   <div class="action-buttons">
     <div class="button-group">
-      <!-- Now the 'Générer graphique' button is functional -->
       <button class="btn btn-secondary" (click)="generateGraph()">Générer graphique</button>
-      
     </div>
     <div class="button-group">
-      <!-- Button for confirming, you can implement the confirmation logic later -->
       <button class="btn btn-primary" (click)="sendToBackend()">Confirmer</button>
     </div>
+  </div>
+
+  <!-- Canvas for the graph -->
+  <div *ngIf="showGraph" class="chart-container">
+    <canvas #chartCanvas></canvas>
   </div>
 </div>

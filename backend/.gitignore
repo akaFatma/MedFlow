@@ -1,3 +1,6 @@
 \venv
 require.txt
 __pycache__/
+*.pyc
+# Django settings
+settings.py

@@ -62,6 +62,7 @@ def get_dpi(request):
     
 
 @csrf_exempt
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def creer_dpi(request): 
     if request.method == 'POST':
         try:
@@ -147,6 +148,7 @@ def creer_dpi(request):
 
 
 @api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def rediger_soin(request):
     try:
         body = json.loads(request.body)
@@ -179,7 +181,9 @@ def rediger_soin(request):
     except Exception as e:
         return JsonResponse({'error': f'Erreur lors du traitement des données: {str(e)}'}, status=400)
     return JsonResponse({'error': 'Requête invalide'}, status=400)
+
 @csrf_exempt
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def commencer_consultation(request):
     if request.method == 'POST':
         try:
@@ -338,6 +342,7 @@ def MedecinView(request):
 
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def get_patient_consultations(request):
     try:
         nss = request.query_params.get('nss')
@@ -363,6 +368,7 @@ def get_patient_consultations(request):
 
 @csrf_exempt
 @api_view(['POST'])  # Attends une requête POST avec l'ID de la consultation dans le corps  # Assure que seul un utilisateur authentifié peut appeler cette fonction
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def get_user_info(request):
     # Étape 1 : Charger et valider le corps de la requête
     try:
@@ -388,7 +394,7 @@ def get_user_info(request):
     bilansradiologiques = BilanRadiologique.objects.filter(idc=consultation.id) 
     compte_rendus = BilanRadiologique.objects.filter(idc=consultation.id).values_list('compte_rendu', flat=True)
     resultats = BilanBiologique.objects.filter(idc=consultation.id).values_list('resultat', flat=True)
-    image_urls = BilanRadiologique.objects.filter(idc=consultation.id).values_list('image_url', flat=True)
+    images = BilanRadiologique.objects.filter(idc=consultation.id).values_list('image', flat=True)
     ordo=consultation.ordonnance
     noms = ordo.traitements.all().values_list('nom', flat=True)
     doses = ordo.traitements.all().values_list('dose', flat=True)
@@ -425,8 +431,8 @@ def get_user_info(request):
         ] if compte_rendus else [],
 
         'bilans_radiologiques_url_image': [
-           image_url for image_url in image_urls
-        ] if image_urls else [],
+           image for image in images
+        ] if images else [],
     }
     print(data)
 
@@ -435,6 +441,7 @@ def get_user_info(request):
 
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def get_patient_soins(request):
     try:
         nss = request.query_params.get('nss')
@@ -458,7 +465,6 @@ def get_patient_soins(request):
 @csrf_exempt  # Assure que l'utilisateur est authentifié
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 def get_nss_info(request):
-    print(request)
 
     userr = request.GET.get('username') 
     if not userr:
@@ -471,9 +477,34 @@ def get_nss_info(request):
     print(nss)
     return Response({'nss': nss}) # hna nbeato el reponse 
 
+from django.http import FileResponse
+from django.conf import settings
+import os
+@api_view(["GET"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+def get_radiography_image(request):
+    url = request.GET.get('id') 
+    if not url:
+        return Response({"error": "Aucune image"}, status=400)
+    
+    image_path = os.path.join(settings.MEDIA_ROOT, url)
+
+    # Check if the image file exists
+    if not os.path.exists(image_path):
+        return Response({'error': 'Image introuvable.'}, status=404)
+
+    # Return the image file as a response
+    try:
+        print("reponse :", FileResponse(open(image_path, 'rb')))
+        return FileResponse(open(image_path, 'rb'), content_type='image/jpeg')
+    except Exception as e:
+        # Handle any unexpected errors
+        return Response({'error': f"Erreur lors de la récupération de l'image: {str(e)}"}, status=500)
+
 
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def get_ordonnance(request, id):
     try:
         # Retrieve the ordonnance by ID
@@ -489,6 +520,7 @@ def get_ordonnance(request, id):
         return Response({'error': 'Ordonnance introuvable'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def valider_ordonnance(request, id):
     ordonnance = Ordonnance.objects.get(id=id)
     if not ordonnance:
@@ -505,6 +537,7 @@ def valider_ordonnance(request, id):
     return Response({'message': f"Ordonnance {status_message}"}, status=200)
 
 @api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def distribuer_medicament(request):
     ordonnance_id = request.data.get('ordonnance_id')
     traitement_id = request.data.get('traitement_id')
@@ -528,6 +561,7 @@ def distribuer_medicament(request):
     return Response(serializer.data, status=201)
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def export_bilans_bio(request):
     biologiques = BilanBiologique.objects.all()
     if not biologiques:
@@ -537,6 +571,7 @@ def export_bilans_bio(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def export_bilans_radio(request):
     radiologiques = BilanRadiologique.objects.all()
     if not radiologiques:
@@ -554,6 +589,7 @@ def export_radio(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def envoi_pres_bio(request):
     id = request.GET.get('id') 
     if not id:
@@ -568,6 +604,7 @@ def envoi_pres_bio(request):
     return Response(bilan.prescription, status=200)
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def envoi_pres_radio(request):
     id = request.GET.get('id') 
     if not id:
@@ -582,6 +619,7 @@ def envoi_pres_radio(request):
     return Response(bilan.prescription, status=200)
 
 @csrf_exempt
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def remplir_bilan_bio(request):
     if request.method == 'POST':
         try:
@@ -617,6 +655,7 @@ def remplir_bilan_bio(request):
     return JsonResponse({"error": "Méthode non autorisée. Utilisez POST."}, status=405)
 
 @csrf_exempt
+@authentication_classes([SessionAuthentication, TokenAuthentication])
 def remplir_bilan_radio(request):
     if request.method == 'POST':
         try:
