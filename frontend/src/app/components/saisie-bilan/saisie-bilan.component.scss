@@ -240,3 +240,14 @@ $font-family: "Inter", sans-serif;
       }
     }
   }
+
+  .chart-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+  

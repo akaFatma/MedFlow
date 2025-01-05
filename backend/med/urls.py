@@ -19,6 +19,7 @@ urlpatterns = [
     path('radio-pres', views.envoi_pres_radio, name='prescription'),
     path('saisie-bilan-bio', views.remplir_bilan_bio, name='remplir bilan'),
     path('saisie-bilan-radio', views.remplir_bilan_radio, name='remplir bilan'),
+    path('image-radio', views.get_radiography_image, name='Envoi image radio'),
     
     path('ordonnance/<int:id>/', views.get_ordonnance, name='get_ordonnance'),
     path('ordonnances/<int:id>/valider', views.valider_ordonnance, name='valider_ordonnance'),

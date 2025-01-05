@@ -23,51 +23,72 @@ export const routes: Routes = [
    { path: 'HomePage', component: HomePageComponent},
    { path: 'login', component: LoginPageComponent},
    { path: 'unauthorized', component: UnauthorizedPageComponent },
+
    { 
      path: 'medecin-landing', 
      component: MedecinLandingPageComponent, 
      canActivate: [RoleGuard], 
-     data: { role: 'Médecin' }
+     data: { roles: ['Médecin'] }
    },
+
    { 
      path: 'dossier-patient/:nss', 
      component: ConsulterDPIPovPatientComponent,
      canActivate: [RoleGuard],
      data: { roles: ['Médecin', 'Patient'] }
    },
+
    { 
     path: 'add-dpi', 
     component: AddDPIComponent,
     canActivate: [RoleGuard],
     data: { roles: ['Médecin', 'Administratif'] }
   },
+
   {
     path : 'new-consultation' ,
     component : NouvelleConsultationComponent,
     canActivate: [RoleGuard],
     data: { roles: ['Médecin'] }
     },
+
   { 
     path: 'soins', 
     component: InfermierLandingPageComponent,
     canActivate: [RoleGuard],
     data: { roles: ["Infirmier"] }
   },
+
    { path: 'consult-patient', 
     component: ConsultPatientComponent, 
     canActivate: [RoleGuard],
     data: { roles: ['Médecin', 'Patient'] }
     },
+
     { path: 'laborantin', 
       component: LaborantinComponent, 
-      },
-      { path: 'saisie-bilan', component: SaisieBilanComponent },
-      { path: 'saisie-bilan-radio', component: SaisieBilanRadioComponent },
+      canActivate: [RoleGuard],
+      data: { roles: ['Laborantin'] }
+    },
+
+    { path: 'saisie-bilan', 
+      component: SaisieBilanComponent,
+      canActivate: [RoleGuard],
+      data: { roles: ['Laborantin'] } },
+
+    { path: 'saisie-bilan-radio', 
+      component: SaisieBilanRadioComponent,
+      canActivate: [RoleGuard],
+      data: { roles: ['Radiologue'] }  },
     
-      { path: 'radiologue', component: RadiologueComponent },  // Add the route for RadiologueComponent
+      { path: 'radiologue', 
+        component: RadiologueComponent, 
+        canActivate: [RoleGuard],
+        data: { roles: ['Radiologue'] } 
+       },  
   
-      // Redirect all invalid paths to Laborantin
-      { path: '**', redirectTo: 'radiologue', pathMatch: 'full' },
+
+      { path: '**', redirectTo: 'HomePage', pathMatch: 'full' },
   
  ];
 

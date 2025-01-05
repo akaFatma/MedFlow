@@ -89,7 +89,7 @@ export class SaisieBilanRadioComponent implements OnInit {
       next: (response) => {
         console.log('Compte rendu et image envoyés avec succès :', response);
         alert('Les données ont été envoyées avec succès.');
-        this.router.navigate(['/success']); // Navigation vers une page de succès, si nécessaire
+
       },
       error: (error) => {
         console.error('Erreur lors de l\'envoi des données :', error);
