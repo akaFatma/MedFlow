@@ -1,25 +1,38 @@
-<div class="h-screen w-64 bg-white-800 text-white flex flex-col p-4">
+<aside [class.hidden]="!isSidebarOpen && isMobileView" class="sidebar">
   <!-- Logo Section -->
-  <div class="mb-6">
-    <img src="/logo.svg" alt="MedFlow Logo" class="logo-image mx-auto" />
+  <div class="logo-container">
+    <img src="../../../assets/Vector.png" alt="MedFlow Icon" class="logo-svg" />
+    <img
+      src="../../../assets/MedFlowLogo.svg"
+      alt="MedFlow Logo"
+      class="logo-text"
+    />
   </div>
 
   <!-- Menu Section -->
-  <div class="flex-grow flex flex-col space-y-4">
-    <!-- First Button -->
-    <button
-      class="flex items-center p-2 w-full text-left mb-2 rounded bg-gray-700 hover:bg-gray-600 transition"
-    >
-      <img src="assets/manage.svg" alt="Gestion des comptes" />
-      <span class="text-sm font-medium">Gestion des comptes</span>
-    </button>
+  <div class="menu">
+    <!-- Dashboard -->
+    <div class="menu-item" (click)="navigateTo('dashboard')">
+      <fa-icon [icon]="faHome" class="menu-icon"></fa-icon>
+      <span>Dashboard</span>
+    </div>
 
-    <!-- Second Button -->
-    <button
-      class="flex items-center p-2 w-full text-left mb-2 rounded bg-blue-600 hover:bg-blue-500 transition"
-    >
-      <img src="assets/add.svg" alt="Ajouter dossier" />
-      <span class="text-sm font-medium">Ajouter dossier</span>
-    </button>
+    <!-- Gestion des Patients -->
+    <div class="menu-item fixed" (click)="navigateTo('patients')">
+      <fa-icon [icon]="faUserGear" class="menu-icon"></fa-icon>
+      <span>Gestion des patients</span>
+    </div>
   </div>
-</div>
+</aside>
+
+<!-- Hamburger Menu -->
+<button
+  *ngIf="isMobileView"
+  class="hamburger-menu"
+  (click)="toggleSidebar()"
+  type="button"
+  aria-label="Toggle navigation menu"
+  title="Toggle Menu"
+>
+  <fa-icon [icon]="faBars" class="hamburger-icon"></fa-icon>
+</button>

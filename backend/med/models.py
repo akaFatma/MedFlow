@@ -181,12 +181,7 @@ class BilanRadiologique(models.Model):
     compte_rendu = models.TextField(
         help_text="Compte-rendu du bilan radiologique"
     )
-    image_url = models.URLField(
-        max_length=200,
-        null=True,
-        blank=True,
-        help_text="Lien vers l'image radiologique (optionnel)"
-    )
+    image= models.ImageField(upload_to='radiologie/', blank=True, null=True)
 
     def __str__(self):
         return f"Bilan Radiologique : {self.prescription} pour la consultation du {self.consultation.date}"

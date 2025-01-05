@@ -28,8 +28,8 @@ interface Consultation {
 })
 export class ConsultPatientComponent implements OnInit {
   errorMessage: string = '';
-  CONSULTATION: any ;
- 
+  CONSULTATION: any;
+
   showRadio: boolean = false;
   loading: boolean = false;
 
@@ -39,6 +39,9 @@ export class ConsultPatientComponent implements OnInit {
     private router: Router
   ) {}
 
+  goToHomePage() {
+    this.router.navigate(['/HomePage']);
+  }
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       const id = params['id'];

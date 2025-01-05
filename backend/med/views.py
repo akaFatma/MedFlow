@@ -16,7 +16,10 @@ from .models import (
     Soin,
     Examen,
     Traitement, Distribution  )
-from .serializers import PatientSerializer, RadiologiqueSerializer ,PatientMinimalSerializer, SoinSerializer, ConsultationMinimalSerializer, DistributionSerializer, OrdonnanceSerializer
+from .serializers import( PatientSerializer, PatientMinimalSerializer,
+                          SoinSerializer, ConsultationMinimalSerializer,
+                            DistributionSerializer, OrdonnanceSerializer,
+                              BiologiqueSerializer, RadiologiqueSerializer)
 from users.decorators import role_required
 from users.serializers import UserSerializer
 from .utils import generate_qrcode
@@ -274,7 +277,7 @@ def commencer_consultation(request):
                                 prescription=consigne,
                                 consultation=consultation,
                                 date_emission=now() ,
-                                resultat='test'                                
+                                resultat=''                                
                             )
                         else:
                             bilan_radio = BilanRadiologique.objects.create(
@@ -282,8 +285,8 @@ def commencer_consultation(request):
                                 prescription=consigne,
                                 consultation=consultation,
                                 date_emission=now() ,
-                                compte_rendu='test',
-                                image_url=None                               
+                                compte_rendu='',
+                                image=None                          
                             )
                         created_exams.append(exam)
                         print(f"Examen créé: {exam.id} avec consigne: {consigne}")
@@ -430,6 +433,7 @@ def get_user_info(request):
     # Étape 4 : Retourner la réponse au client
     return Response({'data': data}, status=200)
 
+
 @api_view(['GET'])
 def get_patient_soins(request):
     try:
@@ -523,6 +527,23 @@ def distribuer_medicament(request):
     serializer = DistributionSerializer(distribution)
     return Response(serializer.data, status=201)
 
+@api_view(['GET'])
+def export_bilans_bio(request):
+    biologiques = BilanBiologique.objects.all()
+    if not biologiques:
+        return Response({'error': 'Aucun bilan biologique trouvé'}, status=status.HTTP_404_NOT_FOUND)
+    serializer = BiologiqueSerializer(biologiques, many=True)
+    print(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def export_bilans_radio(request):
+    radiologiques = BilanRadiologique.objects.all()
+    if not radiologiques:
+        return Response({'error': 'Aucun bilan radiologique trouvé'}, status=status.HTTP_404_NOT_FOUND)
+    serializer = RadiologiqueSerializer(radiologiques, many=True)
+    print(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def export_radio(request):
@@ -532,7 +553,100 @@ def export_radio(request):
     serializer = RadiologiqueSerializer(radiologiques, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def envoi_pres_bio(request):
+    id = request.GET.get('id') 
+    if not id:
+        return Response({"error": "L'identifiant (id) est requis."}, status=400)
 
+    try:
+        bilan = BilanBiologique.objects.get(id=id)
+    except BilanBiologique.DoesNotExist:
+        return Response({'error': 'Bilan introuvable.'}, status=404)
+    
+
+    return Response(bilan.prescription, status=200)
+
+@api_view(['GET'])
+def envoi_pres_radio(request):
+    id = request.GET.get('id') 
+    if not id:
+        return Response({"error": "L'identifiant (id) est requis."}, status=400)
+
+    try:
+        bilan = BilanRadiologique.objects.get(id=id)
+    except BilanRadiologique.DoesNotExist:
+        return Response({'error': 'Bilan introuvable.'}, status=404)
+    
+
+    return Response(bilan.prescription, status=200)
+
+@csrf_exempt
+def remplir_bilan_bio(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            idb = request.GET.get('id') 
+            measures = json.loads(body.get('measures'))
+            print(idb)
+            print(measures)
+            if not idb:
+                return JsonResponse({"error": "L'identifiant du bilan (idb) est requis."}, status=400)
+
+            try:
+                bilan = BilanBiologique.objects.get(id=idb)
+            except BilanBiologique.DoesNotExist:
+                return JsonResponse({"error": "Bilan radiologique introuvable."}, status=404)
+            
+            resultat= "\n".join(
+               f"{item.get('mesure', '')} : {item.get('valeur', '')}" for item in measures
+            )
+
+            bilan.resultat = resultat
+            bilan.save()
+
+            # Réponse en cas de succès
+            return JsonResponse({"message": "Bilan ajouté avec succès.", "bilan_id": bilan.id}, status=201)
+
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Le corps de la requête doit être au format JSON valide."}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
+
+    # Réponse pour les méthodes non autorisées
+    return JsonResponse({"error": "Méthode non autorisée. Utilisez POST."}, status=405)
+
+@csrf_exempt
+def remplir_bilan_radio(request):
+    if request.method == 'POST':
+        try:
+            idb = request.GET.get('id') 
+            if not idb:
+                return JsonResponse({"error": "L'identifiant du bilan (idb) est requis."}, status=400)
+
+            try:
+                bilan = BilanRadiologique.objects.get(id=idb)
+            except BilanRadiologique.DoesNotExist:
+                return JsonResponse({"error": "Bilan radiologique introuvable."}, status=404)
+
+            # Handle the file upload
+            image = request.FILES.get('image')  # Retrieve the image from the request
+            compte_rendu = request.POST.get('compteRendu')  # Retrieve the compte_rendu from the form data
+            
+            if image:
+                bilan.image = image  # Assign the uploaded image to the model
+            if compte_rendu:
+                bilan.compte_rendu = compte_rendu  # Assign the compte_rendu to the model
+
+            bilan.save()
+
+            # Réponse en cas de succès
+            return JsonResponse({"message": "Bilan ajouté avec succès.", "bilan_id": bilan.id}, status=201)
+
+        except Exception as e:
+            return JsonResponse({"error": f"Erreur inattendue : {str(e)}"}, status=500)
+
+    return JsonResponse({"error": "Méthode non autorisée. Utilisez POST."}, status=405)
 
 
 

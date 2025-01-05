@@ -13,11 +13,16 @@ import { InfermierLandingPageComponent } from './pages/infermier-landing-page/in
 import { AddDPIComponent } from './pages/add-dpi/add-dpi.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
-
+import { LaborantinComponent } from './pages/laborantin/laborantin.component';
+import { SaisieBilanComponent } from './components/saisie-bilan/saisie-bilan.component';
+import { SaisieBilanRadioComponent } from './components/saisie-bilan-radio/saisie-bilan-radio.component';
+import { RadiologueComponent } from './pages/radiologue/radiologue.component';
 export const routes: Routes = [
   { path: 'HomePage', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'unauthorized', component: UnauthorizedPageComponent },
+  { path: 'laborantin', component: LaborantinComponent },
+
   {
     path: 'medecin-landing',
     component: MedecinLandingPageComponent,
@@ -30,12 +35,12 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ['Médecin', 'Patient'] },
   },
-  {
-    path: 'add-dpi',
-    component: AddDPIComponent,
-    canActivate: [RoleGuard],
-    data: { roles: ['Médecin', 'Administratif'] },
-  },
+  //  {
+  //   path: 'add-dpi',
+  //   component: AddDPIComponent,
+  //   canActivate: [RoleGuard],
+  //   data: { roles: ['Médecin', 'Administratif'] }
+  // },
   {
     path: 'new-consultation',
     component: NouvelleConsultationComponent,
@@ -54,6 +59,11 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ['Médecin', 'Patient'] },
   },
+  { path: 'laborantin', component: LaborantinComponent },
+  { path: 'saisie-bilan', component: SaisieBilanComponent },
+  { path: 'saisie-bilan-radio', component: SaisieBilanRadioComponent },
 
-  { path: '**', redirectTo: 'HomePage', pathMatch: 'full' },
+  { path: 'radiologue', component: RadiologueComponent },
+
+  { path: '**', redirectTo: 'laborantin', pathMatch: 'full' },
 ];

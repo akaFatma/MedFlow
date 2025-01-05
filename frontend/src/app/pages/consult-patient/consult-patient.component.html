@@ -1,5 +1,23 @@
 <div style="min-height: 200vh; background-color: #f0f4fa; padding-top: 30px">
   <!-- NAVBAR -->
+  <button
+    style="
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 16px;
+      padding: 8px 12px;
+      background-color: #b20000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    "
+    (click)="goToHomePage()"
+  >
+    Sign Out
+  </button>
   <div class="navbar w-11/12 mx-auto flex items-center py-5" style="gap: 20px">
     <div class="w-[30%] flex justify-end">
       <img src="/logo.svg" alt="MedFlow Logo" class="w-1/2" />
@@ -116,8 +134,7 @@
 
       <!-- ORDONNNANNANANANNANCE-->
 
-      <div  class="Ordonnance"    style = "margin-bottom: 100px" >
-
+      <div class="Ordonnance" style="margin-bottom: 100px">
         <div class="header">
           <div class="hospitalInfo">
             <p>Dr. {{ CONSULTATION.data.medecin }}</p>
@@ -175,16 +192,16 @@
         "
       ></div>
       <div
-      class="consultation-container"
-      style="
-        margin: 20px auto; /* Center horizontally */
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 12px;
-        width: 100%; /* Limit the width for centering */
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
-      "
-    >
+        class="consultation-container"
+        style="
+          margin: 20px auto; /* Center horizontally */
+          padding: 20px;
+          background-color: #f9f9f9;
+          border-radius: 12px;
+          width: 100%; /* Limit the width for centering */
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+        "
+      >
         <!-- Header -->
         <div
           class="header-grid"
@@ -212,23 +229,23 @@
             let i = index
           "
         >
-        <div style="text-align: center">
-          <p>
-            {{
-              CONSULTATION.data.bilans_radiologiques_prescription[i] ||
-                "Aucun résultat disponible"
-            }}
-          </p>
-        </div>
+          <div style="text-align: center">
+            <p>
+              {{
+                CONSULTATION.data.bilans_radiologiques_prescription[i] ||
+                  "Aucun résultat disponible"
+              }}
+            </p>
+          </div>
 
-        <div style="text-align: center">
-          <p>
-            {{
-              CONSULTATION.data.bilans_radiologiques_compte_rendu[i] ||
-                "Aucun résultat disponible"
-            }}
-          </p>
-        </div>
+          <div style="text-align: center">
+            <p>
+              {{
+                CONSULTATION.data.bilans_radiologiques_compte_rendu[i] ||
+                  "Aucun résultat disponible"
+              }}
+            </p>
+          </div>
 
           <div style="text-align: center">
             <button class="download-button">Radiographie</button>
@@ -286,7 +303,7 @@
                 justify-content: center;
               "
             >
-              RESULTAS
+              <<<<<<< HEAD RESULTAS ======= RESULTATS >>>>>>> origin/mlk
             </div>
           </div>
 

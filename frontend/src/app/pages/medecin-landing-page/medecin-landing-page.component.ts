@@ -11,7 +11,6 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { QrScannerComponent } from '../../components/qr-scanner/qr-scanner.component';
 
-
 @Component({
   selector: 'app-medecin-landing-page',
   imports: [
@@ -20,25 +19,25 @@ import { QrScannerComponent } from '../../components/qr-scanner/qr-scanner.compo
     BienvenuComponentComponent,
     SearchBarComponent,
     MedecinTableComponent,
-    QrScannerComponent
+    QrScannerComponent,
   ],
   templateUrl: './medecin-landing-page.component.html',
-  styleUrl: './medecin-landing-page.component.scss'
+  styleUrl: './medecin-landing-page.component.scss',
 })
 export class MedecinLandingPageComponent implements OnInit {
-  
   results: Patient[] = [];
   userName: string = '';
-  isQrScannerVisible: boolean = false; 
- 
+  isQrScannerVisible: boolean = false;
+
   constructor(
     private searchService: SearchService,
-    private patientService : PatientService,
-    private authService : AuthService,
-    private router : Router
-  
+    private patientService: PatientService,
+    private authService: AuthService,
+    private router: Router
   ) {}
-
+  goToHomePage() {
+    this.router.navigate(['/HomePage']);
+  }
   ngOnInit(): void {
     // Load all patients when component initializes
     this.loadAllPatients();
@@ -53,10 +52,10 @@ export class MedecinLandingPageComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching patients:', error);
         this.results = [];
-      }
+      },
     });
   }
-   onSearch(nss: number): void {
+  onSearch(nss: number): void {
     if (!nss) {
       this.loadAllPatients(); //if search is cleared load patients again
       return;
@@ -67,20 +66,19 @@ export class MedecinLandingPageComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching data:', error);
-        this.results = []; 
-      }
+        this.results = [];
+      },
     });
+  }
 
-}
+  onScanQR() {
+    this.isQrScannerVisible = true;
+  }
+  onCloseScanner() {
+    this.isQrScannerVisible = false;
+  }
 
-onScanQR() {
-  this.isQrScannerVisible = true;
-}
-onCloseScanner() {
-  this.isQrScannerVisible = false;
-}
-
-onConsulter(patient: Patient): void { 
-  this.router.navigate(['/dossier-patient', patient.nss]);
-}
+  onConsulter(patient: Patient): void {
+    this.router.navigate(['/dossier-patient', patient.nss]);
+  }
 }

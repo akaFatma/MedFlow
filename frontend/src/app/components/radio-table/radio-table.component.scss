@@ -1,0 +1,155 @@
+.labo-table {
+    margin-top: 5%;
+    width: 90%;
+    overflow-x: auto;
+    margin-left: 3%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 2%;
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-family: 'Inter';
+  
+      thead {
+        background-color: white;
+  
+        th {
+          padding: 10px;
+          font-weight: 500;
+          font-size: 15px;
+          color: #666666;
+          border-bottom: 1px solid #e6eff5;
+        }
+      }
+  
+      tbody {
+        tr {
+          td {
+            padding: 10px;
+  
+            .fait {
+              background-color: #f4fcf7;
+              border: 1px solid #48c5a5;
+              border-radius: 20px;
+              color: #48c5a5;
+              padding: 5px 10px;
+              display: inline-block;
+              text-align: center;
+              width: 100px;
+            }
+  
+            .en-attente {
+              background-color: #ffeaea;
+              border: 1px solid #cf3030;
+              border-radius: 20px;
+              color: #cf3030;
+              padding: 5px 10px;
+              display: inline-block;
+              text-align: center;
+              width: 100px;
+            }
+  
+            .ouvrir-button,
+            .completer-button {
+              background-color: #027cc0;
+              color: white;
+              border: none;
+              border-radius: 20px;
+              padding: 10px 20px; /* Consistent padding for equal space */
+              width: 140px; /* Fixed width */
+              height: 40px; /* Fixed height */
+              font-family: 'Inter';
+              font-size: 14px;
+              font-weight: 600;
+              text-align: center; /* Horizontal centering */
+              line-height: 1.5; /* Balanced vertical alignment */
+              display: flex; /* Enable flexbox */
+              justify-content: center; /* Horizontally center text */
+              align-items: center; /* Vertically center text */
+              white-space: nowrap; /* Prevent wrapping of text */
+              cursor: pointer;
+            }
+  
+            .ouvrir-button:hover {
+              background-color: #027cc0;
+            }
+  
+            .completer-button {
+              background-color: #027cc0; /* Unique color for "Compléter bilan" */
+            }
+  
+            .completer-button:hover {
+              background-color: #027cc0;
+            }
+          }
+        }
+      }
+    }
+  
+    /* Media query for small screens (max width: 780px) */
+    @media (max-width: 780px) {
+      margin-left: 0; /* Remove extra margin on smaller screens */
+      width: 100%; /* Make table container take full screen width */
+      padding: 1%; /* Reduce padding */
+  
+      table {
+        font-size: 12px; /* Adjust font size for readability */
+      }
+  
+      .ouvrir-button,
+      .completer-button {
+        width: auto; /* Adjust width dynamically */
+        font-size: 12px; /* Reduce font size for small screens */
+        padding: 8px 12px; /* Adjust padding for smaller buttons */
+      }
+    }
+    @media (max-width: 460px) {
+        margin-left: 0;
+        width: 100%;
+        padding: 1%;
+    
+        table {
+          font-size: 12px;
+    
+          thead {
+            display: none; /* Hide the table headers for smaller screens */
+          }
+    
+          tbody {
+            tr {
+              display: flex;
+              flex-direction: column;
+              margin-bottom: 10px;
+              border: 1px solid #e6eff5;
+              border-radius: 10px;
+              text-align: left; /* Align content to the left */
+    
+              td {
+                display: flex;
+                justify-content: flex-start; /* Align text and data to the left */
+                padding: 10px;
+                font-size: 14px;
+    
+                &:before {
+                  content: attr(data-label); /* Add labels for each cell */
+                  font-weight: bold;
+                  color: #666666;
+                  margin-right: 10px; /* Add spacing between label and content */
+                }
+              }
+            }
+          }
+        }
+    
+        .ouvrir-button,
+        .completer-button {
+          width: 100%; /* Buttons take full width */
+          font-size: 14px; /* Adjust font size */
+          padding: 8px; /* Adjust padding */
+          text-align: left; /* Align text inside the button to the left */
+        }
+      }
+    }

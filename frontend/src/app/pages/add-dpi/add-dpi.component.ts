@@ -65,6 +65,10 @@ export class AddDPIComponent implements OnInit {
       }),
     });
   }
+
+  goToHomePage() {
+    this.router.navigate(['/HomePage']);
+  }
   ngOnInit(): void {
     this.userName = this.authService.getUserName();
   }
@@ -97,21 +101,14 @@ export class AddDPIComponent implements OnInit {
 
   // Va à l'étape suivante
   goToNextStep(): void {
-    if (this.currentStep < 3) {
-      this.currentStep++;
-    }
+    this.currentStep++;
   }
 
-  // Va à l'étape précédente
   goToPreviousStep(): void {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
-    if (this.currentStep === 1) {
-      this.router.navigate(['/HomePage']);
-    }
   }
-
   // Retourne le texte du bouton selon l'étape
   getButtonText(): string {
     if (this.currentStep === 3) {
@@ -121,9 +118,13 @@ export class AddDPIComponent implements OnInit {
     }
   }
 
-  // Soumet le formulaire et envoie les données au backend
+  navigateToHome(): void {
+    this.router.navigate(['/HomePage']);
+  }
+
   onValidate(): void {
     if (this.patientForm.valid) {
+      this.currentStep = 4; // Explicitly set to step 3
       this.sendDataToBackend(); // Envoi final des données au backend
       this.successTitle = 'DPI créé avec succès';
       this.successDescription = 'Le dossier patient a été enregistré';

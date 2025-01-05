@@ -11,15 +11,20 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-consulter-dpipov-patient',
   template: `
-  <app-medical-history [nss]="patientNSS"></app-medical-history>
-  <app-soins-history [nss]="patientNSS"></app-soins-history>
-`,
-  imports: [CommonModule, MedicalHistoryComponent, SoinsHistoryComponent, PersonalInfoCardComponent, BienvenuComponentComponent],
+    <app-medical-history [nss]="patientNSS"></app-medical-history>
+    <app-soins-history [nss]="patientNSS"></app-soins-history>
+  `,
+  imports: [
+    CommonModule,
+    MedicalHistoryComponent,
+    SoinsHistoryComponent,
+    PersonalInfoCardComponent,
+    BienvenuComponentComponent,
+  ],
   templateUrl: './consulter-dpipov-patient.component.html',
-  styleUrls: ['./consulter-dpipov-patient.component.scss']
+  styleUrls: ['./consulter-dpipov-patient.component.scss'],
 })
 export class ConsulterDPIPovPatientComponent implements OnInit {
-
   isDoctor: boolean = false;
   patientNSS: number | null = null; // To store the patient's NSS from the route parameter
 
@@ -27,7 +32,7 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
     private authService: AuthService,
     private patientService: PatientService,
     private route: ActivatedRoute,
-    private router : Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +46,12 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
     console.log('Patient NSS:', this.patientNSS);
   }
 
-
+  goToHomePage() {
+    this.router.navigate(['/HomePage']);
+  }
   handleNewConsultation(): void {
-    this.router.navigate(['/new-consultation'], { queryParams: {'nss' : this.patientNSS}});
+    this.router.navigate(['/new-consultation'], {
+      queryParams: { nss: this.patientNSS },
+    });
   }
 }
-
