@@ -1,65 +1,132 @@
-.header-container { 
-  
+.header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Add space between right-section and header-container */
   align-items: center;
-  background-color: #ffffff;
-  border: 1px solid #eaebf0;
-  border-radius: 20px;
   width: 90%;
-  padding: 0 30px;
   margin: 0 auto;
-  height: 70px;
+  padding: 10px 0;
 
-  .left-section {
+  .right-section {
     display: flex;
     align-items: center;
     gap: 10px;
 
-    .user-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #E8EAED;
-      color: #ffffff;
-      font-size: 24px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    .logo-icon {
+      width: 25px;
+      height: auto;
     }
 
-    .welcome-message {
-      font-family: "Inter", sans-serif;
-      font-size: 16px;
-      color: #666666;
+    .medflow-text {
+      height: 20px;
+      width: auto;
     }
   }
 
-  .fa-bell {
-    
-    font-size: 20px;
-    color: #666666;
-    
+  .header-container {
+    margin-left: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border: 1px solid #eaebf0;
+    border-radius: 20px;
+    background-color: #ffffff;
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .user-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .welcome-message {
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        color: #666666;
+      }
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    width: 100%; /* Adjust header width for medium screens */
+    padding: 10px;
+
+    .header-container {
+      margin-left: 10px; /* Reduce margin */
+      padding: 0 10px; /* Adjust padding */
+      flex-direction: column;
+    }
+
+    .right-section {
+      gap: 5px;
+
+      .logo-icon {
+        width: 20px; /* Reduce logo size */
+      }
+
+      .medflow-text {
+        height: 15px; /* Adjust text height */
+      }
+    }
   }
 
   @media (max-width: 768px) {
-    flex-wrap: wrap;
-    padding: 10px;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
 
-    .left-section {
-      gap: 5px;
+    .right-section,
+    .header-container {
+      width: 100%;
+      margin: 5px 0; /* Add margin between sections */
+      justify-content: center;
+    }
+
+    .header-container {
+      padding: 10px; /* Adjust padding */
+      border: none; /* Remove border for simplicity */
+      background-color: transparent; /* Optional: Transparent background for smaller screens */
+
+      .left-section {
+        flex-direction: column; /* Stack user icon and welcome message */
+        align-items: center;
+
+        .welcome-message {
+          font-size: 14px; /* Smaller font size */
+        }
+      }
     }
   }
 
   @media (max-width: 480px) {
-    .welcome-message {
-      font-size: 14px;
+    .right-section {
+      .logo-icon {
+        width: 15px; /* Further reduce logo size */
+      }
+
+      .medflow-text {
+        height: 12px; /* Smaller text height */
+      }
     }
 
-    .fa-bell {
-      font-size: 18px;
+    .header-container {
+      padding: 5px; /* Minimal padding */
+      .left-section {
+        gap: 5px; /* Smaller gap */
+        .user-icon {
+          width: 30px; /* Smaller icon */
+          height: 30px;
+        }
+
+        .welcome-message {
+          font-size: 12px; /* Smaller text size */
+        }
+      }
     }
   }
 }
-
-  
