@@ -1,0 +1,38 @@
+<div class="labo-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Date</th>
+          <th>ID du bilan</th>
+          <th>État</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bilan of bilans">
+          <td>{{ bilan.nom }}</td>
+          <td>{{ bilan.prenom }}</td>
+          <td>{{ bilan.date_emission }}</td>
+          <td>{{ bilan.id }}</td>
+          <td>
+            <span [ngClass]="{
+                  'fait': bilan.etat === 'fait',
+                  'en-attente': bilan.etat === 'en attente'
+                }">
+              {{ bilan.etat }}
+            </span>
+          </td>
+          <td>
+            <button *ngIf="bilan.etat === 'en attente'" class="completer-button" 
+                    (click)="onCompleterBilan(bilan.id)">
+              Compléter bilan
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

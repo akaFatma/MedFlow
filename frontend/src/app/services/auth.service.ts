@@ -114,6 +114,10 @@ export class AuthService {
       return '/'; // Retour par défaut en cas d'absence de token ou d'erreur
     } else if (role === 'Infirmier') {
       return '/soins'; // Default landing page for other users
+    } else if (role === 'Laborantin') {
+      return '/laborantin'; // Default landing page for other users
+    }else if (role === 'Radiologue') {
+      return '/radiologue'; // Default landing page for other users
     }
     return '/'; // Default return value if no role matches
   }

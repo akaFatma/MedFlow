@@ -1,5 +1,23 @@
 <div style="min-height: 200vh; background-color: #f0f4fa; padding-top: 30px">
   <!-- NAVBAR -->
+  <button
+    style="
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 16px;
+      padding: 8px 12px;
+      background-color: #b20000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    "
+    (click)="goToHomePage()"
+  >
+    Sign Out
+  </button>
   <div class="navbar w-11/12 mx-auto flex items-center py-5" style="gap: 20px">
     <div class="w-[30%] flex justify-end">
       <img src="/logo.svg" alt="MedFlow Logo" class="w-1/2" />
@@ -107,6 +125,7 @@
       <div
         style="
           height: 1px;
+          margin-bottom: 40px;
           background-color: #707b8144;
           margin-top: 5px;
           width: 100%;
@@ -115,59 +134,46 @@
 
       <!-- ORDONNNANNANANANNANCE-->
 
-      <div class="ordonnanceContainer">
-        <div class="Ordonnance">
-          <div class="header">
-            <div class="hospitalInfo">
-              <p>
-                Dr. {{ CONSULTATION.data.medecin }}
-              </p>
-            </div>
-            <div class="patientInfo">
-              <p>
-                Alger, le:
-                <span>{{ CONSULTATION.data.ordonnance.date_emission | date}}</span>
-              </p>
-              <p>
-                Nom:
-                <span>{{ CONSULTATION.data.patient.lastName }}</span>
-              </p>
-              <p>
-                Prénom(s):
-                <span>{{ CONSULTATION.data.patient.firstName }}</span>
-              </p>
-              <p>
-                Age:
-                <span>{{ CONSULTATION.data.patient.age }}</span> ans
-              </p>
-            </div>
+      <div class="Ordonnance" style="margin-bottom: 100px">
+        <div class="header">
+          <div class="hospitalInfo">
+            <p>Dr. {{ CONSULTATION.data.medecin }}</p>
+          </div>
+          <div class="patientInfo">
+            <p>
+              Alger, le:
+              <span>{{
+                CONSULTATION.data.ordonnance.date_emission | date
+              }}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="contenu">
+          <div class="title">
+            <h2 style="font-weight: bold; margin-top: 10px">ORDONNANCE</h2>
           </div>
 
-          <div class="contenu">
-            <div class="title">
-              <h2 style="font-weight: bold; margin-top: 10px">ORDONNANCE</h2>
-            </div>
-
-            <div class="prescriptions-container">
-              <div
-                *ngFor="
-                  let traitement of traitements;
-                  let i = index
-                "
-                class="prescription-line"
-              >
-                <p>
-                  Médicament:
-                  <span>{{ traitements.nom[i] }}</span>
-                </p>
-                <p>
-                  Dose: <span>{{ traitements.dose[i] }}</span>
-                </p>
-                <p>
-                  Instructions:
-                  <span>{{ traitements.consommation[i] }}</span>
-                </p>
-              </div>
+          <div class="prescriptions-container">
+            <!-- Dynamic Rows -->
+            <div
+              *ngFor="
+                let bilan of CONSULTATION.data
+                  .bilans_radiologiques_prescription;
+                let k = index
+              "
+              class="prescription-line"
+            >
+              <p>
+                Médicament: <span>{{ CONSULTATION.data.noms[k] }}</span>
+              </p>
+              <p>
+                Dose: <span>{{ CONSULTATION.data.doses[k] }}</span>
+              </p>
+              <p>
+                Instructions:
+                <span>{{ CONSULTATION.data.consommations[k] }}</span>
+              </p>
             </div>
           </div>
         </div>
@@ -188,10 +194,12 @@
       <div
         class="consultation-container"
         style="
-          margin: 20px;
+          margin: 20px auto; /* Center horizontally */
           padding: 20px;
           background-color: #f9f9f9;
           border-radius: 12px;
+          width: 100%; /* Limit the width for centering */
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
         "
       >
         <!-- Header -->
@@ -199,7 +207,7 @@
           class="header-grid"
           style="
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 2fr 2fr 2fr;
             gap: 15px;
             font-weight: bold;
             padding-bottom: 10px;
@@ -215,87 +223,120 @@
 
         <!-- Data Rows (Dynamic Version) -->
         <div
-        class="consultation-row"
-        *ngFor="
-          let bilan of CONSULTATION.data.bilans_radiologiques_prescription;
-          let i = index
-        "
-      >
-        <p>{{ CONSULTATION.data.bilans_radiologiques_prescription[i] }}</p>
-        <p>{{ CONSULTATION.data.bilans_radiologiques_compte_rendu[i] }}</p>
-        <p>{{ CONSULTATION.data.bilans_radiographiques[i] }}</p>
-        <div>
-          <button class="download-button">Radiographie</button>
-        </div>
-      </div>
-    </div>
-    <!-- Bilan Biologique -->
-    <!-- Bilan Biologique -->
-
-    <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
-      <p class="text-lg font-semibold">Bilans Biologique</p>
-      <div
-        style="
-          height: 1px;
-          background-color: #707b8144;
-          margin-top: 5px;
-          width: 100%;
-        "
-      ></div>
-      <div
-        class="consultation-container"
-        style="
-          margin: 20px;
-          padding: 20px;
-          background-color: #f9f9f9;
-          border-radius: 12px;
-        "
-      >
-        <!-- Header -->
-        <div
-          class="header-grid"
-          style="
-            display: grid;
-            grid-template-columns: 2fr 2fr;
-            gap: 80px;
-            font-weight: bold;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: center;
-          "
-        >
-          <div
-            style="display: flex; align-items: center; justify-content: center"
-          >
-            PRESCRIPTION MEDECIN
-          </div>
-          <div
-            style="display: flex; align-items: center; justify-content: center"
-          >
-            RESULTAS
-          </div>
-        </div>
-
-        <!-- Data Rows -->
-        <div
           class="consultation-row"
           *ngFor="
-            let bilan of CONSULTATION.data.bilans_biologiques_prescription
-          "
-          style="
-            display: grid;
-            grid-template-columns: 2fr 2fr;
-            gap: 80px;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd; /* Optional for row separation */
+            let bilan of CONSULTATION.data.bilans_radiologiques_prescription;
+            let i = index
           "
         >
           <div style="text-align: center">
-            {{bilan}}
+            <p>
+              {{
+                CONSULTATION.data.bilans_radiologiques_prescription[i] ||
+                  "Aucun résultat disponible"
+              }}
+            </p>
           </div>
+
           <div style="text-align: center">
-            {{ CONSULTATION.data.bilans_biologiques_resultat}}
+            <p>
+              {{
+                CONSULTATION.data.bilans_radiologiques_compte_rendu[i] ||
+                  "Aucun résultat disponible"
+              }}
+            </p>
+          </div>
+
+          <div style="text-align: center">
+            <button class="download-button" (click)="getImageRadio(i)">Radiographie</button>
+          </div>
+        </div>
+      </div>
+      <!-- Bilan Biologique -->
+      <!-- Bilan Biologique -->
+
+      <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
+        <p class="text-lg font-semibold">Bilans Biologique</p>
+        <div
+          style="
+            height: 1px;
+            background-color: #707b8144;
+            margin-top: 5px;
+            width: 100%;
+          "
+        ></div>
+        <div
+          class="consultation-container"
+          style="
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+          "
+        >
+          <!-- Header -->
+          <div
+            class="header-grid"
+            style="
+              display: grid;
+              grid-template-columns: 2fr 2fr;
+              gap: 80px;
+              font-weight: bold;
+              padding-bottom: 10px;
+              border-bottom: 1px solid #ddd;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              PRESCRIPTION MEDECIN
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            > 
+            RESULTATS
+            </div>
+          </div>
+
+          <!-- Data Rows -->
+          <div
+            class="consultation-row"
+            *ngFor="
+              let bilan of CONSULTATION.data.bilans_biologiques_prescription;
+              let j = index
+            "
+            style="
+              display: grid;
+              grid-template-columns: 2fr 2fr;
+              gap: 80px;
+              align-items: center;
+              padding: 10px 0;
+              border-bottom: 1px solid #ddd; /* Optional for row separation */
+            "
+          >
+            <div style="text-align: center">
+              <p>
+                {{
+                  CONSULTATION.data.bilans_biologiques_prescription[j] ||
+                    "Aucun résultat disponible"
+                }}
+              </p>
+            </div>
+            <div style="text-align: center">
+              {{
+                CONSULTATION.data.bilans_biologiques_resultat[j] ||
+                  "Aucun résultat disponible"
+              }}
+            </div>
           </div>
         </div>
       </div>

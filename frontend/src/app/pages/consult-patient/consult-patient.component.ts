@@ -3,22 +3,6 @@ import { ConsultationPatientService } from '../../services/consult-patient.servi
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-interface Consultation {
-  id: number;
-
-  data: {
-    date: string;
-    prescription?: string;
-
-    medecin: string;
-    resume: string;
-    bilanbiologique: string;
-    bilanradiologique: {
-      compte_rendu: string;
-    };
-  };
-}
-
 @Component({
   selector: 'app-consult-patient',
   standalone: true,
@@ -28,8 +12,7 @@ interface Consultation {
 })
 export class ConsultPatientComponent implements OnInit {
   errorMessage: string = '';
-  CONSULTATION: any ;
-  traitements: any ;
+  CONSULTATION: any;
 
   showRadio: boolean = false;
   loading: boolean = false;
@@ -40,6 +23,9 @@ export class ConsultPatientComponent implements OnInit {
     private router: Router
   ) {}
 
+  goToHomePage() {
+    this.router.navigate(['/HomePage']);
+  }
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       const id = params['id'];
@@ -56,8 +42,6 @@ export class ConsultPatientComponent implements OnInit {
       next: (data) => {
         console.log('Received Data:', data);
         this.CONSULTATION = data;
-        this.traitements = this.CONSULTATION.data.ordonnance.traitements;
-        console.log('Traitements:', this.traitements);
         this.loading = false;
       },
       error: (error) => {
@@ -97,4 +81,34 @@ export class ConsultPatientComponent implements OnInit {
   onViewRadio(): void {
     this.showRadio = !this.showRadio;
   }
+
+  getImageRadio(index: number): void {
+    if (!this.CONSULTATION?.data?.bilans_radiologiques_url_image?.[index]) {
+      console.error('No image URL found for index:', index);
+      return;
+    }
+    const imageURL = this.CONSULTATION.data.bilans_radiologiques_url_image[index];
+    
+    this.loading = true;
+    this.consultPatientService.getImageRadio(imageURL).subscribe({
+      next: (response: Blob) => {
+        // Create a blob URL and trigger download
+        const url = window.URL.createObjectURL(response);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `radiographie_${index + 1}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error downloading radiography:', error);
+        this.errorMessage = 'Erreur lors du téléchargement de la radiographie';
+        this.loading = false;
+      }
+    });
+  }
+  
 }
