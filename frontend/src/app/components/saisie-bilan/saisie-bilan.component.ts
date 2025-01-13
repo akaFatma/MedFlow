@@ -2,10 +2,22 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataset, Chart } from 'chart.js';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
 import { SaisieBilanService } from '../../services/saisie-bilan.service';
+
+// Import des éléments nécessaires de Chart.js
+import {
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  BarController,
+  Legend,
+  Title,
+  Tooltip,
+} from 'chart.js';
+
+Chart.register(CategoryScale, LinearScale, BarElement, BarController, Legend, Title, Tooltip);
 
 @Component({
   selector: 'app-saisie-bilan',

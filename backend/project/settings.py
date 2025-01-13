@@ -105,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gestion_dpi',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '280919',
         'HOST': 'localhost',
         'PORT': '3306',  # Par défaut pour MySQL
     }
