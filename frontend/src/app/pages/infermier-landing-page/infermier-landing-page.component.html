@@ -53,3 +53,9 @@
     </div>
   </div>
 </form>
+<app-success-notif 
+  *ngIf="showNotification"
+  [title]="'Soins rédigés avec succès'"
+  [description]="'Les soins ont été enregistrés avec succès'"
+>
+</app-success-notif>
