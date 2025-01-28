@@ -1,23 +1,5 @@
 <!-- medecin-landing.component.html -->
 <div class="landing-container">
-  <button
-    style="
-      position: fixed;
-      top: 0;
-      right: 0;
-      margin: 16px;
-      padding: 8px 12px;
-      background-color: #b20000;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      z-index: 1000;
-    "
-    (click)="goToHomePage()"
-  >
-    Sign Out
-  </button>
   <app-side-bar></app-side-bar>
   <div class="content">
     <app-bienvenu-component [userName]="userName"></app-bienvenu-component>

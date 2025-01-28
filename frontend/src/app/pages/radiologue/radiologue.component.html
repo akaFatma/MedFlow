@@ -1,5 +1,24 @@
 <div class="laborantin-page">
   <div class="main-content">
+    <div class="header">
+      <img src="../../../assets/Logo.svg" alt="Logo" />
+      <button
+      style="
+      
+        padding: 8px 12px;
+        background-color: #b20000;
+        color: white;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        z-index: 1000;
+      "
+      (click)="goToHomePage()"
+    >
+      Déconnecter
+    </button>
+     
+    </div>
     <app-radio-table></app-radio-table>
   </div>
 </div>

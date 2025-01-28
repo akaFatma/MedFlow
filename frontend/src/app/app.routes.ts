@@ -4,11 +4,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { UnauthorizedPageComponent } from './pages/unauthorized-page/unauthorized-page.component';
 import { MedecinLandingPageComponent } from './pages/medecin-landing-page/medecin-landing-page.component';
 import { ConsulterDPIPovPatientComponent } from './pages/consulter-dpipov-patient/consulter-dpipov-patient.component';
-import { OrdonnanceComponent } from './components/ordonnance/ordonnance.component';
-import { BilanComponent } from './components/bilan/bilan.component';
-import { ResumeComponent } from './components/resume/resume.component';
 import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nouvelle-consultation.component';
-import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
 import { AddDPIComponent } from './pages/add-dpi/add-dpi.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -21,7 +17,6 @@ export const routes: Routes = [
    { path: 'HomePage', component: HomePageComponent},
    { path: 'login', component: LoginPageComponent},
    { path: 'unauthorized', component: UnauthorizedPageComponent },
-
    { 
      path: 'medecin-landing', 
      component: MedecinLandingPageComponent, 
@@ -86,7 +81,7 @@ export const routes: Routes = [
        },  
   
 
-      { path: '**', redirectTo: 'HomePage', pathMatch: 'full' },
+     { path: '**', redirectTo: 'HomePage', pathMatch: 'full' },
   
- ];
 
+];

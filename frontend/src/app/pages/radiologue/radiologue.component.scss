@@ -1,10 +1,22 @@
 .laborantin-page {
     display: flex;
     flex-wrap: nowrap;
-  
+    background-color: #F6F8FD;
+    width: 100%;
+    min-height: 100vh;
     .main-content {
       flex: 1;
-      padding: 20px;
+
+    }
+    .header{
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      width: 80%;
+      
     }
   
     @media (max-width: 768px) {

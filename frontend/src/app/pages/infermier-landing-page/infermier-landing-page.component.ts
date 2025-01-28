@@ -9,13 +9,13 @@ import {
 } from '@angular/forms';
 import { InfermierTableComponent } from '../../components/infermier-table/infermier-table.component';
 import { SoinsComponent } from '../../components/soins/soins.component';
-import { BienvenuComponentComponent } from '../../components/bienvenu-component/bienvenu-component.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { SearchService } from '../../services/search.services';
 import { PatientService } from '../../services/patient.services';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { InfermierService } from '../../services/infermier.service';
+import { SuccessNotifComponent } from '../../components/success-notif/success-notif.component';
 
 interface patient {
   nom: string;
@@ -26,8 +26,8 @@ interface patient {
   selector: 'app-infermier-landing-page',
   imports: [
     CommonModule,
-    BienvenuComponentComponent,
     FormsModule,
+    SuccessNotifComponent,
     ReactiveFormsModule,
   ],
   templateUrl: './infermier-landing-page.component.html',
@@ -35,6 +35,7 @@ interface patient {
 })
 export class InfermierLandingPageComponent implements OnInit {
   patientCareForm!: FormGroup;
+  showNotification: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +43,9 @@ export class InfermierLandingPageComponent implements OnInit {
     private router: Router
   ) {}
   goToHomePage() {
-    this.router.navigate(['/HomePage']);
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.router.navigate(['/HomePage']);
+    }
   }
   ngOnInit() {
     console.log('Initialisation du composant');
@@ -74,6 +77,10 @@ export class InfermierLandingPageComponent implements OnInit {
         next: (response) => {
           console.log('Soins enregistrés', response);
           this.patientCareForm.reset();
+          this.showNotification = true;
+          setTimeout(() => {
+            this.showNotification = false;
+          }, 5000);
         },
         error: (error) => {
           console.error("Erreur d'enregistrement", error);
