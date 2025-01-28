@@ -275,56 +275,66 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup } from &#x27;@angular/forms&#x27;;
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+  FormBuilder,
+  FormGroup,
+} from &#x27;@angular/forms&#x27;;
 import { InfermierTableComponent } from &#x27;../../components/infermier-table/infermier-table.component&#x27;;
 import { SoinsComponent } from &#x27;../../components/soins/soins.component&#x27;;
 import { BienvenuComponentComponent } from &#x27;../../components/bienvenu-component/bienvenu-component.component&#x27;;
-import { SearchBarComponent } from &quot;../../components/search-bar/search-bar.component&quot;;
-import { SearchService   } from &#x27;../../services/search.services&#x27;;
+import { SearchBarComponent } from &#x27;../../components/search-bar/search-bar.component&#x27;;
+import { SearchService } from &#x27;../../services/search.services&#x27;;
 import { PatientService } from &#x27;../../services/patient.services&#x27;;
 import { AuthService } from &#x27;../../services/auth.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { InfermierService } from &#x27;../../services/infermier.service&#x27;;
 
-
 interface patient {
-  nom : string ; 
-  prenom : string;
-  nss : number ;
+  nom: string;
+  prenom: string;
+  nss: number;
 }
 @Component({
   selector: &#x27;app-infermier-landing-page&#x27;,
-  imports: [CommonModule, BienvenuComponentComponent,FormsModule,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    BienvenuComponentComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: &#x27;./infermier-landing-page.component.html&#x27;,
-  styleUrl: &#x27;./infermier-landing-page.component.scss&#x27;
+  styleUrl: &#x27;./infermier-landing-page.component.scss&#x27;,
 })
-export class InfermierLandingPageComponent  implements OnInit{
-
+export class InfermierLandingPageComponent implements OnInit {
   patientCareForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private infermierService: InfermierService
+    private infermierService: InfermierService,
+    private router: Router
   ) {}
-
+  goToHomePage() {
+    this.router.navigate([&#x27;/HomePage&#x27;]);
+  }
   ngOnInit() {
     console.log(&#x27;Initialisation du composant&#x27;);
     this.patientCareForm &#x3D; this.fb.group({
       nss: [&#x27;&#x27;, Validators.required],
       etatPatient: [&#x27;&#x27;, Validators.required],
       medicaments: [&#x27;&#x27;, Validators.required],
-      autres: [&#x27;&#x27;]
+      autres: [&#x27;&#x27;],
     });
     console.log(&#x27;Formulaire initialisé:&#x27;, this.patientCareForm);
   }
-
-
 
   onSubmit() {
     console.log(&#x27;Soumission du formulaire déclenchée&#x27;);
     if (this.patientCareForm.valid) {
       console.log(&#x27;Soumission du formulaire déclenchée&#x27;);
-      const formData &#x3D; this.patientCareForm.getRawValue()
+      const formData &#x3D; this.patientCareForm.getRawValue();
       console.log(&#x27;Données du formulaire récupérées:&#x27;, formData);
       const formattedData &#x3D; {
         nss: formData.nss,
@@ -333,45 +343,20 @@ export class InfermierLandingPageComponent  implements OnInit{
         etat: formData.etatPatient,
         medicament: formData.medicaments,
         autre: formData.autres,
-      }; 
-      console.log(&#x27;Données formatées pour l\&#x27;API:&#x27;, formattedData);
-      this.infermierService.submitSoins(formattedData)
-        .subscribe({
-          next: (response) &#x3D;&gt; {
-            console.log(&#x27;Soins enregistrés&#x27;, response);
-            this.patientCareForm.reset();
-          },
-          error: (error) &#x3D;&gt; {
-            console.error(&#x27;Erreur d\&#x27;enregistrement&#x27;, error);
-          }
-        });
+      };
+      console.log(&quot;Données formatées pour l&#x27;API:&quot;, formattedData);
+      this.infermierService.submitSoins(formattedData).subscribe({
+        next: (response) &#x3D;&gt; {
+          console.log(&#x27;Soins enregistrés&#x27;, response);
+          this.patientCareForm.reset();
+        },
+        error: (error) &#x3D;&gt; {
+          console.error(&quot;Erreur d&#x27;enregistrement&quot;, error);
+        },
+      });
     }
   }
 }
-  
-
-
-
-
-
-
-  
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
 </code></pre>
     </div>
 </div>

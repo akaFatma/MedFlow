@@ -126,6 +126,12 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -158,8 +164,8 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>CommonModule</code>
-                                <code><a href="../components/SidebarComponent.html" target="_self" >SidebarComponent</a></code>
                             <code>ReactiveFormsModule</code>
+                                <code><a href="../components/SuccessNotifComponent.html" target="_self" >SuccessNotifComponent</a></code>
                 </td>
             </tr>
 
@@ -207,6 +213,15 @@
                             <li>
                                 <a href="#patientForm" >patientForm</a>
                             </li>
+                            <li>
+                                <a href="#successDescription" >successDescription</a>
+                            </li>
+                            <li>
+                                <a href="#successTitle" >successTitle</a>
+                            </li>
+                            <li>
+                                <a href="#userName" >userName</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -229,6 +244,9 @@
                                 <a href="#getFormData" >getFormData</a>
                             </li>
                             <li>
+                                <a href="#goToHomePage" >goToHomePage</a>
+                            </li>
+                            <li>
                                 <a href="#goToNextStep" >goToNextStep</a>
                             </li>
                             <li>
@@ -236,6 +254,12 @@
                             </li>
                             <li>
                                 <a href="#isStepComplete" >isStepComplete</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToHome" >navigateToHome</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                 <a href="#onValidate" >onValidate</a>
@@ -261,12 +285,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fb: FormBuilder, http: HttpClient)</code>
+<code>constructor(fb: FormBuilder, http: HttpClient, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: Router)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -300,6 +324,30 @@
                                                   
                                                         <td>
                                                                     <code>HttpClient</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
                                                         </td>
                                                   
                                                     <td>
@@ -345,8 +393,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="110"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:110</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -382,8 +430,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="90"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:90</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -419,8 +467,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -430,6 +478,43 @@
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>{ nom: any; prenom: any; date_naissance: any; telephone: any; nss: any; mutuelle: any; adr: any; nom_personne: any; prenom_personne: any; telephone_personne: any; }</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToHomePage"></a>
+                    <span class="name">
+                        <span ><b>goToHomePage</b></span>
+                        <a href="#goToHomePage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToHomePage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -456,8 +541,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -493,8 +578,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -530,8 +615,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -541,6 +626,80 @@
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToHome"></a>
+                    <span class="name">
+                        <span ><b>navigateToHome</b></span>
+                        <a href="#navigateToHome"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToHome()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -567,8 +726,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -604,8 +763,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="144"
+                                    class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:144</a></div>
                         </td>
                     </tr>
 
@@ -651,7 +810,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -682,7 +841,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -708,7 +867,100 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="successDescription"></a>
+                    <span class="name">
+                        <span ><b>successDescription</b></span>
+                        <a href="#successDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="successTitle"></a>
+                    <span class="name">
+                        <span ><b>successTitle</b></span>
+                        <a href="#successTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userName"></a>
+                    <span class="name">
+                        <span ><b>userName</b></span>
+                        <a href="#userName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/add-dpi/add-dpi.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -723,17 +975,26 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { SidebarComponent } from &#x27;../../components/sidebar/sidebar.component&#x27;;
 import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from &#x27;@angular/forms&#x27;;
 import { trigger, style, animate, transition } from &#x27;@angular/animations&#x27;;
+import { BienvenuComponentComponent } from &#x27;../../components/bienvenu-component/bienvenu-component.component&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { OnInit } from &#x27;@angular/core&#x27;;
+import { SuccessNotifComponent } from &#x27;../../components/success-notif/success-notif.component&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 @Component({
   selector: &#x27;app-add-dpi&#x27;,
   templateUrl: &#x27;./add-dpi.component.html&#x27;,
   styleUrls: [&#x27;./add-dpi.component.scss&#x27;],
   standalone: true,
-  imports: [CommonModule, SidebarComponent, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SuccessNotifComponent],
   animations: [
     trigger(&#x27;fadeInOut&#x27;, [
       transition(&#x27;:enter&#x27;, [
@@ -744,12 +1005,20 @@ import { trigger, style, animate, transition } from &#x27;@angular/animations&#x
     ]),
   ],
 })
-export class AddDPIComponent {
+export class AddDPIComponent implements OnInit {
+  userName: string &#x3D; &#x27;&#x27;;
   patientForm: FormGroup;
   currentStep: number &#x3D; 1;
   isSuccessPopupVisible: boolean &#x3D; false;
+  successTitle: string &#x3D; &#x27;&#x27;; // Title for success popup
+  successDescription: string &#x3D; &#x27;&#x27;; // Description for success popup
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {
     // Initialisation du formulaire avec les champs requis
     this.patientForm &#x3D; this.fb.group({
       step1: this.fb.group({
@@ -764,9 +1033,19 @@ export class AddDPIComponent {
         adr: [&#x27;&#x27;, Validators.required],
         nom_personne: [&#x27;&#x27;, Validators.required],
         prenom_personne: [&#x27;&#x27;, Validators.required],
-        telephone_personne: [&#x27;&#x27;, [Validators.required, Validators.pattern(&#x27;^[0-9]+$&#x27;)]],
+        telephone_personne: [
+          &#x27;&#x27;,
+          [Validators.required, Validators.pattern(&#x27;^[0-9]+$&#x27;)],
+        ],
       }),
     });
+  }
+
+  goToHomePage() {
+    this.router.navigate([&#x27;/HomePage&#x27;]);
+  }
+  ngOnInit(): void {
+    this.userName &#x3D; this.authService.getUserName();
   }
 
   // Récupère toutes les données du formulaire
@@ -797,18 +1076,14 @@ export class AddDPIComponent {
 
   // Va à l&#x27;étape suivante
   goToNextStep(): void {
-    if (this.currentStep &lt; 3) {
-      this.currentStep++;
-    }
+    this.currentStep++;
   }
 
-  // Va à l&#x27;étape précédente
   goToPreviousStep(): void {
     if (this.currentStep &gt; 1) {
       this.currentStep--;
     }
   }
-
   // Retourne le texte du bouton selon l&#x27;étape
   getButtonText(): string {
     if (this.currentStep &#x3D;&#x3D;&#x3D; 3) {
@@ -818,10 +1093,16 @@ export class AddDPIComponent {
     }
   }
 
-  // Soumet le formulaire et envoie les données au backend
+  navigateToHome(): void {
+    this.router.navigate([&#x27;/HomePage&#x27;]);
+  }
+
   onValidate(): void {
     if (this.patientForm.valid) {
+      this.currentStep &#x3D; 4; // Explicitly set to step 3
       this.sendDataToBackend(); // Envoi final des données au backend
+      this.successTitle &#x3D; &#x27;DPI créé avec succès&#x27;;
+      this.successDescription &#x3D; &#x27;Le dossier patient a été enregistré&#x27;;
       this.isSuccessPopupVisible &#x3D; true;
       setTimeout(() &#x3D;&gt; {
         this.isSuccessPopupVisible &#x3D; false;
@@ -854,7 +1135,7 @@ export class AddDPIComponent {
         console.log(&#x27;Données envoyées avec succès au backend&#x27;, response);
       },
       (error) &#x3D;&gt; {
-        console.error(&#x27;Erreur lors de l\&#x27;envoi des données au backend&#x27;, error);
+        console.error(&quot;Erreur lors de l&#x27;envoi des données au backend&quot;, error);
       }
     );
   }
@@ -864,24 +1145,43 @@ export class AddDPIComponent {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;everything&quot;&gt;
+  &lt;button
+    style&#x3D;&quot;
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 16px;
+      padding: 8px 12px;
+      background-color: #b20000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    &quot;
+    (click)&#x3D;&quot;goToHomePage()&quot;
+  &gt;
+    Sign Out
+  &lt;/button&gt;
+
+  &lt;app-success-notif
+    *ngIf&#x3D;&quot;isSuccessPopupVisible&quot;
+    [isVisible]&#x3D;&quot;isSuccessPopupVisible&quot;
+    [title]&#x3D;&quot;successTitle&quot;
+    [description]&#x3D;&quot;successDescription&quot;
+  &gt;&lt;/app-success-notif&gt;
   &lt;div class&#x3D;&quot;container&quot;&gt;
-    &lt;app-sidebar&gt;&lt;/app-sidebar&gt;
     &lt;div class&#x3D;&quot;main-content&quot;&gt;
       &lt;div class&#x3D;&quot;right-side&quot;&gt;
         &lt;div class&#x3D;&quot;topbox&quot;&gt;
-          &lt;div class&#x3D;&quot;left-side&quot;&gt;
-            &lt;img src&#x3D;&quot;/profil.png&quot; alt&#x3D;&quot;Key Icon&quot; class&#x3D;&quot;icon&quot; /&gt;
-            &lt;p class&#x3D;&quot;textbienven&quot;&gt;Bienvenu administratif&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;right-side&quot;&gt;
-            &lt;img src&#x3D;&quot;/notif.png&quot; alt&#x3D;&quot;Bell Icon&quot; class&#x3D;&quot;icon&quot; /&gt;
-            &lt;img src&#x3D;&quot;/param.png&quot; alt&#x3D;&quot;Settings Icon&quot; class&#x3D;&quot;icon&quot; /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;success-popup&quot; *ngIf&#x3D;&quot;isSuccessPopupVisible&quot; [@fadeInOut]&gt;
-          &lt;div class&#x3D;&quot;popup-content&quot; (click)&#x3D;&quot;$event.stopPropagation()&quot;&gt;
-            &lt;span class&#x3D;&quot;popup-close&quot; (click)&#x3D;&quot;closeSuccessPopup()&quot;&gt;×&lt;/span&gt;
-            &lt;h2 class&#x3D;&quot;popup-message&quot;&gt;DPI CREE AVEC SUCCES !&lt;/h2&gt;
+          &lt;div class&#x3D;&quot;welcome-container&quot;&gt;
+            &lt;div class&#x3D;&quot;iconn&quot;&gt;
+              &lt;img
+                src&#x3D;&quot;../../../assets/account_circle_24dp_E8EAED 1.svg&quot;
+                alt&#x3D;&quot;User Icon&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;textt&quot;&gt;Bienvenue Mr {{ userName }}&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;box&quot;&gt;
@@ -906,7 +1206,14 @@ export class AddDPIComponent {
               {{ currentStep &gt; 2 ? &quot;✔&quot; : &quot;2&quot; }}
             &lt;/div&gt;
             &lt;div class&#x3D;&quot;line&quot; [class.opacity-100]&#x3D;&quot;currentStep &gt; 2&quot;&gt;&lt;/div&gt;
-            &lt;div class&#x3D;&quot;circle&quot; [class.opacity-100]&#x3D;&quot;currentStep &#x3D;&#x3D;&#x3D; 3&quot;&gt;3&lt;/div&gt;
+            &lt;div
+              class&#x3D;&quot;circle&quot;
+              [class.bg-green-500]&#x3D;&quot;currentStep &gt; 3&quot;
+              [class.text-white]&#x3D;&quot;currentStep &gt; 3&quot;
+              [class.opacity-100]&#x3D;&quot;currentStep &gt; 3&quot;
+            &gt;
+              {{ currentStep &#x3D;&#x3D;&#x3D; 3 ? &quot;✔&quot; : &quot;3&quot; }}
+            &lt;/div&gt;
           &lt;/div&gt;
 
           &lt;form [formGroup]&#x3D;&quot;patientForm&quot;&gt;
@@ -944,11 +1251,7 @@ export class AddDPIComponent {
             &gt;
               &lt;div class&#x3D;&quot;input-box&quot;&gt;
                 &lt;label for&#x3D;&quot;nss&quot;&gt;Numéro de sécurité sociale&lt;/label&gt;
-                &lt;input
-                  type&#x3D;&quot;text&quot;
-                  id&#x3D;&quot;nss&quot;
-                  formControlName&#x3D;&quot;nss&quot;
-                /&gt;
+                &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;nss&quot; formControlName&#x3D;&quot;nss&quot; /&gt;
               &lt;/div&gt;
               &lt;div class&#x3D;&quot;input-box&quot;&gt;
                 &lt;label for&#x3D;&quot;mutuelle&quot;&gt;Mutuelle&lt;/label&gt;
@@ -967,7 +1270,9 @@ export class AddDPIComponent {
                 /&gt;
               &lt;/div&gt;
               &lt;div class&#x3D;&quot;input-box&quot;&gt;
-                &lt;label for&#x3D;&quot;prenom_personne&quot;&gt;Prenom de la personne à contacter&lt;/label&gt;
+                &lt;label for&#x3D;&quot;prenom_personne&quot;
+                  &gt;Prenom de la personne à contacter&lt;/label
+                &gt;
                 &lt;input
                   type&#x3D;&quot;text&quot;
                   id&#x3D;&quot;prenom_personne&quot;
@@ -975,8 +1280,14 @@ export class AddDPIComponent {
                 /&gt;
               &lt;/div&gt;
               &lt;div class&#x3D;&quot;input-box&quot;&gt;
-                &lt;label for&#x3D;&quot;telephone_personne&quot;&gt;Telephone de la personne à contacter&lt;/label&gt;
-                &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;telephone_personne&quot; formControlName&#x3D;&quot;telephone_personne&quot; /&gt;
+                &lt;label for&#x3D;&quot;telephone_personne&quot;
+                  &gt;Telephone de la personne à contacter&lt;/label
+                &gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  id&#x3D;&quot;telephone_personne&quot;
+                  formControlName&#x3D;&quot;telephone_personne&quot;
+                /&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 
@@ -1006,19 +1317,22 @@ export class AddDPIComponent {
                   &lt;span class&#x3D;&quot;label&quot;&gt;Adresse : &lt;/span&gt;
                   &lt;span class&#x3D;&quot;value&quot;&gt;{{ getFormData().adr }}&lt;/span&gt;
                 &lt;/div&gt;
-                &lt;div class&#x3D;&quot;summary-item&quot;&gt;
-                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;summary-item&quot;&gt;&lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 
-            &lt;div
-              class&#x3D;&quot;button-container&quot;
-              [ngClass]&#x3D;&quot;{ &#x27;single-button&#x27;: currentStep &#x3D;&#x3D;&#x3D; 1 }&quot;
-            &gt;
+            &lt;div class&#x3D;&quot;button-container&quot;&gt;
               &lt;button
                 class&#x3D;&quot;button retour&quot;
-                (click)&#x3D;&quot;goToPreviousStep()&quot;
                 *ngIf&#x3D;&quot;currentStep &gt; 1&quot;
+                (click)&#x3D;&quot;goToPreviousStep()&quot;
+              &gt;
+                Retour
+              &lt;/button&gt;
+              &lt;button
+                class&#x3D;&quot;button retour&quot;
+                *ngIf&#x3D;&quot;currentStep &#x3D;&#x3D;&#x3D; 1&quot;
+                (click)&#x3D;&quot;navigateToHome()&quot;
               &gt;
                 Retour
               &lt;/button&gt;
@@ -1050,10 +1364,12 @@ export class AddDPIComponent {
   padding-right: 0;
 }
 
+
 /* Step indicator circle when it is complete */
 .bg-green-500 {
   background-color: #28a745 !important; /* Bootstrap green */
 }
+
 
 @media (max-width: 768px) {
   .box {
@@ -1160,14 +1476,15 @@ button {
   padding: 10px;
   width: 100%;
   min-height: 400px;
-  max-width: 600px;
+  max-width: 750px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 100px auto; /* Keep space from the top */
-  margin-bottom: 20px; /* Add space below the box */
+  margin: 150px auto; /* Keep space from the top */
+  margin-bottom:2rem; /* Add space below the box */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
   overflow: hidden;
   align-self: flex-start;
   transform-origin: bottom;
@@ -1176,9 +1493,7 @@ button {
 }
 
 .topbox {
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional shadow */
+ 
   max-width: 800px;
   width: 100%;
   height: 50px; /* Adjusted height */
@@ -1289,6 +1604,7 @@ button {
   padding: 10px;
   margin: 0px auto;
   box-sizing: border-box;
+  min-height: fit-content;
   position: relative;
   overflow: visible; /* Autorise l&#x27;extension */
 }
@@ -1489,6 +1805,32 @@ button {
 .popup-close:hover {
   opacity: 1;
 }
+.welcome-container {
+  width: 950px;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white; 
+  border-radius: 20px;
+  box-shadow: 0px 4px 24px rgba(231, 228, 232, 0.5);
+  border: 1px solid #EAEBF0; 
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.iconn img {
+  width: 30px; 
+  height: 30px;
+}
+
+.textt{
+  font-size: 14px;
+  color: #666666; 
+}
+
 </code></pre>
     </div>
 
@@ -1517,8 +1859,8 @@ button {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="everything">  <div class="container">    <app-sidebar></app-sidebar>    <div class="main-content">      <div class="right-side">        <div class="topbox">          <div class="left-side">            <img src="/profil.png" alt="Key Icon" class="icon" />            <p class="textbienven">Bienvenu administratif</p>          </div>          <div class="right-side">            <img src="/notif.png" alt="Bell Icon" class="icon" />            <img src="/param.png" alt="Settings Icon" class="icon" />          </div>        </div>        <div class="success-popup" *ngIf="isSuccessPopupVisible" [@fadeInOut]>          <div class="popup-content" (click)="$event.stopPropagation()">            <span class="popup-close" (click)="closeSuccessPopup()">×</span>            <h2 class="popup-message">DPI CREE AVEC SUCCES !</h2>          </div>        </div>        <div class="box">          <p class="text">Nouveau dossier patient</p>          <div class="step-indicator">            <div              class="circle"              [class.bg-green-500]="currentStep > 1"              [class.text-white]="currentStep > 1"              [class.opacity-100]="currentStep > 1"            >              {{ currentStep > 1 ? "✔" : "1" }}            </div>            <div class="line" [class.opacity-100]="currentStep > 1"></div>            <div              class="circle"              [class.bg-green-500]="currentStep > 2"              [class.text-white]="currentStep > 2"              [class.opacity-100]="currentStep > 1"            >              {{ currentStep > 2 ? "✔" : "2" }}            </div>            <div class="line" [class.opacity-100]="currentStep > 2"></div>            <div class="circle" [class.opacity-100]="currentStep === 3">3</div>          </div>          <form [formGroup]="patientForm">            <div              class="data-entry-container"              *ngIf="currentStep === 1"              formGroupName="step1"            >              <div class="input-box">                <label for="prenom">Prénom</label>                <input type="text" id="prenom" formControlName="prenom" />              </div>              <div class="input-box">                <label for="nom">Nom</label>                <input type="text" id="nom" formControlName="nom" />              </div>              <div class="input-box">                <label for="date_naissance">Date de naissance</label>                <input                  type="date"                  id="date_naissance"                  formControlName="date_naissance"                />              </div>              <div class="input-box">                <label for="telephone">Numéro de téléphone</label>                <input type="tel" id="telephone" formControlName="telephone" />              </div>            </div>            <div              class="data-entry-container"              *ngIf="currentStep === 2"              formGroupName="step2"            >              <div class="input-box">                <label for="nss">Numéro de sécurité sociale</label>                <input                  type="text"                  id="nss"                  formControlName="nss"                />              </div>              <div class="input-box">                <label for="mutuelle">Mutuelle</label>                <input type="text" id="mutuelle" formControlName="mutuelle" />              </div>              <div class="input-box">                <label for="adr">Adresse</label>                <input type="text" id="adr" formControlName="adr" />              </div>              <div class="input-box">                <label for="nom_personne">Nom de la personne à contacter</label>                <input                  type="text"                  id="nom_personne"                  formControlName="nom_personne"                />              </div>              <div class="input-box">                <label for="prenom_personne">Prenom de la personne à contacter</label>                <input                  type="text"                  id="prenom_personne"                  formControlName="prenom_personne"                />              </div>              <div class="input-box">                <label for="telephone_personne">Telephone de la personne à contacter</label>                <input type="text" id="telephone_personne" formControlName="telephone_personne" />              </div>            </div>            <div class="data-entry-container" *ngIf="currentStep === 3">              <div class="summary-container">                <div class="summary-item">                  <span class="label">Nom : </span>                  <span class="value">{{ getFormData().nom }}</span>                </div>                <div class="summary-item">                  <span class="label">Prénom : </span>                  <span class="value">{{ getFormData().prenom }}</span>                </div>                <div class="summary-item">                  <span class="label">Date de naissance : </span>                  <span class="value">{{ getFormData().date_naissance }}</span>                </div>                <div class="summary-item">                  <span class="label">Numéro de téléphone : </span>                  <span class="value">{{ getFormData().telephone }}</span>                </div>                <div class="summary-item">                  <span class="label">Numéro de sécurité sociale : </span>                  <span class="value">{{ getFormData().nss }}</span>                </div>                <div class="summary-item">                  <span class="label">Adresse : </span>                  <span class="value">{{ getFormData().adr }}</span>                </div>                <div class="summary-item">                </div>              </div>            </div>            <div              class="button-container"              [ngClass]="{ \'single-button\': currentStep === 1 }"            >              <button                class="button retour"                (click)="goToPreviousStep()"                *ngIf="currentStep > 1"              >                Retour              </button>              <button                class="button suivant"                (click)="currentStep === 3 ? onValidate() : goToNextStep()"              >                {{ getButtonText() }}              </button>            </div>          </form>        </div>        <div class="vide"></div>      </div>      <div class="vide"></div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
+        var COMPONENT_TEMPLATE = '<div><div class="everything">  <button    style="      position: fixed;      top: 0;      right: 0;      margin: 16px;      padding: 8px 12px;      background-color: #b20000;      color: white;      border: none;      border-radius: 10px;      cursor: pointer;      z-index: 1000;    "    (click)="goToHomePage()"  >    Sign Out  </button>  <app-success-notif    *ngIf="isSuccessPopupVisible"    [isVisible]="isSuccessPopupVisible"    [title]="successTitle"    [description]="successDescription"  ></app-success-notif>  <div class="container">    <div class="main-content">      <div class="right-side">        <div class="topbox">          <div class="welcome-container">            <div class="iconn">              <img                src="../../../assets/account_circle_24dp_E8EAED 1.svg"                alt="User Icon"              />            </div>            <div class="textt">Bienvenue Mr {{ userName }}</div>          </div>        </div>        <div class="box">          <p class="text">Nouveau dossier patient</p>          <div class="step-indicator">            <div              class="circle"              [class.bg-green-500]="currentStep > 1"              [class.text-white]="currentStep > 1"              [class.opacity-100]="currentStep > 1"            >              {{ currentStep > 1 ? "✔" : "1" }}            </div>            <div class="line" [class.opacity-100]="currentStep > 1"></div>            <div              class="circle"              [class.bg-green-500]="currentStep > 2"              [class.text-white]="currentStep > 2"              [class.opacity-100]="currentStep > 1"            >              {{ currentStep > 2 ? "✔" : "2" }}            </div>            <div class="line" [class.opacity-100]="currentStep > 2"></div>            <div              class="circle"              [class.bg-green-500]="currentStep > 3"              [class.text-white]="currentStep > 3"              [class.opacity-100]="currentStep > 3"            >              {{ currentStep === 3 ? "✔" : "3" }}            </div>          </div>          <form [formGroup]="patientForm">            <div              class="data-entry-container"              *ngIf="currentStep === 1"              formGroupName="step1"            >              <div class="input-box">                <label for="prenom">Prénom</label>                <input type="text" id="prenom" formControlName="prenom" />              </div>              <div class="input-box">                <label for="nom">Nom</label>                <input type="text" id="nom" formControlName="nom" />              </div>              <div class="input-box">                <label for="date_naissance">Date de naissance</label>                <input                  type="date"                  id="date_naissance"                  formControlName="date_naissance"                />              </div>              <div class="input-box">                <label for="telephone">Numéro de téléphone</label>                <input type="tel" id="telephone" formControlName="telephone" />              </div>            </div>            <div              class="data-entry-container"              *ngIf="currentStep === 2"              formGroupName="step2"            >              <div class="input-box">                <label for="nss">Numéro de sécurité sociale</label>                <input type="text" id="nss" formControlName="nss" />              </div>              <div class="input-box">                <label for="mutuelle">Mutuelle</label>                <input type="text" id="mutuelle" formControlName="mutuelle" />              </div>              <div class="input-box">                <label for="adr">Adresse</label>                <input type="text" id="adr" formControlName="adr" />              </div>              <div class="input-box">                <label for="nom_personne">Nom de la personne à contacter</label>                <input                  type="text"                  id="nom_personne"                  formControlName="nom_personne"                />              </div>              <div class="input-box">                <label for="prenom_personne"                  >Prenom de la personne à contacter</label                >                <input                  type="text"                  id="prenom_personne"                  formControlName="prenom_personne"                />              </div>              <div class="input-box">                <label for="telephone_personne"                  >Telephone de la personne à contacter</label                >                <input                  type="text"                  id="telephone_personne"                  formControlName="telephone_personne"                />              </div>            </div>            <div class="data-entry-container" *ngIf="currentStep === 3">              <div class="summary-container">                <div class="summary-item">                  <span class="label">Nom : </span>                  <span class="value">{{ getFormData().nom }}</span>                </div>                <div class="summary-item">                  <span class="label">Prénom : </span>                  <span class="value">{{ getFormData().prenom }}</span>                </div>                <div class="summary-item">                  <span class="label">Date de naissance : </span>                  <span class="value">{{ getFormData().date_naissance }}</span>                </div>                <div class="summary-item">                  <span class="label">Numéro de téléphone : </span>                  <span class="value">{{ getFormData().telephone }}</span>                </div>                <div class="summary-item">                  <span class="label">Numéro de sécurité sociale : </span>                  <span class="value">{{ getFormData().nss }}</span>                </div>                <div class="summary-item">                  <span class="label">Adresse : </span>                  <span class="value">{{ getFormData().adr }}</span>                </div>                <div class="summary-item"></div>              </div>            </div>            <div class="button-container">              <button                class="button retour"                *ngIf="currentStep > 1"                (click)="goToPreviousStep()"              >                Retour              </button>              <button                class="button retour"                *ngIf="currentStep === 1"                (click)="navigateToHome()"              >                Retour              </button>              <button                class="button suivant"                (click)="currentStep === 3 ? onValidate() : goToNextStep()"              >                {{ getButtonText() }}              </button>            </div>          </form>        </div>        <div class="vide"></div>      </div>      <div class="vide"></div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LaborantinComponent', 'selector': 'app-laborantin'},{'name': 'LaboTableComponent', 'selector': 'app-labo-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologueComponent', 'selector': 'app-radiologue'},{'name': 'RadioTableComponent', 'selector': 'app-radio-table'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SaisieBilanComponent', 'selector': 'app-saisie-bilan'},{'name': 'SaisieBilanRadioComponent', 'selector': 'app-saisie-bilan-radio'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignOutButtonComponent', 'selector': 'app-sign-out-button'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SoinsHistoryComponent', 'selector': 'app-soins-history'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AddDPIComponent'};
 </script>

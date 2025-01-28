@@ -280,6 +280,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { Input } from &#x27;@angular/core&#x27;;
 
 interface Alert {
   title: string;
@@ -290,10 +291,14 @@ interface Alert {
 @Component({
   selector: &#x27;app-success-notif&#x27;,
   imports: [],
+  standalone : true,
   templateUrl: &#x27;./success-notif.component.html&#x27;,
   styleUrl: &#x27;./success-notif.component.scss&#x27;
 })
 export class SuccessNotifComponent {
+  @Input() isVisible: boolean &#x3D; false;
+   @Input() title: string &#x3D; &#x27;&#x27;;         // Bindable input for the title
+  @Input() description: string &#x3D; &#x27;&#x27;; 
 
   alert: Alert | null &#x3D; null;
 
@@ -308,6 +313,7 @@ export class SuccessNotifComponent {
       this.hideAlert();
     }, 5000);
   }
+ 
   hideAlert() {
     this.alert &#x3D; null;
   }

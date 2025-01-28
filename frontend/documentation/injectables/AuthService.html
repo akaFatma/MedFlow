@@ -668,8 +668,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/services/auth.service.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/services/auth.service.ts:129</a></div>
                         </td>
                     </tr>
 
@@ -707,8 +707,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/app/services/auth.service.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/services/auth.service.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -1249,6 +1249,10 @@ export class AuthService {
       return &#x27;/&#x27;; // Retour par défaut en cas d&#x27;absence de token ou d&#x27;erreur
     } else if (role &#x3D;&#x3D;&#x3D; &#x27;Infirmier&#x27;) {
       return &#x27;/soins&#x27;; // Default landing page for other users
+    } else if (role &#x3D;&#x3D;&#x3D; &#x27;Laborantin&#x27;) {
+      return &#x27;/laborantin&#x27;; // Default landing page for other users
+    }else if (role &#x3D;&#x3D;&#x3D; &#x27;Radiologue&#x27;) {
+      return &#x27;/radiologue&#x27;; // Default landing page for other users
     }
     return &#x27;/&#x27;; // Default return value if no role matches
   }

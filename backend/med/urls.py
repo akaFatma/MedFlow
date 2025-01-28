@@ -1,7 +1,23 @@
 from django.urls import path
 from . import views
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from django.urls import path
+from django.views.generic import RedirectView
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="API Documentation",
+        default_version="v1",
+    ),
+    public=True,
+)
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/swagger/', permanent=False)),
     path('creerdpi', views.creer_dpi, name='creerdpi'),
     path('patients', views.list_patients, name='list des patients'),
     path('patients/search', views.list_patients_filtered, name='list des patients recherchée'),
@@ -20,9 +36,10 @@ urlpatterns = [
     path('saisie-bilan-bio', views.remplir_bilan_bio, name='remplir bilan'),
     path('saisie-bilan-radio', views.remplir_bilan_radio, name='remplir bilan'),
     path('image-radio', views.get_radiography_image, name='Envoi image radio'),
-    
     path('ordonnance/<int:id>/', views.get_ordonnance, name='get_ordonnance'),
     path('ordonnances/<int:id>/valider', views.valider_ordonnance, name='valider_ordonnance'),
     path('distributions', views.distribuer_medicament, name='distribuer_medicament'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+
     
 ]

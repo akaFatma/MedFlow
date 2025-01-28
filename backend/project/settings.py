@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'users',
+    'drf_yasg',
     'med',
 ]
 
@@ -147,8 +148,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
+# En production
+STATIC_ROOT = Path(BASE_DIR) / 'staticfiles'
+# En développement
+STATICFILES_DIRS = [
+    Path(BASE_DIR) / 'static',  # Utilise Path pour combiner les chemins
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
