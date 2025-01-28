@@ -161,6 +161,7 @@
                 <td class="col-md-9">
                             <code>CommonModule</code>
                                 <code><a href="../components/MedicalHistoryComponent.html" target="_self" >MedicalHistoryComponent</a></code>
+                                <code><a href="../components/SoinsHistoryComponent.html" target="_self" >SoinsHistoryComponent</a></code>
                                 <code><a href="../components/PersonalInfoCardComponent.html" target="_self" >PersonalInfoCardComponent</a></code>
                                 <code><a href="../components/BienvenuComponentComponent.html" target="_self" >BienvenuComponentComponent</a></code>
                 </td>
@@ -175,6 +176,7 @@
             <tr>
                 <td class="col-md-3">template</td>
                 <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;app-medical-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-medical-history&gt;
+&lt;app-soins-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-soins-history&gt;
 </code></pre></td>
             </tr>
 
@@ -225,6 +227,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#goToHomePage" >goToHomePage</a>
+                            </li>
+                            <li>
                                 <a href="#handleNewConsultation" >handleNewConsultation</a>
                             </li>
                             <li>
@@ -253,7 +258,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -340,6 +345,43 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="goToHomePage"></a>
+                    <span class="name">
+                        <span ><b>goToHomePage</b></span>
+                        <a href="#goToHomePage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToHomePage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="handleNewConsultation"></a>
                     <span class="name">
                         <span ><b>handleNewConsultation</b></span>
@@ -356,8 +398,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -393,8 +435,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -440,7 +482,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -471,7 +513,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/consulter-dpipov-patient/consulter-dpipov-patient.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -489,6 +531,7 @@ import { Router, ActivatedRoute } from &#x27;@angular/router&#x27;;
 import { AuthService } from &#x27;../../services/auth.service&#x27;;
 import { PatientService } from &#x27;../../services/patient.services&#x27;;
 import { MedicalHistoryComponent } from &#x27;../../components/medical-history/medical-history.component&#x27;;
+import { SoinsHistoryComponent } from &#x27;../../components/soins-history/soins-history.component&#x27;;
 import { PersonalInfoCardComponent } from &#x27;../../components/personal-info-card/personal-info-card.component&#x27;;
 import { BienvenuComponentComponent } from &#x27;../../components/bienvenu-component/bienvenu-component.component&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
@@ -496,14 +539,20 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 @Component({
   selector: &#x27;app-consulter-dpipov-patient&#x27;,
   template: &#x60;
-  &lt;app-medical-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-medical-history&gt;
-&#x60;,
-  imports: [CommonModule, MedicalHistoryComponent, PersonalInfoCardComponent, BienvenuComponentComponent],
+    &lt;app-medical-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-medical-history&gt;
+    &lt;app-soins-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-soins-history&gt;
+  &#x60;,
+  imports: [
+    CommonModule,
+    MedicalHistoryComponent,
+    SoinsHistoryComponent,
+    PersonalInfoCardComponent,
+    BienvenuComponentComponent,
+  ],
   templateUrl: &#x27;./consulter-dpipov-patient.component.html&#x27;,
-  styleUrls: [&#x27;./consulter-dpipov-patient.component.scss&#x27;]
+  styleUrls: [&#x27;./consulter-dpipov-patient.component.scss&#x27;],
 })
 export class ConsulterDPIPovPatientComponent implements OnInit {
-
   isDoctor: boolean &#x3D; false;
   patientNSS: number | null &#x3D; null; // To store the patient&#x27;s NSS from the route parameter
 
@@ -511,7 +560,7 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
     private authService: AuthService,
     private patientService: PatientService,
     private route: ActivatedRoute,
-    private router : Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -525,36 +574,67 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
     console.log(&#x27;Patient NSS:&#x27;, this.patientNSS);
   }
 
-
+  goToHomePage() {
+    this.router.navigate([&#x27;/HomePage&#x27;]);
+  }
   handleNewConsultation(): void {
-    this.router.navigate([&#x27;/new-consultation&#x27;], { queryParams: {&#x27;nss&#x27; : this.patientNSS}});
+    this.router.navigate([&#x27;/new-consultation&#x27;], {
+      queryParams: { nss: this.patientNSS },
+    });
   }
 }
-
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
-    &lt;div class&#x3D;&quot;header&quot;&gt;
-        &lt;div class&#x3D;&quot;logo&quot;&gt; 
-            &lt;img src&#x3D;&quot;../../../assets/Logo.svg&quot; alt&#x3D;&quot;&quot;&gt;
-        &lt;/div&gt; 
-        &lt;app-bienvenu-component&gt;&lt;/app-bienvenu-component&gt;
-
+  &lt;button
+    style&#x3D;&quot;
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 16px;
+      padding: 8px 12px;
+      background-color: #b20000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    &quot;
+    (click)&#x3D;&quot;goToHomePage()&quot;
+  &gt;
+    Sign Out
+  &lt;/button&gt;
+  &lt;div class&#x3D;&quot;header&quot;&gt;
+    &lt;div class&#x3D;&quot;logo&quot;&gt;
+      &lt;img src&#x3D;&quot;../../../assets/Logo.svg&quot; alt&#x3D;&quot;&quot; /&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;personnalInfo&quot;&gt;
-        &lt;h2&gt;INFORMATIONS PERSONNELLES&lt;/h2&gt;
-        &lt;app-personal-info-card&gt;&lt;/app-personal-info-card&gt;
+    &lt;app-bienvenu-component&gt;&lt;/app-bienvenu-component&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;personnalInfo&quot;&gt;
+    &lt;h2&gt;INFORMATIONS PERSONNELLES&lt;/h2&gt;
+    &lt;app-personal-info-card&gt;&lt;/app-personal-info-card&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;consultationHistory&quot;&gt;
+    &lt;div class&#x3D;&quot;but&quot;&gt;
+      &lt;h2&gt;HISTORIQUE CONSULTATIONS&lt;/h2&gt;
+      &lt;button
+        *ngIf&#x3D;&quot;isDoctor&quot;
+        class&#x3D;&quot;nouvelle-consultation&quot;
+        (click)&#x3D;&quot;handleNewConsultation()&quot;
+      &gt;
+        Nouvelle consultation
+      &lt;/button&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;consultationHistory&quot;&gt;
-        &lt;div class&#x3D;&quot;but&quot;&gt;
-            &lt;h2&gt;HISTORIQUE CONSULTATIONS&lt;/h2&gt;
-            &lt;button  *ngIf&#x3D;&quot;isDoctor&quot;  class&#x3D;&quot;nouvelle-consultation&quot; (click)&#x3D;&quot;handleNewConsultation()&quot;&gt;Nouvelle consultation&lt;/button&gt;
-        &lt;/div&gt;
-       
-        &lt;app-medical-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-medical-history&gt;
+    &lt;app-medical-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-medical-history&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;consultationHistory&quot;&gt;
+    &lt;div class&#x3D;&quot;but&quot;&gt;
+      &lt;h2&gt;HISTORIQUE SOINS&lt;/h2&gt;
     &lt;/div&gt;
+    &lt;app-soins-history [nss]&#x3D;&quot;patientNSS&quot;&gt;&lt;/app-soins-history&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -692,8 +772,8 @@ h2 {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-medical-history [nss]="patientNSS"></app-medical-history></div>'
-    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
+        var COMPONENT_TEMPLATE = '<div><app-medical-history [nss]="patientNSS"></app-medical-history><app-soins-history [nss]="patientNSS"></app-soins-history></div>'
+    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LaborantinComponent', 'selector': 'app-laborantin'},{'name': 'LaboTableComponent', 'selector': 'app-labo-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologueComponent', 'selector': 'app-radiologue'},{'name': 'RadioTableComponent', 'selector': 'app-radio-table'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SaisieBilanComponent', 'selector': 'app-saisie-bilan'},{'name': 'SaisieBilanRadioComponent', 'selector': 'app-saisie-bilan-radio'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignOutButtonComponent', 'selector': 'app-sign-out-button'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SoinsHistoryComponent', 'selector': 'app-soins-history'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ConsulterDPIPovPatientComponent'};
 </script>

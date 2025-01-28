@@ -435,7 +435,7 @@ export class LoginComponent {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;card-container&quot;&gt;
   &lt;div class&#x3D;&quot;logo&quot;&gt;
-    &lt;img src&#x3D;&quot;../../../assets/MedFlowLogo.svg&quot; alt&#x3D;&quot;&quot; /&gt;
+    &lt;img src&#x3D;&quot;../../../assets/Logo.svg&quot; alt&#x3D;&quot;&quot; /&gt;
   &lt;/div&gt;
   &lt;form [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
     &lt;div class&#x3D;&quot;form-group&quot;&gt;
@@ -472,8 +472,8 @@ export class LoginComponent {
                 <pre class="line-numbers"><code class="language-scss">@use &quot;../../../styles&quot; as *;
 
 .card-container {
-  width: 400px;
-  height: 350px;
+  width: 500px;
+  height: 450px;
   padding: 1rem 4rem 1rem 4rem;
   background-color: white;
   box-shadow: 0 2px 10px rgba(231, 228, 232, 0.8);
@@ -483,8 +483,10 @@ export class LoginComponent {
 }
 
 .logo {
+  display: flex;
+  justify-content: center;
   img {
-    width: 200px;
+    width: 250px;
     margin-bottom: 1rem;
   }
 }
@@ -502,7 +504,7 @@ form {
     display: block;
     margin-bottom: 0.5rem;
     border-radius: 12px;
-    color: #232323;
+    color: #666666;
   }
 
   input {
@@ -590,8 +592,8 @@ button[type&#x3D;&quot;submit&quot;] {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="card-container">  <div class="logo">    <img src="../../../assets/MedFlowLogo.svg" alt="" />  </div>  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">    <div class="form-group">      <label for="username">Nom d\'utilisateur</label>      <input        type="text"        id="username"        formControlName="username"        placeholder=""      />    </div>    <div class="form-group">      <label for="password">Mot de passe</label>      <input        type="password"        id="password"        formControlName="password"        placeholder=""      />    </div>    <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>    <!-- Angular property , button is disabled when the form is invalid -->  </form></div></div>'
-    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
+        var COMPONENT_TEMPLATE = '<div><div class="card-container">  <div class="logo">    <img src="../../../assets/Logo.svg" alt="" />  </div>  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">    <div class="form-group">      <label for="username">Nom d\'utilisateur</label>      <input        type="text"        id="username"        formControlName="username"        placeholder=""      />    </div>    <div class="form-group">      <label for="password">Mot de passe</label>      <input        type="password"        id="password"        formControlName="password"        placeholder=""      />    </div>    <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>    <!-- Angular property , button is disabled when the form is invalid -->  </form></div></div>'
+    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LaborantinComponent', 'selector': 'app-laborantin'},{'name': 'LaboTableComponent', 'selector': 'app-labo-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologueComponent', 'selector': 'app-radiologue'},{'name': 'RadioTableComponent', 'selector': 'app-radio-table'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SaisieBilanComponent', 'selector': 'app-saisie-bilan'},{'name': 'SaisieBilanRadioComponent', 'selector': 'app-saisie-bilan-radio'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignOutButtonComponent', 'selector': 'app-sign-out-button'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SoinsHistoryComponent', 'selector': 'app-soins-history'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
 </script>

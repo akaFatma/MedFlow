@@ -213,6 +213,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#goToHomePage" >goToHomePage</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
@@ -236,12 +239,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fb: FormBuilder, infermierService: <a href="../injectables/InfermierService.html" target="_self">InfermierService</a>)</code>
+<code>constructor(fb: FormBuilder, infermierService: <a href="../injectables/InfermierService.html" target="_self">InfermierService</a>, router: Router)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -282,6 +285,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -304,6 +319,43 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="goToHomePage"></a>
+                    <span class="name">
+                        <span ><b>goToHomePage</b></span>
+                        <a href="#goToHomePage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToHomePage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <span ><b>ngOnInit</b></span>
@@ -320,8 +372,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -357,8 +409,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -399,7 +451,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/infermier-landing-page/infermier-landing-page.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -414,56 +466,66 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup } from &#x27;@angular/forms&#x27;;
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+  FormBuilder,
+  FormGroup,
+} from &#x27;@angular/forms&#x27;;
 import { InfermierTableComponent } from &#x27;../../components/infermier-table/infermier-table.component&#x27;;
 import { SoinsComponent } from &#x27;../../components/soins/soins.component&#x27;;
 import { BienvenuComponentComponent } from &#x27;../../components/bienvenu-component/bienvenu-component.component&#x27;;
-import { SearchBarComponent } from &quot;../../components/search-bar/search-bar.component&quot;;
-import { SearchService   } from &#x27;../../services/search.services&#x27;;
+import { SearchBarComponent } from &#x27;../../components/search-bar/search-bar.component&#x27;;
+import { SearchService } from &#x27;../../services/search.services&#x27;;
 import { PatientService } from &#x27;../../services/patient.services&#x27;;
 import { AuthService } from &#x27;../../services/auth.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { InfermierService } from &#x27;../../services/infermier.service&#x27;;
 
-
 interface patient {
-  nom : string ; 
-  prenom : string;
-  nss : number ;
+  nom: string;
+  prenom: string;
+  nss: number;
 }
 @Component({
   selector: &#x27;app-infermier-landing-page&#x27;,
-  imports: [CommonModule, BienvenuComponentComponent,FormsModule,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    BienvenuComponentComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: &#x27;./infermier-landing-page.component.html&#x27;,
-  styleUrl: &#x27;./infermier-landing-page.component.scss&#x27;
+  styleUrl: &#x27;./infermier-landing-page.component.scss&#x27;,
 })
-export class InfermierLandingPageComponent  implements OnInit{
-
+export class InfermierLandingPageComponent implements OnInit {
   patientCareForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private infermierService: InfermierService
+    private infermierService: InfermierService,
+    private router: Router
   ) {}
-
+  goToHomePage() {
+    this.router.navigate([&#x27;/HomePage&#x27;]);
+  }
   ngOnInit() {
     console.log(&#x27;Initialisation du composant&#x27;);
     this.patientCareForm &#x3D; this.fb.group({
       nss: [&#x27;&#x27;, Validators.required],
       etatPatient: [&#x27;&#x27;, Validators.required],
       medicaments: [&#x27;&#x27;, Validators.required],
-      autres: [&#x27;&#x27;]
+      autres: [&#x27;&#x27;],
     });
     console.log(&#x27;Formulaire initialisé:&#x27;, this.patientCareForm);
   }
-
-
 
   onSubmit() {
     console.log(&#x27;Soumission du formulaire déclenchée&#x27;);
     if (this.patientCareForm.valid) {
       console.log(&#x27;Soumission du formulaire déclenchée&#x27;);
-      const formData &#x3D; this.patientCareForm.getRawValue()
+      const formData &#x3D; this.patientCareForm.getRawValue();
       console.log(&#x27;Données du formulaire récupérées:&#x27;, formData);
       const formattedData &#x3D; {
         nss: formData.nss,
@@ -472,82 +534,82 @@ export class InfermierLandingPageComponent  implements OnInit{
         etat: formData.etatPatient,
         medicament: formData.medicaments,
         autre: formData.autres,
-      }; 
-      console.log(&#x27;Données formatées pour l\&#x27;API:&#x27;, formattedData);
-      this.infermierService.submitSoins(formattedData)
-        .subscribe({
-          next: (response) &#x3D;&gt; {
-            console.log(&#x27;Soins enregistrés&#x27;, response);
-            this.patientCareForm.reset();
-          },
-          error: (error) &#x3D;&gt; {
-            console.error(&#x27;Erreur d\&#x27;enregistrement&#x27;, error);
-          }
-        });
+      };
+      console.log(&quot;Données formatées pour l&#x27;API:&quot;, formattedData);
+      this.infermierService.submitSoins(formattedData).subscribe({
+        next: (response) &#x3D;&gt; {
+          console.log(&#x27;Soins enregistrés&#x27;, response);
+          this.patientCareForm.reset();
+        },
+        error: (error) &#x3D;&gt; {
+          console.error(&quot;Erreur d&#x27;enregistrement&quot;, error);
+        },
+      });
     }
   }
 }
-  
-
-
-
-
-
-
-  
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;form [formGroup]&#x3D;&quot;patientCareForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
-    &lt;div class&#x3D;&quot;container&quot;&gt;
-        &lt;div class&#x3D;&quot;header&quot;&gt;
-            &lt;img src&#x3D;&quot;../../../assets/Logo.svg&quot; alt&#x3D;&quot;Logo&quot;&gt;
-            &lt;app-bienvenu-component&gt;&lt;/app-bienvenu-component&gt;
-        &lt;/div&gt;
-        
-        &lt;div class&#x3D;&quot;nss&quot;&gt;
-            &lt;h2&gt;REDACTION DES SOINS&lt;/h2&gt;
-            &lt;input type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;nss&quot; placeholder&#x3D;&quot;NSS correspondant...&quot;&gt;
-        &lt;/div&gt;
-        
-        &lt;div class&#x3D;&quot;soins&quot;&gt;
-            &lt;div class&#x3D;&quot;Etat&quot;&gt;
-                &lt;h2&gt;Etat du patient&lt;/h2&gt;
-                &lt;textarea formControlName&#x3D;&quot;etatPatient&quot;&gt;&lt;/textarea&gt;
-            &lt;/div&gt;
-            
-            &lt;div class&#x3D;&quot;Medicaments&quot;&gt;
-                &lt;h2&gt;Médicaments prodigués au patient&lt;/h2&gt;
-                &lt;textarea formControlName&#x3D;&quot;medicaments&quot;&gt;&lt;/textarea&gt;
-            &lt;/div&gt;
-            
-            &lt;div class&#x3D;&quot;autres&quot;&gt;
-                &lt;h2&gt;Autres&lt;/h2&gt;
-                &lt;textarea formControlName&#x3D;&quot;autres&quot;&gt;&lt;/textarea&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;but&quot;&gt;
-            &lt;button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!patientCareForm.valid&quot;&gt;Soumettre&lt;/button&gt;
-        &lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;button
+  style&#x3D;&quot;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 16px;
+    padding: 8px 12px;
+    background-color: #b20000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1000;
+  &quot;
+  (click)&#x3D;&quot;goToHomePage()&quot;
+&gt;
+  Sign Out
+&lt;/button&gt;
+&lt;form [formGroup]&#x3D;&quot;patientCareForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;header&quot;&gt;
+      &lt;img src&#x3D;&quot;../../../assets/Logo.svg&quot; alt&#x3D;&quot;Logo&quot; /&gt;
+      &lt;app-bienvenu-component&gt;&lt;/app-bienvenu-component&gt;
     &lt;/div&gt;
-&lt;/form&gt;</code></pre>
+
+    &lt;div class&#x3D;&quot;nss&quot;&gt;
+      &lt;h2&gt;REDACTION DES SOINS&lt;/h2&gt;
+      &lt;input
+        type&#x3D;&quot;text&quot;
+        formControlName&#x3D;&quot;nss&quot;
+        placeholder&#x3D;&quot;NSS correspondant...&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;soins&quot;&gt;
+      &lt;div class&#x3D;&quot;Etat&quot;&gt;
+        &lt;h2&gt;Etat du patient&lt;/h2&gt;
+        &lt;textarea formControlName&#x3D;&quot;etatPatient&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;Medicaments&quot;&gt;
+        &lt;h2&gt;Médicaments prodigués au patient&lt;/h2&gt;
+        &lt;textarea formControlName&#x3D;&quot;medicaments&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;autres&quot;&gt;
+        &lt;h2&gt;Autres&lt;/h2&gt;
+        &lt;textarea formControlName&#x3D;&quot;autres&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;but&quot;&gt;
+      &lt;button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!patientCareForm.valid&quot;&gt;
+        Soumettre
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
     </div>
 
 
@@ -576,8 +638,8 @@ export class InfermierLandingPageComponent  implements OnInit{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><form [formGroup]="patientCareForm" (ngSubmit)="onSubmit()">    <div class="container">        <div class="header">            <img src="../../../assets/Logo.svg" alt="Logo">            <app-bienvenu-component></app-bienvenu-component>        </div>                <div class="nss">            <h2>REDACTION DES SOINS</h2>            <input type="text" formControlName="nss" placeholder="NSS correspondant...">        </div>                <div class="soins">            <div class="Etat">                <h2>Etat du patient</h2>                <textarea formControlName="etatPatient"></textarea>            </div>                        <div class="Medicaments">                <h2>Médicaments prodigués au patient</h2>                <textarea formControlName="medicaments"></textarea>            </div>                        <div class="autres">                <h2>Autres</h2>                <textarea formControlName="autres"></textarea>            </div>        </div>        <div class="but">            <button type="submit" [disabled]="!patientCareForm.valid">Soumettre</button>        </div>    </div></form></div>'
-    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
+        var COMPONENT_TEMPLATE = '<div><button  style="    position: fixed;    top: 0;    right: 0;    margin: 16px;    padding: 8px 12px;    background-color: #b20000;    color: white;    border: none;    border-radius: 10px;    cursor: pointer;    z-index: 1000;  "  (click)="goToHomePage()">  Sign Out</button><form [formGroup]="patientCareForm" (ngSubmit)="onSubmit()">  <div class="container">    <div class="header">      <img src="../../../assets/Logo.svg" alt="Logo" />      <app-bienvenu-component></app-bienvenu-component>    </div>    <div class="nss">      <h2>REDACTION DES SOINS</h2>      <input        type="text"        formControlName="nss"        placeholder="NSS correspondant..."      />    </div>    <div class="soins">      <div class="Etat">        <h2>Etat du patient</h2>        <textarea formControlName="etatPatient"></textarea>      </div>      <div class="Medicaments">        <h2>Médicaments prodigués au patient</h2>        <textarea formControlName="medicaments"></textarea>      </div>      <div class="autres">        <h2>Autres</h2>        <textarea formControlName="autres"></textarea>      </div>    </div>    <div class="but">      <button type="submit" [disabled]="!patientCareForm.valid">        Soumettre      </button>    </div>  </div></form></div>'
+    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LaborantinComponent', 'selector': 'app-laborantin'},{'name': 'LaboTableComponent', 'selector': 'app-labo-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologueComponent', 'selector': 'app-radiologue'},{'name': 'RadioTableComponent', 'selector': 'app-radio-table'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SaisieBilanComponent', 'selector': 'app-saisie-bilan'},{'name': 'SaisieBilanRadioComponent', 'selector': 'app-saisie-bilan-radio'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignOutButtonComponent', 'selector': 'app-sign-out-button'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SoinsHistoryComponent', 'selector': 'app-soins-history'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'InfermierLandingPageComponent'};
 </script>
