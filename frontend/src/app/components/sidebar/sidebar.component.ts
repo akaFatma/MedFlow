@@ -1,11 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHome, faUserGear, faBars  } from '@fortawesome/free-solid-svg-icons';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { faHome, faUserGear, faBars } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-sidebar',
-  imports: [FontAwesomeModule,CommonModule],
+  imports: [FontAwesomeModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
@@ -46,6 +45,4 @@ export class SidebarComponent {
     console.log(`Navigating to ${route}`);
     // Add actual navigation logic (e.g., Angular Router)
   }
-
 }
-

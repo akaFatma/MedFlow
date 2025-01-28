@@ -10,15 +10,13 @@ import { ResumeComponent } from './components/resume/resume.component';
 import { NouvelleConsultationComponent } from './pages/nouvelle-consultation/nouvelle-consultation.component';
 import { InfermierTableComponent } from './components/infermier-table/infermier-table.component';
 import { InfermierLandingPageComponent } from './pages/infermier-landing-page/infermier-landing-page.component';
-import {AddDPIComponent} from './pages/add-dpi/add-dpi.component';
+import { AddDPIComponent } from './pages/add-dpi/add-dpi.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConsultPatientComponent } from './pages/consult-patient/consult-patient.component';
-import { LaborantinComponent } from './pages/laborantin/laborantin.component';  
+import { LaborantinComponent } from './pages/laborantin/laborantin.component';
 import { SaisieBilanComponent } from './components/saisie-bilan/saisie-bilan.component';
 import { SaisieBilanRadioComponent } from './components/saisie-bilan-radio/saisie-bilan-radio.component';
 import { RadiologueComponent } from './pages/radiologue/radiologue.component';
-
- 
 export const routes: Routes = [
    { path: 'HomePage', component: HomePageComponent},
    { path: 'login', component: LoginPageComponent},
@@ -46,8 +44,8 @@ export const routes: Routes = [
   },
 
   {
-    path : 'new-consultation' ,
-    component : NouvelleConsultationComponent,
+    path: 'new-consultation',
+    component: NouvelleConsultationComponent,
     canActivate: [RoleGuard],
     data: { roles: ['Médecin'] }
     },
@@ -56,7 +54,7 @@ export const routes: Routes = [
     path: 'soins', 
     component: InfermierLandingPageComponent,
     canActivate: [RoleGuard],
-    data: { roles: ["Infirmier"] }
+    data: { roles: ['Infirmier'] },
   },
 
    { path: 'consult-patient', 

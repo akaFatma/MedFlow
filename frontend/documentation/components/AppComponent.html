@@ -159,6 +159,8 @@
                 <td class="col-md-9">
                             <code>RouterOutlet</code>
                             <code>CommonModule</code>
+                            <code>NgxScannerQrcodeModule</code>
+                                <code><a href="../components/SignOutButtonComponent.html" target="_self" >SignOutButtonComponent</a></code>
                 </td>
             </tr>
 
@@ -213,6 +215,54 @@
     </table>
 </section>
 
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/app.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -248,7 +298,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/app.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/app.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -262,19 +312,27 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { RouterOutlet } from &#x27;@angular/router&#x27;;
+import { Router, RouterOutlet } from &#x27;@angular/router&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { NgxScannerQrcodeModule, LOAD_WASM } from &#x27;ngx-scanner-qrcode&#x27;;
+import { SignOutButtonComponent } from &#x27;./components/sign-out-button/sign-out-button.component&#x27;;
 
 @Component({
   selector: &#x27;app-root&#x27;,
   templateUrl: &#x27;./app.component.html&#x27;,
   styleUrls: [&#x27;./app.component.scss&#x27;],
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    NgxScannerQrcodeModule,
+    SignOutButtonComponent,
+  ],
 })
 export class AppComponent {
   title &#x3D; &#x27;gestionDPI&#x27;;
+
+  constructor(private router: Router) {}
 }
 </code></pre>
     </div>
@@ -317,7 +375,7 @@ export class AppComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet></div>'
-    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
+    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LaborantinComponent', 'selector': 'app-laborantin'},{'name': 'LaboTableComponent', 'selector': 'app-labo-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologueComponent', 'selector': 'app-radiologue'},{'name': 'RadioTableComponent', 'selector': 'app-radio-table'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SaisieBilanComponent', 'selector': 'app-saisie-bilan'},{'name': 'SaisieBilanRadioComponent', 'selector': 'app-saisie-bilan-radio'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignOutButtonComponent', 'selector': 'app-sign-out-button'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SoinsHistoryComponent', 'selector': 'app-soins-history'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

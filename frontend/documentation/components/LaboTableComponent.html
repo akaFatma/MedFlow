@@ -1,0 +1,890 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>gestion-dpi documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">gestion-dpi documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LaboTableComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/labo-table/labo-table.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-labo-table</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./labo-table.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./labo-table.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#bilans" >bilans</a>
+                            </li>
+                            <li>
+                                <a href="#errorMessage" >errorMessage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#loadBilans" >loadBilans</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCompleterBilan" >onCompleterBilan</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(laborantinService: <a href="../injectables/LaborantinService.html" target="_self">LaborantinService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/labo-table/labo-table.component.ts:14</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>laborantinService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LaborantinService.html" target="_self" >LaborantinService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadBilans"></a>
+                    <span class="name">
+                        <span ><b>loadBilans</b></span>
+                        <a href="#loadBilans"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadBilans()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/components/labo-table/labo-table.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/app/components/labo-table/labo-table.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCompleterBilan"></a>
+                    <span class="name">
+                        <span ><b>onCompleterBilan</b></span>
+                        <a href="#onCompleterBilan"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCompleterBilan(bilanId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/components/labo-table/labo-table.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bilanId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bilans"></a>
+                    <span class="name">
+                        <span ><b>bilans</b></span>
+                        <a href="#bilans"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/labo-table/labo-table.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMessage"></a>
+                    <span class="name">
+                        <span ><b>errorMessage</b></span>
+                        <a href="#errorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/labo-table/labo-table.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;; // Import CommonModule
+import { Router } from &#x27;@angular/router&#x27;;
+import { LaborantinService } from &#x27;../../services/laborantin.service&#x27;;
+@Component({
+  selector: &#x27;app-labo-table&#x27;,
+  standalone: true,
+  imports: [CommonModule], // Include CommonModule here
+  templateUrl: &#x27;./labo-table.component.html&#x27;,
+  styleUrls: [&#x27;./labo-table.component.scss&#x27;],
+})
+export class LaboTableComponent  implements OnInit {
+  errorMessage &#x3D; &#x27;&#x27;;
+  bilans: any;
+
+ constructor(private laborantinService: LaborantinService, private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.loadBilans();
+  }
+
+  loadBilans(): void {
+    this.laborantinService.getBilans().subscribe({
+      next: (data) &#x3D;&gt; {
+        this.bilans &#x3D; data;
+        console.log(&#x27;Soins:&#x27;, this.bilans);
+      },
+      error: (error) &#x3D;&gt; {
+        this.errorMessage &#x3D; error.message;
+        console.error(&#x27;Error fetching Soins:&#x27;, error);
+      }
+    });
+  }
+  onCompleterBilan(bilanId: string): void {
+    this.router.navigate([&#x27;/saisie-bilan&#x27;], { queryParams: { id: bilanId } });
+  }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;labo-table&quot;&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Nom&lt;/th&gt;
+          &lt;th&gt;Prénom&lt;/th&gt;
+          &lt;th&gt;Date&lt;/th&gt;
+          &lt;th&gt;ID du bilan&lt;/th&gt;
+          &lt;th&gt;État&lt;/th&gt;
+          &lt;th&gt;Action&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr *ngFor&#x3D;&quot;let bilan of bilans&quot;&gt;
+          &lt;td&gt;{{ bilan.nom }}&lt;/td&gt;
+          &lt;td&gt;{{ bilan.prenom }}&lt;/td&gt;
+          &lt;td&gt;{{ bilan.date_emission }}&lt;/td&gt;
+          &lt;td&gt;{{ bilan.id }}&lt;/td&gt;
+          &lt;td&gt;
+            &lt;span [ngClass]&#x3D;&quot;{
+                  &#x27;fait&#x27;: bilan.etat &#x3D;&#x3D;&#x3D; &#x27;fait&#x27;,
+                  &#x27;en-attente&#x27;: bilan.etat &#x3D;&#x3D;&#x3D; &#x27;en attente&#x27;
+                }&quot;&gt;
+              {{ bilan.etat }}
+            &lt;/span&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;button *ngIf&#x3D;&quot;bilan.etat &#x3D;&#x3D;&#x3D; &#x27;en attente&#x27;&quot; class&#x3D;&quot;completer-button&quot; 
+                    (click)&#x3D;&quot;onCompleterBilan(bilan.id)&quot;&gt;
+              Compléter bilan
+            &lt;/button&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+  
+  
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./labo-table.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.labo-table {
+    margin-top: 5%;
+    width: 90%;
+    overflow-x: auto;
+    margin-left: 3%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 2%;
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-family: &#x27;Inter&#x27;;
+  
+      thead {
+        background-color: white;
+  
+        th {
+          padding: 10px;
+          font-weight: 500;
+          font-size: 15px;
+          color: #666666;
+          border-bottom: 1px solid #e6eff5;
+        }
+      }
+  
+      tbody {
+        tr {
+          td {
+            padding: 10px;
+  
+            .fait {
+              background-color: #f4fcf7;
+              border: 1px solid #48c5a5;
+              border-radius: 20px;
+              color: #48c5a5;
+              padding: 5px 10px;
+              display: inline-block;
+              text-align: center;
+              width: 100px;
+            }
+  
+            .en-attente {
+              background-color: #ffeaea;
+              border: 1px solid #cf3030;
+              border-radius: 20px;
+              color: #cf3030;
+              padding: 5px 10px;
+              display: inline-block;
+              text-align: center;
+              width: 100px;
+            }
+  
+            .ouvrir-button,
+            .completer-button {
+              background-color: #027cc0;
+              color: white;
+              border: none;
+              border-radius: 20px;
+              padding: 10px 20px; /* Consistent padding for equal space */
+              width: 140px; /* Fixed width */
+              height: 40px; /* Fixed height */
+              font-family: &#x27;Inter&#x27;;
+              font-size: 14px;
+              font-weight: 600;
+              text-align: center; /* Horizontal centering */
+              line-height: 1.5; /* Balanced vertical alignment */
+              display: flex; /* Enable flexbox */
+              justify-content: center; /* Horizontally center text */
+              align-items: center; /* Vertically center text */
+              white-space: nowrap; /* Prevent wrapping of text */
+              cursor: pointer;
+            }
+  
+            .ouvrir-button:hover {
+              background-color: #027cc0;
+            }
+  
+            .completer-button {
+              background-color: #027cc0; /* Unique color for &quot;Compléter bilan&quot; */
+            }
+  
+            .completer-button:hover {
+              background-color: #027cc0;
+            }
+          }
+        }
+      }
+    }
+  
+    /* Media query for small screens (max width: 780px) */
+    @media (max-width: 780px) {
+      margin-left: 0; /* Remove extra margin on smaller screens */
+      width: 100%; /* Make table container take full screen width */
+      padding: 1%; /* Reduce padding */
+  
+      table {
+        font-size: 12px; /* Adjust font size for readability */
+      }
+  
+      .ouvrir-button,
+      .completer-button {
+        width: auto; /* Adjust width dynamically */
+        font-size: 12px; /* Reduce font size for small screens */
+        padding: 8px 12px; /* Adjust padding for smaller buttons */
+      }
+    }
+    @media (max-width: 460px) {
+        margin-left: 0;
+        width: 100%;
+        padding: 1%;
+    
+        table {
+          font-size: 12px;
+    
+          thead {
+            display: none; /* Hide the table headers for smaller screens */
+          }
+    
+          tbody {
+            tr {
+              display: flex;
+              flex-direction: column;
+              margin-bottom: 10px;
+              border: 1px solid #e6eff5;
+              border-radius: 10px;
+              text-align: left; /* Align content to the left */
+    
+              td {
+                display: flex;
+                justify-content: flex-start; /* Align text and data to the left */
+                padding: 10px;
+                font-size: 14px;
+    
+                &amp;:before {
+                  content: attr(data-label); /* Add labels for each cell */
+                  font-weight: bold;
+                  color: #666666;
+                  margin-right: 10px; /* Add spacing between label and content */
+                }
+              }
+            }
+          }
+        }
+    
+        .ouvrir-button,
+        .completer-button {
+          width: 100%; /* Buttons take full width */
+          font-size: 14px; /* Adjust font size */
+          padding: 8px; /* Adjust padding */
+          text-align: left; /* Align text inside the button to the left */
+        }
+      }
+    }
+    
+  
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="labo-table">    <table>      <thead>        <tr>          <th>Nom</th>          <th>Prénom</th>          <th>Date</th>          <th>ID du bilan</th>          <th>État</th>          <th>Action</th>        </tr>      </thead>      <tbody>        <tr *ngFor="let bilan of bilans">          <td>{{ bilan.nom }}</td>          <td>{{ bilan.prenom }}</td>          <td>{{ bilan.date_emission }}</td>          <td>{{ bilan.id }}</td>          <td>            <span [ngClass]="{                  \'fait\': bilan.etat === \'fait\',                  \'en-attente\': bilan.etat === \'en attente\'                }">              {{ bilan.etat }}            </span>          </td>          <td>            <button *ngIf="bilan.etat === \'en attente\'" class="completer-button"                     (click)="onCompleterBilan(bilan.id)">              Compléter bilan            </button>          </td>        </tr>      </tbody>    </table>  </div>    </div>'
+    var COMPONENTS = [{'name': 'AddDPIComponent', 'selector': 'app-add-dpi'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BienvenuComponentComponent', 'selector': 'app-bienvenu-component'},{'name': 'BilanComponent', 'selector': 'app-bilan'},{'name': 'ConsulterDPIPovPatientComponent', 'selector': 'app-consulter-dpipov-patient'},{'name': 'ConsultPatientComponent', 'selector': 'app-consult-patient'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'InfermierLandingPageComponent', 'selector': 'app-infermier-landing-page'},{'name': 'InfermierTableComponent', 'selector': 'app-infermier-table'},{'name': 'LaborantinComponent', 'selector': 'app-laborantin'},{'name': 'LaboTableComponent', 'selector': 'app-labo-table'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MedecinLandingPageComponent', 'selector': 'app-medecin-landing-page'},{'name': 'MedecinTableComponent', 'selector': 'app-medecin-table'},{'name': 'MedicalHistoryComponent', 'selector': 'app-medical-history'},{'name': 'NouvelleConsultationComponent', 'selector': 'app-nouvelle-consultation'},{'name': 'OrdonnanceComponent', 'selector': 'app-ordonnance'},{'name': 'PersonalInfoCardComponent', 'selector': 'app-personal-info-card'},{'name': 'QrScannerComponent', 'selector': 'app-qr-scanner'},{'name': 'RadiologueComponent', 'selector': 'app-radiologue'},{'name': 'RadioTableComponent', 'selector': 'app-radio-table'},{'name': 'ResumeComponent', 'selector': 'app-resume'},{'name': 'SaisieBilanComponent', 'selector': 'app-saisie-bilan'},{'name': 'SaisieBilanRadioComponent', 'selector': 'app-saisie-bilan-radio'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SideBarComponent', 'selector': 'app-side-bar'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignOutButtonComponent', 'selector': 'app-sign-out-button'},{'name': 'SoinsComponent', 'selector': 'app-rediger-soins'},{'name': 'SoinsHistoryComponent', 'selector': 'app-soins-history'},{'name': 'SuccessNotifComponent', 'selector': 'app-success-notif'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UnauthorizedPageComponent', 'selector': 'app-unauthorized-page'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'LaboTableComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LaboTableComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

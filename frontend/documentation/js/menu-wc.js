@@ -72,10 +72,22 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ConsultPatientComponent.html" data-type="entity-link" >ConsultPatientComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/HeaderComponent.html" data-type="entity-link" >HeaderComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/HomePageComponent.html" data-type="entity-link" >HomePageComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/InfermierLandingPageComponent.html" data-type="entity-link" >InfermierLandingPageComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/InfermierTableComponent.html" data-type="entity-link" >InfermierTableComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/LaborantinComponent.html" data-type="entity-link" >LaborantinComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/LaboTableComponent.html" data-type="entity-link" >LaboTableComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/LoginComponent.html" data-type="entity-link" >LoginComponent</a>
@@ -105,7 +117,19 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/QrScannerComponent.html" data-type="entity-link" >QrScannerComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/RadiologueComponent.html" data-type="entity-link" >RadiologueComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/RadioTableComponent.html" data-type="entity-link" >RadioTableComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ResumeComponent.html" data-type="entity-link" >ResumeComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SaisieBilanComponent.html" data-type="entity-link" >SaisieBilanComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SaisieBilanRadioComponent.html" data-type="entity-link" >SaisieBilanRadioComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/SearchBarComponent.html" data-type="entity-link" >SearchBarComponent</a>
@@ -117,7 +141,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SidebarComponent.html" data-type="entity-link" >SidebarComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SignOutButtonComponent.html" data-type="entity-link" >SignOutButtonComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SoinsComponent.html" data-type="entity-link" >SoinsComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SoinsHistoryComponent.html" data-type="entity-link" >SoinsHistoryComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/SuccessNotifComponent.html" data-type="entity-link" >SuccessNotifComponent</a>
@@ -154,13 +184,25 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/InfermierService.html" data-type="entity-link" >InfermierService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/LaborantinService.html" data-type="entity-link" >LaborantinService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/MedecinService.html" data-type="entity-link" >MedecinService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/PatientService.html" data-type="entity-link" >PatientService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/RadiologueService.html" data-type="entity-link" >RadiologueService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SaisieBilanService.html" data-type="entity-link" >SaisieBilanService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/SearchService.html" data-type="entity-link" >SearchService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SoinHistoryService.html" data-type="entity-link" >SoinHistoryService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/UserInfoService.html" data-type="entity-link" >UserInfoService</a>
@@ -208,13 +250,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Consultation.html" data-type="entity-link" >Consultation</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Consultation-1.html" data-type="entity-link" >Consultation</a>
-                            </li>
-                            <li class="link">
                                 <a href="interfaces/ConsultationData.html" data-type="entity-link" >ConsultationData</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/MenuItem.html" data-type="entity-link" >MenuItem</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Patient.html" data-type="entity-link" >Patient</a>

@@ -1,33 +1,57 @@
+<button
+  style="
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 16px;
+    padding: 8px 12px;
+    background-color: #b20000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1000;
+  "
+  (click)="goToHomePage()"
+>
+  Sign Out
+</button>
 <form [formGroup]="patientCareForm" (ngSubmit)="onSubmit()">
-    <div class="container">
-        <div class="header">
-            <img src="../../../assets/Logo.svg" alt="Logo">
-            <app-bienvenu-component></app-bienvenu-component>
-        </div>
-        
-        <div class="nss">
-            <h2>REDACTION DES SOINS</h2>
-            <input type="text" formControlName="nss" placeholder="NSS correspondant...">
-        </div>
-        
-        <div class="soins">
-            <div class="Etat">
-                <h2>Etat du patient</h2>
-                <textarea formControlName="etatPatient"></textarea>
-            </div>
-            
-            <div class="Medicaments">
-                <h2>Médicaments prodigués au patient</h2>
-                <textarea formControlName="medicaments"></textarea>
-            </div>
-            
-            <div class="autres">
-                <h2>Autres</h2>
-                <textarea formControlName="autres"></textarea>
-            </div>
-        </div>
-        <div class="but">
-            <button type="submit" [disabled]="!patientCareForm.valid">Soumettre</button>
-        </div>
+  <div class="container">
+    <div class="header">
+      <img src="../../../assets/Logo.svg" alt="Logo" />
+      <app-bienvenu-component></app-bienvenu-component>
     </div>
+
+    <div class="nss">
+      <h2>REDACTION DES SOINS</h2>
+      <input
+        type="text"
+        formControlName="nss"
+        placeholder="NSS correspondant..."
+      />
+    </div>
+
+    <div class="soins">
+      <div class="Etat">
+        <h2>Etat du patient</h2>
+        <textarea formControlName="etatPatient"></textarea>
+      </div>
+
+      <div class="Medicaments">
+        <h2>Médicaments prodigués au patient</h2>
+        <textarea formControlName="medicaments"></textarea>
+      </div>
+
+      <div class="autres">
+        <h2>Autres</h2>
+        <textarea formControlName="autres"></textarea>
+      </div>
+    </div>
+    <div class="but">
+      <button type="submit" [disabled]="!patientCareForm.valid">
+        Soumettre
+      </button>
+    </div>
+  </div>
 </form>

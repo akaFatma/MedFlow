@@ -2,11 +2,11 @@ POST http://127.0.0.1:8000/auth/signup
 Content-Type: application/json
 
 {
-    "username": "radio",
-    "password": "pass123",
+    "username": "rayane",
+    "password": "123456789",
     "first_name": "saliha",
     "last_name": "bailly",
-    "role": "Radiologue"
+    "role": "Paatient"
 }
 
 

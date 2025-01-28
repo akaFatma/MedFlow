@@ -1,9 +1,28 @@
 <div class="everything">
-  <app-success-notif 
-  *ngIf=" isSuccessPopupVisible"
-   [isVisible]="isSuccessPopupVisible" 
-  [title]="successTitle"
-  [description]="successDescription"
+  <button
+    style="
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 16px;
+      padding: 8px 12px;
+      background-color: #b20000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    "
+    (click)="goToHomePage()"
+  >
+    Sign Out
+  </button>
+
+  <app-success-notif
+    *ngIf="isSuccessPopupVisible"
+    [isVisible]="isSuccessPopupVisible"
+    [title]="successTitle"
+    [description]="successDescription"
   ></app-success-notif>
   <div class="container">
     <div class="main-content">
@@ -11,11 +30,12 @@
         <div class="topbox">
           <div class="welcome-container">
             <div class="iconn">
-              <img src="../../../assets/account_circle_24dp_E8EAED 1.svg" alt="User Icon">
+              <img
+                src="../../../assets/account_circle_24dp_E8EAED 1.svg"
+                alt="User Icon"
+              />
             </div>
-            <div class="textt">
-              Bienvenue Mr {{userName}}
-            </div>
+            <div class="textt">Bienvenue Mr {{ userName }}</div>
           </div>
         </div>
         <div class="box">
@@ -40,7 +60,14 @@
               {{ currentStep > 2 ? "✔" : "2" }}
             </div>
             <div class="line" [class.opacity-100]="currentStep > 2"></div>
-            <div class="circle" [class.opacity-100]="currentStep === 3">3</div>
+            <div
+              class="circle"
+              [class.bg-green-500]="currentStep > 3"
+              [class.text-white]="currentStep > 3"
+              [class.opacity-100]="currentStep > 3"
+            >
+              {{ currentStep === 3 ? "✔" : "3" }}
+            </div>
           </div>
 
           <form [formGroup]="patientForm">
@@ -78,11 +105,7 @@
             >
               <div class="input-box">
                 <label for="nss">Numéro de sécurité sociale</label>
-                <input
-                  type="text"
-                  id="nss"
-                  formControlName="nss"
-                />
+                <input type="text" id="nss" formControlName="nss" />
               </div>
               <div class="input-box">
                 <label for="mutuelle">Mutuelle</label>
@@ -101,7 +124,9 @@
                 />
               </div>
               <div class="input-box">
-                <label for="prenom_personne">Prenom de la personne à contacter</label>
+                <label for="prenom_personne"
+                  >Prenom de la personne à contacter</label
+                >
                 <input
                   type="text"
                   id="prenom_personne"
@@ -109,8 +134,14 @@
                 />
               </div>
               <div class="input-box">
-                <label for="telephone_personne">Telephone de la personne à contacter</label>
-                <input type="text" id="telephone_personne" formControlName="telephone_personne" />
+                <label for="telephone_personne"
+                  >Telephone de la personne à contacter</label
+                >
+                <input
+                  type="text"
+                  id="telephone_personne"
+                  formControlName="telephone_personne"
+                />
               </div>
             </div>
 
@@ -140,19 +171,22 @@
                   <span class="label">Adresse : </span>
                   <span class="value">{{ getFormData().adr }}</span>
                 </div>
-                <div class="summary-item">
-                </div>
+                <div class="summary-item"></div>
               </div>
             </div>
 
-            <div
-              class="button-container"
-              [ngClass]="{ 'single-button': currentStep === 1 }"
-            >
+            <div class="button-container">
               <button
                 class="button retour"
-                (click)="goToPreviousStep()"
                 *ngIf="currentStep > 1"
+                (click)="goToPreviousStep()"
+              >
+                Retour
+              </button>
+              <button
+                class="button retour"
+                *ngIf="currentStep === 1"
+                (click)="navigateToHome()"
               >
                 Retour
               </button>
