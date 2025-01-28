@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  loginError: string = ''; 
 
     constructor(
           private fb: FormBuilder,
@@ -27,6 +28,7 @@ export class LoginComponent {
       
         onSubmit() {
           if (this.loginForm.valid) {
+            this.loginError = '';
             const { username, password } = this.loginForm.value;
             this.authService.login(username, password).subscribe({
               next: (response) => {
@@ -34,6 +36,8 @@ export class LoginComponent {
               },
               error: (error) => {
                 console.error('Échec de la connexion', error);
+                this.loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
+                this.loginForm.reset(); 
               }
             });
           } else {

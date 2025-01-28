@@ -86,7 +86,7 @@ export const routes: Routes = [
        },  
   
 
-      { path: '**', redirectTo: 'HomePage', pathMatch: 'full' },
+     { path: '**', redirectTo: 'HomePage', pathMatch: 'full' },
   
- ];
 
+];

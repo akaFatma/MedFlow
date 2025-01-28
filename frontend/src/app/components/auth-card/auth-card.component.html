@@ -22,6 +22,10 @@
         placeholder=""
       />
     </div>
+    
+    <div class="error-message" *ngIf="loginError">
+      {{ loginError }}
+    </div>
 
     <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>
     <!-- Angular property , button is disabled when the form is invalid -->
