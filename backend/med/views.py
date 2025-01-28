@@ -53,8 +53,10 @@ from .serializers import DPISerializer, DPISerializerGET
 def get_dpi(request):
     try:
         nss = request.query_params.get('nss')
+        print('nss ', nss)
         dpi = DPI.objects.get(patient__nss=nss) 
         serializer = DPISerializerGET(dpi)
+        print('dpi', serializer.data)
       #  print(serializer.data)
         return Response(serializer.data, status=200)
     except DPI.DoesNotExist:
@@ -68,7 +70,7 @@ def creer_dpi(request):
         try:
             # Décodage des données envoyées en JSON dans le corps de la requête
             body = json.loads(request.body)
-            print(f"Données reçues nomjour : {body}")  # Affiche les données JSON dans la console pour débogage
+            print(f"Données reçues : {body}")  # Affiche les données JSON dans la console pour débogage
             data = body.get('data')
 
             if not data:
@@ -85,10 +87,10 @@ def creer_dpi(request):
             nom_personne = data.get('nom_personne')
             prenom_personne = data.get('prenom_personne')
             telephone_personne = data.get('telephone_personne')
-
             # Validation des champs obligatoires
             if not all([nom, prenom, date_naissance, telephone, adr, nss, mutuelle, nom_personne, prenom_personne, telephone_personne]):
                 return JsonResponse({'error': 'Certains champs sont manquants'}, status=400)
+                
 
             # Création de la personne à contacter
             personne_a_contacter, created = PersonneAContacter.objects.get_or_create(
@@ -135,7 +137,7 @@ def creer_dpi(request):
                     'personne_prenom': prenom_personne,
                     'telephone_personne': telephone_personne
                 }
-            })
+            }, status=200)
 
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Données JSON invalides'}, status=400)

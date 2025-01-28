@@ -1,6 +1,1 @@
 \venv
-require.txt
-__pycache__/
-*.pyc
-model_bilan.pkl
-settings.py
