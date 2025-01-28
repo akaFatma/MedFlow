@@ -1,24 +1,24 @@
 <div class="laborantin-page">
-  <button
-    style="
-      position: fixed;
-      top: 0;
-      right: 0;
-      margin: 16px;
-      padding: 8px 12px;
-      background-color: #b20000;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      z-index: 1000;
-    "
-    (click)="goToHomePage()"
-  >
-    Sign Out
-  </button>
   <div class="main-content">
-    <app-header></app-header>
+    <div class="header">
+      <img src="../../../assets/Logo.svg" alt="Logo" />
+      <button
+      style="
+      
+        padding: 8px 12px;
+        background-color: #b20000;
+        color: white;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        z-index: 1000;
+      "
+      (click)="goToHomePage()"
+    >
+      Déconnecter
+    </button>
+     
+    </div>
     <app-labo-table></app-labo-table>
   </div>
 </div>

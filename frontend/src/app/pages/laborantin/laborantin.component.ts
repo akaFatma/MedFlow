@@ -14,6 +14,8 @@ export class LaborantinComponent {
   constructor(private router: Router) {}
 
   goToHomePage() {
-    this.router.navigate(['/HomePage']);
-  }
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.router.navigate(['/HomePage']);
+    }
+}
 }
