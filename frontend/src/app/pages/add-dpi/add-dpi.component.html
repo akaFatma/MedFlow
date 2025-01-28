@@ -1,24 +1,5 @@
 <div class="everything">
-  <button
-    style="
-      position: fixed;
-      top: 0;
-      right: 0;
-      margin: 16px;
-      padding: 8px 12px;
-      background-color: #b20000;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      z-index: 1000;
-    "
-    (click)="goToHomePage()"
-  >
-    Sign Out
-  </button>
-
-  <app-success-notif
+ <app-success-notif
     *ngIf="isSuccessPopupVisible"
     [isVisible]="isSuccessPopupVisible"
     [title]="'Succés'"
