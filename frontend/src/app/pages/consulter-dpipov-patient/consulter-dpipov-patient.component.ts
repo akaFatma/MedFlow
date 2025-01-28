@@ -47,7 +47,9 @@ export class ConsulterDPIPovPatientComponent implements OnInit {
   }
 
   goToHomePage() {
-    this.router.navigate(['/HomePage']);
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.router.navigate(['/HomePage']);
+    }
   }
   handleNewConsultation(): void {
     this.router.navigate(['/new-consultation'], {

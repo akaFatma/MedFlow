@@ -6,16 +6,15 @@
     min-height: 100vh;
     font-family: 'Inter' , sans-serif;
 }
-
-.header {
+.header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
-    margin: auto;
-    margin-bottom: 2rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+    width: 100%;
+  }
 
-}
 
 .logo {
     width: 300px;
