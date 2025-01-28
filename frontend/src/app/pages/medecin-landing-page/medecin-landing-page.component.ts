@@ -35,9 +35,7 @@ export class MedecinLandingPageComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
-  goToHomePage() {
-    this.router.navigate(['/HomePage']);
-  }
+ 
   ngOnInit(): void {
     // Load all patients when component initializes
     this.loadAllPatients();

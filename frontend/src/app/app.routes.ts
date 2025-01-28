@@ -21,7 +21,6 @@ export const routes: Routes = [
    { path: 'HomePage', component: HomePageComponent},
    { path: 'login', component: LoginPageComponent},
    { path: 'unauthorized', component: UnauthorizedPageComponent },
-
    { 
      path: 'medecin-landing', 
      component: MedecinLandingPageComponent, 

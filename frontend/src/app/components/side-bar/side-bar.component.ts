@@ -4,10 +4,10 @@ import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
-  standalone: true,  // Optional: Use if using Angular 14+ standalone components
+  standalone: true,  
   imports: [RouterLinkActive],
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss'] // Fixed to 'styleUrls' (plural)
+  styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent {
 
@@ -16,4 +16,11 @@ export class SideBarComponent {
   navigateTo(route: string) {
     this.router.navigate([route]);
   }
+  goToHomePage() {
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.router.navigate(['/HomePage']);
+    }
+  }
 }
+
+
