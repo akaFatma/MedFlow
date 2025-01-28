@@ -42,7 +42,9 @@ export class InfermierLandingPageComponent implements OnInit {
     private router: Router
   ) {}
   goToHomePage() {
-    this.router.navigate(['/HomePage']);
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.router.navigate(['/HomePage']);
+    }
   }
   ngOnInit() {
     console.log('Initialisation du composant');
