@@ -165,8 +165,10 @@ def creer_dpi(request):
             # Validation des champs obligatoires
             if not all([nom, prenom, date_naissance, telephone, adr, nss, mutuelle, nom_personne, prenom_personne, telephone_personne]):
                 return JsonResponse({'error': 'Certains champs sont manquants'}, status=400)
-                
 
+            if Patient.objects.filter(nss=nss).exists():
+                return JsonResponse({'error': 'Un patient avec ce numéro de sécurité sociale existe déjà.'}, status=400)
+    
             # Création de la personne à contacter
             personne_a_contacter, created = PersonneAContacter.objects.get_or_create(
                 nom=nom_personne,

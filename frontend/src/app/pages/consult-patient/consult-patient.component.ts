@@ -3,6 +3,7 @@ import { ConsultationPatientService } from '../../services/consult-patient.servi
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-consult-patient',
   standalone: true,
@@ -22,10 +23,13 @@ export class ConsultPatientComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-
+  
   goToHomePage() {
-    this.router.navigate(['/HomePage']);
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.router.navigate(['/HomePage']);
+    }
   }
+ 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       const id = params['id'];

@@ -1,46 +1,27 @@
 <div style="min-height: 200vh; background-color: #f0f4fa; padding-top: 30px">
   <!-- NAVBAR -->
-  <button
+  <div class="header">
+    <img src="../../../assets/Logo.svg" alt="Logo" />
+    <button
     style="
-      position: fixed;
-      top: 0;
-      right: 0;
-      margin: 16px;
+    
       padding: 8px 12px;
       background-color: #b20000;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 16px;
       cursor: pointer;
       z-index: 1000;
     "
     (click)="goToHomePage()"
   >
-    Sign Out
+    Déconnecter
   </button>
+  </div>
+
   <div class="navbar w-11/12 mx-auto flex items-center py-5" style="gap: 20px">
-    <div class="w-[30%] flex justify-end">
-      <img src="/logo.svg" alt="MedFlow Logo" class="w-1/2" />
-    </div>
-    <div
-      class="relative w-full max-w-[8000px] ml-5 px-5 flex items-center justify-between"
-      style="
-        height: 50px;
-        border: 1px solid #d3d3d3;
-        border-radius: 12px;
-        background-color: #fff;
-      "
-    >
-      <div class="flex items-center pl-4" style="gap: 20px">
-        <img
-          src="/profil.png"
-          alt="Key Icon"
-          class="h-8 w-8"
-          style="margin-left: 15px"
-        />
-        <p class="text-sm" style="color: #666666">Bienvenue Mr.</p>
-      </div>
-    </div>
+   
+   
   </div>
 
   <!-- BUTTON AND TEXTS -->
@@ -58,11 +39,13 @@
         class="text-white px-8 py-2"
         style="
           background-color: #027cc0;
-          border-radius: 12px;
-          height: 35px;
-          width: 280px;
+          border-radius: 16px;
+          height: 40px;
+          width: 250px;
           cursor: pointer;
           transition: background-color 0.2s;
+          text-align: center;
+          margin-top: 1.5rem;
         "
         onmouseover="this.style.backgroundColor='#0263a0'"
         onmouseout="this.style.backgroundColor='#027cc0'"
@@ -189,6 +172,7 @@
           background-color: #707b8144;
           margin-top: 5px;
           width: 100%;
+          margin-bottom: 4rem;
         "
       ></div>
       <div
@@ -199,10 +183,11 @@
           background-color: #f9f9f9;
           border-radius: 12px;
           width: 100%; /* Limit the width for centering */
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+          box-shadow: 0 2px 10px rgba(231, 228, 232, 0.8); /* Add shadow for better visibility */
         "
       >
         <!-- Header -->
+         
         <div
           class="header-grid"
           style="
@@ -253,8 +238,6 @@
         </div>
       </div>
       <!-- Bilan Biologique -->
-      <!-- Bilan Biologique -->
-
       <div style="color: #707b81; flex: 1; max-width: 100%; margin-top: 30px">
         <p class="text-lg font-semibold">Bilans Biologique</p>
         <div

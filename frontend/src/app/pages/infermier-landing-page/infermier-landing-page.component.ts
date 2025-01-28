@@ -42,11 +42,7 @@ export class InfermierLandingPageComponent implements OnInit {
     private infermierService: InfermierService,
     private router: Router
   ) {}
-  goToHomePage() {
-    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-      this.router.navigate(['/HomePage']);
-    }
-  }
+
   ngOnInit() {
     console.log('Initialisation du composant');
     this.patientCareForm = this.fb.group({
@@ -57,7 +53,11 @@ export class InfermierLandingPageComponent implements OnInit {
     });
     console.log('Formulaire initialisé:', this.patientCareForm);
   }
-
+  goToHomePage() {
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.router.navigate(['/HomePage']);
+    }
+  }
   onSubmit() {
     console.log('Soumission du formulaire déclenchée');
     if (this.patientCareForm.valid) {
